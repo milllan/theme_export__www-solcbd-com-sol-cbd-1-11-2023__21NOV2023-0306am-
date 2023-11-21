@@ -57,10 +57,31 @@ tabindex="-1">
         >
       {% endif %}
       
-      <img class="product--image media lazyload {{ img_id_class }}" 
-      {%- render 'lazysizes', img: media, img_type: 'responsive' -%}
-      alt="{{ media.alt }}"
-      data-media-id="{{ media.id }}">
+      <img loading="{% if featured %}eager" fetchpriority="high{% else %}lazy{% endif %}" decoding="async" class="product--image media {% if featured %}skip-lazy{% else %}lazyload{% endif %} {{ img_id_class }}" 
+        {% if featured %}
+          data-image-id="{{ media.id }}" class=""
+          srcset="{%- if media.width >= 180 -%}{{ media | img_url: '180x180', format: 'pjpg' }} 180w,{%- endif -%}
+                {%- if media.width >= 360 -%}{{ media | img_url: '360x360', format: 'pjpg' }} 360w,{%- endif -%}
+                {%- if media.width >= 540 -%}{{ media | img_url: '540x540', format: 'pjpg' }} 540w,{%- endif -%}
+                {%- if media.width >= 720 -%}{{ media | img_url: '720x720', format: 'pjpg' }} 720w,{%- endif -%}
+                {%- if media.width >= 1080 -%}{{ media | img_url: '1080x1080', format: 'pjpg' }} 1080w,{%- endif -%}
+                {%- if media.width >= 1296 -%}{{ media | img_url: '1296x1296', format: 'pjpg' }} 1296w,{%- endif -%}
+                {{ media | img_url: 'original' }} {{ media.width }}w"
+          src="{{ media | img_url: 'original', format: 'pjpg' }}"
+          sizes="(max-width: 1024px) 83vw, 42vw"
+          //src="{{ section.settings.image | image_url: width: 720 }}"
+          //sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+        {% else %}
+          {%- render 'lazysizes', img: media, img_type: 'responsive', format: 'pjpg' -%}
+        {% endif %}
+        alt="{{ media.alt }}"
+        data-media-id="{{ media.id }}" >
+        {% capture featuredImg %}
+          <img loading="eager" decoding="async" class="product--image media {{ img_id_class }}" 
+            {%- render 'lazysizes', img: media, img_type: 'responsive' -%}
+            alt="{{ media.alt }}"
+            data-media-id="{{ media.id }}" >
+        {% endcapture %}  
       
       {% if enable_image_zoom_on_icon_click and full_screen_image %}
         </a>
@@ -177,7 +198,7 @@ tabindex="-1">
       {%- endif -%}
   {% endcase %}
   <noscript>
-    <img class="product-single__media media-wrapper" src="{{ media | img_url: 'master' }}"
+    <img loading="lazy" class="product-single__media media-wrapper" src="{{ media | img_url: 'master' }}"
       alt="{{ media.alt | escape }}">
   </noscript>
 </div>

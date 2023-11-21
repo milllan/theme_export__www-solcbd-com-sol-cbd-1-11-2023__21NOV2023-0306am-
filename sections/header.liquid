@@ -80,7 +80,7 @@
                 -%}
 
                 {%- if logo_default != blank -%}
-                  <img class="default-logo imgset lazyload radius-none"
+                  <img loading="lazy" class="default-logo imgset lazyload radius-none"
                     {% render 'lazysizes', img: logo_default, img_type: logo_default_type, img_width: logo_default_width %}
                     alt="{{ shop.name }}"
                     {% if disabled_by_yoast_seo %}itemprop="logo"{% endif %}>
@@ -113,8 +113,8 @@
                 -%}
 
                 {%- if logo_inverted != blank -%}
-                  <img class="inverted-logo imgset lazyload radius-none"
-                  {% render 'lazysizes', img: logo_inverted, img_type: logo_inverted_type, img_width: logo_inverted_width %}
+                  <img loading="lazy" class="inverted-logo imgset lazyload radius-none"
+                   {% render 'lazysizes', img: logo_inverted, img_type: logo_inverted_type, img_width: logo_inverted_width %}
                   alt="{{ shop.name }}">
                 {%- else -%}
                   <span class="inverted-logo">{{ shop.name }}</span>
@@ -134,8 +134,11 @@
                 -%}
 
                 {%- if logo_mobile != blank -%}
-                  <img class="mobile-logo imgset lazyload radius-none"
-                  {% render 'lazysizes', img: logo_mobile, img_type: logo_mobile_type, img_width: logo_mobile_width %}
+                  {% capture noLazyImg %}
+                    {% render 'lazysizes', img: logo_mobile, img_type: logo_mobile_type, img_width: logo_mobile_width %}
+                  {% endcapture %}
+                  <img loading="eager" decoding="async" class="mobile-logo imgset radius-none"
+                  {{ noLazyImg | remove: "data-" }}
                   alt="{{ shop.name }}">
                 {%- else -%}
                   <span class="mobile-logo">{{ shop.name }}</span>

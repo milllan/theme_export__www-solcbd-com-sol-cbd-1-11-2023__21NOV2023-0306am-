@@ -51,11 +51,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {%- endif -%}
 
     {%- if request.page_type == "contact" or request.page_type == "product" or request.page_type == "captcha" -%}
-      <link rel="preconnect" href="https://www.google.com">
+      <!--link rel="preconnect" href="https://www.google.com">
       <link rel="preconnect" href="https://www.gstatic.com">
       <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link rel="preconnect" href="https://www.recaptcha.net" crossorigin>
+      <link rel="preconnect" href="https://www.recaptcha.net" crossorigin-->
     {%- endif -%}
 
     <link rel="preconnect" href="https://debutify.com">
@@ -94,15 +94,53 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     -%}
 
     <!-- Preload assets -->
-    <link rel="preload" href="{{ "theme.scss.css" | asset_url }}" as="style">
-    <link rel="preload" as="font" href="{{ header_family | font_url }}" type="font/woff2" crossorigin>
-    <link rel="preload" as="font" href="{{ accent_family | font_url }}" type="font/woff2" crossorigin>
-    <link rel="preload" as="font" href="{{ base_family | font_url }}" type="font/woff2" crossorigin>
-    <link rel="preload" as="font" href="{{ settings.icon | append: ".woff2" | asset_url }}" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ "jquery-2.2.3.min.js" | asset_url }}" as="script">
-    <link rel="preload" href="{{ "theme.min.js" | asset_url }}" as="script">
-    <link rel="preload" href="{{ "lazysizes.min.js" | asset_url }}" as="script">
-    <link rel="preload" href="{{ "dbtfy-addons.min.js" | asset_url }}" as="script">
+    {%- if "product" -%}
+      {%- liquid
+        assign current_variant = product.selected_or_first_available_variant
+        assign featured_media = current_variant.featured_media | default: product.featured_media
+      -%}
+      <link rel="preload" 
+        as="image"
+        fetchpriority="high"
+        href="{{ featured_media | img_url: 'original', format: 'pjpg' }}" 
+        imagesrcset="{%- if featured_media.width >= 180 -%}{{ featured_media | img_url: '180x180', format: 'pjpg' }} 180w,{%- endif -%}
+        {%- if featured_media.width >= 360 -%}{{ featured_media | img_url: '360x360', format: 'pjpg' }} 360w,{%- endif -%}
+        {%- if featured_media.width >= 540 -%}{{ featured_media | img_url: '540x540', format: 'pjpg' }} 540w,{%- endif -%}
+        {%- if featured_media.width >= 720 -%}{{ featured_media | img_url: '720x720', format: 'pjpg' }} 720w,{%- endif -%}
+        {%- if featured_media.width >= 1080 -%}{{ featured_media | img_url: '1080x1080', format: 'pjpg' }} 1080w,{%- endif -%}
+        {%- if featured_media.width >= 1296 -%}{{ featured_media | img_url: '1296x1296', format: 'pjpg' }} 1296w,{%- endif -%}
+        {{ featured_media | img_url: 'original' }} {{ featured_media.width }}w"
+        imagesizes="(max-width: 1024px) 83vw, 42vw">
+      <style>
+        .grid__item.product-single__media-flex-wrapper:first-child {
+            -webkit-flex: 0 0 auto;
+            -moz-flex: 0 0 auto;
+            -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+        }
+        /* CLS fix for "add to wishlist btn" */
+        .product-wl-qc-buttons-wrapper {
+            min-height: 28.83px;
+        }
+        /* Blocking time reduction, 2023-10-28 */
+        #mainContent .shopify-section:not(:first-child):not(:last-child),
+        #shopify-section-guarantee,
+        #shopify-section-footer {
+            content-visibility: auto;
+            contain-intrinsic-size: auto 100vw auto 500px;
+        }
+      </style>
+    {%- endif -%}
+
+    <!-- link rel="preload" href="{{ "theme.scss.css" | asset_url }}" as="style" -->
+    <!-- link rel="preload" as="font" href="{{ header_family | font_url }}" type="font/woff2" crossorigin -->
+    <!-- link rel="preload" as="font" href="{{ accent_family | font_url }}" type="font/woff2" crossorigin -->
+    <!-- link rel="preload" as="font" href="{{ base_family | font_url }}" type="font/woff2" crossorigin -->
+    <!-- link rel="preload" as="font" href="{{ settings.icon | append: ".woff2" | asset_url }}" type="font/woff2" crossorigin -->
+    <!-- link rel="preload" href="{{ "jquery-2.2.3.min.js" | asset_url }}" as="script" -->
+    <!-- link rel="preload" href="{{ "theme.min.js" | asset_url }}" as="script" -->
+    <!-- link rel="preload" href="{{ "lazysizes.min.js" | asset_url }}" as="script" -->
+    <!-- link rel="preload" href="{{ "dbtfy-addons.min.js" | asset_url }}" as="script" -->
 
     {%- if canonical_url != blank -%}
       {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}

@@ -10,7 +10,7 @@
       {%- endif -%}
         {%- if section.settings.image != blank -%}
           <div class="media-wrapper" style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%;">
-            <img class="media lazyload"
+            <img loading="eager" fetchpriority="high" decoding="async" class="media lazyload"
             {%- render 'lazysizes', img: section.settings.image, img_type: 'responsive' -%}
             alt="{{ section.settings.image.alt }}">
           </div>

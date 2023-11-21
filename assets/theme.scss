@@ -1783,11 +1783,11 @@ $class-type: unquote(".");
 
 /*================ _Slick_slider ================*/
 .slick {
-    opacity: 0;
+    opacity: 1; //was 0
 
     // Show on init
     &.slick-initialized, &.slick-fallback {
-        @include animated(fadeIn, $animation_fill_mode: false);
+        /*@include animated(fadeIn, $animation_fill_mode: false);*/
         opacity: 1;
     }
 }
@@ -1866,13 +1866,13 @@ $class-type: unquote(".");
 .slick-slide {
     float: left;
     min-height: 1px;
-    @include transition(opacity $transitionDurationFast $transitionTiming, transform $transitionDurationFast $transitionTiming);
+    /*@include transition(opacity $transitionDurationFast $transitionTiming, transform $transitionDurationFast $transitionTiming);*/
     @include noFocus;
 
     // Hide slide when its slider is not initialized yet
-    .slick-slider:not(.slick-initialized) & {
+    /*.slick-slider:not(.slick-initialized) & {
         display: none;
-    }
+    }*/
 
     &.dragging img {
         pointer-events: none;
@@ -2121,24 +2121,24 @@ $class-type: unquote(".");
     @include animated(fadeIn, $transitionDurationFast);background-color: $colorBody!important;}
 
 /*================ _Lazy_sizes ================*/
-.lazyload {
+/*.lazyload {
     opacity: 0;
 }
 
 .lazyloading {
     opacity: 0;
-}
+}*/
 
 .lazyloaded {
     opacity: 1;
-    @include transition(opacity $animationDuration $transitionTiming);
+    /*@include transition(opacity $animationDuration $transitionTiming);*/
 }
 
 // Bug fix fallback where lazyloaded is never added to cloned slides
 .slick-cloned {
     .lazyloading:not(.lazyload) {
         opacity: 1;
-        @include transition(opacity $animationDuration $transitionTiming);
+        /*@include transition(opacity $animationDuration $transitionTiming);*/
     }
 }
 
@@ -9178,4 +9178,4 @@ $zindexFirstColumn: 9;/* end-dbtfy-quick-compare */
 }
 .cart__price--compare .money {
     display: none;
-}
+}

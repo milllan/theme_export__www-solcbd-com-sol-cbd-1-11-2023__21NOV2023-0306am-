@@ -98,7 +98,7 @@
                     -%}
 
                     {%- if footer_logo != blank -%}
-                      <img class="footer-logo imgset spacer-bottom lazyload radius-none"
+                      <img loading="lazy" class="footer-logo imgset spacer-bottom lazyload radius-none"
                         {% render 'lazysizes', img: footer_logo, img_type: footer_logo_type, img_width: block.settings.logo_width %}
                         alt="{{ shop.name }}">
                     {%- endif -%}
@@ -869,3 +869,56 @@
     }
   }
 {% endschema %}
+
+<script>
+  // Load the script after the user scrolls, moves the mouse, or touches the screen
+document.addEventListener('scroll', initQuicklinkOnEvent);
+document.addEventListener('mousemove', initQuicklinkOnEvent);
+document.addEventListener('touchstart', initQuicklinkOnEvent);
+
+// Or, load the script after 2 seconds
+document.addEventListener('DOMContentLoaded', () => { setTimeout(initGTM, 2600); });
+
+// Initializes quicklink.js in response to an event
+function initQuicklinkOnEvent (event) {
+	initGTM();
+	event.currentTarget.removeEventListener(event.type, initQuicklinkOnEvent);
+}
+
+// Initializes Google Tag Manager
+function initGTM () {
+	if (window.qlDidInit) {
+	  // Don't load again
+	  return false;
+	}
+
+	window.qlDidInit = true;
+	
+	// Create the script
+	const script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.onload = () => {
+      console.log('quicklink ready');
+      quicklink.listen({
+        ignores: [
+          /\/api\/?/,
+          /\/account\/?/,
+          /\/cart\/?/,
+          /\/search\/?/,
+          /\/your-wishlist\/?/,
+          /\/aftership\/?/,
+          uri => uri.includes('.zip'),
+          uri => uri.includes('.pdf'),
+          (uri, elem) => elem.hasAttribute('noprefetch'),
+        ],
+      })
+    }
+	script.src = '//cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js';
+	
+	// We are still deferring the script
+	script.defer = true;
+	
+	// Append the script to the body of the document
+	document.getElementsByTagName('body')[0].appendChild(script);
+}
+</script>
