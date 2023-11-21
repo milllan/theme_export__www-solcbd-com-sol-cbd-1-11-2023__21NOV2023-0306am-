@@ -1,0 +1,21 @@
+<button type="submit" name="checkout" class="btn btn--primary btn--checkout full {% if type == "page" %}cart__checkout{% endif %}" {% if disabled %}disabled{% endif %}>
+  <span class="btn__text">
+    {% unless settings.checkout_icon == blank %}
+      <span class="{{ settings.icon }} icon-width" aria-hidden="true">{{ settings.checkout_icon }}</span>
+    {% endunless %}
+
+    {{ 'cart.general.checkout' | t }}
+
+    {%- if settings.cart_count_checkout -%}
+      {%- if type == "drawer" -%}
+        ({{ cart.item_count }})
+      {%- else -%}
+        (<span class="cart-count">{{ cart.item_count }}</span>)
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if settings.cart_cost_checkout -%}
+      – <span class="cart-cost" data-cart-total-value><span class="money">{{ cart.total_price | money }}</span></span>
+    {%- endif -%}
+  </span>
+</button>

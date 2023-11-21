@@ -1,0 +1,220 @@
+{%- liquid
+  assign collection_count = 0
+  assign emptyState = true
+
+  comment
+    Count how many collections we have to show
+  endcomment
+
+  if section.settings.display_type == 'all'
+    case section.settings.sort
+      when 'products_high' or 'products_low'
+        assign list_collections = collections | sort: 'all_products_count'
+      when 'date' or 'date_reversed'
+        assign list_collections = collections | sort: 'published_at'
+      else
+        assign list_collections = collections
+    endcase
+
+    for collection in list_collections
+      unless collection.handle == 'frontpage'
+        assign collection_count = collection_count | plus: 1
+      endunless
+    endfor
+  else
+    assign collection_count = section.blocks.size
+  endif
+
+  if collection_count > 0
+    assign emptyState = false
+  endif
+-%}
+
+<div id="CollectionListSection" data-section-id="{{ section.id }}" data-section-type="list-collections-template">
+  <div class="box">
+    <div class="wrapper">
+
+      <div class="grid">
+        <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+          <div class="section-header">
+            <div class="page-title-wrapper">
+              <h1 class="page-title">{{ 'collections.general.catalog_title' | t }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%- if section.settings.display_type == 'all' -%}
+        {%- assign limit = section.settings.collection_per_page -%}
+
+        {% paginate collections by limit %}
+          <div {% if settings.dbtfy_infinite_scroll %}id="infiniteScrollContainer"{% endif %} class="grid grid-spacer">
+
+            {%- liquid
+              if section.settings.sort == 'products_low' or section.settings.sort == 'date' or section.settings.sort == 'alphabetical'
+                for collection in list_collections
+                  if collection.handle == 'frontpage'
+                    continue
+                  endif
+
+                  capture current 
+                   cycle 1, 2, 3, 4, 5, 6 
+                  endcapture
+
+                  render 'collection-grid-item' with collection as collection, grid_item_width: grid_item_width, current: current
+                endfor
+              else
+                for collection in list_collections reversed
+                  if collection.handle == 'frontpage'
+                    continue
+                  endif
+
+                  capture current 
+                   cycle 1, 2, 3, 4, 5, 6 
+                  endcapture
+
+                  render 'collection-grid-item' with collection as collection, grid_item_width: grid_item_width, current: current
+                endfor
+              endif
+            -%}
+          </div>
+
+          {%- render "pagination" with paginate as paginate -%}
+        {%- endpaginate -%}
+
+      {%- else -%}
+        <div class="grid grid-spacer">
+          {%- liquid
+            for block in section.blocks
+              capture current
+                cycle 1, 2, 3, 4, 5, 6
+              endcapture
+
+              assign collection = collections[block.settings.collection]
+              render 'collection-grid-item' with collection as collection, block: block, current: current
+            endfor
+          -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.list_collections_template.name",
+	  "class": "list-collections-section",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:sections.list_collections_template.settings.paragraph.content"
+      },
+      {
+        "type": "radio",
+        "id": "display_type",
+        "label": "t:sections.list_collections_template.settings.display_type.label",
+        "default": "all",
+        "options": [
+          {
+            "value": "all",
+            "label": "t:sections.list_collections_template.settings.display_type.options__1.label"
+          },
+          {
+            "value": "selected",
+            "label": "t:sections.list_collections_template.settings.display_type.options__2.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "sort",
+        "label": "t:sections.list_collections_template.settings.sort.label",
+        "info": "t:sections.list_collections_template.settings.sort.info",
+        "default": "alphabetical",
+        "options": [
+          {
+            "value": "products_high",
+            "label": "t:sections.list_collections_template.settings.sort.options__1.label"
+          },
+          {
+            "value": "products_low",
+            "label": "t:sections.list_collections_template.settings.sort.options__2.label"
+          },
+          {
+            "value": "alphabetical",
+            "label": "t:sections.list_collections_template.settings.sort.options__3.label"
+          },
+          {
+            "value": "alphabetical_reversed",
+            "label": "t:sections.list_collections_template.settings.sort.options__4.label"
+          },
+          {
+            "value": "date",
+            "label": "t:sections.list_collections_template.settings.sort.options__5.label"
+          },
+          {
+            "value": "date_reversed",
+            "label": "t:sections.list_collections_template.settings.sort.label"
+          }
+        ]
+      },
+	    {
+        "type": "select",
+        "id": "section_height",
+        "label": "t:sections.list_collections_template.settings.section_height.label",
+        "default": "medium",
+        "options": [
+          {
+            "label": "t:sections.list_collections_template.settings.section_height.options__1.label",
+            "value": "xsmall"
+          },
+		      {
+            "label": "t:sections.list_collections_template.settings.section_height.options__2.label",
+            "value": "small"
+          },
+          {
+            "label": "t:sections.list_collections_template.settings.section_height.options__3.label",
+            "value": "medium"
+          },
+          {
+            "label": "t:sections.list_collections_template.settings.section_height.options__4.label",
+            "value": "large"
+          },
+		      {
+            "label": "t:sections.list_collections_template.settings.section_height.options__5.label",
+            "value": "xlarge"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "collection_per_page",
+        "label": "t:sections.list_collections_template.settings.collection_per_page.label",
+        "min": 3,
+        "max": 100,
+        "step": 1,
+        "default": 12,
+        "info": "t:sections.list_collections_template.settings.collection_per_page.info"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "t:sections.list_collections_template.blocks.collection.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.list_collections_template.blocks.collection.settings.title.label",
+            "info": "t:sections.list_collections_template.blocks.collection.settings.title.info"
+          },
+          {
+            "label": "t:sections.list_collections_template.blocks.collection.settings.collection.label",
+            "id": "collection",
+            "type": "collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

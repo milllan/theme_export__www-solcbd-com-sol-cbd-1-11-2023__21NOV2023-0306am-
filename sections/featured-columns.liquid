@@ -1,0 +1,234 @@
+<div id="section-{{ section.id }}" class="{% unless section.settings.show_on_desktop %} medium--hide large--hide{% endunless %} {% unless section.settings.show_on_mobile %} small--hide{% endunless %} {{ section.settings.section_style }}" data-section-id="{{ section.id }}" data-section-type="featured-columns-section">
+  <div class="box">
+    <div class="wrapper">
+
+      {%- unless section.settings.title == blank and section.settings.subtitle == blank -%}
+        <div class="grid">
+          <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+            <div class="section-header">
+              {%- unless section.settings.title == blank -%}
+                <h2 class="section-header__title">{{ section.settings.title | escape }}</h2>
+              {%- endunless -%}
+              {%- unless section.settings.subtitle == blank -%}
+                <p class="section-header__subtitle">{{ section.settings.subtitle | escape }}</p>
+              {%- endunless -%}
+            </div>
+           </div>
+        </div>
+      {%- endunless -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="grid grid-spacer {{ section.settings.text_align }}">
+
+          {%- capture column_width -%}
+            {%- render 'block-width' -%}
+          {%- endcapture -%}
+
+          <!-- Blocks -->
+          {%- for block in section.blocks -%}
+            <div class="grid__item {{ column_width }}" 
+              {{ block.shopify_attributes }}>
+
+              {%- if block.settings.image != blank -%}
+                <div class="media-wrapper spacer-bottom" style="padding-top:{{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100}}%;">
+                  {%- if block.settings.image_link != blank -%}
+                    <a href="{{ block.settings.image_link }}">
+                  {%- endif -%}
+
+                    <img class="media lazyload"
+                    {%- render 'lazysizes', img: block.settings.image, img_type: 'responsive' -%}
+                    alt="{{ block.settings.image.alt }}">
+
+                  {%- if block.settings.image_link != blank -%}
+                    </a>
+                  {%- endif -%}
+                </div>
+              {%- elsif block.settings.icon != blank -%}
+                <span class="{{ settings.icon }} icon-xl text-secondary" aria-hidden="true">{{ block.settings.icon }}</span>
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg spacer-bottom' }}
+              {%- endif -%}
+
+              <h3 class="h4">{{ block.settings.heading_text }}</h3>
+              <div class="rte">{{ block.settings.text }}</div>
+              {%- unless block.settings.button_label == blank -%}
+                <p><a href="{{ block.settings.button_link }}" class="btn btn--small {{ block.settings.button_style }}">
+                  {{ block.settings.button_label | escape }}
+                </a></p>
+              {%- endunless -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        {%- render 'no-blocks' -%}
+      {%- endif -%}
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.featured_columns.name",
+    "class": "featured-columns-section",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_on_desktop",
+        "label": "t:sections.featured_columns.settings.show_on_desktop.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_on_mobile",
+        "label": "t:sections.featured_columns.settings.show_on_mobile.label",
+        "default": true
+      },
+	    {
+        "type": "text",
+        "id": "title",
+        "label": "t:sections.featured_columns.settings.title.label",
+        "default": "Featured columns"
+      },
+	    {
+        "type": "text",
+        "id": "subtitle",
+        "label": "t:sections.featured_columns.settings.subtitle.label"
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "t:sections.featured_columns.settings.section_style.label",
+        "default": "section-blank",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "t:sections.featured_columns.settings.section_style.options__1.label"
+          },
+		      {
+            "value": "section-default",
+            "label": "t:sections.featured_columns.settings.section_style.options__2.label"
+          },
+          {
+            "value": "section-border",
+            "label": "t:sections.featured_columns.settings.section_style.options__3.label"
+          }
+        ]
+      },
+	    {
+        "type": "select",
+        "id": "text_align",
+        "label": "t:sections.featured_columns.settings.text_align.label",
+        "default": "text-center",
+        "options": [
+          {
+            "value": "",
+            "label": "t:sections.featured_columns.settings.text_align.options__1.label"
+          },
+          {
+            "value": "text-center",
+            "label": "t:sections.featured_columns.settings.text_align.options__2.label"
+          },
+          {
+            "value": "text-right",
+            "label": "t:sections.featured_columns.settings.text_align.options__3.label"
+          },
+          {
+            "value": "text-justify",
+            "label": "t:sections.featured_columns.settings.text_align.options__4.label"
+          }
+        ]
+      }
+	  ],
+	  "blocks" : [
+	    {
+        "type": "text_block",
+        "name": "t:sections.featured_columns.blocks.text_block.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.featured_columns.blocks.text_block.settings.title.label",
+            "info": "t:sections.featured_columns.blocks.text_block.settings.title.info"
+          },
+		      {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.featured_columns.blocks.text_block.settings.image.label"
+          },
+          {
+            "type": "url",
+            "id": "image_link",
+            "label": "Image link"
+          },
+          {
+            "type": "text",
+            "id": "icon",
+            "label": "t:sections.featured_columns.blocks.text_block.settings.icon.label",
+            "info": "t:sections.featured_columns.blocks.text_block.settings.icon.info"
+          },
+          {
+            "type": "text",
+            "id": "heading_text",
+            "label":"t:sections.featured_columns.blocks.text_block.settings.heading_text.label",
+            "default": "Add a title or tagline"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "t:sections.featured_columns.blocks.text_block.settings.text.label",
+            "default":"<p>Use this text to describe what makes your store stand out from others and why customers should buy from you.</p>"
+          },
+		      {
+            "type": "select",
+            "id": "button_style",
+            "label": "t:sections.featured_columns.blocks.text_block.settings.button_style.label",
+            "default": "btn--primary",
+            "options": [
+              {
+                "value": "",
+                "label": "t:sections.featured_columns.blocks.text_block.settings.button_style.options__1.label"
+              },
+              {
+                "value": "btn--primary",
+                "label": "t:sections.featured_columns.blocks.text_block.settings.button_style.options__2.label"
+              },
+              {
+                "value": "btn-outline-primary",
+                "label": "t:sections.featured_columns.blocks.text_block.settings.button_style.options__3.label"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "t:sections.featured_columns.blocks.text_block.settings.button_label.label"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "t:sections.featured_columns.blocks.text_block.settings.button_link.label"
+          }
+        ]
+      }
+    ],
+	  "presets": [
+      {
+        "name":  "t:sections.featured_columns.presets.name",
+        "category": "t:sections.featured_columns.presets.category",
+		    "blocks": [
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "text_block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

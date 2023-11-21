@@ -1,0 +1,55 @@
+{%- if settings.dbtfy_collection_addtocart -%}
+  {%- unless emptyState -%}
+    <div class="dbtfy dbtfy-collection_addtocart">
+      <div id="CollectionAddtocart">
+        {%- capture "form_classes" %}ca-form{%- endcapture -%}
+
+        {%- form "product", product, class: form_classes, id: nil -%}
+          {%- if product.has_only_default_variant -%}
+            <input type="hidden" name="id" value="{{ product.first_available_variant.id }}">
+          {%- endif -%}
+
+          <button name="add"
+                  type="submit"
+                  class="ca-button btn btn-outline-primary btn--small small--full text-ellipsis{% unless layout == 'list' %} full radius-none{% endunless %}{% if sold_out %} disabled{% endif %}"
+                  {% if sold_out %}disabled="disabled"{% endif %}
+                  {% unless product.has_only_default_variant %}style="display:none"{% endunless %}>
+            <span class="btn__text">
+            {%- if sold_out -%}
+              {{ "products.product.sold_out" | t }}
+            {%- else -%}
+              {{ "products.product.add_to_cart" | t }}
+            {%- endif -%}
+            </span>
+          </button>
+
+          <select class="ca-select btn btn-outline-primary btn--small small--full text-ellipsis{% unless layout == 'list' %} full radius-none{% endunless %}{% if sold_out %} disabled{% endif %}"
+                  name="id"
+                  {% if sold_out %}disabled="disabled"{% endif %}
+                  {% if product.has_only_default_variant %}style="display:none"{% endif %}>
+
+            <option disabled="disabled"
+                    {% unless product.has_only_default_variant %}selected="selected"{% endunless %}
+                    hidden="hidden">
+
+              {%- if sold_out -%}
+                {{ "products.product.sold_out" | t }}
+              {%- else -%}
+                {{ "products.product.add_to_cart" | t }}
+              {%- endif -%}
+            </option>
+
+            {%- for variant in product.variants -%}
+              {%- if variant.available -%}
+                <option value="{{ variant.id }}" data-variant-title="{{ variant.title | escape }}" data-variant-price="{{ variant.price }}"
+                        {% if product.has_only_default_variant %}selected="selected"{% endif %}>
+                  {{ variant.title | escape }} - {{ variant.price | money }}
+                </option>
+              {%- endif -%}
+            {%- endfor -%}
+          </select>
+        {%- endform -%}
+      </div>
+    </div>
+  {%- endunless -%}
+{%- endif -%}

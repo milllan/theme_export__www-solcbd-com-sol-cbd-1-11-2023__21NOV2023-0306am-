@@ -1,0 +1,31 @@
+{%- comment -%} Loop Subscription Snippet v7.0 {%- endcomment -%}
+{% comment %}
+	LOOP SUBSCRIPTIONS (https://apps.shopify.com/loop-subscriptions)
+
+  DO NOT modify source code of this file because
+	It is automatically generated from LOOP SUBSCRIPTIONS WIDGET DESIGN
+	If you need to make change, please do it using our standard widget design settings or create a custom widget design in LOOP SUBSCRIPTIONS app.
+{% endcomment %}
+
+<div class='loop-display-none'>Rendering loop-subscriptions</div>
+{%- if type contains 'product-widget' -%}
+	{%- if content_for_header contains 'loop_snippets' -%}
+		{% render 'loop-widget-standard' type: 'product-widget', product: product %}
+	{%- endif -%}
+{%- elsif type == 'customer-portal-link' -%}
+	{% assign locale = shop_locale.iso_code %}
+	{% if locale == null %}
+		{% assign locale = localization.language.iso_code %}
+	{% endif %}
+	{% if locale == null %}
+		{% assign locale = request.locale.iso_code %}
+	{% endif %}
+	{% if routes.root_url == '/' %}
+		{% assign locale = null %}
+	{% endif %}
+	<div>
+		<a href="/a/loop_subscriptions/auth?customer_id={{customer.id}}&myshopify_domain={{shop.permanent_domain}}&locale={{ locale }}&rootUrl={{ routes.root_url }}" id="loop-subscriptions-customer-portal-link">
+			<button class="btn" style="padding: 10px 20px;margin:0 0 20px 0">My Subscriptions</button>
+		</a>
+	</div>
+{%- endif -%}

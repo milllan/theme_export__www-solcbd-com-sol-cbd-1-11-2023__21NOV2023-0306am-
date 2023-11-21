@@ -1,0 +1,220 @@
+{%- liquid
+  assign has_color_swatches = false
+
+  if settings.dbtfy_color_swatches
+    if settings.dbtfy_color_swatches_grid != blank
+      if product.available and product.variants.size > 1
+        assign has_color_swatches = true
+      endif
+    endif
+  endif
+
+  if emptyState
+    assign product_link = '/admin/products'
+    assign vendor = 'home_page.onboarding.product_vendor' | t
+    assign title = 'home_page.onboarding.product_title' | t
+    assign compare_at_price = 2999
+    assign price = 1999
+  else
+    assign variant = product.first_available_variant
+    assign product_link = product.url | within: collection
+    assign vendor = product.vendor
+    assign title = product.title
+
+    assign compare_at_price = product.compare_at_price
+    assign price = product.price
+  endif
+
+  if compare_at_price > price
+    assign on_sale = true
+  else
+    assign on_sale = false
+  endif
+
+  if product.available or emptyState
+    assign sold_out = false
+  else
+    assign sold_out = true
+  endif
+
+  if settings.dbtfy_show_second_image_on_hover and product.media.size > 1
+    assign image_hover = true
+    assign media_hover_image = product.media[1].preview_image
+  else
+    assign image_hover = false
+  endif
+
+  assign variant = product.selected_or_first_available_variant
+
+  capture product_collections
+    for collection in product.collections
+      echo collection.handle
+
+      unless forloop.last
+        echo ","
+      endunless
+    endfor
+  endcapture
+-%}
+
+<div class="grid__item grid-product flex {{ grid_item_width }}{% if sold_out %} is-sold-out{% endif %}{% if emptyState %} empty-state{% endif %} grid-view" data-product-card data-product-handle="{{ product.handle }}" data-product-id="{{ product.id }}" data-product-collections="{{ product_collections }}">
+  <div class="card grid-product__wrapper{% if image_hover %} has-hover-image{% endif %}">
+    <div class="grid-product__image-wrapper">
+      <a href="{{ product_link }}" class="grid-product__image-link">
+        {%- assign media = product.media.first -%}
+
+        {%- if emptyState -%}
+          {{ 'product-' | append: current | placeholder_svg_tag: 'card-image placeholder-svg' }}
+        {%- elsif media != blank -%}
+          <div id="ProductImageWrapper-{{ media.id }}" class="product--wrapper card-image grid-product--wrapper media-wrapper" style="padding-top:{{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
+            <img class="product--image media lazyload ProductImage-{{ media.id }}"
+                {% render 'lazysizes', img: media.preview_image, img_type: 'responsive' %}
+                 alt="{{ media.preview_image.alt }}"
+                 data-image>
+          </div>
+
+          {%- if image_hover -%}
+            <div class="product--wrapper card-image grid-product--wrapper media-wrapper product-hover-image" style="padding-top:{{ 1 | divided_by: media_hover_image.aspect_ratio | times: 100 }}%;">
+              <img class="product--image media lazyload"
+                  {% render 'lazysizes', img: media_hover_image, img_type: 'responsive', add_on_crop: settings.dbtfy_product_image_crop %}
+                   alt="{{ media_hover_image.alt }}">
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          {{ 'product-' | append: current | placeholder_svg_tag: 'card-image placeholder-svg' }}
+        {%- endif -%}
+      </a>
+
+      {%- unless settings.tag_placement == 'none' -%}
+        {%- if sold_out -%}
+          <span class="badge grid-product__badge grid-product__badge-{{ settings.tag_placement }} disabled">
+            <span class="{{ settings.icon }}">watch_later</span>
+            <span class="product-badge-text tooltip-position-bottom">
+              {{ 'products.product.sold_out_html' | t }}
+            </span>
+          </span>
+        {%- elsif on_sale -%}
+          {%- capture discount_price -%}
+            {%- if settings.sale_type == 'amount' -%}
+              {%- assign discount_price = compare_at_price | minus: price -%}
+
+              <span class="product-badge-discount money">{{ discount_price | money }}</span>
+            {%- elsif settings.sale_type == 'percentage' -%}
+              {%- assign discount_price = compare_at_price | minus: price | times: 100 | divided_by: compare_at_price -%}
+
+              <span class="product-badge-discount">{{ discount_price }}%</span>
+            {%- endif -%}
+          {%- endcapture -%}
+
+          {%- if settings.dbtfy_discount_saved -%}
+            <span class="badge grid-product__badge grid-product__badge-{{ settings.tag_placement }}">
+              <span class="{{ settings.icon }}">local_offer</span>
+              <span class="product-badge-text tooltip-position-bottom">
+                {{ 'products.general.save_html' | t: saved_amount: discount_price }}
+              </span>
+            </span>
+          {%- endif -%}
+
+        {%- endif -%}
+      {%- endunless -%}
+
+      {%- liquid
+        unless emptyState
+          echo '<div class="grid-product__badge grid-product__badge-icons">'
+            render "dbtfy-wish-list" with product as product
+            render "dbtfy-quick-compare" with product as product ,type: "grid"
+            render "dbtfy-quick-view" with product as product
+          echo '</div>'
+        endunless
+      -%}
+    </div>
+
+    {%- liquid
+      unless emptyState
+        if product != blank
+          render "dbtfy-collection-addtocart" with product as product, sold_out: sold_out
+        endif
+      endunless
+    -%}
+
+    <a href="{{ product_link }}" class="card-body grid-product__meta spacer-auto-xs text-center">
+      {%- liquid
+        if has_color_swatches
+          unless emptyState
+            render "dbtfy-color-swatches" with product as product, type: 'product_grid', position: 'center'
+          endunless
+        endif
+      -%}
+
+      <p class="grid-product__title h6{% if settings.grid_product_truncate %} text-ellipsis{% endif %}">{{ title }}</p>
+
+      {%- liquid
+        if settings.review_badge_product_grid
+          unless emptyState
+            render "review-badge" with product as product, position: "product_grid"
+          endunless
+        endif
+      -%}
+
+      <p class="grid-product__price-wrap">
+        <span class="grid-product__price text-money">
+          {%- if settings.dbtfy_color_swatches -%}
+            <span class="price-regular{% if on_sale %} on-sale text-sale{% endif %}" {% if on_sale %}
+              aria-label="{{ 'products.general.sale_price' | t }}" {% else %}
+              aria-label="{{ 'products.general.regular_price' | t }}" {% endif %}>
+              {%- if product.price_varies and emptyState == false -%}
+                <span class="money">{{ product.price_min | money }}</span>
+              {%- else -%}
+                <span class="money">{{ price | money }}</span>
+              {%- endif -%}
+            </span>
+          {%- else -%}
+            <span class="price-regular {% if on_sale %} on-sale text-sale{% endif %}" aria-label="{{ 'products.general.regular_price' | t }}">
+              {%- if product.price_varies and emptyState == false -%}
+                <span class="money">{{ product.price_min | money }} +</span>
+              {%- else -%}
+                <span class="money">{{ price | money }}</span>
+              {%- endif -%}
+            </span>
+          {%- endif -%}
+          &nbsp;
+          <span class="price-compare text-strike text-muted {% unless on_sale %}hide{% endunless %}"
+                aria-label="{{ 'products.general.regular_price' | t }}">
+            {%- if on_sale -%}
+              <span class="money">{{ compare_at_price | money }}</span>
+            {%- else -%}
+              <span class="money"></span>
+            {%- endif -%}
+          </span>
+        </span>
+
+        {%- if variant.available and variant.unit_price_measurement -%}
+          {%- capture unit_price_separator -%}
+            <span aria-hidden="true">/</span><span class="visually-hidden">&nbsp;{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+          {%- endcapture -%}
+
+          {%- capture unit_price_base_unit -%}
+            <span>
+              {%- if variant.unit_price_measurement.reference_value != 1 -%}
+                {{- variant.unit_price_measurement.reference_value -}}
+              {%- endif -%}
+
+              {{ variant.unit_price_measurement.reference_unit }}
+            </span>
+          {%- endcapture -%}
+
+          <span class="product-unit-price">
+            <span class="visually-hidden">{{ 'products.general.unit_price' | t }}</span>
+            <span>{{ variant.unit_price | money }}</span>{{- unit_price_separator -}}{{- unit_price_base_unit -}}
+          </span>
+        {%- endif -%}
+      </p>
+    </a>
+
+    {%- if settings.grid_product_vendor -%}
+      <div class="card-footer card-footer-xs text-center">
+        <p class="vendor grid-product__vendor text-small text-italic">{{ vendor }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

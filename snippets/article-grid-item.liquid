@@ -1,0 +1,73 @@
+{%- liquid
+  if emptyState
+    assign article_title = 'home_page.onboarding.blog_title' | t
+    assign article_link = '/admin/articles'
+    assign article_content = 'home_page.onboarding.blog_excerpt' | t
+  else
+    assign article_title = article.title
+    assign article_link = article.url
+    assign article_content = article.excerpt_or_content
+  endif
+
+  assign number_of_comments = article.comments_count
+
+  if comment and comment.created_at
+    assign number_of_comments = article.comments_count | plus: 1
+  endif
+-%}
+
+<article class="grid__item {{ grid_item_width }} flex article-grid-item">
+  <div class="card">
+    <a href="{{ article_link }}" title="{{ 'blogs.article.read_more' | t }}">
+      <div class="image-link" title="{{ 'blogs.article.read_more' | t }}">
+        {%- if article.image != blank -%}
+          <div class="card-image media-wrapper" style="padding-top: 100%;">
+            <img class="media lazyload"
+              {%- render 'lazysizes', img: article.image, img_type: 'responsive' -%}
+                  alt="{{ article.image.alt }}">
+          </div>
+        {%- elsif emptyState -%}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'card-image placeholder-svg' }}
+        {%- else -%}
+          {{ 'image' | append: current | placeholder_svg_tag: 'card-image placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </a>
+
+    <div class="card-body">
+      <a href="{{ article_link }}" title="{{ 'blogs.article.read_more' | t }}">
+        {%- if no_heading_tag -%}
+          <p class="article_grid-title h3">
+            {{ article_title }}
+          </p>
+        {%- else -%}
+          {%- if request.page_type == "blog" -%}
+            <h3 class="article_grid-title h3">
+              {{ article_title }}
+            </h3>
+          {%- else -%}
+            <h4 class="article_grid-title">
+              {{ article_title }}
+            </h4>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- unless article_content == blank -%}
+          <p>
+            {{ article_content | strip_html | truncatewords: settings.word_count }}
+          </p>
+        {%- endunless -%}
+      </a>
+
+      {%- if settings.show_tags -%}
+        {%- render 'tags-article' with article as article, hide_label: true, blog: blog -%}
+      {%- endif -%}
+    </div>
+
+    <div class="card-footer card-footer-xs text-small text-italic">
+      <a href="{{ article_link }}" title="{{ 'blogs.article.read_more' | t }}">
+        {%- render 'blog-meta' with article as article, show_author: settings.show_author, show_date: settings.show_date, show_comments: settings.show_comments, number_of_comments: number_of_comments, number_of_comments: number_of_comments, blog: blog, emptyState: emptyState -%}
+      </a>
+    </div>
+  </div>
+</article>

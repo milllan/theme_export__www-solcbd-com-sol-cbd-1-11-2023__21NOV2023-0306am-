@@ -1,0 +1,11 @@
+{%- if collection.image != blank -%}
+  {%- render "collection-image" with collection as collection -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.collection_image.name",
+  "class": "hero-section",
+  "settings": []
+}
+{% endschema %}

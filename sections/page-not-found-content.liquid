@@ -1,0 +1,26 @@
+<div class="box">
+  <div class="wrapper">
+
+    <div class="grid">
+      <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+        <div class="section-header">
+          <div class="page-title-wrapper">
+            <h1 class="page-title">{{ 'general.404.title' | t }}</h1>
+          </div>
+        </div>
+        <div class="page-empty">
+          <p>{{ 'general.404.subtext_html' | t }}</p>
+          <a href="{{ settings.browsing_link }}" class="btn btn--primary 404--continue-browsing">{{ 'cart.general.continue_browsing_html' | t }}</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.page_not_found_content.name",
+  "settings": []
+}
+{% endschema %}

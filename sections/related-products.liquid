@@ -1,0 +1,339 @@
+{%- if section.settings.show_related_products -%}
+  {%- liquid
+    assign limit = section.settings.desktop_grid | times: section.settings.rows
+    assign counter = 0
+
+    if section.settings.related_collection
+      assign related_collection = true
+    else
+      assign related_all = true
+    endif
+
+    if section.settings.same_vendor
+      assign same_vendor = true
+    else
+      assign same_vendor = false
+    endif
+
+    if section.settings.same_type
+      assign same_type = true
+    else
+      assign same_type = false
+    endif
+
+    assign found_a_collection = false
+
+    if related_collection
+      assign exclusions = 'frontpage,all' | split: ','
+
+      if product.metafields.c_f['Related Products']
+        assign collection = collections[product.metafields.c_f['Related Products']]
+      endif
+
+      if collection and collection.all_products_count > 1
+        unless exclusions contains collection.handle
+          assign found_a_collection = true
+        endunless
+      endif
+
+      unless found_a_collection
+        for c in product.collections
+          unless exclusions contains c.handle or c.all_products_count < 2
+            assign found_a_collection = true
+            assign collection = c
+            break
+          endunless
+        endfor
+      endunless
+
+      if found_a_collection == false and section.settings.never_empty
+        assign found_a_collection = true
+      endif
+    endif
+
+    if related_all
+      assign collection = collections.all
+      assign found_a_collection = true
+    endif
+  -%}
+
+  {%- if found_a_collection -%}
+    {%- liquid
+      assign current_product = product
+      assign gift_wrap_product_id = settings.dbtfy_gift_wrap_product.id
+
+      capture grid_item_width
+        render 'product-width'
+      endcapture
+
+      capture related_items
+        for product in collection.products
+          capture product_item
+            capture current
+              cycle 1, 2, 3, 4, 5, 6
+            endcapture
+
+            unless product.handle == current_product.handle
+              unless same_vendor and current_product.vendor != product.vendor
+                unless same_type and current_product.type != product.type
+                  render 'product-grid-item' with product as product, grid_item_width: grid_item_width, current: current
+
+                  assign counter = counter | plus: 1
+
+                  if counter == limit
+                    break
+                  endif
+                endunless
+              endunless
+            endunless
+          endcapture
+
+          if settings.dbtfy_gift_wrap
+            unless product.id == gift_wrap_product_id
+              echo product_item
+            endunless
+          else
+            echo product_item
+          endif
+        endfor
+      endcapture
+
+      if related_items == blank and section.settings.never_empty
+        assign collection = collections.all
+        assign found_a_collection = true
+
+        capture related_items
+          for product in collection.products
+            capture product_item
+              capture current
+                cycle 1, 2, 3, 4, 5, 6
+              endcapture
+
+              unless product.handle == current_product.handle
+                render 'product-grid-item' with product as product, grid_item_width: grid_item_width, current: current
+
+                assign counter = counter | plus: 1
+
+                if counter == limit
+                  break
+                endif
+              endunless
+            endcapture
+
+            if settings.dbtfy_gift_wrap
+              unless product.id == gift_wrap_product_id
+                echo product_item
+              endunless
+            else
+              echo product_item
+            endif
+          endfor
+        endcapture
+      endif
+
+      assign related_items = related_items | strip
+    -%}
+
+    {%- unless related_items == blank -%}
+      <div id="relatedProductSection" class="{{ section.settings.section_style }}" data-section-id="{{ section.id }}" data-section-type="product-grid-section">
+        <div class="box">
+          <div class="wrapper">
+            {%- unless section.settings.title == blank and section.settings.subtitle == blank -%}
+              <div class="section-header">
+                {%- unless section.settings.title == blank -%}
+                  <h2 class="section-header__title">{{ section.settings.title | escape }}</h2>
+                {%- endunless -%}
+
+                {%- unless section.settings.subtitle == blank -%}
+                  <p class="section-header__subtitle">{{ section.settings.subtitle | escape }}</p>
+                {%- endunless -%}
+              </div>
+            {%- endunless -%}
+
+            <div id="ProductGrid-{{ section.id }}"
+                class="grid grid-spacer {% if section.settings.slider_related_products %}slick slick-product-grid{% endif %}"
+                data-arrows="{{ section.settings.arrows }}"
+                data-dots="{{ section.settings.dots }}"
+                data-autoplay="{{ section.settings.autoplay }}"
+                data-autoplayspeed="{{ section.settings.autoplayspeed | times: 1000 }}"
+                data-slidetoshow="{{ section.settings.desktop_grid }}">
+              {{ related_items }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endunless -%}
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "t:sections.related_products.name",
+	  "class": "related-product-section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_related_products",
+        "label": "t:sections.related_products.settings.show_related_products.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "related_collection",
+        "label": "t:sections.related_products.settings.related_collection.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "same_vendor",
+        "label": "t:sections.related_products.settings.same_vendor.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "same_type",
+        "label": "t:sections.related_products.settings.same_type.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "never_empty",
+        "label": "t:sections.related_products.settings.never_empty.label",
+        "default": true
+      },
+	    {
+        "type": "text",
+        "id": "title",
+        "label": "t:sections.related_products.settings.title.label",
+        "default": "You may also like"
+      },
+	    {
+        "type": "text",
+        "id": "subtitle",
+        "label": "t:sections.related_products.settings.subtitle.label"
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "t:sections.related_products.settings.section_style.label",
+        "default": "section-border",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "t:sections.related_products.settings.section_style.option__1.label"
+          },
+		      {
+            "value": "section-default",
+            "label": "t:sections.related_products.settings.section_style.option__2.label"
+          },
+          {
+            "value": "section-border",
+            "label": "t:sections.related_products.settings.section_style.option__3.label"
+          }
+        ]
+      },
+	    {
+        "type": "select",
+        "id": "rows",
+        "label": "t:sections.related_products.settings.rows.label",
+        "default": "1",
+        "options": [
+		      {
+            "value": "1",
+            "label": "t:sections.related_products.settings.rows.option__1.label"
+          },
+          {
+            "value": "2",
+            "label": "t:sections.related_products.settings.rows.option__2.label"
+          },
+          {
+            "value": "3",
+            "label": "t:sections.related_products.settings.rows.option__3.label"
+          },
+          {
+            "value": "4",
+            "label": "t:sections.related_products.settings.rows.option__4.label"
+          },
+          {
+            "value": "5",
+            "label": "t:sections.related_products.settings.rows.option__5.label"
+          }
+        ]
+      },
+	    {
+		    "type": "select",
+		    "id": "desktop_grid",
+		    "label": "t:sections.related_products.settings.desktop_grid.label",
+        "default": "4",
+        "options": [
+          {
+            "value": "2",
+            "label": "t:sections.related_products.settings.desktop_grid.option__1.label"
+          },
+          {
+            "value": "3",
+            "label": "t:sections.related_products.settings.desktop_grid.option__2.label"
+          },
+          {
+            "value": "4",
+            "label": "t:sections.related_products.settings.desktop_grid.option__3.label"
+          }
+        ]
+	    },
+      {
+        "type": "select",
+        "id": "mobile_grid",
+        "label": "t:sections.related_products.settings.mobile_grid.label",
+        "default": "2",
+        "options":[
+          {
+            "value": "1",
+            "label": "t:sections.related_products.settings.mobile_grid.option__1.label"
+          },
+          {
+            "value":"2",
+            "label": "t:sections.related_products.settings.mobile_grid.option__2.label"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.related_products.settings.header__1.content"
+      },
+      {
+        "type": "checkbox",
+        "id": "slider_related_products",
+        "label": "t:sections.related_products.settings.slider_related_products.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "t:sections.related_products.settings.arrows.label",
+        "default": true
+      },
+	    {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "t:sections.related_products.settings.dots.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "t:sections.related_products.settings.autoplay.label",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "autoplayspeed",
+        "label": "t:sections.related_products.settings.autoplayspeed.label",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "unit": "s",
+        "default": 5
+      }
+    ]
+  }
+{% endschema %}

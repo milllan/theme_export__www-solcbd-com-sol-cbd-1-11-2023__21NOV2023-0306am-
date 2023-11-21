@@ -1,0 +1,70 @@
+{%- if settings.dbtfy_wish_list -%}
+  {%- liquid
+    assign show_bubble = settings.dbtfy_wish_list_bubble
+    assign enable_bubble_animation = settings.dbtfy_wish_list_bubble_animation
+    assign show_count = settings.dbtfy_wish_list_count
+    assign wishlist_page = settings.dbtfy_wish_list_page
+    assign icon_placement = settings.dbtfy_wish_list_icon_placement
+    assign add_to_wishlist_text = 'add-ons.wishlist.add_to_wishlist_text' | t
+    assign remove_from_wishlist_text = 'add-ons.wishlist.remove_from_wishlist_text' | t
+    assign empty_wishlist_text = 'add-ons.wishlist.empty_wishlist_text' | t
+    assign share_wishlist_text = 'add-ons.wishlist.share_wishlist_text' | t
+  -%}
+
+  {%- if type == "page" -%}
+    <div class="dbtfy dbtfy-wish_list dbtfy-wish_list--page">
+      <div id="WishlistPage" data-section-type="wish-list-page">
+        <div class="wl-no-item text-center" style="display: none">
+          <p>{{ empty_wishlist_text }}</p>
+          <a href="{{ settings.browsing_link }}" class="btn btn--primary cart--continue-browsing">{{ "cart.general.continue_browsing_html" | t }}</a>
+        </div>
+
+        {%- render "social-sharing", share_label: share_wishlist_text, share_button: "btn btn-square-xsmall", container_class: "spacer-bottom text-right wl-social-sharing", style: "style='display: none'" -%}
+
+        <div id="WishlistTemplate" class="card-group"></div>
+      </div>
+    </div>
+  {%- elsif type == "menu" -%}
+    <li class="dbtfy dbtfy-wish_list site-nav__item {{ class }}">
+      {%- assign wishlist_page = pages[wishlist_page] -%}
+      <a href="{{ wishlist_page.url }}" class="site-nav__link site-nav__link--icon wishlist-link" aria-label="{{ wishlist_page.title }}" title="{{ wishlist_page.title }}">
+        <span class="{{ settings.icon }}" aria-hidden="true">{%- if settings.icon == "material-icons-outlined" -%}favorite_border{%- else -%}favorite{%- endif -%}</span>
+
+        {%- if show_bubble -%}
+          <span class="wl-bubble cart-link__bubble--visible{% if enable_bubble_animation %} rubberBand infinite slow{% endif %}" style="display: none;"></span>
+        {%- endif -%}
+
+        {%- if show_count -%}
+          <span class="wl-count"></span>
+        {%- endif -%}
+      </a>
+    </li>
+  {%- elsif type == "button" -%}
+    <div class="dbtfy dbtfy-wish_list flex-auto">
+      <div class="dbtfy-wishlist-btn">
+        <button class="wl-product-page-btn wl-add wl-icon btn btn-reveal-primary btn--xsmall"
+                data-product-handle="{{ product.handle }}"
+                data-add-wish-list-text="{{ add_to_wishlist_text }}"
+                data-remove-wish-list-text="{{ remove_from_wishlist_text }}"
+                aria-label="{{ add_to_wishlist_text }}"
+                title="{{ add_to_wishlist_text }}">
+          <span class="{{ settings.icon }}">{%- if settings.icon == "material-icons-outlined" -%}favorite_border{%- else -%}favorite{%- endif -%}</span>
+         <span class="wl-btn-text">{{ add_to_wishlist_text }}</span>
+        </button>
+      </div>
+    </div>
+  {%- else -%}
+    <div class="dbtfy dbtfy-wish_list">
+      <div class="dbtfy-wishlist-icon grid-product__badge-{{ icon_placement }}">
+        <button class="wl-add wl-icon btn btn-reveal-primary btn-square-xsmall"
+                data-product-handle="{{ product.handle }}"
+                data-add-wish-list-text="{{ add_to_wishlist_text }}"
+                data-remove-wish-list-text="{{ remove_from_wishlist_text }}"
+                aria-label="{{ add_to_wishlist_text }}"
+                title="{{ add_to_wishlist_text }}">
+          <span class="{{ settings.icon }}">{%- if settings.icon == "material-icons-outlined" -%}favorite_border{%- else -%}favorite{%- endif -%}</span>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

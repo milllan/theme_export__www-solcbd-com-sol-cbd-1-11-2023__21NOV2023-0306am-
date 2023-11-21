@@ -1,0 +1,82 @@
+<!-- /templates/customers/account.liquid -->
+<div class="box">
+  <div class="wrapper">
+
+    {%- paginate customer.orders by 20 -%}
+      <div class="section-header">
+        <div class="page-title-wrapper">
+          <h1 class="page-title">{{ 'customer.account.title' | t }}</h1>
+        </div>
+        <a href="{{ routes.account_logout_url }}">
+          <span class="{{ settings.icon }}">exit_to_app</span>
+          {{ 'layout.customer.log_out' | t }}
+        </a>
+      </div>
+
+      <div {% if settings.dbtfy_infinite_scroll %}id="infiniteScrollContainer" {% endif %}class="grid grid-spacer">
+        <div class="grid__item large--three-twelfths medium--three-twelfths large--sticky mediumm--sticky sticky-check-header">
+          <h2>{{ 'customer.account.details' | t }}</h2>
+          <div class="card">
+            <div class="card-body">
+              {%- unless customer.addresses_count == 0 -%}
+              <span class="text-capitalize">{{ customer.default_address | format_address }}</span>
+              <a href="{{ routes.account_addresses_url }}" class="btn btn-outline-primary btn--small">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+              {%- else -%}
+              <a href="{{ routes.account_addresses_url }}" class="btn btn--primary btn--small">{{ 'customer.addresses.add' | t }}</a>
+              {%- endunless -%}
+            </div>
+          </div>
+        </div>
+
+        <div class="grid__item large--nine-twelfths medium--nine-twelfths">
+          <h2>{{ 'customer.orders.title' | t }}</h2>
+          {% render 'loop-subscriptions', type: 'customer-portal-link'%}
+
+
+          {%- if customer.orders.size != 0 -%}
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>{{ 'customer.orders.order_number' | t }}</th>
+                  <th>{{ 'customer.orders.date' | t }}</th>
+                  <th>{{ 'customer.orders.payment_status' | t }}</th>
+                  <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                  <th>{{ 'customer.orders.total' | t }}</th>
+                </tr>
+              </thead>
+              <tbody class="whitespace-nowrap">
+                {%- for order in customer.orders -%}
+                <tr>
+                  <td>
+                    <a href="{{ order.customer_url }}" class="btn btn-{% unless forloop.first == true %}outline{% endunless %}-primary btn--small" title="{{ 'customer.orders.order_number' | t }} {{ order.name }}" aria-label="{{ 'customer.orders.order_number' | t }} {{ order.name }}">
+                      <span class="{{ settings.icon }}">visibility</span>
+                      {{ order.name }}
+                    </a>
+                  </td>
+                  <td>{{ order.created_at | date: format: 'month_day_year' }}</td>
+                  <td>
+                    <span class="badge">{{ order.financial_status_label }}</span>
+                  </td>
+                  <td>
+                    <span class="badge">{{ order.fulfillment_status_label }}</span>
+                  </td>
+                  <td><span class="text-money"><span class="money">{{ order.total_price | money }}</span></span></td>
+                </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+          {%- else -%}
+          <p>{{ 'customer.orders.none' | t }}</p>
+          {%- endif -%}
+        </div>
+
+      </div>
+
+      {%- render "pagination" with paginate as paginate -%}
+
+    {%- endpaginate -%}
+
+  </div>
+</div>

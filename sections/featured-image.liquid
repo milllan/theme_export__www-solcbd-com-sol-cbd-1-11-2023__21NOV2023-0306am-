@@ -1,0 +1,88 @@
+{%- if section.settings.full_width -%}
+  {%- assign full_width = true -%}
+{%- endif -%}
+
+<div id="section-{{ section.id }}" class="{% unless section.settings.show_on_desktop %} medium--hide large--hide{% endunless %} {% unless section.settings.show_on_mobile %} small--hide{% endunless %} {% if full_width %}section-full-width section-no-title{% endif %} {{ section.settings.section_style }}" data-section-id="{{ section.id }}" data-section-type="featured-image-section">
+  <div class="box">
+    <div class="{%- if full_width -%}wrapper-full{%- else -%}wrapper{%- endif -%}">
+      {%- if section.settings.image_link != blank -%}
+      <a href="{{ section.settings.image_link }}" class="image-link">
+      {%- endif -%}
+        {%- if section.settings.image != blank -%}
+          <div class="media-wrapper" style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%;">
+            <img class="media lazyload"
+            {%- render 'lazysizes', img: section.settings.image, img_type: 'responsive' -%}
+            alt="{{ section.settings.image.alt }}">
+          </div>
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      {%- if section.settings.image_link != blank -%}
+      </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.featured_image.name",
+    "class": "featured-image-section",
+    "settings": [
+       {
+        "type": "checkbox",
+        "id": "show_on_desktop",
+        "label": "t:sections.featured_image.settings.show_on_desktop.label",
+        "default": true
+       },
+       {
+        "type": "checkbox",
+        "id": "show_on_mobile",
+        "label": "t:sections.featured_image.settings.show_on_mobile.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "t:sections.featured_image.settings.full_width.label",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "t:sections.featured_image.settings.image.label"
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "t:sections.featured_image.settings.section_style.label",
+        "default": "section-blank",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "t:sections.featured_image.settings.section_style.options__1.label"
+          },
+		      {
+            "value": "section-default",
+            "label": "t:sections.featured_image.settings.section_style.options__2.label"
+          },
+          {
+            "value": "section-border",
+            "label": "t:sections.featured_image.settings.section_style.options__3.label"
+          }
+        ]
+      },
+      {
+        "type": "url",
+        "id": "image_link",
+        "label": "t:sections.featured_image.settings.image_link.label"
+      }
+	  ],
+	  "presets": [
+      {
+        "name":  "t:sections.featured_image.presets.name",
+        "category":"t:sections.featured_image.presets.category"
+      }
+    ]
+  }
+{% endschema %}

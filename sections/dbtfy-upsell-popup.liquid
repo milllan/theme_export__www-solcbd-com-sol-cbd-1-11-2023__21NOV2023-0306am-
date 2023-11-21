@@ -1,0 +1,941 @@
+{%- if settings.dbtfy_upsell_popup and section.blocks.size > 0 -%}
+  <div class="dbtfy dbtfy-upsell_popup"
+       data-section-id="{{ section.id }}"
+       data-section-type="upsell-popup"
+       data-popup-width="{{ section.settings.dbtfy_upsell_popup_width }}"
+       data-popup-description="{{ section.settings.dbtfy_upsell_popup_description }}"
+       data-cart-text="{{ section.settings.dbtfy_upsell_popup_cart }}"
+       data-checkout-text="{{ section.settings.dbtfy_upsell_popup_checkout }}"
+       data-text-alignment="{{ section.settings.text_alignment }}"
+       data-range="{{ section.settings.dbtfy_upsell_popup_range }}"
+  >
+
+    <!-- Blocks -->
+    {%- for block in section.blocks -%}
+      {%- for i in (1..10) -%}
+        {%- capture index -%}{{ forloop.index }}{%- endcapture -%}
+        {%- capture dbtfy_upsell_popup_title -%}title_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_upsell_popup_text -%}text_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_upsell_popup_collection_trigger -%}collection_trigger_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_upsell_popup_product_trigger -%}product_trigger_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_upsell_popup_product_offer -%}product_offer_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_upsell_popup_icons -%}icons_{{index}}{%- endcapture -%}
+        {%- capture button_label -%}button_label_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_upsell_popup_discount_name -%}discount_name_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_upsell_popup_discount_amount -%}discount_amount_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_upsell_popup_discount_type -%}discount_type_{{index}}{%- endcapture -%}
+
+        {%- assign title = block.settings[dbtfy_upsell_popup_title] -%}
+        {%- assign text = block.settings[dbtfy_upsell_popup_text] -%}
+        {%- assign collection_trigger = block.settings[dbtfy_upsell_popup_collection_trigger] -%}
+        {%- assign product_trigger = block.settings[dbtfy_upsell_popup_product_trigger] -%}
+        {%- assign product_offer = block.settings[dbtfy_upsell_popup_product_offer] -%}
+        {%- assign icons = block.settings[dbtfy_upsell_popup_icons] -%}
+        {%- assign button_label = block.settings[button_label] -%}
+        {%- assign discount_name = block.settings[dbtfy_upsell_popup_discount_name] -%}
+        {%- assign discount_amount = block.settings[dbtfy_upsell_popup_discount_amount] -%}
+        {%- assign discount_type = block.settings[dbtfy_upsell_popup_discount_type] -%}
+
+        <div class="upsell-popup-item"
+            data-title="{{ title }}"
+            data-text="{{ text | escape }}"
+            data-product-trigger="{{ product_trigger }}"
+            data-collection-trigger="{{ collection_trigger }}"
+            data-product-offer="{{ product_offer }}"
+            data-icons="{{ icons }}"
+            data-button-label="{{ button_label }}"
+            data-discount-name="{{ discount_name }}"
+            data-discount-amount="{{ discount_amount }}"
+            data-discount-type="{{ discount_type }}"
+            data-block-id="{{ block.id }}">
+        </div>
+
+        {%- if product_offer.media.first != blank -%}
+          <script type="application/json" id="upsellProductOfferJson-{{ product_offer.id }}">
+            {
+              "media": {{ product_offer.media.first | json }}
+            }
+          </script>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Upsell Popup",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Help Center"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Follow our step-by-step tutorial](https://help.debutify.com/en/articles/5054298-how-to-enable-the-upsell-pop-up-add-on-in-the-debutify-theme)"
+      },
+      {
+        "type": "paragraph",
+        "content": "To enable/disable this add-on, go to Theme settings > Debutify Add-ons."
+      },
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_upsell_popup_width",
+        "label": "Size",
+        "default": "",
+        "options": [
+          {
+            "value": "",
+            "label": "Medium"
+          },
+          {
+            "value": "modal-large",
+            "label": "Large"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_popup_description",
+        "label": "Description text",
+        "default": "See product details"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_popup_cart",
+        "label": "Decline offer text",
+        "default": "No thanks"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_popup_checkout",
+        "label": "Checkout text",
+        "default": "Go to checkout →"
+      },
+      {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Text alignment",
+        "default": "text-center",
+        "options": [
+          {
+            "value": "",
+            "label": "Left"
+          },
+          {
+            "value": "text-center",
+            "label": "Center"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_upsell_popup_range",
+        "label": "Progress bar width",
+        "min": 50,
+        "max": 90,
+        "step": 1,
+        "unit": "%",
+        "default": 75
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "upsell",
+        "name": "Upsell",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Block name",
+            "info": "Used for internal identification"
+          },
+          {
+            "type": "header",
+            "content": "Upsell 1"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Title",
+            "default": "Special Offer!"
+          },
+          {
+            "type": "richtext",
+            "id": "text_1",
+            "label": "Text",
+            "default": "<p>Add this product to your cart and get 20% OFF your entire order.<\/p>"
+          },
+          {
+            "type": "collection",
+            "id": "collection_trigger_1",
+            "label": "Collection trigger"
+          },
+          {
+            "type": "product",
+            "id": "product_trigger_1",
+            "label": "Product trigger",
+            "info": "Leave both collection and product pickers empty to trigger upsell popup on all products"
+          },
+          {
+            "type": "product",
+            "id": "product_offer_1",
+            "label": "Product offer"
+          },
+          {
+            "type": "text",
+            "id": "icons_1",
+            "label": "Button icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "card_giftcard"
+          },
+          {
+            "type": "text",
+            "id": "button_label_1",
+            "label": "Button label",
+            "default": "Claim offer!"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](/admin/discounts/new)"
+          },
+          {
+            "type": "text",
+            "id": "discount_name_1",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "discount_amount_1",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "discount_type_1",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Upsell 2"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Title",
+            "default": "Special Offer!"
+          },
+          {
+            "type": "richtext",
+            "id": "text_2",
+            "label": "Text",
+            "default": "<p>Add this product to your cart and get 20% OFF your entire order.<\/p>"
+          },
+          {
+            "type": "collection",
+            "id": "collection_trigger_2",
+            "label": "Collection trigger"
+          },
+          {
+            "type": "product",
+            "id": "product_trigger_2",
+            "label": "Product trigger",
+            "info": "Leave both collection and product pickers empty to trigger upsell popup on all products"
+          },
+          {
+            "type": "product",
+            "id": "product_offer_2",
+            "label": "Product offer"
+          },
+          {
+            "type": "text",
+            "id": "icons_2",
+            "label": "Button icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "card_giftcard"
+          },
+          {
+            "type": "text",
+            "id": "button_label_2",
+            "label": "Button label",
+            "default": "Claim offer!"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](/admin/discounts/new)"
+          },
+          {
+            "type": "text",
+            "id": "discount_name_2",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "discount_amount_2",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "discount_type_2",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Upsell 3"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Title",
+            "default": "Special Offer!"
+          },
+          {
+            "type": "richtext",
+            "id": "text_3",
+            "label": "Text",
+            "default": "<p>Add this product to your cart and get 20% OFF your entire order.<\/p>"
+          },
+          {
+            "type": "collection",
+            "id": "collection_trigger_3",
+            "label": "Collection trigger"
+          },
+          {
+            "type": "product",
+            "id": "product_trigger_3",
+            "label": "Product trigger",
+            "info": "Leave both collection and product pickers empty to trigger upsell popup on all products"
+          },
+          {
+            "type": "product",
+            "id": "product_offer_3",
+            "label": "Product offer"
+          },
+          {
+            "type": "text",
+            "id": "icons_3",
+            "label": "Button icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "card_giftcard"
+          },
+          {
+            "type": "text",
+            "id": "button_label_3",
+            "label": "Button label",
+            "default": "Claim offer!"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](/admin/discounts/new)"
+          },
+          {
+            "type": "text",
+            "id": "discount_name_3",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "discount_amount_3",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "discount_type_3",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Upsell 4"
+          },
+          {
+            "type": "text",
+            "id": "title_4",
+            "label": "Title",
+            "default": "Special Offer!"
+          },
+          {
+            "type": "richtext",
+            "id": "text_4",
+            "label": "Text",
+            "default": "<p>Add this product to your cart and get 20% OFF your entire order.<\/p>"
+          },
+          {
+            "type": "collection",
+            "id": "collection_trigger_4",
+            "label": "Collection trigger"
+          },
+          {
+            "type": "product",
+            "id": "product_trigger_4",
+            "label": "Product trigger",
+            "info": "Leave both collection and product pickers empty to trigger upsell popup on all products"
+          },
+          {
+            "type": "product",
+            "id": "product_offer_4",
+            "label": "Product offer"
+          },
+          {
+            "type": "text",
+            "id": "icons_4",
+            "label": "Button icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "card_giftcard"
+          },
+          {
+            "type": "text",
+            "id": "button_label_4",
+            "label": "Button label",
+            "default": "Claim offer!"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](/admin/discounts/new)"
+          },
+          {
+            "type": "text",
+            "id": "discount_name_4",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "discount_amount_4",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "discount_type_4",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+          ]
+          },
+          {
+            "type": "header",
+            "content": "Upsell 5"
+          },
+          {
+            "type": "text",
+            "id": "title_5",
+            "label": "Title",
+            "default": "Special Offer!"
+          },
+          {
+            "type": "richtext",
+            "id": "text_5",
+            "label": "Text",
+            "default": "<p>Add this product to your cart and get 20% OFF your entire order.<\/p>"
+          },
+          {
+            "type": "collection",
+            "id": "collection_trigger_5",
+            "label": "Collection trigger"
+          },
+          {
+            "type": "product",
+            "id": "product_trigger_5",
+            "label": "Product trigger",
+            "info": "Leave both collection and product pickers empty to trigger upsell popup on all products"
+          },
+          {
+            "type": "product",
+            "id": "product_offer_5",
+            "label": "Product offer"
+          },
+          {
+            "type": "text",
+            "id": "icons_5",
+            "label": "Button icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "card_giftcard"
+          },
+          {
+            "type": "text",
+            "id": "button_label_5",
+            "label": "Button label",
+            "default": "Claim offer!"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](/admin/discounts/new)"
+          },
+          {
+            "type": "text",
+            "id": "discount_name_5",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "discount_amount_5",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "discount_type_5",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+              "value": "%",
+              "label": "Percentage"
+              },
+              {
+              "value": "$",
+              "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Upsell 6"
+          },
+          {
+            "type": "text",
+            "id": "title_6",
+            "label": "Title",
+            "default": "Special Offer!"
+          },
+          {
+            "type": "richtext",
+            "id": "text_6",
+            "label": "Text",
+            "default": "<p>Add this product to your cart and get 20% OFF your entire order.<\/p>"
+          },
+          {
+            "type": "collection",
+            "id": "collection_trigger_6",
+            "label": "Collection trigger"
+          },
+          {
+            "type": "product",
+            "id": "product_trigger_6",
+            "label": "Product trigger",
+            "info": "Leave both collection and product pickers empty to trigger upsell popup on all products"
+          },
+          {
+            "type": "product",
+            "id": "product_offer_6",
+            "label": "Product offer"
+          },
+          {
+            "type": "text",
+            "id": "icons_6",
+            "label": "Button icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "card_giftcard"
+          },
+          {
+            "type": "text",
+            "id": "button_label_6",
+            "label": "Button label",
+            "default": "Claim offer!"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](/admin/discounts/new)"
+          },
+          {
+            "type": "text",
+            "id": "discount_name_6",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "discount_amount_6",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "discount_type_6",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Upsell 7"
+          },
+          {
+            "type": "text",
+            "id": "title_7",
+            "label": "Title",
+            "default": "Special Offer!"
+          },
+          {
+            "type": "richtext",
+            "id": "text_7",
+            "label": "Text",
+            "default": "<p>Add this product to your cart and get 20% OFF your entire order.<\/p>"
+          },
+          {
+            "type": "collection",
+            "id": "collection_trigger_7",
+            "label": "Collection trigger"
+          },
+          {
+            "type": "product",
+            "id": "product_trigger_7",
+            "label": "Product trigger",
+            "info": "Leave both collection and product pickers empty to trigger upsell popup on all products"
+          },
+          {
+            "type": "product",
+            "id": "product_offer_7",
+            "label": "Product offer"
+          },
+          {
+            "type": "text",
+            "id": "icons_7",
+            "label": "Button icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "card_giftcard"
+          },
+          {
+            "type": "text",
+            "id": "button_label_7",
+            "label": "Button label",
+            "default": "Claim offer!"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](/admin/discounts/new)"
+          },
+          {
+            "type": "text",
+            "id": "discount_name_7",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "discount_amount_7",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "discount_type_7",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Upsell 8"
+          },
+          {
+            "type": "text",
+            "id": "title_8",
+            "label": "Title",
+            "default": "Special Offer!"
+          },
+          {
+            "type": "richtext",
+            "id": "text_8",
+            "label": "Text",
+            "default": "<p>Add this product to your cart and get 20% OFF your entire order.<\/p>"
+          },
+          {
+            "type": "collection",
+            "id": "collection_trigger_8",
+            "label": "Collection trigger"
+          },
+          {
+            "type": "product",
+            "id": "product_trigger_8",
+            "label": "Product trigger",
+            "info": "Leave both collection and product pickers empty to trigger upsell popup on all products"
+          },
+          {
+            "type": "product",
+            "id": "product_offer_8",
+            "label": "Product offer"
+          },
+          {
+            "type": "text",
+            "id": "icons_8",
+            "label": "Button icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "card_giftcard"
+          },
+          {
+            "type": "text",
+            "id": "button_label_8",
+            "label": "Button label",
+          "default": "Claim offer!"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](/admin/discounts/new)"
+          },
+          {
+            "type": "text",
+            "id": "discount_name_8",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "discount_amount_8",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "discount_type_8",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Upsell 9"
+          },
+          {
+            "type": "text",
+            "id": "title_9",
+            "label": "Title",
+            "default": "Special Offer!"
+          },
+          {
+            "type": "richtext",
+            "id": "text_9",
+            "label": "Text",
+            "default": "<p>Add this product to your cart and get 20% OFF your entire order.<\/p>"
+          },
+          {
+            "type": "collection",
+            "id": "collection_trigger_9",
+            "label": "Collection trigger"
+          },
+          {
+            "type": "product",
+            "id": "product_trigger_9",
+            "label": "Product trigger",
+            "info": "Leave both collection and product pickers empty to trigger upsell popup on all products"
+          },
+          {
+            "type": "product",
+            "id": "product_offer_9",
+            "label": "Product offer"
+          },
+          {
+            "type": "text",
+            "id": "icons_9",
+            "label": "Button icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "card_giftcard"
+          },
+          {
+            "type": "text",
+            "id": "button_label_9",
+            "label": "Button label",
+            "default": "Claim offer!"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](/admin/discounts/new)"
+          },
+          {
+            "type": "text",
+            "id": "discount_name_9",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "discount_amount_9",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "discount_type_9",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Upsell 10"
+          },
+          {
+            "type": "text",
+            "id": "title_10",
+            "label": "Title",
+            "default": "Special Offer!"
+          },
+          {
+            "type": "richtext",
+            "id": "text_10",
+            "label": "Text",
+            "default": "<p>Add this product to your cart and get 20% OFF your entire order.<\/p>"
+          },
+          {
+            "type": "collection",
+            "id": "collection_trigger_10",
+            "label": "Collection trigger"
+          },
+          {
+            "type": "product",
+            "id": "product_trigger_10",
+            "label": "Product trigger",
+            "info": "Leave both collection and product pickers empty to trigger upsell popup on all products"
+          },
+          {
+            "type": "product",
+            "id": "product_offer_10",
+            "label": "Product offer"
+          },
+          {
+            "type": "text",
+            "id": "icons_10",
+            "label": "Button icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "card_giftcard"
+          },
+          {
+            "type": "text",
+            "id": "button_label_10",
+            "label": "Button label",
+            "default": "Claim offer!"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](/admin/discounts/new)"
+          },
+          {
+            "type": "text",
+            "id": "discount_name_10",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "discount_amount_10",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "discount_type_10",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,62 @@
+<div class="box">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+        <div class="section-header">
+          <div class="page-title-wrapper">
+            <h1 class="page-title">{{ page.title }}</h1>
+          </div>
+        </div>
+
+        {%- unless page.content == blank -%}
+          <div class="page-content rte">
+            {{ page.content }}
+          </div>
+        {%- endunless -%}
+      </div>
+    </div>
+
+    {%- if settings.dbtfy_order_tracking -%}
+      {%- liquid
+        assign order_tracking_input_placeholder = 'add-ons.order_tracking.input_placeholder' | t
+        assign order_tracking_button_text = 'add-ons.order_tracking.button_text' | t
+      -%}
+
+      <div class="dbtfy dbtfy-order_tracking">
+        <div class="grid">
+          <div class="grid__item large--four-twelfths medium--six-twelfths push--large--four-twelfths push--medium--three-twelfths text-center">
+            <form action="/" id="ot-form" class="form-vertical">
+              <!-- Tracking number input box. -->
+              <input type="text" id="ot-num" class="input-full" maxlength="50"
+                     placeholder="{{ order_tracking_input_placeholder }}"/>
+
+              <!-- The button is used to call script method. -->
+              {%- if order_tracking_button_text != blank -%}
+                <button id="ot-btn" type="submit" class="btn btn--primary btn--full"
+                        value="{{ order_tracking_button_text }}">
+                    <span class="btn__text">
+                        {{ order_tracking_button_text }}
+                    </span>
+                </button>
+              {%- endif -%}
+            </form>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="grid__item">
+            <!-- Container to display the tracking result. -->
+            <div id="ot-container"></div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.page_order_tracking_content.name",
+  "settings": []
+}
+{% endschema %}

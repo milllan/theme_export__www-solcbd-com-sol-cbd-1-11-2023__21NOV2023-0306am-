@@ -1,0 +1,49 @@
+{%- if settings.dbtfy_inventory_quantity -%}
+  {%- liquid
+    assign icons = settings.settings.dbtfy_inventory_quantity_icons
+    assign threshold_qty = settings.dbtfy_inventory_quantity_threshold
+    assign prefix_text = 'add-ons.inventory_quantity.prefix_text' | t
+    assign suffix_text = 'add-ons.inventory_quantity.suffix_text' | t
+    assign in_stock_text = 'add-ons.inventory_quantity.in_stock_text' | t
+  -%}
+
+  <div class="dbtfy dbtfy-inventory_quantity{% if sticky_variant %} sticky_inventory_quantity{% endif %}" hidden>
+
+    {%- unless icons == blank -%}
+      <span class="{{ settings.icon }}">
+        {{ icons }}
+      </span>
+    {%- endunless -%}
+
+    {%- for variant in product.variants -%}
+      {%- if variant.inventory_quantity > 0 and variant.inventory_management == "shopify" -%}
+        <span class="quantity-item-inventory_quantity quantity-item-{{ variant.id }}-inventory_quantity"
+              data-threshold-qty="{{ threshold_qty }}"
+              data-origin-quantity="{{ variant.inventory_quantity }}"
+              hidden>
+          <span class="quantity-item-less-threshold-inventory_quantity">
+            {%- unless prefix_text == blank -%}
+              <span>
+                {{ prefix_text }}
+              </span>
+            {%- endunless -%}
+
+            <strong class="quantity-item-value-inventory_quantity">{{ variant.inventory_quantity }}</strong>
+
+            {%- unless suffix_text == blank -%}
+              <span>
+                {{ suffix_text }}
+              </span>
+            {%- endunless -%}
+          </span>
+
+          {%- if in_stock_text != blank -%}
+            <span class="quantity-item-more-threshold-inventory_quantity">
+              {{ in_stock_text }}
+            </span>
+          {%- endif -%}
+        </span>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}

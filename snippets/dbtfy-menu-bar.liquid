@@ -1,0 +1,23 @@
+{%- if settings.dbtfy_menu_bar -%}
+  {%- liquid
+    assign menu = settings.dbtfy_menu_bar_link_list
+    assign show_mobile_menu = settings.dbtfy_menu_bar_mobile
+    assign show_desktop_menu = settings.dbtfy_menu_bar_desktop
+  -%}
+
+  {%- if linklists[menu].links.size > 0 -%}
+    <div class="dbtfy dbtfy-menu_bar{% unless show_mobile_menu %} small--hide{%- endunless -%}{% unless show_desktop_menu %} medium--hide large--hide{% endunless %}">
+      <ul class="menu-bar__inner no-bullets flex">
+        {%- for link in linklists[menu].links -%}
+          <li class="menu-bar__item">
+            <a href="{{ link.url }}" class="menu-bar__link">
+              <span class="menu-bar__link-text">
+                {{ link.title | escape }}
+              </span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+{%- endif -%}

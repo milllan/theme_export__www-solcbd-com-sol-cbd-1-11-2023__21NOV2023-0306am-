@@ -1,0 +1,11 @@
+{%- if settings.dbtfy_cart_notification -%}
+  {%- liquid
+    assign button_style = settings.cart_message_button_style
+    assign cart_message_text = 'cart.cart_message.text' | t
+    assign cart_message_button_label = 'cart.cart_message.button_label' | t
+  -%}
+
+  <div class="cart-message-toast-wrapper">
+    {% render 'notification-toast', toast_text: cart_message_text, button_style: button_style, toast_button_label: cart_message_button_label %}
+  </div>
+{%- endif -%}

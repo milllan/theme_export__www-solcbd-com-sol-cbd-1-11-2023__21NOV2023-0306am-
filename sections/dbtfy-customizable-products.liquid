@@ -1,0 +1,456 @@
+{%- if settings.dbtfy_customizable_products -%}
+  {%- if section.blocks.size >= 1 -%}
+    <div class="dbtfy-customizable_products" hidden>
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign block_id = block.id
+          assign block_type = block.type
+
+          assign label = block.settings.label
+          assign label_handleized = label | handleize
+          assign placeholder = block.settings.placeholder
+          assign options = block.settings.options | split: ','
+          assign is_required = block.settings.field_required
+          assign show_at_checkout = block.settings.show_at_checkout
+          assign group_type = block.settings.group_type
+          assign property_value = label
+
+          assign visibility = block.settings.visibility
+          assign product_id = block.settings.product.id
+          assign collection_handle = block.settings.collection
+          assign types = block.settings.types
+          assign tags = block.settings.tags
+
+          unless show_at_checkout
+            assign property_value = label | prepend: '_'
+          endunless
+        -%}
+
+        <div class="line-item-property__field line-item-field-{{ block_id }} spacer-bottom"
+             data-field-id="{{ block_id }}"
+             data-visibility-type="{{ visibility }}"
+             data-product-id="{{ product_id }}"
+             data-collection="{{ collection_handle }}"
+             data-types="{{ types }}"
+             data-tags="{{ tags }}"
+             {{ block.shopify_attributes }}>
+
+          {%- if block_type == "text" and label != blank -%}
+            {%- liquid
+              if is_required
+                assign field_class = "input--small full required"
+              else
+                assign field_class = "input--small full"
+              endif
+            -%}
+
+            {%- if label != blank -%}
+              <label for="{{ label_handleized }}">
+                {{ label }}
+              </label>
+
+              <input class="{{ field_class }}"
+                     id="{{ label_handleized }}"
+                     type="text"
+                     name="properties[{{ property_value }}]"
+                     {% if is_required %}required{% endif %}
+                     placeholder="{{ placeholder }}">
+           {%- endif -%}
+
+          {%- elsif block_type == "checkbox" and label != blank -%}
+            {%- if label != blank -%}
+              <div class="checkbox">
+                <input type="hidden"
+                       name="properties[{{ property_value }}]"
+                       value="No">
+
+                <input id="{{ label_handleized }}"
+                       {% if is_required %}required class="required"{% endif %}
+                       type="checkbox"
+                       name="properties[{{ property_value }}]"
+                       value="Yes">
+
+                <label for="{{ label_handleized }}">
+                  {{ label }}
+                </label>
+              </div>
+            {%- endif -%}
+
+          {%- elsif block_type == "group" and options != blank -%}
+            {% if label != blank %}
+              <label for="{{ label_handleized }}">
+                {{ label }}
+              </label>
+            {%- endif -%}
+
+            {%- case group_type -%}
+              {%- when "dropdown" -%}
+                {% if label != blank %}
+                  <select class="select--small"
+                          id="{{ label_handleized }}"
+                          name="properties[{{ property_value }}]">
+
+                    {%- for option in options -%}
+                      {%- liquid
+                        assign option_name = option | strip
+
+                        unless show_at_checkout
+                          assign option_name = option_name | prepend: '_'
+                        endunless
+                      -%}
+
+                      <option value="{{ option_name }}">
+                        {{ option_name }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                {%- endif -%}
+
+              {%- when "radio_buttons" -%}
+                {%- if label != blank -%}
+                  {%- for option in options -%}
+                    {%- assign option_name = option | strip -%}
+
+                    <div class="radio{% unless forloop.last %} spacer-bottom-xs{% endunless %}">
+                      <input id="radio_{{ forloop.index }}_{{ block_id }}"
+                             {% if forloop.first %}checked{% endif %}
+                             type="radio"
+                             name="properties[{{ property_value }}]"
+                             value="{{ option_name }}">
+
+                      <label for="radio_{{ forloop.index }}_{{ block_id }}">
+                        {{ option_name }}
+                      </label>
+                    </div>
+                  {%- endfor -%}
+                {%- endif -%}
+
+              {%- when "checkbox_group" -%}
+                {%- if label != blank -%}
+                  {%- for option in options -%}
+                    {%- assign option_name = option | strip -%}
+
+                    <div class="checkbox{% unless forloop.last %} spacer-bottom-xs{% endunless %}">
+                      <input class="cp-checkbox-group-checkbox"
+                             type="checkbox"
+                             id="checkbox_{{ forloop.index }}_{{ block_id }}"
+                             value="{{ option_name }}">
+
+                      <label for="checkbox_{{ forloop.index }}_{{ block_id }}">
+                        {{ option_name }}
+                      </label>
+                    </div>
+                  {%- endfor -%}
+
+                  <input type="hidden"
+                         class="cp-checkbox-group-hidden"
+                         name="properties[{{ property_value }}]">
+                {%- endif -%}
+            {%- endcase -%}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy_customizable_products.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy_customizable_products.settings.header__1.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy_customizable_products.settings.paragraph__1.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy_customizable_products.settings.paragraph__2.content"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "t:sections.dbtfy_customizable_products.blocks.text.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.block_name.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.text.settings.block_name.info"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.label.label"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.placeholder.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "field_required",
+          "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.required.label",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_at_checkout",
+          "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.show_at_checkout.label",
+          "default": true,
+          "info": "t:sections.dbtfy_customizable_products.blocks.text.settings.show_at_checkout.info"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.dbtfy_customizable_products.blocks.text.settings.header__1.content"
+        },
+        {
+          "type": "radio",
+          "id": "visibility",
+          "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.visibility.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.text.settings.visibility.info",
+          "default": "all",
+          "options": [
+            {
+              "value": "all",
+              "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.visibility.options__1.label"
+            },
+            {
+              "value": "collection",
+              "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.visibility.options__2.label"
+            },
+            {
+              "value": "type",
+              "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.visibility.options__3.label"
+            },
+            {
+              "value": "tag",
+              "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.visibility.options__4.label"
+            },
+            {
+              "value": "product",
+              "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.visibility.options__5.label"
+            }
+          ]
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.collection.label"
+        },
+        {
+          "type": "textarea",
+          "id": "types",
+          "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.product_types.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.text.settings.product_types.info"
+        },
+        {
+          "type": "textarea",
+          "id": "tags",
+          "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.product_tags.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.text.settings.product_tags.info"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.dbtfy_customizable_products.blocks.text.settings.product.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "name": "t:sections.dbtfy_customizable_products.blocks.checkbox.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.block_name.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.block_name.info"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.label.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "field_required",
+          "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.required.label",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_at_checkout",
+          "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.show_at_checkout.label",
+          "default": true,
+          "info": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.show_at_checkout.info"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.header__1.content"
+        },
+        {
+          "type": "radio",
+          "id": "visibility",
+          "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.visibility.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.visibility.info",
+          "default": "all",
+          "options": [
+            {
+              "value": "all",
+              "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.visibility.options__1.label"
+            },
+            {
+              "value": "collection",
+              "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.visibility.options__2.label"
+            },
+            {
+              "value": "type",
+              "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.visibility.options__3.label"
+            },
+            {
+              "value": "tag",
+              "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.visibility.options__4.label"
+            },
+            {
+              "value": "product",
+              "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.visibility.options__5.label"
+            }
+          ]
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.collection.label"
+        },
+        {
+          "type": "textarea",
+          "id": "types",
+          "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.product_types.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.product_types.info"
+        },
+        {
+          "type": "textarea",
+          "id": "tags",
+          "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.product_tags.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.product_tags.info"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.dbtfy_customizable_products.blocks.checkbox.settings.product.label"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "name": "t:sections.dbtfy_customizable_products.blocks.group.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.block_name.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.group.settings.block_name.info"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.label.label"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.options.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.group.settings.options.info"
+        },
+        {
+          "type": "select",
+          "id": "group_type",
+          "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.group_type.label",
+          "options": [
+            {
+              "value": "dropdown",
+              "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.group_type.options__1.label"
+            },
+            {
+              "value": "radio_buttons",
+              "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.group_type.options__2.label"
+            },
+            {
+              "value": "checkbox_group",
+              "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.group_type.options__3.label"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_at_checkout",
+          "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.show_at_checkout.label",
+          "default": true,
+          "info": "t:sections.dbtfy_customizable_products.blocks.group.settings.show_at_checkout.info"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.dbtfy_customizable_products.blocks.group.settings.header__1.content"
+        },
+        {
+          "type": "radio",
+          "id": "visibility",
+          "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.visibility.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.group.settings.visibility.info",
+          "default": "all",
+          "options": [
+            {
+              "value": "all",
+              "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.visibility.options__1.label"
+            },
+            {
+              "value": "collection",
+              "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.visibility.options__2.label"
+            },
+            {
+              "value": "type",
+              "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.visibility.options__3.label"
+            },
+            {
+              "value": "tag",
+              "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.visibility.options__4.label"
+            },
+            {
+              "value": "product",
+              "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.visibility.options__5.label"
+            }
+          ]
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.collection.label"
+        },
+        {
+          "type": "textarea",
+          "id": "types",
+          "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.product_types.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.group.settings.product_types.info"
+        },
+        {
+          "type": "textarea",
+          "id": "tags",
+          "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.product_tags.label",
+          "info": "t:sections.dbtfy_customizable_products.blocks.group.settings.product_tags.info"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.dbtfy_customizable_products.blocks.group.settings.product.label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

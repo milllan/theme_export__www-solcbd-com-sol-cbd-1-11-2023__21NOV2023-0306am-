@@ -1,0 +1,38 @@
+{%- if settings.dbtfy_cookie_box -%}
+  {%- liquid
+    assign use_drawer_colors = settings.dbtfy_cookie_box_inverted
+    assign text = 'add-ons.cookie_box.text_html' | t
+    assign button_label = 'add-ons.cookie_box.button_label' | t
+    assign button_style = settings.dbtfy_cookie_box_button_style
+  -%}
+
+  <div class="dbtfy dbtfy-cookie_box">
+    <div id="CookieBox" class="prevent-scrollbar-shift" style="display: none;">
+      <div class="wrapper cb-wrapper">
+        <div class="cb-container{% if use_drawer_colors %} cb-inverted overlay-content{% endif %}">
+          <div class="grid grid-small align-center cb-grid">
+            <div class="grid__item cb-text-item">
+              <div class="rte small--text-center">
+                <p>{{ text }}</p>
+              </div>
+            </div>
+
+            <div class="grid__item flex large--flex-auto medium--flex-auto cb-button-item{%- if button_label == blank -%} justify-center{%- endif -%}">
+              {%- unless button_label == blank -%}
+                <button class="btn {{ button_style }} btn--small small--full cb-btn">
+                  <span class="btn__text">
+                    {{ button_label | escape }}
+                  </span>
+                </button>
+              {%- endunless -%}
+
+              <button type="button" class="btn btn-square-small flex-shrink cb-btn-close">
+                <span class="{{ settings.icon }}" aria-hidden="true">close</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

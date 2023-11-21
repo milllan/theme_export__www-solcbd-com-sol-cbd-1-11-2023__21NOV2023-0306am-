@@ -1,0 +1,10 @@
+{%- if settings.dbtfy_facebook_messenger -%}
+  {%- assign code = settings.dbtfy_facebook_messenger_code -%}
+  {%- assign hide_on_mobile = settings.dbtfy_facebook_messenger_mobile -%}
+
+  {%- if code != blank -%}
+    <div class="dbtfy dbtfy-facebook_messenger stacked-on-top-of-content{% if hide_on_mobile %} small--hide{% endif %}">
+      {{- code -}}
+    </div>
+  {%- endif -%}
+{%- endif -%}

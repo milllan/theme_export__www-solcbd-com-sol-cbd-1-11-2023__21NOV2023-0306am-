@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="{{ shop.locale }}">
+  <head>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M72RTQZ');</script>
+<!-- End Google Tag Manager -->
+{% render 'hs-critical-css' %}
+
+{% include 'hyperspeed-imports' %}
+
+    <!-- Basic page needs -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no">
+    <meta name="theme-color" content="{{ settings.color_body_bg }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="author" content="Debutify">
+
+    <!-- Preconnect external resources -->
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="preconnect" href="https://shop.app" crossorigin>
+    <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
+
+
+    
+    {%- if content_for_layout contains "product-template" -%}
+      <link rel="preconnect" href="https://godog.shopifycloud.com">
+
+      {%- if settings.enable_payment_button -%}
+        <link rel="preconnect" href="https://pay.google.com" crossorigin>
+        <link rel="preconnect" href="https://play.google.com" crossorigin>
+      {%- endif -%}
+    {%- endif -%}
+
+
+  
+    {%- if content_for_layout contains "featured-video" -%}
+      <link rel="preconnect" href="https://www.youtube.com">
+    {%- endif -%}
+
+
+  
+    {%- if content_for_layout contains "map" -%}
+      <link rel="preconnect" href="https://maps.googleapis.com">
+    {%- endif -%}
+
+    {%- if request.page_type == "contact" or request.page_type == "product" or request.page_type == "captcha" -%}
+      <link rel="preconnect" href="https://www.google.com">
+      <link rel="preconnect" href="https://www.gstatic.com">
+      <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="preconnect" href="https://www.recaptcha.net" crossorigin>
+    {%- endif -%}
+
+    <link rel="preconnect" href="https://debutify.com">
+
+    {%- if settings.dbtfy_automatic_geolocation -%}
+      <link rel="preconnect" href="https://api.teathemes.net" crossorigin>
+    {%- endif -%}
+
+    {%- if settings.dbtfy_instagram_feed -%}
+      <link rel="preconnect" href="https://graph.instagram.com/" crossorigin>
+    {%- endif -%}
+
+    {%- if settings.dbtfy_facebook_messenger -%}
+      <link rel="preconnect" href="https://www.facebook.com/" crossorigin>
+      <link rel="preconnect" href="https://www.facebook.com/">
+    {%- endif -%}
+
+    {%- liquid
+      assign accent_family = settings.accent_family
+      assign base_family = settings.base_family
+      assign header_family = settings.header_family
+      assign base_family_bold = base_family | font_modify: "weight", "bolder"
+      assign base_family_italic = base_family | font_modify: "style", "italic"
+      assign base_family_bold_italic = base_family_bold | font_modify: "style", "italic"
+      assign accent_family_bold = accent_family | font_modify: "weight", "bolder"
+      assign icon_split = settings.icon | split: "-"
+      capture icon_family
+        for icon in icon_split
+          unless forloop.last == true
+            echo icon | capitalize | append: " "
+          else
+            echo icon | capitalize
+          endunless
+        endfor
+      endcapture
+    -%}
+
+    <!-- Preload assets -->
+    <link rel="preload" href="{{ "theme.scss.css" | asset_url }}" as="style">
+    <link rel="preload" as="font" href="{{ header_family | font_url }}" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="{{ accent_family | font_url }}" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="{{ base_family | font_url }}" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="{{ settings.icon | append: ".woff2" | asset_url }}" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ "jquery-2.2.3.min.js" | asset_url }}" as="script">
+    <link rel="preload" href="{{ "theme.min.js" | asset_url }}" as="script">
+    <link rel="preload" href="{{ "lazysizes.min.js" | asset_url }}" as="script">
+    <link rel="preload" href="{{ "dbtfy-addons.min.js" | asset_url }}" as="script">
+
+    {%- if canonical_url != blank -%}
+      {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<link rel="canonical" href="{{ canonical_url }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+    {%- endif -%}
+
+    <!-- Fav icon -->
+    {%- assign favicon_url = settings.favicon | img_url: "100x100", crop: "center" -%}
+
+    {%- if settings.favicon == blank -%}
+      {%- assign favicon_url = "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII=" -%}
+    {%- endif -%}
+
+    <link sizes="192x192" rel="shortcut icon" type="image/png" id="favicon" href="{{ favicon_url }}">
+
+    <!-- Title and description -->
+    {%- comment -%}Auto-disabled. Yoast plugin is taking care of SEO output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<title>
+      {{ page_title }}{% if current_tags %}{%- assign meta_tags = current_tags | join: ", " -%} &ndash; {{ "general.meta.tags" | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ "general.meta.page" | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+
+    {%- if page_description -%}
+      {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta name="description" content="{{ page_description | escape }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+    {%- endif -%}
+
+    <!-- Social meta -->
+    {%- render "social-meta-tags" -%}
+
+    <!-- CSS  -->
+    {% render 'hs-defer-css' with filename: 'theme.scss.css', pages: 'collection,index,product' | split: ',', local: true %}
+
+    {%- if settings.dbtfy_delivery_date -%}
+      {% render 'hs-defer-css' with filename: 'flatpickr.min.css', pages: 'collection,index,product' | split: ',', local: true %}
+    {%- endif -%}
+
+    <!-- Load fonts independently to prevent rendering blocks -->
+    <style>
+      {{ header_family | font_face: font_display: "swap" }}
+      {{ accent_family | font_face: font_display: "swap" }}
+      {{ base_family | font_face: font_display: "swap" }}
+      {{ base_family_bold | font_face: font_display: "swap" }}
+      {{ base_family_italic | font_face: font_display: "swap" }}
+      {{ base_family_bold_italic | font_face: font_display: "swap" }}
+      {{ accent_family_bold | font_face: font_display: "swap" }}
+      @font-face {
+        font-family: {{ icon_family }};
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+        src: url({{ settings.icon | append: ".woff2" | asset_url }}) format("woff2");
+      }
+    </style>
+
+    <!-- Google Tag Manager -->
+    {%- if settings.google_tag_manager_id != blank -%}
+      <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',{{ settings.google_tag_manager_id | json }});
+      </script>
+    {%- endif -%}
+
+    <!-- Theme strings and settings -->
+    {%- render "translations-js" -%}
+
+    <!-- JS -->
+    {%- render 'loading' -%}
+
+    {{ "jquery-2.2.3.min.js" | asset_url | script_tag }}
+
+    <script defer src="{{ 'theme.min.js' | asset_url }}"></script>
+
+    <script async src="{{ 'lazysizes.min.js' | asset_url }}"></script>
+
+    {%- if settings.show_currency_selector -%}
+      {%- if settings.dbtfy_custom_currencies or shop.enabled_currencies.size > 1 and settings.dbtfy_cart_goal -%}
+        <script data-no-instant="" src="/services/javascripts/currencies.js" type="text/javascript"></script>
+        <script defer src="{{ 'jquery.currencies.min.js' | asset_url }}"></script>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if request.page_type contains "customers/" -%}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+    {%- endif -%}
+
+    <!-- Header hook for plugins -->
+    {{ content_for_header }}
+
+    {% render 'review-head' %}
+
+      <script>	
+      function loadCSSAsync(href) {	
+        var cssLink = document.createElement('link');	
+        cssLink.rel = 'stylesheet';	
+        cssLink.href = href;	
+        document.head.appendChild(cssLink);	
+      }	
+      </script>
+
+  <script defer src="https://cdn.debutify.com/scripts/production/c29sLWNiZC5teXNob3BpZnkuY29t/debutify_script_tags.js"></script>
+
+      <script id="loop-subscription-script" src="{{ 'loop-widget.min.js' | asset_url }}" type="text/javascript"></script>
+    
+  {% render 'gp-head' %}
+</head>
+
+
+    <style class="loop-style"> {% render 'loop-widget.css' %} </style>
+    
+<script src="{{ 'loop_bundle.min.js' | asset_url }}"></script>
+  <body id="{{ page_title | handle }}"
+        class="{% if settings.dbtfy_sticky_header %}sticky-header{% endif %}
+                 {% if settings.sticky_announcement_bar %}sticky-announcement_bar{% endif %}
+                 {% if settings.hero_header_desktop %}transparent-header--desktop{% endif %}
+                 {% if settings.hero_header_mobile %}transparent-header--mobile{% else %}transparent-header--no-mobile{% endif %}
+                 {% if settings.dbtfy_menu_bar %}menu_bar--present{% endif %}
+                 {% if customer %}customer-logged-in{% endif %}
+                 template-{{ request.page_type | handle }}"><main id="mainContent" class="main-content fadeIn" role="main">
+        {%- if request.page_type == "captcha" or request.page_type == "policy" -%}
+          <div class="box">
+            <div class="wrapper">
+              <div class="grid">
+                <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+                  {%- endif -%}
+
+                  {%- if template == 'index' -%}
+                    <div class="index-sections">
+                  {%- endif -%}
+
+
+    {%- if request.path contains 'loop_subscriptions/bundle' or request.path contains 'loop_subscriptions/customer' -%}
+      {% render 'loop_loader' %}
+    {%- endif -%}
+  
+                  {{ content_for_layout }}
+
+                  {%- if template == 'index' -%}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if request.page_type == "captcha" or request.page_type == "policy" -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </main></body>
+</html>

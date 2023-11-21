@@ -1,0 +1,538 @@
+{%- if template == "page.faq" -%}
+  <div class="box">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+          <div class="section-header">
+            <div class="page-title-wrapper">
+              <h1 class="page-title">{{ page.title }}</h1>
+            </div>
+          </div>
+
+          {%- unless page.content == blank -%}
+            <div class="page-content rte">
+              {{ page.content }}
+            </div>
+          {%- endunless -%}
+        </div>
+      </div>
+
+      {%- render "dbtfy-faq-section", section: section -%}
+    </div>
+  </div>
+{%- else -%}
+  {%- render "dbtfy-faq-section", section: section -%}
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "FAQ",
+    "class": "faq-section dbtfy dbtfy-faq_page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Help Center"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Follow our step-by-step tutorial](https:\/\/help.debutify.com\/en\/articles\/5054110-how-to-display-a-new-f-a-q-page-in-3-0)"
+      },
+      {
+        "type": "paragraph",
+        "content": "To enable/disable this add-on, go to Theme settings > Debutify Add-ons."
+      },
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_on_desktop",
+        "label": "Show on desktop",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_on_mobile",
+        "label": "Show on mobile",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "FAQ"
+      },
+	    {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subheading"
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "Section style",
+        "default": "section-border",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "Blank background"
+          },
+          {
+            "value": "section-default",
+            "label": "Accent background"
+          },
+          {
+            "value": "section-border",
+            "label": "Border top"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Search"
+	    },
+	    {
+        "type": "checkbox",
+        "id": "dbtfy_faq_searchbox",
+        "label": "Show search",
+        "default": true
+      },
+	    {
+        "type": "text",
+        "id": "dbtfy_faq_search_placeholder",
+        "label": "Placeholder",
+		    "default": "Search questions..."
+      },
+      {
+        "type": "header",
+        "content": "Answer"
+	    },
+      {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Text alignment (desktop)",
+        "default": "text-center",
+        "options": [
+          {
+            "value": "text-left",
+            "label": "Left"
+          },
+          {
+            "value": "text-center",
+            "label": "Center"
+          },
+          {
+            "value": "text-right",
+            "label": "Right"
+          },
+          {
+            "value": "text-justify",
+            "label": "Justify"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "text_alignment_mobile",
+        "label": "Text alignment (mobile)",
+        "default": "text-center",
+        "options": [
+          {
+            "value": "text-left",
+            "label": "Left"
+          },
+          {
+            "value": "text-center",
+            "label": "Center"
+          },
+          {
+            "value": "text-right",
+            "label": "Right"
+          },
+          {
+            "value": "text-justify",
+            "label": "Justify"
+          }
+        ]
+      },
+	    {
+        "type": "header",
+        "content": "Banner"
+	    },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_faq_bannerbox",
+        "label": "Show banner",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_faq_banner_icon",
+        "label": "Banner icon",
+        "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+        "default": "live_help"
+      },
+	    {
+        "type": "text",
+        "id": "dbtfy_faq_banner_text",
+        "label": "Banner subtitle",
+		    "default": "Didn't find your answer?"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_faq_banner_subtitle",
+        "label": "Banner text",
+		    "default": "Our customer service will be happy to help you."
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_faq_btn",
+        "label": "Button label",
+		    "default": "Get in Touch"
+      },
+      {
+        "type": "url",
+        "id": "dbtfy_faq_link",
+        "label": "Button link"
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "category_block",
+        "name": "Category",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Block name",
+            "info": "Used for internal identification"
+          },
+		      {
+            "type": "header",
+            "content": "Category"
+     	    },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_category",
+            "label": "Heading",
+			      "default": "Category"
+		      },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_icons",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+            "default": "support"
+          }
+        ]
+      },
+	    {
+        "type": "text_block",
+        "name": "Question",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Block name",
+            "info": "Used for internal identification"
+          },
+		      {
+            "type": "header",
+            "content": "Question / Answer 1"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_faq_page_open_1",
+            "label": "Open by default",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_page_icon_1",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+          },
+          {
+            "type": "text",
+            "id": "question_1",
+            "label": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "text_1",
+            "label": "Answer",
+            "default": "<p>This is your answer.</p>"
+          },
+          {
+            "type": "header",
+            "content": "Question / Answer 2"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_faq_page_open_2",
+            "label": "Open by default",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_page_icon_2",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+          },
+          {
+            "type": "text",
+            "id": "question_2",
+            "label": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "text_2",
+            "label": "Answer",
+            "default": "<p>This is your answer.</p>"
+          },
+          {
+            "type": "header",
+            "content": "Question / Answer 3"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_faq_page_open_3",
+            "label": "Open by default",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_page_icon_3",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+          },
+          {
+            "type": "text",
+            "id": "question_3",
+            "label": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "text_3",
+            "label": "Answer",
+            "default": "<p>This is your answer.</p>"
+          },
+          {
+            "type": "header",
+            "content": "Question / Answer 4"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_faq_page_open_4",
+            "label": "Open by default",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_page_icon_4",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+          },
+          {
+            "type": "text",
+            "id": "question_4",
+            "label": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "text_4",
+            "label": "Answer",
+            "default": "<p>This is your answer.</p>"
+          },
+          {
+            "type": "header",
+            "content": "Question / Answer 5"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_faq_page_open_5",
+            "label": "Open by default",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_page_icon_5",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+          },
+          {
+            "type": "text",
+            "id": "question_5",
+            "label": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "text_5",
+            "label": "Answer",
+            "default": "<p>This is your answer.</p>"
+          },
+          {
+            "type": "header",
+            "content": "Question / Answer 6"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_faq_page_open_6",
+            "label": "Open by default",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_page_icon_6",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+          },
+          {
+            "type": "text",
+            "id": "question_6",
+            "label": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "text_6",
+            "label": "Answer",
+            "default": "<p>This is your answer.</p>"
+          },
+          {
+            "type": "header",
+            "content": "Question / Answer 7"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_faq_page_open_7",
+            "label": "Open by default",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_page_icon_7",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+          },
+          {
+            "type": "text",
+            "id": "question_7",
+            "label": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "text_7",
+            "label": "Answer",
+            "default": "<p>This is your answer.</p>"
+          },
+          {
+            "type": "header",
+            "content": "Question / Answer 8"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_faq_page_open_8",
+            "label": "Open by default",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_page_icon_8",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+          },
+          {
+            "type": "text",
+            "id": "question_8",
+            "label": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "text_8",
+            "label": "Answer",
+            "default": "<p>This is your answer.</p>"
+          },
+          {
+            "type": "header",
+            "content": "Question / Answer 9"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_faq_page_open_9",
+            "label": "Open by default",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_page_icon_9",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+          },
+          {
+            "type": "text",
+            "id": "question_9",
+            "label": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "text_9",
+            "label": "Answer",
+            "default": "<p>This is your answer.</p>"
+          },
+          {
+            "type": "header",
+            "content": "Question / Answer 10"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_faq_page_open_10",
+            "label": "Open by default",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_faq_page_icon_10",
+            "label": "Icon",
+            "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+          },
+          {
+            "type": "text",
+            "id": "question_10",
+            "label": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "text_10",
+            "label": "Answer",
+            "default": "<p>This is your answer.</p>"
+          }
+        ]
+      }
+    ],
+    "presets": [
+       {
+          "name": "FAQ",
+          "category": "Add-ons",
+          "blocks": [
+            {
+              "type": "category_block"
+            },
+            {
+              "type": "text_block"
+            }
+          ]
+       }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,91 @@
+{%- if settings.dbtfy_breadcrumbs -%}
+  {%- unless request.page_type == 'index' or request.page_type == 'cart' or request.page_type == 'list-collections' or request.page_type == '404' -%}
+    {%- if settings.show_breadcrumbs_on_desktop or settings.show_breadcrumbs_on_mobile or settings.show_social_media_on_desktop or settings.show_social_media_on_mobile -%}
+      {%- assign t = request.page_type | split: '.' | first -%}
+      {%- capture separator -%}
+        <li>
+          <span class="{{ settings.icon }}" aria-hidden="true">keyboard_arrow_right</span>
+        </li>
+      {%- endcapture -%}
+
+      <nav class="breadcrumbs text-accent text-small">
+        <div class="wrapper">
+          <div class="grid grid-small overflow-hidden flex-nowrap align-center{% if settings.show_social_media_on_mobile %} breadcrumbs-wrap-small{% endif %}">
+            <div class="grid__item {% unless settings.show_breadcrumbs_on_mobile %}small--hide{% endunless %}{% unless settings.show_breadcrumbs_on_desktop %} medium--hide large--hide{% endunless %} flex-fill small--text-center large--overflow-hidden medium--overflow-hidden">
+              <ul class="breadcrumb-nav inline-list" role="navigation" aria-label="breadcrumbs">
+                <li>
+                  <a href="{{ routes.root_url }}" aria-label="{{ shop.name | capitalize }}" title="{{ shop.name | capitalize }}">
+                    <span class="{{ settings.icon }}" aria-hidden="true">home</span>
+                  </a>
+                </li>
+                {{- separator -}}
+                {%- case t -%}
+                {%- when 'page' -%}
+                  <li>
+                    <a href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+                  </li>
+                {%- when 'product' -%}
+                  {%- if collection.url -%}
+                    <li>
+                      {{ collection.title | link_to: collection.url }}
+                    </li>
+                  {{- separator -}}
+                  {%- endif -%}
+                  <li>
+                    <a href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+                  </li>
+                {%- when 'collection' and collection.handle -%}
+                  {%- if current_tags -%}
+                    <li>
+                      {{ collection.title | link_to: collection.url }}
+                    </li>
+                    {{- separator -}}
+                    <li>
+                      {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+" }}{%- endcapture -%}
+                      <a href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+                    </li>
+                  {%- else -%}
+                    <li>
+                      <a href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+                    </li>
+                  {%- endif -%}
+                {%- when 'blog' -%}
+                  {%- if current_tags -%}
+                    <li>
+                      {{ blog.title | link_to: blog.url }}
+                    </li>
+                    {{- separator -}}
+                    <li>
+                      {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+                      <a href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+                    </li>
+                  {%- else -%}
+                    <li>
+                      <a href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+                    </li>
+                  {%- endif -%}
+                {%- when 'article' -%}
+                  <li>
+                    {{ blog.title | link_to: blog.url }}
+                  </li>
+                  {{- separator -}}
+                  <li>
+                    <a href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+                  </li>
+                {%- else -%}
+                  <li>
+                    <a href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+                  </li>
+                {%- endcase -%}
+              </ul>
+            </div>
+
+            <div class="{% unless settings.show_social_media_on_mobile %}small--hide{% else %}small--flex-fill small--text-center{% endunless %}{% unless settings.show_social_media_on_desktop %} medium--hide large--hide{% endunless %} grid__item {% if settings.show_breadcrumbs_on_desktop %}flex-auto{% else %}flex-fill{% endif %} text-right">
+              {%- render 'social-sharing' -%}
+            </div>
+          </div>
+        </div>
+      </nav>
+    {%- endif -%}
+  {%- endunless -%}
+{%- endif -%}

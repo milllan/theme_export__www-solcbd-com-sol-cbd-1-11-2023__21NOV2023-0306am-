@@ -1,0 +1,93 @@
+{% include 'product-content.zipifypages', contentprt: 'header' %}{%- comment -%}
+  Template only used for AJAX reference
+{%- endcomment -%}
+
+{%- layout none -%}
+
+{%- liquid
+  assign image = product.featured_media
+
+  if product.available or emptyState
+    assign sold_out = false
+  else
+    assign sold_out = true
+  endif
+
+  capture product_collections
+    for collection in product.collections
+      echo collection.handle
+
+      unless forloop.last
+        echo ","
+      endunless
+    endfor
+  endcapture
+-%}
+
+<div id="WishlistItem-{{ product.handle }}"
+     class="grid align-center small--align-top wl-item"
+     data-product-id="{{ product.id }}"
+     data-product-collections="{{ product_collections }}">
+
+  <div class="grid__item large--three-twelfths medium--three-twelfths small--four-twelfths">
+    <a href="{{ product.url }}"
+        class="image-link wl-img media-wrapper">
+
+      {%- if image != blank -%}
+        <div class="product--wrapper" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 }}%">
+          <img class="product--image media lazyload"
+              {%- render 'lazysizes', img: image, img_type: 'responsive' -%}
+               alt="{{ image.alt }}">
+        </div>
+      {%- else -%}
+        {{ "product-1" | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </a>
+  </div>
+
+  <div class="grid__item large--nine-twelfths medium--nine-twelfths small eight-twelfths">
+    <div class="grid align-center">
+      <div class="grid__item large--four-twelfths medium--four-twelfths wl-name-wrapper">
+        <h5 class="wl-name">
+          <a href="{{ product.url }}" class="cart__product-name">
+            {{ product.title }}
+          </a>
+        </h5>
+
+        <p class="cart__product-meta spacer-bottom-none">
+          <button type="button" class="wl-remove" data-product-handle="{{ product.handle }}">
+            <span class="{{ settings.icon }}">delete</span>
+            <span class="small--hide">
+              {{ "cart.general.remove" | t }}
+            </span>
+          </button>
+        </p>
+      </div>
+
+      <div class="grid__item large--four-twelfths medium--four-twelfths">
+        <span class="cart__price text-money">
+          {%- if product.compare_at_price > 0 -%}
+            <span class="on-sale text-sale" aria-label="{{ 'products.general.regular_price' | t }}">
+               <span class="money">{{ product.price | money }}</span>
+            </span>
+
+            <span class="text-strike text-muted" aria-label="{{ 'products.general.sale_price' | t }}">
+              <span class="money">{{ product.compare_at_price | money }}</span>
+            </span>
+          {%- else -%}
+            <span class="price" aria-label="{{ 'products.general.regular_price' | t }}">
+              <span class="money">{{ product.price | money }}</span>
+            </span>
+          {%- endif -%}
+        </span>
+      </div>
+
+      <div class="grid__item large--four-twelfths medium--four-twelfths">
+        <div class="wl-product-options">
+          {%- render "dbtfy-collection-addtocart" with product as product, sold_out: sold_out -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include 'product-content.zipifypages', contentprt: 'footer' %}

@@ -1,0 +1,377 @@
+{%- if settings.dbtfy_mega_menu and section.blocks.size > 0 -%}
+  <!-- Blocks -->
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign mega_menu_nav_url = "#"
+
+      if block.settings.dbtfy_mega_menu_nav_link_url != blank
+        assign mega_menu_nav_url = block.settings.dbtfy_mega_menu_nav_link_url
+      endif
+  -%}
+
+    <li class="dbtfy dbtfy-mega_menu dropdown site-nav__item mm-item small--hide medium--hide mm-item-{{ block.id }}" data-position="{{ block.settings.dbtfy_mega_menu_position }}" data-blockid="{{ block.id }}" {{ block.shopify_attributes }}>
+      <a id="MegaMenuToggle-{{ block.id }}" href="{{ mega_menu_nav_url }}"
+        class="dropdown-toggle site-nav__link"
+        aria-controls="MegaMenu-{{ block.id }}"
+        aria-haspopup="true"
+        aria-expanded="false">
+        {{ block.settings.dbtfy_mega_menu_nav_link | escape }}
+        <span class="{{ settings.icon }}" aria-hidden="true">keyboard_arrow_down</span>
+      </a>
+
+      <div id="MegaMenu-{{ block.id }}"
+           class="dropdown-menu dropdown-menu-body dropdown-megamenu dropdown-list-parent"
+           aria-labelledby="MegaMenuToggle-{{ block.id }}">
+
+        {%- if block.type == "mega" -%}
+         {%- liquid
+           assign show_menu_headers = block.settings.dbtfy_mega_menu_header
+           assign limit = block.settings.dbtfy_mega_menu_product_slider_total_count | plus: 0
+           assign product_carousel_title = block.settings.dbtfy_mega_menu_carousel_title
+           assign product_carousel_title_link = block.settings.dbtfy_mega_menu_carousel_title_link
+           assign product_slider_dots = block.settings.dbtfy_mega_menu_product_slider_dots
+           assign product_slider_arrows = block.settings.dbtfy_mega_menu_product_slider_arrows
+           assign product_slider_autoplay = block.settings.dbtfy_mega_menu_product_slider_autoplay
+           assign product_slider_autoplay_speed = block.settings.dbtfy_mega_menu_product_slider_autoplayspeed| times: 1000
+           assign product_slides_to_show = block.settings.dbtfy_mega_menu_product_slider_count | plus: 0
+           assign enable_slider = true
+
+           if block.settings.dbtfy_mega_menu_collection == blank or collections[block.settings.dbtfy_mega_menu_collection].products_count == 0
+             assign emptyState = true
+           else
+             assign emptyState = false
+           endif
+
+           if limit == product_slides_to_show
+             assign enable_slider = false
+           endif
+
+           capture menu_container_class
+             if emptyState
+               echo "mm-menu-container-one-whole"
+             else
+               if product_slides_to_show == 1
+                 echo "mm-menu-container-one-column"
+               endif
+             endif  
+           endcapture
+         -%}
+
+          <div class="grid grid-spacer grid-small multi-mega_menu">
+            <div class="mm-upper-section">
+              <div class="mm-menu-container {{ menu_container_class }}">
+                 {%- if block.settings.dbtfy_mega_menu_multi != blank -%}
+                  {%- liquid
+                    assign menu_links_count = linklists[block.settings.dbtfy_mega_menu_multi].links.size
+
+                    case menu_links_count
+                      when 1
+                        assign menu_column_count = "large--one-whole medium--one-fifth"
+                      when 2
+                        assign menu_column_count = "large--six-twelfths medium--three-twelfths"
+                      when 3
+                        assign menu_column_count = "large--four-twelfths medium--four-twelfths"
+                      else
+                        assign menu_column_count = "large--four-twelfths medium--four-twelfths"
+                    endcase
+                  -%}
+
+                  {%- for link in linklists[block.settings.dbtfy_mega_menu_multi].links -%}
+                    <div class="mm-menu-item grid__item{% if emptyState %} one-fifth{% elsif emptyState == false and product_slides_to_show == 1 %} large--three-twelfths medium--three-twelfths{% else %} {{ menu_column_count }}{% endif %}">
+                      {%- if show_menu_headers -%}
+                        <a href="{{ link.url }}" class="mm-item-title h6">
+                          {{ link.title }}
+                        </a>
+                      {%- endif -%}
+
+                      {%- if link.links != blank -%}
+                        <ul class="mm-menu-list no-bullets">
+                          {%- for childlink in link.links -%}
+                            <li class="mm-list-item spacer-bottom-xs">
+                              <a href="{{ childlink.url }}" class="title-product-mega_menu">
+                                {{ childlink.title }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    </div>
+                  {%- endfor -%}
+                {%- endif -%}
+              </div>
+
+              {%- unless emptyState -%}
+                <div class="mm-product-carousel-container{% if product_slides_to_show == 1 %} mm-product-carousel-one-column{% endif %}">
+                  {%- if product_carousel_title != blank -%}
+                    {%- if product_carousel_title_link != blank -%}
+                      <a href="{{ product_carousel_title_link }}">
+                    {%- endif -%}
+
+                      <h4 class="mm-product-carousel-title">{{ product_carousel_title }}</h4>
+
+                    {%- if product_carousel_title_link != blank -%}
+                      </a>
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  <div {% if product_slides_to_show == 1 %}style="max-width: 205px;"{% endif %}
+                      class="grid grid-small{% if enable_slider == true %} mm-product-carousel mm-product-carousel__{{ block.id }} slick slick-product-grid{% endif %}"
+                      {% if enable_slider %}
+                        data-arrows="{{ product_slider_arrows }}"
+                        data-dots="{{ product_slider_dots }}"
+                        data-autoplay="{{ product_slider_autoplay }}"
+                        data-autoplayspeed="{{ product_slider_autoplay_speed }}"
+                        data-slides-to-show="{{ product_slides_to_show }}"
+                      {% endif %}>
+
+                    {%- liquid
+                      unless emptyState
+                        assign gift_wrap_product_id = settings.dbtfy_gift_wrap_product.id
+                        assign grid_width = ""
+
+                        if enable_slider == false and product_slides_to_show == 2
+                          assign grid_width = "large--six-twelfths medium--six-twelfths"
+                        endif
+
+                        for product in collections[block.settings.dbtfy_mega_menu_collection].products limit: limit
+                          capture product_item
+                            capture current
+                              cycle 1, 2, 3, 4, 5, 6
+                            endcapture
+
+                            render 'product-grid-item' with product as product, grid_item_width: grid_width, current: current
+                          endcapture
+
+                          if settings.dbtfy_gift_wrap
+                            unless product.id == gift_wrap_product_id
+                              echo product_item
+                            endunless
+                          else
+                            echo product_item
+                          endif
+                        endfor
+                      endunless
+                    -%}
+                  </div>
+                </div>
+              {%- endunless -%}
+            </div>
+
+            {%- liquid
+              assign images_loop = '1,2,3,4,5,6' | split: ','
+              assign mega_menu_image_count = 0
+              assign image_slider_arrows = block.settings.dbtfy_mega_menu_multi_image_slider_arrows
+              assign image_slider_dots = block.settings.dbtfy_mega_menu_multi_image_slider_dots
+              assign image_slider_autoplay = block.settings.dbtfy_mega_menu_multi_image_slider_autoplay
+              assign image_slider_autoplay_speed = block.settings.dbtfy_mega_menu_multi_image_slider_autoplayspeed | times: 1000
+              assign image_height = '200px'
+              assign show_mega_menu_image_slider = false
+
+              for item in images_loop
+                assign index = forloop.index
+                assign image_selector = "dbtfy_mega_menu_multi_image_" | append: index
+                assign image_link_selector = "dbtfy_mega_menu_multi_image_link_" | append: index
+                assign mega_menu_image = block.settings[image_selector]
+                assign mega_menu_image_link = block.settings[image_link_selector]
+
+                if mega_menu_image != blank
+                  assign mega_menu_image_count = mega_menu_image_count | plus: 1
+                endif
+              endfor
+
+              case mega_menu_image_count
+                when 1
+                  assign column_count = "large--one-whole medium--one-fifth "
+                when 2
+                  assign column_count = "large--six-twelfths medium--three-twelfths "
+                when 3
+                  assign column_count = "large--four-twelfths medium--four-twelfths "
+              endcase
+
+              if mega_menu_image_count > 3
+                assign show_mega_menu_image_slider = true
+              endif
+            -%}
+
+            <div class="mm-images-container mm-images-container__{{ block.id }}{% if show_mega_menu_image_slider %} slick{% endif %}"
+              {% unless show_mega_menu_image_slider %}style="display: flex;"{% endunless %}
+              {% if show_mega_menu_image_slider %}
+                data-arrows="{{ image_slider_arrows }}"
+                data-dots="{{ image_slider_dots }}"
+                data-autoplay="{{ image_slider_autoplay }}"
+                data-autoplayspeed="{{ image_slider_autoplay_speed }}"
+              {% endif %}>
+
+                {%- for item in images_loop -%}
+                  {%- capture index -%}{{ forloop.index }}{%- endcapture -%}
+                  {%- capture image_selector -%}dbtfy_mega_menu_multi_image_{{index}}{%- endcapture -%}
+                  {%- capture image_link_selector -%}dbtfy_mega_menu_multi_image_link_{{index}}{%- endcapture -%}
+                  {%- assign mega_menu_image = block.settings[image_selector] -%}
+                  {%- assign mega_menu_image_link = block.settings[image_link_selector] -%}
+
+                  {%- if mega_menu_image != blank -%}
+                    <div class="grid__item {% if mega_menu_image_count <= 3 %}{{ column_count }}{% endif %} flex-auto">
+                      {%- if mega_menu_image_link != blank -%}
+                        <a class="image-link" href="{{ mega_menu_image_link }}">
+                      {%- endif -%}
+
+                      <div class="media-wrapper" style="height: {{ image_height }};">
+                        <img class="media lazyload" style="height: {{ image_height }}; object-fit: cover;"
+                        {%- render 'lazysizes', img: mega_menu_image, img_type: 'responsive' -%}
+                        alt="{{ block.settings.dbtfy_mega_menu_multi_image.alt }}">
+                      </div>
+
+                      {%- if mega_menu_image_link != blank -%}
+                        </a>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if block.type == "product" -%}
+          {%- if block.settings.dbtfy_mega_menu_header -%}
+            <div class="header-wrapper-mega_menu">
+              <h4 class="title-product-mega_menu">
+                <a href="{{ collections[block.settings.dbtfy_mega_menu_product].url }}">
+                  {{ collections[block.settings.dbtfy_mega_menu_product].title | escape }}
+                </a>
+              </h4>
+
+              <a class="link-mega_menu text-link"
+                  href="{{ collections[block.settings.dbtfy_mega_menu_product].url }}">
+                {{ "blogs.article.view_all" | t }}
+              </a>
+            </div>
+          {%- endif -%}
+
+          {%- liquid
+            if block.settings.dbtfy_mega_menu_product_grid == "4"
+              assign limit = 4
+              assign grid_item_width = "large--three-twelfths"
+            elsif block.settings.dbtfy_mega_menu_product_grid == "5"
+              assign limit = 5
+              assign grid_item_width = "large--one-fifth"
+            endif
+          -%}
+
+          <div class="grid grid-small">
+            {%- liquid
+              assign gift_wrap_product_id = settings.dbtfy_gift_wrap_product.id
+
+              for product in collections[block.settings.dbtfy_mega_menu_product].products limit: limit
+                capture product_item
+                  capture current
+                    cycle 1, 2, 3, 4, 5, 6
+                  endcapture
+
+                  render "product-grid-item" with product as product, grid_item_width: grid_item_width, current: current
+                endcapture
+
+                if settings.dbtfy_gift_wrap
+                  unless product.id == gift_wrap_product_id
+                    echo product_item
+                  endunless
+                else
+                  echo product_item
+                endif
+              endfor
+            -%}
+          </div>
+        {%- endif -%}
+
+        {%- if block.type == "collection" -%}
+          {%- if block.settings.dbtfy_mega_menu_header -%}
+            <div class="header-wrapper-mega_menu">
+              <h4 class="title-product-mega_menu">
+                <a href="{{ routes.collections_url }}">{{ block.settings.dbtfy_mega_menu_title }}</a>
+              </h4>
+
+              <a class="link-mega_menu text-link"
+                  href="{{ routes.collections_url }}">
+                {{ "blogs.article.view_all" | t }}
+              </a>
+            </div>
+          {%- endif -%}
+
+          <div class="grid grid-spacer grid-small collection-mega_menu">
+            {%- liquid
+              assign collection_1 = block.settings.dbtfy_mega_menu_collection_1
+              assign collection_2 = block.settings.dbtfy_mega_menu_collection_2
+              assign collection_3 = block.settings.dbtfy_mega_menu_collection_3
+              assign collection_4 = block.settings.dbtfy_mega_menu_collection_4
+              assign collection_5 = block.settings.dbtfy_mega_menu_collection_5
+              assign collection_6 = block.settings.dbtfy_mega_menu_collection_6
+
+              if collection_1 != blank
+                assign collection = collections[collection_1]
+                render 'collection-grid-item' with collection as collection, no_heading_tag: true, current: 1
+              endif
+
+              if collection_2 != blank
+                assign collection = collections[collection_2]
+                render 'collection-grid-item' with collection as collection, no_heading_tag: true, current: 2
+              endif
+
+              if collection_3 != blank
+                assign collection = collections[collection_3]
+                render 'collection-grid-item' with collection as collection, no_heading_tag: true, current: 3
+              endif
+
+              if collection_4 != blank
+                assign collection = collections[collection_4]
+                render 'collection-grid-item' with collection as collection, no_heading_tag: true, current: 4
+              endif
+
+              if collection_5 != blank
+                assign collection = collections[collection_5]
+                render 'collection-grid-item' with collection as collection, no_heading_tag: true, current: 5
+              endif
+
+              if collection_6 != blank
+                assign collection = collections[collection_6]
+                render 'collection-grid-item' with collection as collection, no_heading_tag: true, current: 6
+              endif
+            -%}
+          </div>
+        {%- endif -%}
+
+        {%- if block.type == "blog" -%}
+          {%- if block.settings.dbtfy_mega_menu_header -%}
+            <div class="header-wrapper-mega_menu">
+              <h4 class="title-product-mega_menu">
+                <a href="{{ blogs[block.settings.dbtfy_mega_menu_blog].url }}">
+                  {{ blogs[block.settings.dbtfy_mega_menu_blog].title | escape }}
+                </a>
+              </h4>
+
+              <a class="link-mega_menu text-link"
+                  href="{{ blogs[block.settings.dbtfy_mega_menu_blog].url }}">
+                  {{ "blogs.article.view_all" | t }}
+              </a>
+            </div>
+          {%- endif -%}
+
+          {%- assign limit = 3 -%}
+          {%- assign grid_item_width = "large--four-twelfths" -%}
+
+          <div class="grid grid-small">
+            {%- liquid
+              for article in blogs[block.settings.dbtfy_mega_menu_blog].articles limit: limit
+                render "article-grid-item" with article as article, grid_item_width: grid_item_width, no_heading_tag: true
+              endfor
+            -%}
+          </div>
+        {%- endif -%}
+
+        {%- liquid
+          if block.type == "html"
+            echo block.settings.dbtfy_mega_menu_html
+          endif
+        -%}
+      </div>
+    </li>
+  {%- endfor -%}
+{%- endif -%}

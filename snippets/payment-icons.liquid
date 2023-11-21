@@ -1,0 +1,18 @@
+{%- unless shop.enabled_payment_types == blank -%}
+	<div class="payment-icons">
+	  <ul class="inline-list">
+		<span class="visually-hidden">{{ 'general.payment.method' | t }}</span>
+		{%- for type in shop.enabled_payment_types -%}
+		<li>{{ type | payment_type_svg_tag: class: 'payment-icon' }}</li>
+		{%- endfor -%}
+		{%- for icon in (1..4) -%}
+			{%- capture icon_id -%}payment_icon_{{ forloop.index }}{%- endcapture -%}
+			{%- if settings[icon_id] != blank -%}
+			<li>
+				<img class="payment-icon custom-payment-icon lazyload hs-lazyload hs-id-2320f7f4" data-src="{{ settings[icon_id] | asset_url }}" height="{{ settings.payment_icon_size }}px' title='{{ settings[icon_id] | split: '.' | first | replace: '-', ' ' | capitalize }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+			</li>
+			{%- endif -%}
+		{%- endfor -%}
+	</ul>
+</div>
+{%- endunless -%}

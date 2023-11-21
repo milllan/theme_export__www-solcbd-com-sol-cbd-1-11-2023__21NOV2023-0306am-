@@ -1,0 +1,204 @@
+{%- liquid
+  assign display_map = false
+  assign emptyState = false
+  assign bg_image = section.settings.background_image
+
+  if section.settings.api_key == blank and bg_image == blank
+    assign emptyState = true
+  endif
+
+  if section.settings.api_key != blank and section.settings.map_address
+    assign display_map = true
+  endif
+-%}
+
+{%- unless section.settings.hide_section -%}
+  <div id="MapSection--{{ section.id }}"
+       class="{% unless section.settings.show_on_desktop %} medium--hide large--hide{% endunless %} {% unless section.settings.show_on_mobile %} small--hide{% endunless %} section-default{% if display_map %} map-section--display-map{% endif %}{% if emptyState %} map-section--emptyState{% endif %}"
+       data-section-id="{{ section.id }}"
+       data-section-type="map-section">
+
+    <div class="wrapper-full map-wrapper">
+      <div class="map-container media-wrapper">
+        {%- if bg_image.src != blank -%}
+          <div class="map-section__image media bgset lazyload"
+              {%- render "lazysizes", img: bg_image, img_type: "background" -%}
+               style="background-position: {{ section.settings.image_position }};">
+          </div>
+        {%- elsif emptyState -%}
+          {{ "lifestyle-2" | placeholder_svg_tag: "media placeholder-svg" }}
+        {%- endif -%}
+
+        {%- if display_map -%}
+          <div class="overflow-hidden media lazyload"
+               id="Map-{{ section.id }}"
+               data-map
+               data-address-setting="{{ section.settings.map_address | escape }}"
+               data-api-key="{{ section.settings.api_key }}">
+          </div>
+        {%- endif -%}
+
+        <div class="wrapper box media-content">
+          <div class="card map-section__content text-center">
+            {%- if section.settings.heading != blank -%}
+              <h2>{{ section.settings.heading | escape }}</h2>
+            {%- endif -%}
+
+            {%- if section.settings.address != blank -%}
+              <div class="rte">{{ section.settings.address }}</div>
+
+              {%- if section.settings.map_address != blank and section.settings.button_text != blank -%}
+                <p>
+                  <a href="https://maps.google.com?daddr={{ section.settings.map_address | escape }}"
+                     class="btn btn--primary map_section__directions-btn"
+                     target="_blank">
+                  <span class="btn__text">
+                    {%- if section.settings.map_icon -%}
+                      <span class="{{ settings.icon }}" aria-hidden="true">
+                        {{ section.settings.map_icon }}
+                      </span>
+                    {% endif %}
+
+                    {%- if section.settings.button_text -%}
+                      <span>{{ section.settings.button_text | escape }}</span>
+                    {%- endif -%}
+                  </span>
+                  </a>
+                </p>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "t:sections.map.name",
+  "class": "map-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "t:sections.map.settings.show_on_desktop.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "t:sections.map.settings.show_on_mobile.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "t:sections.map.settings.hide_section.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.map.settings.header__1.content"
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": "t:sections.map.settings.heading.label",
+      "default": "Our store"
+    },
+    {
+      "id": "address",
+      "type": "richtext",
+      "label": "t:sections.map.settings.address.label",
+      "default": "<p>123 Fake St.<br>Toronto, Canada</p><p>Mon - Fri, 10am - 9pm<br>Saturday, 11am - 9pm<br>Sunday, 11am - 5pm</p>"
+    },
+    {
+      "id": "map_address",
+      "type": "text",
+      "label": "t:sections.map.settings.map_address.label",
+      "info": "t:sections.map.settings.map_address.info",
+      "default": "490 Rue De La Gauchetière O, Montréal"
+    },
+    {
+      "id": "button_text",
+      "type": "text",
+      "label": "t:sections.map.settings.button_text.label",
+      "default": "Get directions"
+    },
+    {
+      "type": "text",
+      "id": "map_icon",
+      "label": "t:sections.map.settings.map_icon.label",
+      "default": "location_on",
+      "info": "t:sections.map.settings.map_icon.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.map.settings.header__2.content"
+    },
+    {
+      "id": "api_key",
+      "type": "text",
+      "label": "t:sections.map.settings.api_key.label",
+      "info": "t:sections.map.settings.api_key.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:sections.map.settings.background_image.label",
+      "info": "t:sections.map.settings.background_image.info"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:sections.map.settings.image_position.label",
+      "default": "center center",
+      "options": [
+        {
+          "label": "t:sections.map.settings.image_position.options__1.label",
+          "value": "top left"
+        },
+        {
+          "label": "t:sections.map.settings.image_position.options__2.label",
+          "value": "top center"
+        },
+        {
+          "label": "t:sections.map.settings.image_position.options__3.label",
+          "value": "top right"
+        },
+        {
+          "label": "t:sections.map.settings.image_position.options__4.label",
+          "value": "center left"
+        },
+        {
+          "label": "t:sections.map.settings.image_position.options__5.label",
+          "value": "center center"
+        },
+        {
+          "label":"t:sections.map.settings.image_position.options__6.label",
+          "value": "center right"
+        },
+        {
+          "label":"t:sections.map.settings.image_position.options__7.label",
+          "value": "bottom left"
+        },
+        {
+          "label": "t:sections.map.settings.image_position.options__8.label",
+          "value": "bottom center"
+        },
+        {
+          "label": "t:sections.map.settings.image_position.options__9.label",
+          "value": "bottom right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.map.presets.name",
+      "category": "t:sections.map.presets.category"
+    }
+  ]
+}
+{% endschema %}

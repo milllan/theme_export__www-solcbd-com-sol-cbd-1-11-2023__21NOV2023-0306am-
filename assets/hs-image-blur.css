@@ -1,0 +1,9 @@
+.hs-blur-up {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    transition: filter 300ms, -webkit-filter 300ms;
+}
+.hs-blur-up.lazyloaded {
+    -webkit-filter: blur(0);
+    filter: blur(0);
+}

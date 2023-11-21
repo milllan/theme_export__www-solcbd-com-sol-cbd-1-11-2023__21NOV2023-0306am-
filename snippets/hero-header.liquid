@@ -1,0 +1,82 @@
+{%- if settings.hero_header_desktop or settings.hero_header_mobile -%}
+<style class="hero-header-style" media="not all">
+  {%- if settings.hero_header_desktop -%}
+    .transparent-header--desktop .header-container,
+    .transparent-header--desktop .menu-bar__inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .transparent-header--desktop .dbtfy-menu_bar .menu-bar__inner {
+      top: {{ settings.height_header }}px;
+    }
+
+    .transparent-header--desktop .site-header .site-nav__link,
+    .transparent-header--desktop .site-header .site-header__logo-link,
+    .transparent-header--desktop .dbtfy-menu_bar .menu-bar__link {
+      color: {{ settings.color_transparent_nav_text }};
+    }
+
+    .transparent-header--desktop .cart-link__bubble--visible {
+      border-color: {{ settings.color_transparent_nav_text }};
+    }
+
+    .transparent-header--desktop .site-header .default-logo {
+      display: none;
+    }
+
+    .transparent-header--desktop .site-header .inverted-logo {
+      display: block;
+    }
+
+    .transparent-header--desktop .dbtfy-menu_bar .menu-bar__item {
+      border-color: {{ settings.color_nav_border }};
+    }
+
+    .transparent-header--desktop .site-header,
+    .transparent-header--desktop .dbtfy-menu_bar,
+    .transparent-header--desktop .dbtfy-menu_bar .menu-bar__link {
+      background-color: transparent;
+    }
+  {%- endif -%}
+
+  {%- if settings.hero_header_mobile -%}
+    @media (max-width: 769px) {
+      .transparent-header--mobile .header-container,
+      .transparent-header--mobile .menu-bar__inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .transparent-header--mobile .dbtfy-menu_bar .menu-bar__inner {
+        top: {{ settings.height_header_mobile }}px;
+      }
+
+      .transparent-header--mobile .site-header .site-nav__link,
+      .transparent-header--mobile .site-header .site-header__logo-link,
+      .transparent-header--mobile .dbtfy-menu_bar .menu-bar__link {
+        color: {{ settings.color_transparent_nav_text }};
+      }
+
+      .transparent-header--mobile .cart-link__bubble--visible {
+        border-color: {{ settings.color_transparent_nav_text }};
+      }
+
+      .transparent-header--mobile .dbtfy-menu_bar .menu-bar__item {
+        border-color: {{ settings.color_nav_border }};
+      }
+
+      .transparent-header--mobile .site-header,
+      .transparent-header--mobile.dbtfy-menu_bar,
+      .transparent-header--mobile .dbtfy-menu_bar .menu-bar__link {
+        background-color: transparent;
+      }
+    }
+  {%- endif -%}
+
+</style>
+{%- endif -%}

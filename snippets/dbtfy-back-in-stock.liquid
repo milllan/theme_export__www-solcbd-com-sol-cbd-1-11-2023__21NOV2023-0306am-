@@ -1,0 +1,112 @@
+{%- if settings.dbtfy_back_in_stock -%}
+  {%- liquid
+    assign isKlaviyoEnabled = false
+
+    if settings.newsletter_app == "klaviyo" and settings.klaviyo_app_public_key != blank and settings.klaviyo_app_list_id != blank
+      assign isKlaviyoEnabled = true
+    endif
+
+    capture product_url
+      if request.page_type == "product"
+        echo canonical_url
+
+        unless current_variant.available
+          echo "?variant=" | append: current_variant.id
+        endunless
+      else
+        echo shop.url | append: product.url
+
+        unless current_variant.available
+          echo "?variant=" | append: current_variant.id
+        endunless
+      endif
+    endcapture
+
+    assign icon = settings.dbtfy_back_in_stock_icon
+    assign button_animation = settings.dbtfy_back_in_stock_btn_animation
+    assign form_text = 'add-ons.back_in_stock.form_text' | t
+    assign button_label = 'add-ons.back_in_stock.button_label' | t
+    assign success_message = 'add-ons.back_in_stock.success_message' | t
+    assign body_message = 'add-ons.back_in_stock.body_message' | t: product_name: product.title, product_url: product_url
+  -%}
+
+  {%- if isKlaviyoEnabled -%}
+    <a class="btn btn--primary full klaviyo-bis-trigger action_button{% if button_animation %} btn--addtocart_animation{% endif %}" href="#">
+      <span class="btn__text">
+        <span class="{{ settings.icon }} icon-width" aria-hidden="true">{{ icon }}</span>
+        <span class="submit_btn_text">{{ button_label }}</span>
+      </span>
+    </a>
+  {%- else -%}
+    <div class="dbtfy dbtfy-back_in_stock notify_form notify-form-{{ product.id }} spacer-bottom"
+        id="notify-form-{{ product.id }}">
+
+      {%- form "contact", class: "form-vertical", id: "notify-form" -%}
+        {%- liquid
+          assign is_to_show_success_form = false
+
+          if form.posted_successfully? and success_message
+            assign is_to_show_success_form = true
+          endif
+        -%}
+
+        {%- if is_to_show_success_form -%}
+          <div class="note form-success notify_form__success">
+            <p>{{ success_message }}</p>
+          </div>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          {{ form.errors | default_errors }}
+        {%- else -%}
+          <div class="notify_form__inputs{% if customer %} customer--true{% endif %}"
+              {%- if is_to_show_success_form or current_variant.available -%}hidden{%- endif -%}
+
+              {% if request.page_type == "product" %}
+                data-url="{{ canonical_url }}"
+              {% else %}
+                data-url="{{ shop.url }}{{ product.url }}"
+              {% endif %}
+                data-body-message="{{ body_message }}">
+
+            <label for="BackInStockInput" class="notify_form__label" hidden>
+              {%- if form_text != blank -%}
+                {%- unless is_to_show_success_form -%}
+                  {{ form_text }}
+                {%- endunless -%}
+              {%- endif -%}
+            </label>
+
+            <input type="email"
+                  id="BackInStockInput"
+                  class="input--small newsletter__input{% if form.errors contains 'email' %} input-error{% endif %}"
+                  name="contact[email]"
+                  pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
+                  placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}"
+                  aria-label="{{ 'general.newsletter_form.newsletter_placeholder' | t }}"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
+                  required="required"
+                  aria-required="true"
+                  value="{%- if form.email -%}{{ form.email }}{%- elsif customer -%}{{ customer.email }}{%- endif -%}"
+                {%- if form.errors contains 'email' -%}
+              aria-invalid="true"
+                {%- endif -%}>
+
+            <input type="hidden" name="challenge" value="false" />
+            <input type="hidden" name="contact[body]" class="notify_form_message"
+                  data-body="{{ body_message }}" value="{{ body_message }}" />
+
+            <button class="btn kalviyo-btn btn--primary full action_button{% if button_animation %} btn--addtocart_animation{% endif %}" type="submit" name="commit">
+              <span class="btn__text">
+                <span class="{{ settings.icon }} icon-width" aria-hidden="true">{{ icon }}</span>
+                <span class="submit_btn_text">{{ button_label }}</span>
+              </span>
+            </button>
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}

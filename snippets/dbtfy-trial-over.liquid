@@ -1,0 +1,35 @@
+{%- if request.design_mode -%}
+  <div id="TrialOverPopup" class="toast">
+    <div class="card overlay-content">
+      <div class="card-header">
+        <div class="toast-image">
+          {%- render "svg-definitions" with "debutify-logo" -%}
+        </div>
+
+        <h6 class="spacer-bottom-none">
+          {{ 'general.trial_over.heading' | t }}
+        </h6>
+
+        <button type="button"
+                data-toast-close
+                class="btn btn-square-small spacer-left-auto flex-shrink"
+                title="{{ 'general.password_page.close' | t }}"
+                aria-label="{{ 'general.password_page.close' | t }}">
+          <span class="{{ settings.icon }}">close</span>
+        </button>
+      </div>
+
+      <div class="card-body">
+        <p class="text-small">{{ 'general.trial_over.text' | t: name: shop.name | newline_to_br }}</p>
+
+        <div>
+          <a href="https://theme.debutify.com/plans"
+              target="_blank"
+              class="btn btn--small btn--primary to-link-btn">
+            {{ 'general.trial_over.pick_a_plan' | t }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

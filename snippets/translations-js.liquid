@@ -1,0 +1,156 @@
+{%- assign favicon_url = settings.favicon | img_url: "100x100", crop: "center" -%}
+
+{%- if settings.favicon == blank -%}
+  {%- assign favicon_url = "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII=" -%}
+{%- endif -%}
+
+<script>
+  window.theme = window.theme || {};
+
+  theme.routes = {
+    predictive_search_url: {{ routes.predictive_search_url | json  }},
+    cart_url: {{ routes.cart_url | json }}
+  };
+
+  theme.settings = {
+    cartType: {{ settings.cart_type | json }},
+    enableCartMessage: {{ settings.dbtfy_cart_notification | json }},
+    saleType: {{ settings.sale_type | json }},
+    stickyHeader: {{ settings.dbtfy_sticky_header | json }},
+    heightHeader: {{ settings.height_header | json }},
+    heightHeaderMobile: {{ settings.height_header_mobile | json }},
+    icon: {{ settings.icon | json }},
+    currencyOriginalPrice: {{ settings.default_price | json }},
+    customCurrency: {{ settings.dbtfy_custom_currencies | json }},
+    facebookPageId: {{ settings.facebook_page_id | json }},
+    dbtfyATCAnimationType: {{ settings.dbtfy_addtocart_animation_type | json }},
+    dbtfyATCAnimationInterval: {{ settings.dbtfy_addtocart_animation_interval | json }},
+    dbtfyShopProtectImage: {{ settings.dbtfy_shop_protect_image | json }},
+    dbtfyShopProtectDrag: {{ settings.dbtfy_shop_protect_drag | json }},
+    dbtfyShopProtectTextProduct: {{ settings.dbtfy_shop_protect_text_product | json }},
+    dbtfyShopProtectTextArticle: {{ settings.dbtfy_shop_protect_text_article | json }},
+    dbtfyShopProtectCollection: {{ settings.dbtfy_shop_protect_collection | json }},
+    dbtfySkipCart: {{ settings.dbtfy_skip_cart | json }},
+    isSearchEnabled: {{ settings.search_enabled | json }},
+    enableHistoryState: {{ settings.enable_history_state | json }},
+    customScript: {{ settings.custom_script | json }},
+    dbtfyInactiveTabFirstMessage: {{ 'add-ons.inactive_tab_message.first_message' | t | json }},
+    dbtfyInactiveTabSecondMessage: {{ 'add-ons.inactive_tab_message.second_message' | t | json }},
+    dbtfyInactiveTabDelay: {{ settings.dbtfy_inactive_tab_delay | json }},
+    faviconImage: {{ favicon_url | json }},
+    cartFaviconImage: {%- if settings.dbtfy_cart_favicon_icon != blank -%}{{ settings.dbtfy_cart_favicon_icon | img_url: "192x192" | json }}{%- else -%}""{%- endif -%},
+    dbtfyCartSavings: {{ settings.dbtfy_cart_savings | json }},
+    dbtfyCookieBoxEUOnly: {{ settings.dbtfy_cookie_box_eu_only | json }},
+    dbtfyGiftWrap: {{ settings.dbtfy_gift_wrap | json }},
+    dbtfyDeliveryDateRequired: {{ settings.dbtfy_delivery_date_required | json }},
+    dbtfyOrderFeedbackRequired: {{ settings.dbtfy_order_feedback_required | json }}
+  };
+
+  theme.variables = {
+    small: 769,
+    postSmall: 769.1,
+    animationDuration: 600,
+    animationSlow: 1000,
+    transitionSpeed: 300,
+    addonsLink: {{ "dbtfy-addons.min.js" | asset_url | json }},
+    fastClickPluginLink: {{ "FastClick.js" | asset_url | json }},
+    jQueryUIPluginLink: {{ "jquery-ui.min.js" | asset_url | json }},
+    jQueryUIAutocompletePluginLink: {{ "jquery.ui.autocomplete.scroll.min.js" | asset_url | json }},
+    jQueryExitIntentPluginLink: {{ "jquery.exitintent.min.js" | asset_url | json }},
+    trackingPluginLink: {{ "//www.17track.net/externalcall.js" | json }},
+    speedBoosterPluginLink: {{ "instant.page.min.js" | asset_url | json }},
+    ajaxinatePluginLink: {{ "infinite-scroll.min.js" | asset_url | json }},
+    datePickerPluginLink: {{ "flatpickr.min.js" | asset_url | json }},
+    cartCount: {{ cart.item_count | json }},
+    shopLocales: {{ shop.published_locales | json }},
+    productPlaceholderSvg: {{ "product-1" | placeholder_svg_tag: 'placeholder-svg' | json }}
+  };
+
+  theme.strings = {
+    zoomClose: {{ "products.zoom.close" | t | json }},
+    zoomPrev: {{ "products.zoom.prev" | t | json }},
+    zoomNext: {{ "products.zoom.next" | t | json }},
+    moneyFormat: {{ shop.money_format | json }},
+    moneyWithCurrencyFormat: {{ shop.money_with_currency_format | strip_html | json }},
+    currencyFormat: {{ settings.currency_format | default: "money_with_currency_format" | json }},
+    saveFormat: {{ "products.general.save_html" | t | json }},
+    addressError: {{ "home_page.map.address_error" | t | json }},
+    addressNoResults: {{ "home_page.map.address_no_results" | t | json }},
+    addressQueryLimit: {{ "home_page.map.address_query_limit_html" | t | json }},
+    authError: {{ "home_page.map.auth_error_html" | t | json }},
+    cartCookie: {{ "cart.general.cookies_required" | t | json }},
+    addToCart: {{ "products.product.add_to_cart" | t | json }},
+    soldOut: {{ "products.product.sold_out" | t | json }},
+    unavailable: {{ "products.product.unavailable" | t | json }},
+    regularPrice: {{ "products.general.regular_price" | t | json }},
+    salePrice: {{ "products.general.sale_price" | t | json }},
+    saveLabel: {{ "products.general.save_html" | t | json }},
+    quantityLabel: {{ "products.product.quantity" | t | json }},
+    closeText: {{ "general.password_page.close" | t | json }},
+    shopCurrency: {{ shop.currency | json }},
+    months: {
+      full: {
+        1: {{ 'general.months.full.january' | t | json }},
+        2: {{ 'general.months.full.february' | t | json }},
+        3: {{ 'general.months.full.march' | t | json }},
+        4: {{ 'general.months.full.april' | t | json }},
+        5: {{ 'general.months.full.may' | t | json }},
+        6: {{ 'general.months.full.june' | t | json }},
+        7: {{ 'general.months.full.july' | t | json }},
+        8: {{ 'general.months.full.august' | t | json }},
+        9: {{ 'general.months.full.september' | t | json }},
+        10: {{ 'general.months.full.october' | t | json }},
+        11: {{ 'general.months.full.november' | t | json }},
+        12: {{ 'general.months.full.december' | t | json }}
+      },
+      short: {
+        1: {{ 'general.months.short.january' | t | json }},
+        2: {{ 'general.months.short.february' | t | json }},
+        3: {{ 'general.months.short.march' | t | json }},
+        4: {{ 'general.months.short.april' | t | json }},
+        5: {{ 'general.months.short.may' | t | json }},
+        6: {{ 'general.months.short.june' | t | json }},
+        7: {{ 'general.months.short.july' | t | json }},
+        8: {{ 'general.months.short.august' | t | json }},
+        9: {{ 'general.months.short.september' | t | json }},
+        10: {{ 'general.months.short.october' | t | json }},
+        11: {{ 'general.months.short.november' | t | json }},
+        12: {{ 'general.months.short.december' | t | json }}
+      }
+    },
+    weekdays: {
+      full: {
+        0: {{ 'general.weekdays.full.sunday' | t | json }},
+        1: {{ 'general.weekdays.full.monday' | t | json }},
+        2: {{ 'general.weekdays.full.tuesday' | t | json }},
+        3: {{ 'general.weekdays.full.wednesday' | t | json }},
+        4: {{ 'general.weekdays.full.thursday' | t | json }},
+        5: {{ 'general.weekdays.full.friday' | t | json }},
+        6: {{ 'general.weekdays.full.saturday' | t | json }}
+      },
+      short: {
+        0: {{ 'general.weekdays.short.sunday' | t | json }},
+        1: {{ 'general.weekdays.short.monday' | t | json }},
+        2: {{ 'general.weekdays.short.tuesday' | t | json }},
+        3: {{ 'general.weekdays.short.wednesday' | t | json }},
+        4: {{ 'general.weekdays.short.thursday' | t | json }},
+        5: {{ 'general.weekdays.short.friday' | t | json }},
+        6: {{ 'general.weekdays.short.saturday' | t | json }}
+      }
+    },
+    agreeTermsWarningMessage: {{ 'add-ons.agree_to_terms.warning_text' | t | json }},
+    deliveryDateWarningMessage: {{ 'add-ons.delivery_date.error_message' | t | json }},
+    {%- for locale in shop.published_locales -%}
+      {%- if locale.primary -%}
+        shopPrimaryLocale: {{ locale.iso_code | json }},
+      {%- endif -%}
+    {%- endfor -%}
+  };
+
+  theme.addons = {% render "addons-list" | json %}
+
+  window.lazySizesConfig = window.lazySizesConfig || {};
+  window.lazySizesConfig.customMedia = {
+    "--small": `(max-width: ${theme.variables.small}px)`
+  };
+</script>

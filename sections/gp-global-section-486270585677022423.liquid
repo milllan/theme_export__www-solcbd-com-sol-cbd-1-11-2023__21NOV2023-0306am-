@@ -1,0 +1,630 @@
+
+  {% render 'gp-head', isThemeSection: true %}
+  
+      <style>
+        @font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfedA.woff) format('woff');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlEw.woff) format('woff');
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJbecnFHGPezSQ.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJnecnFHGPezSQ.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z11lFd2JQEl8qw.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1JlFd2JQEl8qw.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+      </style>
+    
+  <style>
+    .gps-486270585677022423 .g-paragraph-1{font-family:var(--g-p1-ff);font-size:var(--g-p1-size);font-style:var(--g-p1-fs);font-weight:var(--g-p1-weight);letter-spacing:var(--g-p1-ls);line-height:var(--g-p1-lh)}.gps-486270585677022423 .pointer-events-none{pointer-events:none}.gps-486270585677022423 .pointer-events-auto{pointer-events:auto}.gps-486270585677022423 .invisible{visibility:hidden}.gps-486270585677022423 .absolute{position:absolute}.gps-486270585677022423 .relative{position:relative}.gps-486270585677022423 .z-9{z-index:9}.gps-486270585677022423 .mx-auto{margin-left:auto;margin-right:auto}.gps-486270585677022423 .mb-0{margin-bottom:0}.gps-486270585677022423 .inline-block{display:inline-block}.gps-486270585677022423 .flex{display:flex}.gps-486270585677022423 .inline-flex{display:inline-flex}.gps-486270585677022423 .grid{display:grid}.gps-486270585677022423 .h-5{height:20px}.gps-486270585677022423 .h-full{height:100%}.gps-486270585677022423 .w-5{width:20px}.gps-486270585677022423 .w-full{width:100%}.gps-486270585677022423 .max-w-full{max-width:100%}.gps-486270585677022423 .shrink-0{flex-shrink:0}@keyframes spin{to{transform:rotate(1turn)}}.gps-486270585677022423 .animate-spin{animation:spin 1s linear infinite}.gps-486270585677022423 .flex-col{flex-direction:column}.gps-486270585677022423 .items-center{align-items:center}.gps-486270585677022423 .justify-center{justify-content:center}.gps-486270585677022423 .gap-y-0{row-gap:0}.gps-486270585677022423 .overflow-hidden{overflow:hidden}.gps-486270585677022423 .overflow-clip{overflow:clip}.gps-486270585677022423 .truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gps-486270585677022423 .rounded-none{border-radius:0}.gps-486270585677022423 .bg-g-brand{background-color:var(--g-c-brand)}.gps-486270585677022423 .align-middle{vertical-align:middle}.gps-486270585677022423 .text-g-bg-3{color:var(--g-c-bg-3)}.gps-486270585677022423 .text-g-text-3{color:var(--g-c-text-3)}.gps-486270585677022423 .no-underline{text-decoration-line:none}.gps-486270585677022423 .opacity-25{opacity:.25}.gps-486270585677022423 .opacity-75{opacity:.75}.gps-486270585677022423 .transition-colors{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-486270585677022423 .duration-200{transition-duration:.2s}.gps-486270585677022423 .duration-300{transition-duration:.3s}.gps-486270585677022423 .ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-486270585677022423 .disabled\:btn-disabled:disabled{cursor:default}.gps-486270585677022423 .disabled\:pointer-events-none:disabled{pointer-events:none}.gps-486270585677022423 .disabled\:opacity-30:disabled{opacity:.3}.gps-486270585677022423 .group[data-state=loading] .group-data-\[state\=loading\]\:visible{visibility:visible}.gps-486270585677022423 .group[data-state=loading] .group-data-\[state\=loading\]\:invisible{visibility:hidden}.gps-486270585677022423 .\[\&_\*\]\:max-w-full *{max-width:100%}.gps-486270585677022423 .\[\&_p\]\:inline p{display:inline}.gps-486270585677022423 .\[\&_p\]\:truncate p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gps-486270585677022423 .\[\&_p\]\:after\:whitespace-pre-wrap p:after{content:var(--tw-content);white-space:pre-wrap}.gps-486270585677022423 .\[\&_p\]\:after\:content-\[\'\\A\'\] p:after{--tw-content:"\A";content:var(--tw-content)}
+  </style>
+  
+      
+      
+            <section
+              class="mx-auto max-w-full"
+              style="--pos:sticky;--top:1px;--z:11;--w:100%;--w-tablet:100%;--w-mobile:100%;--pl:0px;--pl-tablet:0px;--pl-mobile:0px;--pr:0px;--pr-tablet:0px;--pr-mobile:0px"
+            >
+              
+    <div
+      pageContext id="gGKc5nrYkM"
+        style="--mt:0px;--pt:5px;--pb:5px;--d:grid;--d-tablet:grid;--d-mobile:grid;--b:solid;--bc:#121212;--bw:0px;--radius:var(--g-radius-none);--hasBoxShadow:true;--shadow:2.4492935982947064e-16px 4px 12px 0px rgba(0, 0, 0, 0.20);--op:100%;--cg:32px;--pc:center;--gtc:minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:#FFFFFF;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gGKc5nrYkM mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      pageContext tag="Col" label="Block" type="component"
+      style="--jc:start"
+      class="gJcNGg6See relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      pageContext parentTag="Col" id="gGBK-DPesL"
+        style="--mb:0px;--pl:5px;--pr:5px;--d:grid;--d-tablet:grid;--d-mobile:grid;--b:solid;--bc:#121212;--bw:0px;--radius:var(--g-radius-none);--shadow:none;--op:100%;--cg:32px;--pc:start;--gtc:minmax(0, auto) minmax(0, auto) minmax(0, auto);--gtc-mobile:minmax(0, 12fr);--w:100%;--w-tablet:var(--g-ct-w, 100%);--w-mobile:var(--g-ct-w, 100%);--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gGBK-DPesL mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      pageContext tag="Col" label="Block" type="component"
+      style="--jc:center"
+      class="gN33B4nPqO relative flex flex-col"
+    >
+      <div
+    
+    role="presentation"
+    class="group/image gaHqND8aMf"
+    style="--mb:0px;--d:block;--d-tablet:block;--d-mobile:block;--b:solid;--bc:#121212;--bw:0px;--radius:var(--g-radius-none);--shadow:none;--op:100%;--pos:static;--ta:left;--ta-mobile:center"
+    >
+    <figure
+      class="relative inline-block overflow-hidden align-middle pointer-events-none"
+      style="--shadow:none;--h:auto;--h-tablet:auto;--h-mobile:auto;border-radius:inherit"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+      >
+        <img
+    quality="70" title
+    draggable="false"
+    class="inline-block w-full h-full max-w-full flex"
+    data-src="{{ "482463132267054172-ee8f6e10-7e15-4607-97bf-85f62f9f9b8b.webp" | asset_url }}" data-srcset="{{ '482463132267054172-ee8f6e10-7e15-4607-97bf-85f62f9f9b8b.webp' | asset_url }} 768w, {{ '482463132267054172-ee8f6e10-7e15-4607-97bf-85f62f9f9b8b.webp' | asset_url }} 1024w, {{ '482463132267054172-ee8f6e10-7e15-4607-97bf-85f62f9f9b8b.webp' | asset_url }} 1440w" src="{{ "482463132267054172-ee8f6e10-7e15-4607-97bf-85f62f9f9b8b.webp" | asset_url }}" width="200" height="49" alt="Alt image" priority="true"
+    sizes="100vw"
+    style="--aspect:auto;--aspect-tablet:auto;--aspect-mobile:auto;--objf:cover;--bs:none;--bw:0px;--bc:transparent;--radius:var(--g-radius-none);--w:100%"
+  />
+      </div>
+    </figure>
+  </div>
+    </div><div
+      pageContext tag="Col" label="Block" type="component"
+      style="--jc:center"
+      class="gRYnSb7pi0 relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      pageContext parentTag="Col" id="gWGpvw7tJ_"
+        style="--mb:0px;--d:grid;--d-tablet:grid;--d-mobile:grid;--b:solid;--bc:#121212;--bw:0px;--radius:var(--g-radius-none);--shadow:none;--op:100%;--cg:15px;--cg-mobile:5px;--pc:center;--gtc:minmax(0, auto) minmax(0, auto) minmax(0, auto) minmax(0, auto) minmax(0, auto);--gtc-mobile:minmax(0, auto) minmax(0, auto) minmax(0, auto) minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:var(--g-ct-w, 100%);--w-mobile:var(--g-ct-w, 100%);--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gWGpvw7tJ_ mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      pageContext tag="Col" label="Block" type="component"
+      style="--jc:end;--jc-mobile:center"
+      class="gw69esopf8 relative flex flex-col"
+    >
+      <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px;--ta:center"
+    class=""
+  >
+    <style>
+    .gIVPXd3eJn.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #e2e2e2;
+  
+      border-radius: var(--g-radius-small);
+    }
+
+    .gIVPXd3eJn:hover::before {
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #e2e2e2;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+    }
+  </style>
+    <button
+      type="button" data-id="gIVPXd3eJn" aria-label="Tinctures"
+      data-state="idle"
+      class="gIVPXd3eJn gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none"
+      style="--hvr-bg:transparent;--bg:transparent;--radius:var(--g-radius-small);--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--shadow:none;--c:#121212;--hvr-c:#383838;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--pl:16px;--pr:16px;--pt:4px;--pb:4px;--tt:capitalize;--ff:var(--g-font-Poppins, Poppins);--weight:400;--lh:180%;--size:17px;--size-tablet:16px;--size-mobile:14px;--tdl:underline"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="truncate group-data-[state=loading]:invisible [&_p]:truncate z-9 "
+        style="--tt:default"
+      >
+        tinctures
+      </span>
+    </button>
+  </div>
+    </div><div
+      pageContext tag="Col" label="Block" type="component"
+      style="--jc:end;--jc-mobile:center"
+      class="gj4kKK6Elk relative flex flex-col"
+    >
+      <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px;--ta:center"
+    class=""
+  >
+    <style>
+    .gTByirS5mA.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #e2e2e2;
+  
+      border-radius: var(--g-radius-small);
+    }
+
+    .gTByirS5mA:hover::before {
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #e2e2e2;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+    }
+  </style>
+    <button
+      type="button" data-id="gTByirS5mA" aria-label="Softgels"
+      data-state="idle"
+      class="gTByirS5mA gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none"
+      style="--hvr-bg:transparent;--bg:transparent;--radius:var(--g-radius-small);--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--shadow:none;--c:#121212;--hvr-c:#383838;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--pl:16px;--pr:16px;--pt:4px;--pb:4px;--tt:capitalize;--ff:var(--g-font-Poppins, Poppins);--weight:400;--lh:180%;--size:17px;--size-tablet:16px;--size-mobile:14px;--tdl:underline"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="truncate group-data-[state=loading]:invisible [&_p]:truncate z-9 "
+        style="--tt:default"
+      >
+        softgels
+      </span>
+    </button>
+  </div>
+    </div><div
+      pageContext tag="Col" label="Block" type="component"
+      style="--jc:end;--jc-mobile:center"
+      class="gdumu6iTiw relative flex flex-col"
+    >
+      <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px;--ta:center"
+    class=""
+  >
+    <style>
+    .gkb93iKZxV.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #e2e2e2;
+  
+      border-radius: var(--g-radius-small);
+    }
+
+    .gkb93iKZxV:hover::before {
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #e2e2e2;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+    }
+  </style>
+    <button
+      type="button" data-id="gkb93iKZxV" aria-label="Edibles"
+      data-state="idle"
+      class="gkb93iKZxV gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none"
+      style="--hvr-bg:transparent;--bg:transparent;--radius:var(--g-radius-small);--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--shadow:none;--c:#121212;--hvr-c:#383838;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--pl:16px;--pr:16px;--pt:4px;--pb:4px;--tt:capitalize;--ff:var(--g-font-Poppins, Poppins);--weight:400;--lh:180%;--size:17px;--size-tablet:16px;--size-mobile:14px;--tdl:underline"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="truncate group-data-[state=loading]:invisible [&_p]:truncate z-9 "
+        style="--tt:default"
+      >
+        edibles
+      </span>
+    </button>
+  </div>
+    </div><div
+      pageContext tag="Col" label="Block" type="component"
+      style="--jc:end;--jc-mobile:center"
+      class="g1_4oho-0Y relative flex flex-col"
+    >
+      <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px;--ta:center"
+    class=""
+  >
+    <style>
+    .gEJ9Y67PH-.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #e2e2e2;
+  
+      border-radius: var(--g-radius-small);
+    }
+
+    .gEJ9Y67PH-:hover::before {
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #e2e2e2;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+    }
+  </style>
+    <button
+      type="button" data-id="gEJ9Y67PH-" aria-label="Topicals"
+      data-state="idle"
+      class="gEJ9Y67PH- gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none"
+      style="--hvr-bg:transparent;--bg:transparent;--radius:var(--g-radius-small);--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--shadow:none;--c:#121212;--hvr-c:#383838;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--pl:16px;--pr:16px;--pt:4px;--pb:4px;--tt:capitalize;--ff:var(--g-font-Poppins, Poppins);--weight:400;--lh:180%;--size:17px;--size-tablet:16px;--size-mobile:14px;--tdl:underline"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="truncate group-data-[state=loading]:invisible [&_p]:truncate z-9 "
+        style="--tt:default"
+      >
+        topicals
+      </span>
+    </button>
+  </div>
+    </div><div
+      pageContext tag="Col" label="Block" type="component"
+      style="--jc:end;--jc-mobile:center"
+      class="g45ne_-qvZ relative flex flex-col"
+    >
+      <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px;--ta:center"
+    class=""
+  >
+    <style>
+    .gjdym_S0a0.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #e2e2e2;
+  
+      border-radius: var(--g-radius-small);
+    }
+
+    .gjdym_S0a0:hover::before {
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #e2e2e2;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+    }
+  </style>
+    <button
+      type="button" data-id="gjdym_S0a0" aria-label="Pets"
+      data-state="idle"
+      class="gjdym_S0a0 gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none"
+      style="--hvr-bg:transparent;--bg:transparent;--radius:var(--g-radius-small);--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--shadow:none;--c:#121212;--hvr-c:#383838;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--pl:16px;--pr:16px;--pt:4px;--pb:4px;--tt:capitalize;--ff:var(--g-font-Poppins, Poppins);--weight:400;--lh:180%;--size:17px;--size-tablet:16px;--size-mobile:14px;--tdl:underline"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="truncate group-data-[state=loading]:invisible [&_p]:truncate z-9 "
+        style="--tt:default"
+      >
+        pets
+      </span>
+    </button>
+  </div>
+    </div>
+    </div>
+  
+    
+    </div><div
+      pageContext tag="Col" label="Block" type="component"
+      style="--jc:center"
+      class="gO8C6mUWbY relative flex flex-col"
+    >
+      
+    <div
+      pageContext parentTag="Col"
+        class="gaUZXG0tXO  overflow-clip"
+        style="--tt:default;--ta:left;--ta-mobile:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xs)"
+      >
+      <div class="flex" style="--jc:left;--jc-mobile:center">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--ta-mobile:center;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#121212;--fs:normal;--ff:var(--g-font-Poppins, Poppins);--weight:400;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;word-break:break-word"
+        >
+        <p>Done shopping?</p>
+        </div>
+      </div>
+    </div><div
+    
+    style="--mb:10px;--d:block;--d-tablet:block;--d-mobile:block;--b:solid;--bc:#121212;--bw:0px;--radius:var(--g-radius-none);--shadow:none;--op:100%;--ta:left;--ta-mobile:center"
+    class=""
+  >
+    <style>
+    .gBOrfMcmTb.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #121212;
+  
+      border-radius: var(--g-radius-small);
+    }
+
+    .gBOrfMcmTb:hover::before {
+      
+      
+    }
+  </style>
+    <a
+      href="https://www.solcbd.com/cart" target="_self" data-id="gBOrfMcmTb" aria-label="CHECKOUT HERE"
+      data-state="idle"
+      class="gBOrfMcmTb gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none bg-g-brand text-g-text-3 g-paragraph-1"
+      style="--bg:var(--g-c-brand, brand);--hvr-bg:#1E1E1E;--radius:var(--g-radius-small);--shadow:none;--c:var(--g-c-text-3, text-3);--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--pl:24px;--pr:24px;--pt:8px;--pb:8px;--tt:default"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    <span
+        class="inline-flex shrink-0 items-center justify-center group-data-[state=loading]:invisible z-9"
+        style="--mr:8px;--w:1em"
+      ><svg style="color: white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7,18c-1.1,0-1.99,0.9-1.99,2S5.9,22,7,22s2-0.9,2-2S8.1,18,7,18z M17,18c-1.1,0-1.99,0.9-1.99,2s0.89,2,1.99,2s2-0.9,2-2 S18.1,18,17,18z M8.1,13h7.45c0.75,0,1.41-0.41,1.75-1.03L21,4.96L19.25,4l-3.7,7H8.53L4.27,2H1v2h2l3.6,7.59l-1.35,2.44 C4.52,15.37,5.48,17,7,17h12v-2H7L8.1,13z M12,2l4,4l-4,4l-1.41-1.41L12.17,7L8,7l0-2l4.17,0l-1.59-1.59L12,2z" fill="white"></path></svg></span>
+      <span
+        class="truncate group-data-[state=loading]:invisible [&_p]:truncate z-9 "
+        style="--tt:default"
+      >
+        CHECKOUT HERE
+      </span>
+    </a>
+  </div>
+    </div>
+    </div>
+  
+    
+    </div>
+    </div>
+  
+            </section>
+          
+    
+{% schema %}
+  {
+    
+    "presets": [
+      {
+        "name": "Header"
+      }
+    ],
+    
+    "name": "Header",
+    "tag": "section",
+    "class": "gps-486270585677022423 gps gpsi",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Section design by GemPages. [Click here to start design](https://builder.gempages.net/instant/hyperlink/edit?type=section&section_id=486270585677022423)"
+      }
+    ],
+    "blocks": [{"type": "@app"}]
+  }
+{% endschema %}

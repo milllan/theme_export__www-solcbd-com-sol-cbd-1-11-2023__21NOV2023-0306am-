@@ -1,0 +1,1720 @@
+{%- if settings.dbtfy_delivery_time -%}
+  <div class="dbtfy dbtfy-delivery_time"
+       data-position="{{ section.settings.dbtfy_delivery_time_position }}"
+       hidden>
+
+    {%- for block in section.blocks -%}
+      {%- for i in (1..10) -%}
+        {%- capture index -%}{{ forloop.index }}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_from -%}dbtfy_delivery_time_from_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_to -%}dbtfy_delivery_time_to_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_date -%}dbtfy_delivery_time_date_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_format -%}dbtfy_delivery_time_format_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_exclude_days -%}dbtfy_delivery_time_exclude_days_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_cut_off -%}dbtfy_delivery_time_cut_off_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_cut_off_time -%}dbtfy_delivery_time_cut_off_time_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_cut_off_message -%}dbtfy_delivery_time_cut_off_message_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_type -%}type_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_tag -%}tag_{{index}}{%- endcapture -%}
+        {%- capture visibility -%}visibility_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_product -%}product_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_collection -%}collection_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_icon -%}dbtfy_delivery_time_icon_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_prefix -%}dbtfy_delivery_time_prefix_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_separator -%}dbtfy_delivery_time_separator_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_delivery_time_suffix -%}dbtfy_delivery_time_suffix_{{index}}{%- endcapture -%}
+
+        {%- assign current_delivery_time_from = block.settings[dbtfy_delivery_time_from] -%}
+        {%- assign current_delivery_time_to = block.settings[dbtfy_delivery_time_to] -%}
+        {%- assign current_delivery_time_date = block.settings[dbtfy_delivery_time_date] -%}
+        {%- assign current_delivery_time_format = block.settings[dbtfy_delivery_time_format] -%}
+        {%- assign current_delivery_time_exclude_days = block.settings[dbtfy_delivery_time_exclude_days] -%}
+        {%- assign current_delivery_time_cut_off = block.settings[dbtfy_delivery_time_cut_off] -%}
+        {%- assign current_delivery_time_cut_off_time = block.settings[dbtfy_delivery_time_cut_off_time] -%}
+        {%- assign current_delivery_time_cut_off_message = block.settings[dbtfy_delivery_time_cut_off_message] -%}
+        {%- assign current_delivery_time_type = block.settings[dbtfy_delivery_time_type] -%}
+        {%- assign current_delivery_time_tag = block.settings[dbtfy_delivery_time_tag] -%}
+        {%- assign current_visibility = block.settings[visibility] -%}
+        {%- assign current_delivery_time_product = block.settings[dbtfy_delivery_time_product] -%}
+        {%- assign current_delivery_time_collection = block.settings[dbtfy_delivery_time_collection] -%}
+        {%- assign current_delivery_time_icon = block.settings[dbtfy_delivery_time_icon] -%}
+        {%- assign current_delivery_time_prefix = block.settings[dbtfy_delivery_time_prefix] -%}
+        {%- assign current_delivery_time_separator = block.settings[dbtfy_delivery_time_separator] -%}
+        {%- assign current_delivery_time_suffix = block.settings[dbtfy_delivery_time_suffix] -%}
+
+        <div class="dt-info"
+            data-min-date="{{ current_delivery_time_from }}"
+            data-max-date="{{ current_delivery_time_to }}"
+            data-show-as-date="{{ current_delivery_time_date }}"
+            data-time-format="{{ current_delivery_time_format }}"
+            data-exclude-days="{{ current_delivery_time_exclude_days }}"
+            data-show-cut-off="{{ current_delivery_time_cut_off }}"
+            data-cut-off-time="{{ current_delivery_time_cut_off_time }}"
+            data-cut-off-message="{{ current_delivery_time_cut_off_message }}"
+            data-product-types="{{ current_delivery_time_type }}"
+            data-product-tags="{{ current_delivery_time_tag }}"
+            data-time-zone="{{ settings.time_zone }}"
+            data-visibility-type="{{ current_visibility }}"
+            data-product="{{ current_delivery_time_product.id }}"
+            data-product-collection="{{ collections[current_delivery_time_collection].handle }}">
+
+          {%- unless current_delivery_time_icon == blank -%}
+            <span class="{{ settings.icon }} icon-width">{{ current_delivery_time_icon }}</span>
+          {% endunless %}
+
+          <span class="delivery_time_prefix">{{ current_delivery_time_prefix }}</span>
+          <strong class="from-text-delivery_time"></strong>
+          <span class="delivery_time_separator">{{ current_delivery_time_separator }}</span>
+          <strong class="to-text-delivery_time"></strong>
+          <span class="delivery_time_sufix">{{ current_delivery_time_suffix }}</span>
+
+          {%- if current_delivery_time_cut_off -%}
+            <span class="delivery_cut_off">
+              (<span class="delivery_cut_off_message">
+                {{- current_delivery_time_cut_off_message | append: ' ' -}}
+              </span>
+              <span class="delivery_cut_off_time">
+                {{- current_delivery_time_cut_off_time -}}
+              </span>)
+            </span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{%- schema -%}
+{
+  "name": "Delivery Time",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Help Center"
+    },
+    {
+      "type": "paragraph",
+      "content": "[Follow our step-by-step tutorial](https://help.debutify.com/en/articles/5054100-how-to-enable-the-delivery-time-add-on-in-the-debutify-theme)"
+    },
+    {
+      "type": "paragraph",
+      "content": "To enable/disable this add-on, go to Theme settings > Debutify Add-ons."
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "select",
+      "id": "dbtfy_delivery_time_position",
+      "label": "Position",
+      "default": "under-addtocart-button",
+      "options": [
+        {
+          "value": "under-product-price",
+          "label": "Under product price"
+        },
+        {
+          "value": "under-addtocart-button",
+          "label": "Under add-to-cart button"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "delivery_time",
+      "name": "Delivery Time",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Block name",
+          "info": "Used for internal identification"
+        },
+        {
+          "type": "header",
+          "content": "Delivery Time 1"
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_icon_1",
+          "label": "Icon",
+          "default": "local_shipping",
+          "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_prefix_1",
+          "label": "Prefix",
+          "default": "Buy now to receive in"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_separator_1",
+          "label": "Separator",
+          "default": "-"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_suffix_1",
+          "label": "Suffix",
+          "default": "days"
+        },
+        {
+          "type": "header",
+          "content": "Format settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_date_1",
+          "label": "Show as date",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_format_1",
+          "label": "Date format",
+          "default": "%b %d",
+          "info": "%a %A - weekdays, %b %B - months, %d - days, %y %Y - years. Lowercase letters are for the short date format."
+        },
+        {
+          "type": "header",
+          "content": "General delivery",
+          "info": "Applies to all products"
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_from_1",
+          "label": "Min delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_to_1",
+          "label": "Max delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "textarea",
+          "id": "dbtfy_delivery_time_exclude_days_1",
+          "label": "Delivery exclude days",
+          "default": "SAT, SUN",
+          "info": "Use the 'MON','TUE','WED','THU','FRI','SAT' and 'SUN'. Separate exclude days with commas"
+        },
+        {
+          "type": "header",
+          "content": "Delivery cutoff time"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_cut_off_1",
+          "label": "Show delivery cutoff",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_time_1",
+          "label": "Date format",
+          "default": "16:00:00",
+          "info": "Number only (24 hours format - 16:00:00 means 4PM) relative to timezone of seller"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_message_1",
+          "label": "Message",
+          "default": "Order within"
+        },
+        {
+          "type": "header",
+          "content": "Visibility settings"
+        },
+        {
+          "type": "radio",
+          "id": "visibility_1",
+          "label": "Visibility",
+          "options": [
+            {
+              "value": "all",
+              "label": "All"
+            },
+            {
+              "value": "collection",
+              "label": "Collection based"
+            },
+            {
+              "value": "type",
+              "label": "Type based"
+            },
+            {
+              "value": "tag",
+              "label": "Tag based"
+            },
+            {
+              "value": "product",
+              "label": "Product based"
+            }
+          ],
+          "info": "From lowest to higher priority.",
+          "default": "all"
+        },
+        {
+          "type": "collection",
+          "id": "collection_1",
+          "label": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "type_1",
+          "label": "Product types",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_1",
+          "label": "Product tags",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Delivery Time 2"
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_icon_2",
+          "label": "Icon",
+          "default": "local_shipping",
+          "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_prefix_2",
+          "label": "Prefix",
+          "default": "Buy now to receive in"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_separator_2",
+          "label": "Separator",
+          "default": "-"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_suffix_2",
+          "label": "Suffix",
+          "default": "days"
+        },
+        {
+          "type": "header",
+          "content": "Format settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_date_2",
+          "label": "Show as date",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_format_2",
+          "label": "Date format",
+          "default": "%b %d",
+          "info": "%a %A - weekdays, %b %B - months, %d - days, %y %Y - years. Lowercase letters are for the short date format."
+        },
+        {
+          "type": "header",
+          "content": "General delivery",
+          "info": "Applies to all products"
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_from_2",
+          "label": "Min delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_to_2",
+          "label": "Max delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "textarea",
+          "id": "dbtfy_delivery_time_exclude_days_2",
+          "label": "Delivery exclude days",
+          "default": "SAT, SUN",
+          "info": "Use the 'MON','TUE','WED','THU','FRI','SAT' and 'SUN'. Separate exclude days with commas"
+        },
+        {
+          "type": "header",
+          "content": "Delivery cutoff time"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_cut_off_2",
+          "label": "Show delivery cutoff",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_time_2",
+          "label": "Date format",
+          "default": "16:00:00",
+          "info": "Number only (24 hours format - 16:00:00 means 4PM) relative to timezone of seller"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_message_2",
+          "label": "Message",
+          "default": "Order within"
+        },
+        {
+          "type": "header",
+          "content": "Visibility settings"
+        },
+        {
+          "type": "radio",
+          "id": "visibility_2",
+          "label": "Visibility",
+          "options": [
+            {
+              "value": "all",
+              "label": "All"
+            },
+            {
+              "value": "collection",
+              "label": "Collection based"
+            },
+            {
+              "value": "type",
+              "label": "Type based"
+            },
+            {
+              "value": "tag",
+              "label": "Tag based"
+            },
+            {
+              "value": "product",
+              "label": "Product based"
+            }
+          ],
+          "info": "From lowest to higher priority.",
+          "default": "all"
+        },
+        {
+          "type": "collection",
+          "id": "collection_2",
+          "label": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "type_2",
+          "label": "Product types",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_2",
+          "label": "Product tags",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Delivery Time 3"
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_icon_3",
+          "label": "Icon",
+          "default": "local_shipping",
+          "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_prefix_3",
+          "label": "Prefix",
+          "default": "Buy now to receive in"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_separator_3",
+          "label": "Separator",
+          "default": "-"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_suffix_3",
+          "label": "Suffix",
+          "default": "days"
+        },
+        {
+          "type": "header",
+          "content": "Format settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_date_3",
+          "label": "Show as date",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_format_3",
+          "label": "Date format",
+          "default": "%b %d",
+          "info": "%a %A - weekdays, %b %B - months, %d - days, %y %Y - years. Lowercase letters are for the short date format."
+        },
+        {
+          "type": "header",
+          "content": "General delivery",
+          "info": "Applies to all products"
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_from_3",
+          "label": "Min delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_to_3",
+          "label": "Max delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "textarea",
+          "id": "dbtfy_delivery_time_exclude_days_3",
+          "label": "Delivery exclude days",
+          "default": "SAT, SUN",
+          "info": "Use the 'MON','TUE','WED','THU','FRI','SAT' and 'SUN'. Separate exclude days with commas"
+        },
+        {
+          "type": "header",
+          "content": "Delivery cutoff time"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_cut_off_3",
+          "label": "Show delivery cutoff",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_time_3",
+          "label": "Date format",
+          "default": "16:00:00",
+          "info": "Number only (24 hours format - 16:00:00 means 4PM) relative to timezone of seller"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_message_3",
+          "label": "Message",
+          "default": "Order within"
+        },
+        {
+          "type": "header",
+          "content": "Visibility settings"
+        },
+        {
+          "type": "radio",
+          "id": "visibility_3",
+          "label": "Visibility",
+          "options": [
+            {
+              "value": "all",
+              "label": "All"
+            },
+            {
+              "value": "collection",
+              "label": "Collection based"
+            },
+            {
+              "value": "type",
+              "label": "Type based"
+            },
+            {
+              "value": "tag",
+              "label": "Tag based"
+            },
+            {
+              "value": "product",
+              "label": "Product based"
+            }
+          ],
+          "info": "From lowest to higher priority.",
+          "default": "all"
+        },
+        {
+          "type": "collection",
+          "id": "collection_3",
+          "label": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "type_3",
+          "label": "Product types",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_3",
+          "label": "Product tags",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Delivery Time 4"
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_icon_4",
+          "label": "Icon",
+          "default": "local_shipping",
+          "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_prefix_4",
+          "label": "Prefix",
+          "default": "Buy now to receive in"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_separator_4",
+          "label": "Separator",
+          "default": "-"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_suffix_4",
+          "label": "Suffix",
+          "default": "days"
+        },
+        {
+          "type": "header",
+          "content": "Format settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_date_4",
+          "label": "Show as date",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_format_4",
+          "label": "Date format",
+          "default": "%b %d",
+          "info": "%a %A - weekdays, %b %B - months, %d - days, %y %Y - years. Lowercase letters are for the short date format."
+        },
+        {
+          "type": "header",
+          "content": "General delivery",
+          "info": "Applies to all products"
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_from_4",
+          "label": "Min delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_to_4",
+          "label": "Max delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "textarea",
+          "id": "dbtfy_delivery_time_exclude_days_4",
+          "label": "Delivery exclude days",
+          "default": "SAT, SUN",
+          "info": "Use the 'MON','TUE','WED','THU','FRI','SAT' and 'SUN'. Separate exclude days with commas"
+        },
+        {
+          "type": "header",
+          "content": "Delivery cutoff time"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_cut_off_4",
+          "label": "Show delivery cutoff",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_time_4",
+          "label": "Date format",
+          "default": "16:00:00",
+          "info": "Number only (24 hours format - 16:00:00 means 4PM) relative to timezone of seller"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_message_4",
+          "label": "Message",
+          "default": "Order within"
+        },
+        {
+          "type": "header",
+          "content": "Visibility settings"
+        },
+        {
+          "type": "radio",
+          "id": "visibility_4",
+          "label": "Visibility",
+          "options": [
+            {
+              "value": "all",
+              "label": "All"
+            },
+            {
+              "value": "collection",
+              "label": "Collection based"
+            },
+            {
+              "value": "type",
+              "label": "Type based"
+            },
+            {
+              "value": "tag",
+              "label": "Tag based"
+            },
+            {
+              "value": "product",
+              "label": "Product based"
+            }
+          ],
+          "info": "From lowest to higher priority.",
+          "default": "all"
+        },
+        {
+          "type": "collection",
+          "id": "collection_4",
+          "label": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "type_4",
+          "label": "Product types",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_4",
+          "label": "Product tags",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "product",
+          "id": "product_4",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Delivery Time 5"
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_icon_5",
+          "label": "Icon",
+          "default": "local_shipping",
+          "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_prefix_5",
+          "label": "Prefix",
+          "default": "Buy now to receive in"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_separator_5",
+          "label": "Separator",
+          "default": "-"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_suffix_5",
+          "label": "Suffix",
+          "default": "days"
+        },
+        {
+          "type": "header",
+          "content": "Format settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_date_5",
+          "label": "Show as date",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_format_5",
+          "label": "Date format",
+          "default": "%b %d",
+          "info": "%a %A - weekdays, %b %B - months, %d - days, %y %Y - years. Lowercase letters are for the short date format."
+        },
+        {
+          "type": "header",
+          "content": "General delivery",
+          "info": "Applies to all products"
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_from_5",
+          "label": "Min delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_to_5",
+          "label": "Max delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "textarea",
+          "id": "dbtfy_delivery_time_exclude_days_5",
+          "label": "Delivery exclude days",
+          "default": "SAT, SUN",
+          "info": "Use the 'MON','TUE','WED','THU','FRI','SAT' and 'SUN'. Separate exclude days with commas"
+        },
+        {
+          "type": "header",
+          "content": "Delivery cutoff time"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_cut_off_5",
+          "label": "Show delivery cutoff",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_time_5",
+          "label": "Date format",
+          "default": "16:00:00",
+          "info": "Number only (24 hours format - 16:00:00 means 4PM) relative to timezone of seller"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_message_5",
+          "label": "Message",
+          "default": "Order within"
+        },
+        {
+          "type": "header",
+          "content": "Visibility settings"
+        },
+        {
+          "type": "radio",
+          "id": "visibility_5",
+          "label": "Visibility",
+          "options": [
+            {
+              "value": "all",
+              "label": "All"
+            },
+            {
+              "value": "collection",
+              "label": "Collection based"
+            },
+            {
+              "value": "type",
+              "label": "Type based"
+            },
+            {
+              "value": "tag",
+              "label": "Tag based"
+            },
+            {
+              "value": "product",
+              "label": "Product based"
+            }
+          ],
+          "info": "From lowest to higher priority.",
+          "default": "all"
+        },
+        {
+          "type": "collection",
+          "id": "collection_5",
+          "label": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "type_5",
+          "label": "Product types",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_5",
+          "label": "Product tags",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "product",
+          "id": "product_5",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Delivery Time 6"
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_icon_6",
+          "label": "Icon",
+          "default": "local_shipping",
+          "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_prefix_6",
+          "label": "Prefix",
+          "default": "Buy now to receive in"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_separator_6",
+          "label": "Separator",
+          "default": "-"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_suffix_6",
+          "label": "Suffix",
+          "default": "days"
+        },
+        {
+          "type": "header",
+          "content": "Format settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_date_6",
+          "label": "Show as date",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_format_6",
+          "label": "Date format",
+          "default": "%b %d",
+          "info": "%a %A - weekdays, %b %B - months, %d - days, %y %Y - years. Lowercase letters are for the short date format."
+        },
+        {
+          "type": "header",
+          "content": "General delivery",
+          "info": "Applies to all products"
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_from_6",
+          "label": "Min delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_to_6",
+          "label": "Max delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "textarea",
+          "id": "dbtfy_delivery_time_exclude_days_6",
+          "label": "Delivery exclude days",
+          "default": "SAT, SUN",
+          "info": "Use the 'MON','TUE','WED','THU','FRI','SAT' and 'SUN'. Separate exclude days with commas"
+        },
+        {
+          "type": "header",
+          "content": "Delivery cutoff time"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_cut_off_6",
+          "label": "Show delivery cutoff",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_time_6",
+          "label": "Date format",
+          "default": "16:00:00",
+          "info": "Number only (24 hours format - 16:00:00 means 4PM) relative to timezone of seller"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_message_6",
+          "label": "Message",
+          "default": "Order within"
+        },
+        {
+          "type": "header",
+          "content": "Visibility settings"
+        },
+        {
+          "type": "radio",
+          "id": "visibility_6",
+          "label": "Visibility",
+          "options": [
+            {
+              "value": "all",
+              "label": "All"
+            },
+            {
+              "value": "collection",
+              "label": "Collection based"
+            },
+            {
+              "value": "type",
+              "label": "Type based"
+            },
+            {
+              "value": "tag",
+              "label": "Tag based"
+            },
+            {
+              "value": "product",
+              "label": "Product based"
+            }
+          ],
+          "info": "From lowest to higher priority.",
+          "default": "all"
+        },
+        {
+          "type": "collection",
+          "id": "collection_6",
+          "label": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "type_6",
+          "label": "Product types",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_6",
+          "label": "Product tags",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "product",
+          "id": "product_6",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Delivery Time 7"
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_icon_7",
+          "label": "Icon",
+          "default": "local_shipping",
+          "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_prefix_7",
+          "label": "Prefix",
+          "default": "Buy now to receive in"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_separator_7",
+          "label": "Separator",
+          "default": "-"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_suffix_7",
+          "label": "Suffix",
+          "default": "days"
+        },
+        {
+          "type": "header",
+          "content": "Format settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_date_7",
+          "label": "Show as date",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_format_7",
+          "label": "Date format",
+          "default": "%b %d",
+          "info": "%a %A - weekdays, %b %B - months, %d - days, %y %Y - years. Lowercase letters are for the short date format."
+        },
+        {
+          "type": "header",
+          "content": "General delivery",
+          "info": "Applies to all products"
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_from_7",
+          "label": "Min delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_to_7",
+          "label": "Max delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "textarea",
+          "id": "dbtfy_delivery_time_exclude_days_7",
+          "label": "Delivery exclude days",
+          "default": "SAT, SUN",
+          "info": "Use the 'MON','TUE','WED','THU','FRI','SAT' and 'SUN'. Separate exclude days with commas"
+        },
+        {
+          "type": "header",
+          "content": "Delivery cutoff time"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_cut_off_7",
+          "label": "Show delivery cutoff",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_time_7",
+          "label": "Date format",
+          "default": "16:00:00",
+          "info": "Number only (24 hours format - 16:00:00 means 4PM) relative to timezone of seller"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_message_7",
+          "label": "Message",
+          "default": "Order within"
+        },
+        {
+          "type": "header",
+          "content": "Visibility settings"
+        },
+        {
+          "type": "radio",
+          "id": "visibility_7",
+          "label": "Visibility",
+          "options": [
+            {
+              "value": "all",
+              "label": "All"
+            },
+            {
+              "value": "collection",
+              "label": "Collection based"
+            },
+            {
+              "value": "type",
+              "label": "Type based"
+            },
+            {
+              "value": "tag",
+              "label": "Tag based"
+            },
+            {
+              "value": "product",
+              "label": "Product based"
+            }
+          ],
+          "info": "From lowest to higher priority.",
+          "default": "all"
+        },
+        {
+          "type": "collection",
+          "id": "collection_7",
+          "label": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "type_7",
+          "label": "Product types",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_7",
+          "label": "Product tags",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "product",
+          "id": "product_7",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Delivery Time 8"
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_icon_8",
+          "label": "Icon",
+          "default": "local_shipping",
+          "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_prefix_8",
+          "label": "Prefix",
+          "default": "Buy now to receive in"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_separator_8",
+          "label": "Separator",
+          "default": "-"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_suffix_8",
+          "label": "Suffix",
+          "default": "days"
+        },
+        {
+          "type": "header",
+          "content": "Format settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_date_8",
+          "label": "Show as date",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_format_8",
+          "label": "Date format",
+          "default": "%b %d",
+          "info": "%a %A - weekdays, %b %B - months, %d - days, %y %Y - years. Lowercase letters are for the short date format."
+        },
+        {
+          "type": "header",
+          "content": "General delivery",
+          "info": "Applies to all products"
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_from_8",
+          "label": "Min delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_to_8",
+          "label": "Max delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "textarea",
+          "id": "dbtfy_delivery_time_exclude_days_8",
+          "label": "Delivery exclude days",
+          "default": "SAT, SUN",
+          "info": "Use the 'MON','TUE','WED','THU','FRI','SAT' and 'SUN'. Separate exclude days with commas"
+        },
+        {
+          "type": "header",
+          "content": "Delivery cutoff time"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_cut_off_8",
+          "label": "Show delivery cutoff",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_time_8",
+          "label": "Date format",
+          "default": "16:00:00",
+          "info": "Number only (24 hours format - 16:00:00 means 4PM) relative to timezone of seller"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_message_8",
+          "label": "Message",
+          "default": "Order within"
+        },
+        {
+          "type": "header",
+          "content": "Visibility settings"
+        },
+        {
+          "type": "radio",
+          "id": "visibility_8",
+          "label": "Visibility",
+          "options": [
+            {
+              "value": "all",
+              "label": "All"
+            },
+            {
+              "value": "collection",
+              "label": "Collection based"
+            },
+            {
+              "value": "type",
+              "label": "Type based"
+            },
+            {
+              "value": "tag",
+              "label": "Tag based"
+            },
+            {
+              "value": "product",
+              "label": "Product based"
+            }
+          ],
+          "info": "From lowest to higher priority.",
+          "default": "all"
+        },
+        {
+          "type": "collection",
+          "id": "collection_8",
+          "label": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "type_8",
+          "label": "Product types",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_8",
+          "label": "Product tags",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "product",
+          "id": "product_8",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Delivery Time 9"
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_icon_9",
+          "label": "Icon",
+          "default": "local_shipping",
+          "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_prefix_9",
+          "label": "Prefix",
+          "default": "Buy now to receive in"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_separator_9",
+          "label": "Separator",
+          "default": "-"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_suffix_9",
+          "label": "Suffix",
+          "default": "days"
+        },
+        {
+          "type": "header",
+          "content": "Format settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_date_9",
+          "label": "Show as date",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_format_9",
+          "label": "Date format",
+          "default": "%b %d",
+          "info": "%a %A - weekdays, %b %B - months, %d - days, %y %Y - years. Lowercase letters are for the short date format."
+        },
+        {
+          "type": "header",
+          "content": "General delivery",
+          "info": "Applies to all products"
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_from_9",
+          "label": "Min delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_to_9",
+          "label": "Max delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "textarea",
+          "id": "dbtfy_delivery_time_exclude_days_9",
+          "label": "Delivery exclude days",
+          "default": "SAT, SUN",
+          "info": "Use the 'MON','TUE','WED','THU','FRI','SAT' and 'SUN'. Separate exclude days with commas"
+        },
+        {
+          "type": "header",
+          "content": "Delivery cutoff time"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_cut_off_9",
+          "label": "Show delivery cutoff",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_time_9",
+          "label": "Date format",
+          "default": "16:00:00",
+          "info": "Number only (24 hours format - 16:00:00 means 4PM) relative to timezone of seller"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_message_9",
+          "label": "Message",
+          "default": "Order within"
+        },
+        {
+          "type": "header",
+          "content": "Visibility settings"
+        },
+        {
+          "type": "radio",
+          "id": "visibility_9",
+          "label": "Visibility",
+          "options": [
+            {
+              "value": "all",
+              "label": "All"
+            },
+            {
+              "value": "collection",
+              "label": "Collection based"
+            },
+            {
+              "value": "type",
+              "label": "Type based"
+            },
+            {
+              "value": "tag",
+              "label": "Tag based"
+            },
+            {
+              "value": "product",
+              "label": "Product based"
+            }
+          ],
+          "info": "From lowest to higher priority.",
+          "default": "all"
+        },
+        {
+          "type": "collection",
+          "id": "collection_9",
+          "label": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "type_9",
+          "label": "Product types",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_9",
+          "label": "Product tags",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "product",
+          "id": "product_9",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Delivery Time 10"
+        },
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_icon_10",
+          "label": "Icon",
+          "default": "local_shipping",
+          "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_prefix_10",
+          "label": "Prefix",
+          "default": "Buy now to receive in"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_separator_10",
+          "label": "Separator",
+          "default": "-"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_suffix_10",
+          "label": "Suffix",
+          "default": "days"
+        },
+        {
+          "type": "header",
+          "content": "Format settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_date_10",
+          "label": "Show as date",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_format_10",
+          "label": "Date format",
+          "default": "%b %d",
+          "info": "%a %A - weekdays, %b %B - months, %d - days, %y %Y - years. Lowercase letters are for the short date format."
+        },
+        {
+          "type": "header",
+          "content": "General delivery",
+          "info": "Applies to all products"
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_from_10",
+          "label": "Min delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "range",
+          "id": "dbtfy_delivery_time_to_10",
+          "label": "Max delivery time (days)",
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "textarea",
+          "id": "dbtfy_delivery_time_exclude_days_10",
+          "label": "Delivery exclude days",
+          "default": "SAT, SUN",
+          "info": "Use the 'MON','TUE','WED','THU','FRI','SAT' and 'SUN'. Separate exclude days with commas"
+        },
+        {
+          "type": "header",
+          "content": "Delivery cutoff time"
+        },
+        {
+          "type": "checkbox",
+          "id": "dbtfy_delivery_time_cut_off_10",
+          "label": "Show delivery cutoff",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_time_10",
+          "label": "Date format",
+          "default": "16:00:00",
+          "info": "Number only (24 hours format - 16:00:00 means 4PM) relative to timezone of seller"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_delivery_time_cut_off_message_10",
+          "label": "Message",
+          "default": "Order within"
+        },
+        {
+          "type": "header",
+          "content": "Visibility settings"
+        },
+        {
+          "type": "radio",
+          "id": "visibility_10",
+          "label": "Visibility",
+          "options": [
+            {
+              "value": "all",
+              "label": "All"
+            },
+            {
+              "value": "collection",
+              "label": "Collection based"
+            },
+            {
+              "value": "type",
+              "label": "Type based"
+            },
+            {
+              "value": "tag",
+              "label": "Tag based"
+            },
+            {
+              "value": "product",
+              "label": "Product based"
+            }
+          ],
+          "info": "From lowest to higher priority.",
+          "default": "all"
+        },
+        {
+          "type": "collection",
+          "id": "collection_10",
+          "label": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "type_10",
+          "label": "Product types",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_10",
+          "label": "Product tags",
+          "info": "Comma-separated"
+        },
+        {
+          "type": "product",
+          "id": "product_10",
+          "label": "Product"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema -%}
+

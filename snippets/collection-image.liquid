@@ -1,0 +1,28 @@
+{%- if settings.show_hero and collection.image -%}
+  <div class="hero-container hero-collection hero-first"
+     data-section-type="hero-section">
+  <div class="hero hero--{{ settings.section_height }} hero-mobile-{{ settings.section_height_mobile }} media-wrapper align-center text-center overlay">
+    <div class="hero-image media bgset lazyload"
+    {%- render 'lazysizes', img: collection.image, img_type: 'background' -%}>
+    </div>
+    <div class="hero__inner media-content">
+      <div class="hero__text-wrapper">
+        <div class="hero-content">
+          <div class="page-title-wrapper">
+            <h1 class="hero__title page-title">{{ collection.title | escape }}</h1>
+          </div>
+          {%- unless collection.description == blank -%}
+          <div class="rte hero__text">
+            <p>{{ collection.description }}</p>
+          </div>
+          {%- endunless -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- else if collection.image == blank -%}
+<div class="hero-container hero-collection hero-first"
+     data-section-type="hero-section">
+</div>
+{%- endif -%}

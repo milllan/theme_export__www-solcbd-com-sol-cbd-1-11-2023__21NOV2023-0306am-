@@ -1,0 +1,206 @@
+{%- if section.settings.show_product_recommendations -%}
+  {%- assign limit = section.settings.desktop_grid | times: section.settings.rows -%}
+
+  {%- if recommendations.performed -%}
+    {%- if recommendations.products_count > 0 -%}
+      <div class="product-recommendations">
+        <div class="box">
+          <div class="wrapper">
+            {%- unless section.settings.title == blank and section.settings.subtitle == blank -%}
+              <div class="section-header">
+                {%- unless section.settings.title == blank -%}
+                  <h2 class="section-header__title">{{ section.settings.title | escape }}</h2>
+                {%- endunless -%}
+
+                {%- unless section.settings.subtitle == blank -%}
+                  <p class="section-header__subtitle">{{ section.settings.subtitle | escape }}</p>
+                {%- endunless -%}
+              </div>
+            {%- endunless -%}
+
+            <div id="ProductGrid-{{ section.id }}"
+                class="grid grid-spacer {% if section.settings.slider_related_products %}slick slick-product-grid{% endif %}">
+
+              {%- liquid
+                capture grid_item_width
+                  render 'product-width'
+                endcapture
+
+                for product in recommendations.products
+                  capture current
+                    cycle 1, 2, 3, 4, 5, 6
+                  endcapture
+
+                  render 'product-grid-item' with product as product, grid_item_width: grid_item_width, current: current
+                endfor
+              -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- else -%}
+    <div id="productRecommendationsSection"
+         class="{{ section.settings.section_style }}"
+         data-product-id="{{ product.id }}"
+         data-section-id="{{ section.id }}"
+         data-section-type="product-recommendations"
+         data-section-url="{{ routes.product_recommendations_url }}"
+         data-limit="{{ limit }}"
+         data-arrows="{{ section.settings.arrows }}"
+         data-dots="{{ section.settings.dots }}"
+         data-autoplay="{{ section.settings.autoplay }}"
+         data-autoplayspeed="{{ section.settings.autoplayspeed | times: 1000 }}"
+         data-slidetoshow="{{ section.settings.desktop_grid }}">
+	  </div>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "t:sections.product_recommendations.name",
+	  "class": "product-recommendations-section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_product_recommendations",
+        "label": "t:sections.product_recommendations.settings.show_product_recommendations.label",
+		    "info": "t:sections.product_recommendations.settings.show_product_recommendations.info",
+        "default": true
+      },
+	    {
+        "type": "text",
+        "id": "title",
+        "label": "t:sections.product_recommendations.settings.title.label",
+        "default": "Recommended for you"
+      },
+	    {
+        "type": "text",
+        "id": "subtitle",
+        "label": "t:sections.product_recommendations.settings.subtitle.label"
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "t:sections.product_recommendations.settings.section_style.label",
+        "default": "section-border",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "t:sections.product_recommendations.settings.section_style.option__1.label"
+          },
+		      {
+            "value": "section-default",
+            "label": "t:sections.product_recommendations.settings.section_style.option__2.label"
+          },
+          {
+            "value": "section-border",
+            "label": "t:sections.product_recommendations.settings.section_style.option__3.label"
+          }
+        ]
+      },
+	    {
+        "type": "select",
+        "id": "rows",
+        "label": "t:sections.product_recommendations.settings.rows.label",
+        "default": "2",
+        "options": [
+		      {
+            "value": "1",
+            "label": "t:sections.product_recommendations.settings.rows.option__1.label"
+          },
+          {
+            "value": "2",
+            "label": "t:sections.product_recommendations.settings.rows.option__2.label"
+          },
+          {
+            "value": "3",
+            "label": "t:sections.product_recommendations.settings.rows.option__3.label"
+          },
+          {
+            "value": "4",
+            "label": "t:sections.product_recommendations.settings.rows.option__4.label"
+          },
+          {
+            "value": "5",
+            "label": "t:sections.product_recommendations.settings.rows.option__5.label"
+          }
+        ]
+      },
+	    {
+        "type": "select",
+        "id": "desktop_grid",
+        "label": "t:sections.product_recommendations.settings.desktop_grid.label",
+        "default": "4",
+        "options": [
+          {
+            "value": "2",
+            "label": "t:sections.product_recommendations.settings.desktop_grid.option__1.label"
+          },
+          {
+            "value": "3",
+            "label": "t:sections.product_recommendations.settings.desktop_grid.option__2.label"
+          },
+          {
+            "value": "4",
+            "label": "t:sections.product_recommendations.settings.desktop_grid.option__3.label"
+          }
+        ]
+	    },
+	    {
+        "type": "select",
+        "id": "mobile_grid",
+        "label": "t:sections.product_recommendations.settings.mobile_grid.label",
+        "default": "2",
+        "options":[
+          {
+            "value": "1",
+            "label": "t:sections.product_recommendations.settings.mobile_grid.option__1.label"
+          },
+          {
+            "value":"2",
+            "label": "t:sections.product_recommendations.settings.mobile_grid.option__2.label"
+          }
+        ]
+	    },
+	    {
+        "type": "header",
+        "content": "t:sections.product_recommendations.settings.header__1.content"
+	    },
+      {
+        "type": "checkbox",
+        "id": "slider_related_products",
+        "label": "t:sections.product_recommendations.settings.slider_related_products.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "t:sections.product_recommendations.settings.arrows.label",
+        "default": true
+      },
+	    {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "t:sections.product_recommendations.settings.dots.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "t:sections.product_recommendations.settings.autoplay.label",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "autoplayspeed",
+        "label": "t:sections.product_recommendations.settings.autoplayspeed.label",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "unit": "s",
+        "default": 5
+      }
+    ]
+  }
+{% endschema %}

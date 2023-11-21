@@ -1,0 +1,24 @@
+{% layout none %}
+
+[
+{% paginate search.results by 250 %}
+  {% for product in search.results %}
+    {
+      "id": {{ product.id | json }},
+      "collections": {{ product.collections | json }},
+      "handle": {{ product.handle | json }},
+      "available": {{ product.available | json }},
+      "url": {{ product.url | json }},
+      "title": {{ product.title | json }},
+      "description": {{ product.description | json }},
+      "variants": {{ product.variants | json }},
+      "selected_or_first_available_variant": {{ product.selected_or_first_available_variant | json }},
+      "featured_image": {
+        "src": {{ product.featured_image.src | json }},
+        "aspect_ratio": {{ product.featured_image.aspect_ratio | json }},
+        "alt": {{ product.featured_image.alt | escape | json }}
+      }
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+{% endpaginate %}
+]

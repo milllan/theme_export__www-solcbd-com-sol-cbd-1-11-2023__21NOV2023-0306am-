@@ -1,0 +1,27 @@
+{%- liquid
+  if count
+    assign block_count = count
+  else
+    assign block_count = section.blocks.size
+  endif
+
+  case block_count
+    when 0
+    when 1
+      if section.settings.full_width
+        echo "one-whole text-center"
+      else
+        echo "large--eight-twelfths push--large--two-twelfths text-center"
+      endif
+    when 2
+      echo "large--six-twelfths medium--six-twelfths"
+    when 3
+      echo "large--four-twelfths medium--four-twelfths"
+    when 4
+      echo "large--three-twelfths medium--six-twelfths"
+    when 5
+      echo "large--one-fifth medium--six-twelfths"
+    when 6
+      echo "large--two-twelfths medium--six-twelfths"
+  endcase
+-%}

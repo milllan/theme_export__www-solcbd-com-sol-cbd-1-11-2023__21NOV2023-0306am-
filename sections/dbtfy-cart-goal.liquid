@@ -1,0 +1,331 @@
+{%- if settings.dbtfy_cart_goal -%}
+  {%- assign goal = section.settings.dbtfy_cart_goal_amount -%}
+  {%- assign goal_amount = goal | times: 1 -%}
+  {%- assign cart_total = cart.total_price | divided_by: 100.0 -%}
+  {%- assign percentage_reached = cart_total | times: 100 | divided_by: goal -%}
+
+  <div class="dbtfy-cart_goal_list" hidden>
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+
+        {%- for i in (1..10) -%}
+          {%- capture index -%}{{ forloop.index }}{%- endcapture -%}
+          {%- capture country_goal_selector -%}dbtfy_cart_goal_amount_{{index}}{%- endcapture -%}
+          {%- capture region_selector -%}dbtfy_cart_goal_region_{{index}}{%- endcapture -%}
+
+          {%- assign country_goal = block.settings[country_goal_selector] | times: 1 -%}
+          {%- assign region = block.settings[region_selector] -%}
+
+          {%- if country_goal != blank and region != blank -%}
+            <div class="dbtfy dbtfy-cart_goal"
+                data-goal-amount="{{ country_goal }}"
+                data-cart-total-amount="{{ cart_total }}"
+                data-cart-total-count="{{ cart.item_count }}"
+                data-before-amount-text="{{ section.settings.dbtfy_cart_goal_before_text }}"
+                data-after-amount-text="{{ section.settings.dbtfy_cart_goal_after_text }}"
+                data-goal-reached-text="{{ section.settings.dbtfy_cart_goal_reached_text }}"
+                data-goal-region="{{ region }}">
+
+              <div class="cg-wrapper" {% if cart.item_count == 0 %}hidden{% endif %}>
+                <p class="cg-free-shipping-text text-center">
+                  {%- if country_goal > cart_total -%}
+                    <span>{{ section.settings.dbtfy_cart_goal_before_text }} <span class="cg-goal-amount text-money text-secondary"> </span> {{ section.settings.dbtfy_cart_goal_after_text }}</span>
+                  {%- else -%}
+                    <span>{{ section.settings.dbtfy_cart_goal_reached_text }}</span>
+                  {%- endif -%}
+                </p>
+
+                <div class="cg-free-shipping-bar progress progress-rounded">
+                  <div class="cg-progress-bar progress-bar" role="progressbar" style="width: {{ percentage_reached }}%">
+                    {%- if section.settings.dbtfy_cart_goal_icons != blank -%}
+                      <span class="cg-icon">
+                        <span class="{{ settings.icon }} icon-width text-secondary">{{ section.settings.dbtfy_cart_goal_icons }}</span>
+                      </span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+
+              <span class="cart_goal_amount_new hide">{{ country_goal }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if goal != blank -%}
+      <div class="dbtfy dbtfy-cart_goal"
+           data-goal-amount="{{ goal }}"
+           data-cart-total-amount="{{ cart_total }}"
+           data-cart-total-count="{{ cart.item_count }}"
+           data-before-amount-text="{{ section.settings.dbtfy_cart_goal_before_text }}"
+           data-after-amount-text="{{ section.settings.dbtfy_cart_goal_after_text }}"
+           data-goal-reached-text="{{ section.settings.dbtfy_cart_goal_reached_text }}"
+           data-goal-region="all">
+
+        <div class="cg-wrapper" {% if cart.item_count == 0 %}hidden{% endif %}>
+          <p class="cg-free-shipping-text text-center">
+            {%- if goal > cart_total -%}
+              <span>{{ section.settings.dbtfy_cart_goal_before_text }} <span class="cg-goal-amount text-money text-secondary"> </span> {{ section.settings.dbtfy_cart_goal_after_text }}</span>
+            {%- else -%}
+              <span>{{ section.settings.dbtfy_cart_goal_reached_text }}</span>
+            {%- endif -%}
+          </p>
+
+          <div class="cg-free-shipping-bar progress progress-rounded">
+            <div class="cg-progress-bar progress-bar" role="progressbar" style="width: {{ percentage_reached }}%">
+              {%- if section.settings.dbtfy_cart_goal_icons != blank -%}
+                <span class="cg-icon">
+                  <span class="{{ settings.icon }} icon-width text-secondary">{{ section.settings.dbtfy_cart_goal_icons }}</span>
+                </span>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <span class="cart_goal_amount_new hide">{{ goal }}</span>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+
+{% schema %}
+{
+  "name": "Cart Goal",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Help Center"
+    },
+    {
+      "type": "paragraph",
+      "content": "[Follow our step-by-step tutorial](https://help.debutify.com/en/articles/5054070-how-to-use-the-cart-goal-add-on-in-the-debutify-theme)"
+    },
+    {
+      "type": "paragraph",
+      "content": "To enable/disable this add-on, go to Theme settings > Debutify Add-ons."
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_goal_before_text",
+      "label": "Prefix",
+      "default": "You're"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_goal_amount",
+      "label": "Goal amount",
+      "info": "e.g. 70 or 70.99. Set up your free [shipping rates](\/admin\/settings\/shipping) matching the amount entered above",
+      "default": "70"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_goal_after_text",
+      "label": "Suffix",
+      "default": "away from FREE shipping!"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_goal_reached_text",
+      "label": "Goal reached",
+      "default": "You are eligible for FREE shipping!"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_goal_icons",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/material.io\/resources\/icons)",
+      "default": "local_shipping"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "goal",
+      "name": "Specific Country Goal",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Block name",
+          "info": "Used for internal identification"
+        },
+        {
+          "type": "header",
+          "content": "Country Goal 1"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_region_1",
+          "label": "Region",
+          "info": "Enter continent or country name, e.g: Europe or Germany."
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_amount_1",
+          "label": "Goal amount",
+          "default": "70",
+          "info": "e.g. 70 or 70.99. Set up your free [shipping rates](/admin/settings/shipping) matching the amount entered above"
+        },
+        {
+          "type": "header",
+          "content": "Country Goal 2"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_region_2",
+          "label": "Region",
+          "info": "Enter continent or country name, e.g: Europe or Germany."
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_amount_2",
+          "label": "Goal amount",
+          "default": "70",
+          "info": "e.g. 70 or 70.99. Set up your free [shipping rates](/admin/settings/shipping) matching the amount entered above"
+        },
+        {
+          "type": "header",
+          "content": "Country Goal 3"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_region_3",
+          "label": "Region",
+          "info": "Enter continent or country name, e.g: Europe or Germany."
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_amount_3",
+          "label": "Goal amount",
+          "default": "70",
+          "info": "e.g. 70 or 70.99. Set up your free [shipping rates](/admin/settings/shipping) matching the amount entered above"
+        },
+        {
+          "type": "header",
+          "content": "Country Goal 4"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_region_4",
+          "label": "Region",
+          "info": "Enter continent or country name, e.g: Europe or Germany."
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_amount_4",
+          "label": "Goal amount",
+          "default": "70",
+          "info": "e.g. 70 or 70.99. Set up your free [shipping rates](/admin/settings/shipping) matching the amount entered above"
+        },
+        {
+          "type": "header",
+          "content": "Country Goal 5"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_region_5",
+          "label": "Region",
+          "info": "Enter continent or country name, e.g: Europe or Germany."
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_amount_5",
+          "label": "Goal amount",
+          "default": "70",
+          "info": "e.g. 70 or 70.99. Set up your free [shipping rates](/admin/settings/shipping) matching the amount entered above"
+        },
+        {
+          "type": "header",
+          "content": "Country Goal 6"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_region_6",
+          "label": "Region",
+          "info": "Enter continent or country name, e.g: Europe or Germany."
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_amount_6",
+          "label": "Goal amount",
+          "default": "70",
+          "info": "e.g. 70 or 70.99. Set up your free [shipping rates](/admin/settings/shipping) matching the amount entered above"
+        },
+        {
+          "type": "header",
+          "content": "Country Goal 7"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_region_7",
+          "label": "Region",
+          "info": "Enter continent or country name, e.g: Europe or Germany."
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_amount_7",
+          "label": "Goal amount",
+          "default": "70",
+          "info": "e.g. 70 or 70.99. Set up your free [shipping rates](/admin/settings/shipping) matching the amount entered above"
+        },
+        {
+          "type": "header",
+          "content": "Country Goal 8"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_region_8",
+          "label": "Region",
+          "info": "Enter continent or country name, e.g: Europe or Germany."
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_amount_8",
+          "label": "Goal amount",
+          "default": "70",
+          "info": "e.g. 70 or 70.99. Set up your free [shipping rates](/admin/settings/shipping) matching the amount entered above"
+        },
+        {
+          "type": "header",
+          "content": "Country Goal 9"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_region_9",
+          "label": "Region",
+          "info": "Enter continent or country name, e.g: Europe or Germany."
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_amount_9",
+          "label": "Goal amount",
+          "default": "70",
+          "info": "e.g. 70 or 70.99. Set up your free [shipping rates](/admin/settings/shipping) matching the amount entered above"
+        },
+        {
+          "type": "header",
+          "content": "Country Goal 10"
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_region_10",
+          "label": "Region",
+          "info": "Enter continent or country name, e.g: Europe or Germany."
+        },
+        {
+          "type": "text",
+          "id": "dbtfy_cart_goal_amount_10",
+          "label": "Goal amount",
+          "default": "70",
+          "info": "e.g. 70 or 70.99. Set up your free [shipping rates](/admin/settings/shipping) matching the amount entered above"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

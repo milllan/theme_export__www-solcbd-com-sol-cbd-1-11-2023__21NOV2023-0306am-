@@ -1,0 +1,252 @@
+{%- if settings.dbtfy_color_swatches -%}
+  <style>
+    {% for block in section.blocks %}
+      {%- for i in (1..10) -%}
+        {%- capture index -%}{{ forloop.index }}{%- endcapture -%}
+        {%- capture title -%}title_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_swatches_color_value -%}dbtfy_swatches_color_value_{{index}}{%- endcapture -%}
+        {%- capture dbtfy_swatches_image -%}dbtfy_swatches_image_{{index}}{%- endcapture -%}
+
+        {%- assign color_name = block.settings[title] -%}
+        {%- assign color = block.settings[dbtfy_swatches_color_value] -%}
+        {%- assign image = block.settings[dbtfy_swatches_image] -%}
+        {%- assign apply_color_swatch_css = true -%}
+
+        {%- if color == blank and image == blank -%}
+         {%- assign apply_color_swatch_css = false -%}
+        {%- endif -%}
+
+        {% if apply_color_swatch_css %}
+          .product-option-color--{{ color_name | handleize }} {
+            {% if color != blank %} background-color: {{ color }}!important; {% endif %}
+            {% if image != blank %} background-image: url("{{ image | img_url: '50x' }}")!important; {% endif %}
+          }
+        {% endif %}
+      {%- endfor -%}
+    {%- endfor -%}
+  </style>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Color Swatches",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Help Center"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Follow our step-by-step tutorial](https://help.debutify.com/en/articles/5054086-how-to-add-color-swatches-in-the-debutify-theme)"
+      },
+      {
+        "type": "paragraph",
+        "content": "To enable/disable this add-on, go to Theme settings > Debutify Add-ons."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "swatch",
+        "name": "Color Swatch",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Block name",
+            "info": "Used for internal identification"
+          },
+          {
+            "type": "header",
+            "content": "Color swatch 1"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Color name"
+          },
+          {
+            "type": "color",
+            "id": "dbtfy_swatches_color_value_1",
+            "label": "Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_swatches_image_1",
+            "label": "Image to color"
+          },
+          {
+            "type": "header",
+            "content": "Color swatch 2"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Color name"
+          },
+          {
+            "type": "color",
+            "id": "dbtfy_swatches_color_value_2",
+            "label": "Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_swatches_image_2",
+            "label": "Image to color"
+          },
+          {
+            "type": "header",
+            "content": "Color swatch 3"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Color name"
+          },
+          {
+            "type": "color",
+            "id": "dbtfy_swatches_color_value_3",
+            "label": "Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_swatches_image_3",
+            "label": "Image to color"
+          },
+          {
+            "type": "header",
+            "content": "Color swatch 4"
+          },
+          {
+            "type": "text",
+            "id": "title_4",
+            "label": "Color name"
+          },
+          {
+            "type": "color",
+            "id": "dbtfy_swatches_color_value_4",
+            "label": "Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_swatches_image_4",
+            "label": "Image to color"
+          },
+          {
+            "type": "header",
+            "content": "Color swatch 5"
+          },
+          {
+            "type": "text",
+            "id": "title_5",
+            "label": "Color name"
+          },
+          {
+            "type": "color",
+            "id": "dbtfy_swatches_color_value_5",
+            "label": "Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_swatches_image_5",
+            "label": "Image to color"
+          },
+          {
+            "type": "header",
+            "content": "Color swatch 6"
+          },
+          {
+            "type": "text",
+            "id": "title_6",
+            "label": "Color name"
+          },
+          {
+            "type": "color",
+            "id": "dbtfy_swatches_color_value_6",
+            "label": "Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_swatches_image_6",
+            "label": "Image to color"
+          },
+          {
+            "type": "header",
+            "content": "Color swatch 7"
+          },
+          {
+            "type": "text",
+            "id": "title_7",
+            "label": "Color name"
+          },
+          {
+            "type": "color",
+            "id": "dbtfy_swatches_color_value_7",
+            "label": "Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_swatches_image_7",
+            "label": "Image to color"
+          },
+          {
+            "type": "header",
+            "content": "Color swatch 8"
+          },
+          {
+            "type": "text",
+            "id": "title_8",
+            "label": "Color name"
+          },
+          {
+            "type": "color",
+            "id": "dbtfy_swatches_color_value_8",
+            "label": "Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_swatches_image_8",
+            "label": "Image to color"
+          },
+          {
+            "type": "header",
+            "content": "Color swatch 9"
+          },
+          {
+            "type": "text",
+            "id": "title_9",
+            "label": "Color name"
+          },
+          {
+            "type": "color",
+            "id": "dbtfy_swatches_color_value_9",
+            "label": "Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_swatches_image_9",
+            "label": "Image to color"
+          },
+          {
+            "type": "header",
+            "content": "Color swatch 10"
+          },
+          {
+            "type": "text",
+            "id": "title_10",
+            "label": "Color name"
+          },
+          {
+            "type": "color",
+            "id": "dbtfy_swatches_color_value_10",
+            "label": "Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_swatches_image_10",
+            "label": "Image to color"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

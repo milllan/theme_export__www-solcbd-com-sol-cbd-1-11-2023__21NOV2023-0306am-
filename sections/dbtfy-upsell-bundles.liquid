@@ -1,0 +1,912 @@
+{%- if settings.dbtfy_upsell_bundles -%}
+  {%- liquid
+    assign limit = section.settings.dbtfy_upsell_bundles_limit
+    assign valid_bundle = false
+    assign specific_bundle = false
+    assign has_offer_1 = false
+    assign has_offer_2 = false
+    assign current_product = product
+    assign has_collection = true
+    assign grid_item_width = "large--four-twelfths medium--four-twelfths"
+
+    if section.settings.dbtfy_upsell_bundles_position == "button"
+      assign grid_column_images_width = "one-whole"
+      assign grid_column_total_width = "one-whole order-2 small-order-2"
+      assign grid_column_form_width = "one-whole order-1 small-order-1"
+    else
+      assign grid_column_images_width = "large--six-twelfths medium--seven-twelfths"
+      assign grid_column_total_width = "large--six-twelfths medium--five-twelfths small-order-2"
+      assign grid_column_form_width = "one-whole small-order-1"
+    endif
+
+    assign discount_name = section.settings.dbtfy_upsell_bundles_discount_code
+    assign discount_amount = section.settings.dbtfy_upsell_bundles_discount_amount
+    assign discount_type = section.settings.dbtfy_upsell_bundles_discount_type
+  -%}
+
+  {%- for block in section.blocks -%}
+    {%- for i in (1..10) -%}
+      {%- capture index -%}{{ forloop.index }}{%- endcapture -%}
+      {%- capture dbtfy_upsell_bundles_product_trigger -%}dbtfy_upsell_bundles_product_trigger_{{index}}{%- endcapture -%}
+      {%- capture dbtfy_upsell_bundles_product_offer_1 -%}dbtfy_upsell_bundles_product_offer_1_{{index}}{%- endcapture -%}
+      {%- capture dbtfy_upsell_bundles_product_offer_2 -%}dbtfy_upsell_bundles_product_offer_2_{{index}}{%- endcapture -%}
+      {%- capture dbtfy_upsell_bundles_discount_code -%}dbtfy_upsell_bundles_discount_code_{{index}}{%- endcapture -%}
+      {%- capture dbtfy_upsell_bundles_discount_amount -%}dbtfy_upsell_bundles_discount_amount_{{index}}{%- endcapture -%}
+      {%- capture dbtfy_upsell_bundles_discount_type -%}dbtfy_upsell_bundles_discount_type_{{index}}{%- endcapture -%}
+
+      {%- liquid
+        assign product_trigger = block.settings[dbtfy_upsell_bundles_product_trigger]
+
+        if product_trigger.handle == current_product.handle
+          assign offer_1 = blank
+          assign offer_2 = blank
+
+          if block.settings[dbtfy_upsell_bundles_product_offer_1] != blank
+            assign offer_1 = block.settings[dbtfy_upsell_bundles_product_offer_1]
+            assign has_offer_1 = true
+          endif
+
+          if block.settings[dbtfy_upsell_bundles_product_offer_2] != blank
+            assign offer_2 = block.settings[dbtfy_upsell_bundles_product_offer_2]
+            assign has_offer_2 = true
+          endif
+
+          if product_trigger.available
+            assign discount_name = block.settings[dbtfy_upsell_bundles_discount_code]
+            assign discount_amount = block.settings[dbtfy_upsell_bundles_discount_amount]
+            assign discount_type = block.settings[dbtfy_upsell_bundles_discount_type]
+            assign specific_bundle = true
+          endif
+        endif
+      -%}
+    {%- endfor -%}
+  {%- endfor -%}
+
+  {%- liquid
+    if current_product.collections == blank
+      assign has_collection = false
+    endif
+  -%}
+
+  {%- if section.settings.show_automatic_bundles or specific_bundle -%}
+    {%- if has_collection or specific_bundle -%}
+      <div hidden>
+        {%- render "dbtfy-upsell-bundles-grid" with current_product as product, type: "image", item: "first", grid_item_width: grid_item_width, index: 0 -%}
+        {%- render "dbtfy-upsell-bundles-grid" with current_product as product, type: "form", item: "first", index: 0 -%}
+      </div>
+    {%- endif -%}
+
+    <div class="dbtfy dbtfy-upsell_bundles {{ product_trigger }}">
+      <div id="UpsellBundles"
+          data-bundle-product-count="{{ limit }}"
+          data-product-id="{{ product.id }}"
+          data-section-id="{{ section.id }}"
+          data-discount-name="{{ discount_name }}"
+          data-discount-amount="{{ discount_amount }}"
+          data-discount-type="{{ discount_type }}"
+          data-section-type="bundle-recommendations"
+          data-limit="{{ limit }}"
+          data-position="{{ section.settings.dbtfy_upsell_bundles_position }}"
+          class="{{ section.settings.section_style }} ub-position-{{ section.settings.dbtfy_upsell_bundles_position }} {% if specific_bundle %}specific-upsell_bundles{% endif %}">
+
+        {%- if recommendations.performed or specific_bundle -%}
+          {%- if recommendations.products_count > 0 or specific_bundle -%}
+            <div class="box">
+              <div class="wrapper">
+
+                {%- unless section.settings.dbtfy_upsell_bundles_title == blank and section.settings.dbtfy_upsell_bundles_subtitle == blank -%}
+                  <div class="section-header">
+                    {%- unless section.settings.dbtfy_upsell_bundles_title == blank -%}
+                      <h2 class="section-header__title">{{ section.settings.dbtfy_upsell_bundles_title | escape }}</h2>
+                    {%- endunless -%}
+
+                    {%- unless section.settings.dbtfy_upsell_bundles_subtitle == blank -%}
+                      <p class="section-header__subtitle">{{ section.settings.dbtfy_upsell_bundles_subtitle | escape }}</p>
+                    {%- endunless -%}
+                  </div>
+                {%- endunless -%}
+
+              <div class="grid grid-spacer align-center">
+                <div class="grid__item {{ grid_column_images_width }}">
+                  <div class="grid grid-spacer image-wrapper-upsell_bundles align-center{% if section.settings.dbtfy_upsell_bundles_position == "button" %} grid-small{% endif %}">
+                    {%- liquid
+                      if specific_bundle
+                        if has_offer_1
+                          render "dbtfy-upsell-bundles-grid" with offer_1 as product, type: "image", grid_item_width: grid_item_width, index: 1
+                        endif
+
+                        if has_offer_2
+                          render "dbtfy-upsell-bundles-grid" with offer_2 as product, type: "image", grid_item_width: grid_item_width, index: 2
+                        endif
+                      else
+                        assign products_added = 0
+
+                        for product in recommendations.products
+                          if products_added != limit
+                            assign product_type = product.type | downcase
+
+                            if product_type != "insurance"
+                              if settings.dbtfy_gift_wrap
+                                unless product.id == gift_wrap_product_id
+                                  assign products_added = products_added | plus: 1
+                                  render "dbtfy-upsell-bundles-grid" with product as product, type: "image", grid_item_width: grid_item_width, index: forloop.index
+                                endunless
+                              else
+                                assign products_added = products_added | plus: 1
+                                render "dbtfy-upsell-bundles-grid" with product as product, type: "image", grid_item_width: grid_item_width, index: forloop.index
+                              endif
+                            endif
+                          endif
+                        endfor
+                      endif
+                    -%}
+                  </div>
+                </div>
+                <div class="grid__item {{ grid_column_total_width }}">
+                  <div class="total-wrapper-upsell_bundles dbtfy-discount_saved" data-discount-variant="{{ settings.sale_type }}">
+                    <div class="inline-flex flex-column align-center small--full">
+                      <div class="text-money flex align-center flex-wrap spacer-bottom">
+                        <div class="inline-flex flex-column align-center">
+                          <p class="spacer-bottom-none">{{ section.settings.dbtfy_upsell_bundles_total }}</p>
+                          <div class="dbtfy-ub-price-box flex align-center flex-wrap justify-center">
+                            <span class="total-upsell_bundles small-order-1 spacer-left-xs"></span>
+                            <span class="compare-total-upsell_bundles small-order-2 text-money text-muted text-strike spacer-left-xs"></span>
+                            {%- if settings.dbtfy_discount_saved -%}
+                              <span class="discount-upsell_bundles small-order-0 badge number-discount_saved badge spacer-left-xs">
+                                <span class="{{ settings.icon }}">local_offer</span>
+                                <span class="discount-upsell_bundles_text"></span>
+                              </span>
+                            {%- endif -%}
+                          </div>
+                        </div>
+                      </div>
+
+                      <button type="button" class="btn btn--primary btn-upsell_bundles">
+                        <span class="btn__text">
+                          {%- unless section.settings.dbtfy_upsell_bundles_icons == blank -%}
+                            <span class="{{ settings.icon }} icon-width">{{ section.settings.dbtfy_upsell_bundles_icons }}</span>
+                          {% endunless %}
+
+                          {{ section.settings.dbtfy_upsell_bundles_cart }}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="grid__item {{ grid_column_form_width }}">
+                  <div class="form-wrapper-upsell_bundles">
+                    {%- liquid
+                      if specific_bundle
+                        if has_offer_1
+                          render "dbtfy-upsell-bundles-grid" with offer_1 as product, type: "form", index: 1
+                        endif
+
+                        if has_offer_2
+                          render "dbtfy-upsell-bundles-grid" with offer_2 as product, type: "form", index: 2
+                        endif
+                      else
+                        assign products_added = 0
+
+                        for product in recommendations.products
+                          if products_added != limit
+                            assign product_type = product.type | downcase
+
+                            if product_type != "insurance"
+                              assign products_added = products_added | plus: 1
+                              render "dbtfy-upsell-bundles-grid" with product as product, type: "form", index: forloop.index
+                            endif
+                          endif
+                        endfor
+                      endif
+                    -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Upsell Bundles",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Help Center"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Follow our step-by-step tutorial](https://help.debutify.com/en/articles/5054282-how-to-enable-the-upsell-bundles-add-on-in-the-debutify-theme)"
+      },
+      {
+        "type": "paragraph",
+        "content": "To enable/disable this add-on, go to Theme settings > Debutify Add-ons."
+      },
+      {
+        "type": "paragraph",
+        "content": "* Create at least 1 collection to show dynamic recommendations or use custom bundles below"
+      },
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_bundles_title",
+        "label": "Heading",
+        "default": "Frequently bought together"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_bundles_subtitle",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_bundles_total",
+        "label": "Total price:",
+        "default": "Total price:"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_bundles_cart",
+        "label": "Button label",
+        "default": "Add selected items"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_bundles_icons",
+        "label": "Button icon",
+        "default": "library_add_check",
+        "info": "[View all available icons](https:\/\/material.io\/resources\/icons)"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_bundles_current",
+        "label": "This item:",
+        "default": "This item:"
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "Section style",
+        "default": "section-border",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "Blank background"
+          },
+          {
+            "value": "section-default",
+            "label": "Blank background"
+          },
+          {
+            "value": "section-border",
+            "label": "Border top"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Bundle settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_upsell_bundles_reviews",
+        "label": "Show star rating",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_automatic_bundles",
+        "label": "Enable automatic bundles",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_upsell_bundles_limit",
+        "label": "Products upsell",
+		    "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_upsell_bundles_position",
+        "label": "Position",
+		    "default": "product",
+        "options": [
+          {
+            "value": "product",
+            "label": "Under product section"
+          },
+          {
+            "value": "button",
+            "label": "Under add-to-cart button"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Discount code",
+        "info": "[Create a discount code](\/admin\/discounts\/new)"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_bundles_discount_code",
+        "label": "Name",
+        "placeholder": "20OFF"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_upsell_bundles_discount_amount",
+        "label": "Amount",
+        "placeholder": "20"
+      },
+      {
+        "type": "radio",
+        "id": "dbtfy_upsell_bundles_discount_type",
+        "label": "Type",
+        "default": "%",
+        "options": [
+          {
+            "value": "%",
+            "label": "Percentage"
+          },
+          {
+            "value": "$",
+            "label": "Fixed amount"
+          }
+        ]
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "bundle",
+        "name": "Custom Bundles",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Block name",
+            "info": "Used for internal identification"
+          },
+          {
+            "type": "header",
+            "content": "Bundle 1"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_trigger_1",
+            "label": "Product trigger"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_1_1",
+            "label": "Product offer"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_2_1",
+            "label": "Product offer"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](\/admin\/discounts\/new)"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_code_1",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_amount_1",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "dbtfy_upsell_bundles_discount_type_1",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Bundle 2"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_trigger_2",
+            "label": "Product trigger"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_1_2",
+            "label": "Product offer"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_2_2",
+            "label": "Product offer"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](\/admin\/discounts\/new)"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_code_2",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_amount_2",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "dbtfy_upsell_bundles_discount_type_2",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Bundle 3"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_trigger_3",
+            "label": "Product trigger"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_1_3",
+            "label": "Product offer"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_2_3",
+            "label": "Product offer"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](\/admin\/discounts\/new)"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_code_3",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_amount_3",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "dbtfy_upsell_bundles_discount_type_3",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Bundle 4"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_trigger_4",
+            "label": "Product trigger"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_1_4",
+            "label": "Product offer"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_2_4",
+            "label": "Product offer"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](\/admin\/discounts\/new)"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_code_4",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_amount_4",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "dbtfy_upsell_bundles_discount_type_4",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Bundle 5"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_trigger_5",
+            "label": "Product trigger"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_1_5",
+            "label": "Product offer"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_2_5",
+            "label": "Product offer"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](\/admin\/discounts\/new)"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_code_5",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_amount_5",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "dbtfy_upsell_bundles_discount_type_5",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Bundle 6"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_trigger_6",
+            "label": "Product trigger"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_1_6",
+            "label": "Product offer"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_2_6",
+            "label": "Product offer"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](\/admin\/discounts\/new)"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_code_6",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_amount_6",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "dbtfy_upsell_bundles_discount_type_6",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Bundle 7"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_trigger_7",
+            "label": "Product trigger"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_1_7",
+            "label": "Product offer"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_2_7",
+            "label": "Product offer"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](\/admin\/discounts\/new)"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_code_7",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_amount_7",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "dbtfy_upsell_bundles_discount_type_7",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Bundle 8"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_trigger_8",
+            "label": "Product trigger"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_1_8",
+            "label": "Product offer"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_2_8",
+            "label": "Product offer"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](\/admin\/discounts\/new)"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_code_8",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_amount_8",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "dbtfy_upsell_bundles_discount_type_8",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Bundle 9"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_trigger_9",
+            "label": "Product trigger"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_1_9",
+            "label": "Product offer"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_2_9",
+            "label": "Product offer"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](\/admin\/discounts\/new)"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_code_9",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_amount_9",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "dbtfy_upsell_bundles_discount_type_9",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Bundle 10"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_trigger_10",
+            "label": "Product trigger"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_1_10",
+            "label": "Product offer"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_upsell_bundles_product_offer_2_10",
+            "label": "Product offer"
+          },
+          {
+            "type": "header",
+            "content": "Discount code",
+            "info": "[Create a discount code](\/admin\/discounts\/new)"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_code_10",
+            "label": "Name",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_upsell_bundles_discount_amount_10",
+            "label": "Amount",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "dbtfy_upsell_bundles_discount_type_10",
+            "label": "Type",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "Percentage"
+              },
+              {
+                "value": "$",
+                "label": "Fixed amount"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+

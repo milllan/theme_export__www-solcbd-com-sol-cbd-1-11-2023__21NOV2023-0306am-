@@ -1,0 +1,343 @@
+<div class="dbtfy-product_swatches"
+     data-show-in-product-grid="{{ section.settings.dbtfy_product_swatches_show_in_grid }}"
+     hidden>
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'product' -%}
+
+      {%- for i in (1..10) -%}
+        {%- capture index %}{{ forloop.index }}{% endcapture -%}
+        {%- capture product_selector %}product_{{index}}{% endcapture -%}
+        {%- capture option_name_selector %}option_name_{{index}}{% endcapture -%}
+
+        {%- assign product = block.settings[product_selector] -%}
+        {%- assign option_name = block.settings[option_name_selector] -%}
+
+        {%- if product != blank -%}
+          {%- if template contains 'customers/login' or template contains 'customers/activate_account' or template contains 'customers/reset_password' -%}
+            {%- assign product_handle = product -%}
+            {%- assign current_product = all_products[product_handle] -%}
+          {%- else -%}
+            {%- assign current_product = product -%}
+          {%- endif -%}
+
+          {%- assign list_products_and_groups = list_products_and_groups | append: ',' | append: current_product.handle -%}
+          {%- assign current_option_title = blank -%}
+
+          {%- if option_name != blank -%}
+            {%- assign current_option_title = option_name -%}
+          {%- else -%}
+            {%- assign current_option_title = current_product.title -%}
+          {%- endif -%}
+
+          {%- assign list_products_option_title = list_products_option_title | append: ',' | append: current_option_title -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if block.type == "group" -%}
+      {%- unless forloop.first or forloop.last -%}
+        {%- assign list_products_and_groups = list_products_and_groups | append: '::' -%}
+        {%- assign list_products_option_title = list_products_option_title | append: '::' -%}
+      {%- endunless -%}
+
+      {%- if block.settings.variant_title != blank -%}
+        {%- assign list_groups = list_groups | append: ',' | append: block.settings.variant_title -%}
+      {%- else -%}
+        {%- assign list_groups = list_groups | append: ',' | append: "_blank" -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- assign groups_array = list_groups | remove_first: ',' | strip | split: ',' -%}
+  {%- assign separate_groups_with_products_array = list_products_and_groups | strip | split: '::' -%}
+  {%- assign separate_groups_with_product_option_titles_array = list_products_option_title | strip | split: '::' -%}
+
+  {%- for group in groups_array -%}
+    {%- assign array_of_products = separate_groups_with_products_array[forloop.index0] | remove_first: ',' | strip | split: ',' -%}
+    {%- assign array_of_options_titles = separate_groups_with_product_option_titles_array[forloop.index0] | remove_first: ',' | strip | split: ',' -%}
+
+    {%- if array_of_products.size >= 1 -%}
+      <div class="ps-group">
+        {%- if group != "_blank" -%}
+          <label>
+            {{ group }}:
+            <span class="variant-label-option-value"></span>
+          </label>
+        {%- endif -%}
+
+        <ul>
+          {%- assign visible_product_handles = "" -%}
+
+          {%- for product_handle in array_of_products -%}
+            {%- assign visible_product_handles_array = visible_product_handles | split: "," -%}
+
+            {%- if visible_product_handles_array contains product_handle -%}
+              {%- continue -%}
+            {%- else -%}
+              {%- assign visible_product_handles = visible_product_handles | append: product_handle | append: "," -%}
+            {%- endif -%}
+
+            {%- assign linked_product = blank -%}
+
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'product' -%}
+                {%- for i in (1..10) -%}
+                  {%- capture index %}{{ forloop.index }}{% endcapture -%}
+                  {%- capture product_selector %}product_{{index}}{% endcapture -%}
+                  {%- capture option_name_selector %}option_name_{{index}}{% endcapture -%}
+
+                  {%- assign product = block.settings[product_selector] -%}
+
+                  {%- if product != blank -%}
+                    {%- assign block_product_handle = product -%}
+
+                    {%- if block_product_handle == product_handle -%}
+                      {%- if template contains 'customers/login' or template contains 'customers/activate_account' or template contains 'customers/reset_password' -%}
+                        {%- assign linked_product = all_products[block_product_handle] -%}
+                      {%- else -%}
+                        {%- assign linked_product = product -%}
+                      {%- endif -%}
+
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            <li data-product-id="{{ linked_product.id }}" data-product-option="{{ array_of_options_titles[forloop.index0] }}">
+              <a href="{{ linked_product.url }}">
+                {%- assign image = linked_product.media.first.preview_image -%}
+
+                {%- if image != blank -%}
+                  <img alt="{{ linked_product.title }}" class="lazyload hs-lazyload hs-id-44432add" data-src="{{ image | img_url: '150x' }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+                {%- else -%}
+                  {{ "product-1" | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </a>
+
+              <div class="tooltip spacer-bottom text-center" data-w="{{ array_of_options_titles[forloop.index0] }}">{{ array_of_options_titles[forloop.index0] }}</div>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Product Swatches",
+  "class": "dbtfy-product-swatches-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Help Center"
+    },
+    {
+      "type": "paragraph",
+      "content": "[Follow our step-by-step tutorial](https://help.debutify.com/en/articles/5472573-how-to-enable-the-product-swatches-add-on-in-the-debutify-theme)"
+    },
+    {
+      "type": "paragraph",
+      "content": "To enable/disable this add-on, go to Theme settings > Debutify Add-ons."
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_product_swatches_show_in_grid",
+      "label": "Show in product grid",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "group",
+      "name": "Group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Block name",
+          "info": "Used for internal identification"
+        },
+        {
+          "type": "text",
+          "id": "group_name",
+          "label": "Group name"
+        },
+        {
+          "type": "text",
+          "id": "variant_title",
+          "label": "Variant name"
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Block name",
+          "info": "Used for internal identification"
+        },
+        {
+          "type": "header",
+          "content": "Product 1"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "option_name_1",
+          "label": "Option name",
+          "info": "If the field is empty, the product name will be used"
+        },
+       {
+          "type": "header",
+          "content": "Product 2"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "option_name_2",
+          "label": "Option name",
+          "info": "If the field is empty, the product name will be used"
+        },
+        {
+          "type": "header",
+          "content": "Product 3"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "option_name_3",
+          "label": "Option name",
+          "info": "If the field is empty, the product name will be used"
+        },
+        {
+          "type": "header",
+          "content": "Product 4"
+        },
+        {
+          "type": "product",
+          "id": "product_4",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "option_name_4",
+          "label": "Option name",
+          "info": "If the field is empty, the product name will be used"
+        },
+        {
+          "type": "header",
+          "content": "Product 5"
+        },
+        {
+          "type": "product",
+          "id": "product_5",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "option_name_5",
+          "label": "Option name",
+          "info": "If the field is empty, the product name will be used"
+        },
+        {
+          "type": "header",
+          "content": "Product 6"
+        },
+        {
+          "type": "product",
+          "id": "product_6",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "option_name_6",
+          "label": "Option name",
+          "info": "If the field is empty, the product name will be used"
+        },
+        {
+          "type": "header",
+          "content": "Product 7"
+        },
+        {
+          "type": "product",
+          "id": "product_7",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "option_name_7",
+          "label": "Option name",
+          "info": "If the field is empty, the product name will be used"
+        },
+        {
+          "type": "header",
+          "content": "Product 8"
+        },
+        {
+          "type": "product",
+          "id": "product_8",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "option_name_8",
+          "label": "Option name",
+          "info": "If the field is empty, the product name will be used"
+        },
+        {
+          "type": "header",
+          "content": "Product 9"
+        },
+        {
+          "type": "product",
+          "id": "product_9",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "option_name_9",
+          "label": "Option name",
+          "info": "If the field is empty, the product name will be used"
+        },
+        {
+          "type": "header",
+          "content": "Product 10"
+        },
+        {
+          "type": "product",
+          "id": "product_10",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "option_name_10",
+          "label": "Option name",
+          "info": "If the field is empty, the product name will be used"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

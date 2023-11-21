@@ -1,0 +1,293 @@
+{%- capture column_width -%}
+  {%- render 'block-width' -%}
+{%- endcapture -%}
+
+{%- if section.blocks.size > 0 -%}
+<div id="section-{{ section.id }}" class="{% unless section.settings.show_on_desktop %} medium--hide large--hide{% endunless %} {% unless section.settings.show_on_mobile %} small--hide{% endunless %} {{ section.settings.section_style }}" data-section-id="{{ section.id }}" data-section-type="quotes-section">
+  <div class="box">
+    <div class="wrapper">
+      {%- unless section.settings.title == blank and section.settings.subtitle == blank -%}
+        <div class="grid">
+        <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+          <div class="section-header">
+            {%- unless section.settings.title == blank -%}
+            <h2 class="section-header__title">{{ section.settings.title | escape }}</h2>
+            {%- endunless -%}
+            {%- unless section.settings.subtitle == blank -%}
+            <p class="section-header__subtitle">{{ section.settings.subtitle | escape }}</p>
+            {%- endunless -%}
+          </div>
+        </div>
+      </div>
+      {%- endunless -%}
+
+      <style>
+        .quote-icon-wrapper{
+          width: {{ section.settings.quote_width }}px;
+          height: {{ section.settings.quote_width }}px;
+        }
+      </style>
+
+      <div id="Quotes-{{ section.id }}"
+          class="grid {% if section.blocks.size > 1 %}slick slick-quotes{% endif %}"
+          data-count="{{ section.blocks.size }}"
+          data-arrows="{{ section.settings.arrows }}"
+          data-dots="{{ section.settings.dots }}"
+          data-autoplay="{{ section.settings.autoplay }}"
+          data-autoplayspeed="{{ section.settings.autoplayspeed | times: 1000 }}"
+          data-slidetoshow="3">
+
+          {%- capture column_width -%}
+            {%- render 'block-width' -%}
+          {%- endcapture -%}
+
+        <!-- Blocks -->
+        {%- for block in section.blocks -%}
+        <div class="grid__item flex {{ column_width }} quotes-{{ block.id }}" 
+          {{ block.shopify_attributes }}>
+          <div class="card text-center">
+            <div class="card-header">
+              {%- if block.settings.quote_image -%}
+              <img class="quote-image spacer-x-auto imgset lazyload"
+              {%- render 'lazysizes', img: block.settings.quote_image, img_type: 'retina', img_width: section.settings.quote_width, img_height: section.settings.quote_width, crop: 'center' -%}
+              alt="{{ block.settings.quote_image.alt }}">
+              {%- else -%}
+              <div class="quote-icon-wrapper flex align-center justify-center spacer-x-auto">
+                <span class="{{ settings.icon }} quote-icon icon-lg" aria-hidden="true">{{ block.settings.icon }}</span>
+              </div>
+              {%- endif -%}
+            </div>
+            <div class="card-body card-body-lg {{ block.settings.text_alignment }} small--{{ block.settings.text_alignment_mobile }}">
+              {%- if block.settings.quote != blank -%}
+              <div class="rte">{{ block.settings.quote }}</div>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.author != blank -%}
+            <div class="card-footer card-footer-xs">
+              <cite>{{ block.settings.author | escape }}</cite>
+            </div>
+            {%- endif -%}
+          </div>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "t:sections.quotes.name",
+    "class": "quotes-section",
+    "max_blocks": 9,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_on_desktop",
+        "label": "t:sections.quotes.settings.show_on_desktop.label",
+        "default": true
+      },
+       {
+        "type": "checkbox",
+        "id": "show_on_mobile",
+        "label": "t:sections.quotes.settings.show_on_mobile.label",
+        "default": true
+      },
+	    {
+        "type": "text",
+        "id": "title",
+        "label": "t:sections.quotes.settings.title.label",
+        "default": "Testimonials"
+      },
+	    {
+        "type": "text",
+        "id": "subtitle",
+        "label": "t:sections.quotes.settings.subtitle.label"
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "t:sections.quotes.settings.section_style.label",
+        "default": "section-blank",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "t:sections.quotes.settings.section_style.option__1.label"
+          },
+		      {
+            "value": "section-default",
+            "label": "t:sections.quotes.settings.section_style.option__2.label"
+          },
+          {
+            "value": "section-border",
+            "label": "t:sections.quotes.settings.section_style.option__3.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "quote_width",
+        "label": "t:sections.quotes.settings.quote_width.label",
+        "default": "60",
+        "options": [
+          {
+            "label": "t:sections.quotes.settings.quote_width.option__1.label",
+            "value": "50"
+          },
+          {
+            "label": "t:sections.quotes.settings.quote_width.option__2.label",
+            "value": "60"
+          },
+          {
+            "label": "t:sections.quotes.settings.quote_width.option__3.label",
+            "value": "70"
+          },
+          {
+            "label": "t:sections.quotes.settings.quote_width.option__4.label",
+            "value": "80"
+          },
+          {
+            "label": "t:sections.quotes.settings.quote_width.option__5.label",
+            "value": "90"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.quotes.settings.header__1.content"
+      },
+	    {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "t:sections.quotes.settings.arrows.label",
+        "default": true
+      },
+	    {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "t:sections.quotes.settings.dots.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "t:sections.quotes.settings.autoplay.label",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "autoplayspeed",
+        "label": "t:sections.quotes.settings.autoplayspeed.label",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "unit": "s",
+        "default": 5
+      }
+	  ],
+	  "blocks" : [
+	    {
+        "type": "quote",
+        "name": "t:sections.quotes.blocks.quote.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.quotes.blocks.quote.settings.title.label",
+            "info": "t:sections.quotes.blocks.quote.settings.title.info"
+          },
+		      {
+            "type": "image_picker",
+            "id": "quote_image",
+            "label": "t:sections.quotes.blocks.quote.settings.quote_image.label"
+          },
+          {
+            "type": "text",
+            "id": "icon",
+            "label": "t:sections.quotes.blocks.quote.settings.icon.label",
+			      "default": "format_quote",
+			      "info": "t:sections.quotes.blocks.quote.settings.icon.info"
+          },
+          {
+            "type": "richtext",
+            "id": "quote",
+            "label": "t:sections.quotes.blocks.quote.settings.quote.label",
+            "default":"<p>Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.</p>"
+          },
+		      {
+            "type": "text",
+            "id": "author",
+            "label": "t:sections.quotes.blocks.quote.settings.author.label",
+            "default":"Author's name"
+          },
+          {
+            "type": "select",
+            "id": "text_alignment",
+            "label": "t:sections.quotes.blocks.quote.settings.text_alignment.label",
+            "default": "text-center",
+            "options": [
+              {
+                "value": "text-left",
+                "label": "t:sections.quotes.blocks.quote.settings.text_alignment.options__1.label"
+              },
+              {
+                "value": "text-center",
+                "label": "t:sections.quotes.blocks.quote.settings.text_alignment.options__2.label"
+              },
+              {
+                "value": "text-right",
+                "label": "t:sections.quotes.blocks.quote.settings.text_alignment.options__3.label"
+              },
+              {
+                "value": "text-justify",
+                "label": "t:sections.quotes.blocks.quote.settings.text_alignment.options__4.label"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_alignment_mobile",
+            "label": "t:sections.quotes.blocks.quote.settings.text_alignment_mobile.label",
+            "default": "text-center",
+            "options": [
+              {
+                "value": "text-left",
+                "label": "t:sections.quotes.blocks.quote.settings.text_alignment_mobile.options__1.label"
+              },
+              {
+                "value": "text-center",
+                "label": "t:sections.quotes.blocks.quote.settings.text_alignment_mobile.options__2.label"
+              },
+              {
+                "value": "text-right",
+                "label": "t:sections.quotes.blocks.quote.settings.text_alignment_mobile.options__3.label"
+              },
+              {
+                "value": "text-justify",
+                "label": "t:sections.quotes.blocks.quote.settings.text_alignment_mobile.options__4.label"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+	  "presets": [
+      {
+        "name": "t:sections.quotes.presets.name",
+        "category": "t:sections.quotes.presets.category",
+		    "blocks": [
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

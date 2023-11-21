@@ -1,0 +1,94 @@
+
+    {%-liquid
+      assign gpTemplateSuffix = template.suffix
+      assign arrSplitSuffix = gpTemplateSuffix | split: "-"
+      if gpTemplateSuffix contains "gem-" and gpTemplateSuffix contains "-template" and arrSplitSuffix.size == 3
+        assign isV6GpTemplate = true
+      endif
+      if gpTemplateSuffix contains "gp-template-" and arrSplitSuffix.size == 3
+        assign isV7GpTemplate = true
+      endif
+      assign gpShopMeta = shop.metafields.GEMPAGES
+      if gpShopMeta and gpShopMeta['product-default'] and request.page_type == 'product'
+        assign isV7GpTemplate = true
+      endif
+      if gpShopMeta and gpShopMeta['index-default'] and request.page_type == 'index'
+        assign isV7GpTemplate = true
+      endif
+       if gpShopMeta and gpShopMeta['collection-default'] and request.page_type == 'collection'
+        assign isV7GpTemplate = true
+      endif
+      if isPreview
+       assign isV7GpTemplate = true
+      endif
+    %}
+
+    {% if isV7GpTemplate or isThemeSection %}
+      
+        <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-lazyload.v2.js" async></script>
+        <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-global.js" defer></script>
+        
+      {{ 'gp-global.css' | asset_url | stylesheet_tag }}
+      {{ 'gp-style.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    {% if isV7GpTemplate %}
+      {%-liquid
+        if request.page_type == 'page'
+          assign GEMPAGES = page.metafields.GEMPAGES
+        elsif request.page_type == 'product'
+          assign GEMPAGES = product.metafields.GEMPAGES
+        elsif request.page_type == 'index'
+          assign GEMPAGES = shop.metafields.GEMPAGES
+        elsif request.page_type == 'collection'
+          assign GEMPAGES = collection.metafields.GEMPAGES
+        elsif request.page_type == 'article'
+          assign GEMPAGES = article.metafields.GEMPAGES
+        elsif request.page_type == 'blog'
+          assign GEMPAGES = blog.metafields.GEMPAGES
+        endif
+      %}
+      {% if GEMPAGES and GEMPAGES['title'] %}
+        {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta property="og:title" content="{{ GEMPAGES['title'] }}" />
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+      {% endif %}
+      {% if GEMPAGES and GEMPAGES['description'] %}
+        {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta property="og:description" content="{{ GEMPAGES['description'] }}" />
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+      {% endif %}
+      {% if GEMPAGES and GEMPAGES['thumbnail'] %}
+        {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta property="og:image" content="{{ GEMPAGES['thumbnail'] }}" />
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+        <meta property="og:image:alt" content="{{ page_title }}" />
+        {% if GEMPAGES and GEMPAGES['thumbnail_width'] %}
+          {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta property="og:image:width" content="{{ GEMPAGES['thumbnail_width'] }}" />
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+        {% endif %}
+        {% if GEMPAGES and GEMPAGES['thumbnail_height'] %}
+          {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta property="og:image:width" content="{{ GEMPAGES['thumbnail_height'] }}" />
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+
+    {% if isV6GpTemplate or isV7GpTemplate %}
+      {% assign isGpTemplate = true %}
+      {% render 'gp-rich-snippets', GEMPAGES: GEMPAGES, isGpTemplate: isGpTemplate %}
+      {% render 'gp-header-custom-code', GEMPAGES: GEMPAGES, isGpTemplate: isGpTemplate %}
+    {% endif %}
+  

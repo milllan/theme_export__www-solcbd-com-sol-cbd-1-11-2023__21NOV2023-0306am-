@@ -1,0 +1,572 @@
+{%- liquid
+  if section.blocks.size > 1
+    assign hero_slick = true
+  else
+    assign hero_slick = false
+  endif
+-%}
+
+<div id="section-{{ section.id }}"
+     class="{% unless section.settings.show_on_desktop %} medium--hide large--hide{% endunless %}{% unless section.settings.show_on_mobile %} small--hide{% endunless %}"
+     data-section-id="{{ section.id }}"
+     data-section-type="hero-section">
+
+  {%- if section.blocks.size > 0 -%}
+    <div id="Hero-{{ section.id }}" class="hero-container hero-index {% if hero_slick %}slick slick-hero{% endif %}"
+        data-arrows="{{ section.settings.arrows }}"
+        data-dots="{{ section.settings.dots }}"
+        data-autoplay="{{ section.settings.autoplay }}"
+        data-autoplayspeed="{{ section.settings.autoplayspeed | times: 1000 }}"
+        data-fade="true">
+
+      <!-- Blocks -->
+      {%- for block in section.blocks -%}
+        <div class="hero hero-{{ block.id }}
+            hero--{{ section.settings.section_height }} hero-mobile-{{ section.settings.section_height_mobile }}
+            {{ block.settings.text_position }} small--{{ block.settings.text_position_mobile }}
+            {{ block.settings.text_alignment }} small--{{ block.settings.text_alignment_mobile }}
+            {% if block.settings.overlay %}overlay{% endif %}
+            {% if hero_slick %}hero__slide{% endif %}
+            media-wrapper"
+            {{ block.shopify_attributes }}>
+
+          {%- if block.settings.image != blank -%}
+            <div class="hero-image hero-image-{{ block.id }} media bgset lazyload"
+                {%- render 'lazysizes', img: block.settings.image, img_mobile: block.settings.image_mobile, img_type: 'background' -%}>
+            </div>
+          {%- elsif block.settings.video != blank -%}
+            {%- assign video_extension = block.settings.video | split: '.' | last -%}
+
+            <video class="hero-video hero-video-{{ block.id }} media lazyload" src="{{ block.settings.video }}" loop muted no-controls autoplay playsinline preload="true">
+              <source type="video/{{ video_extension }}" src="{{ block.settings.video }}">
+            </video>
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'media placeholder-svg lazyload' }}
+          {%- endif -%}
+
+          <div class="hero__inner media-content">
+            <div class="hero__text-wrapper">
+              <div class="hero-content">
+                {%- if block.settings.heading_text != blank -%}
+                  <div class="page-title-wrapper">
+                    <h2 class="hero__title page-title h1">{{ block.settings.heading_text | escape }}</h2>
+                  </div>
+                {%- endif -%}
+
+                {%- if block.settings.text != blank -%}
+                  <div class="rte hero__text">{{ block.settings.text }}</div>
+                {%- endif -%}
+
+                {%- if block.settings.slide_link == blank -%}
+                  {%- if block.settings.button_label != blank or block.settings.button_label_2 != blank -%}
+                    <div class="hero__cta">
+                      <div class="inline-list">
+                        {%- if block.settings.button_label != blank -%}
+                          <a href="{{ block.settings.button_link }}" class="btn {{ block.settings.button_style }} hero__btn">
+                            {{ block.settings.button_label | escape }}
+                          </a>
+                        {%- endif -%}
+
+                        {%- if block.settings.button_label_2 != blank -%}
+                          <a href="{{ block.settings.button_link_2 }}" class="btn {{ block.settings.button_style_2 }} hero__btn">
+                            {{ block.settings.button_label_2 | escape }}
+                          </a>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+
+          {%- if block.settings.slide_link != blank -%}
+            <a class="slide-link" href="{{ block.settings.slide_link }}"></a>
+          {%- endif -%}
+
+          {%- if block.settings.image -%}
+            <style>
+              .hero-image-{{ block.id }} {
+                background-position: {{ block.settings.image_position }};
+              }
+
+              .mobile-view .hero-image-{{ block.id }} {
+                background-position: {{ block.settings.image_position_mobile }};
+              }
+            </style>
+          {%- endif -%}
+
+          {%- if block.settings.enable_custom_fonts -%}
+            {%- liquid
+              assign slideshow_family = block.settings.slideshow_family
+              assign slideshow_font_stack = slideshow_family.family | append: ", " | append: slideshow_family.fallback_families
+              assign slideshow_font_weight = slideshow_family.weight
+              assign slideshow_font_style = slideshow_family.style
+            -%}
+
+            <link rel="preload" as="font" href="{{ slideshow_family | font_url }}" type="font/woff2" crossorigin>
+
+            <style>
+              {{ slideshow_family | font_face: font_display: "swap" }}
+
+              .hero-{{ block.id }} .hero__title.h1 {
+                font-family: {{ slideshow_font_stack }};
+                font-weight: {{ slideshow_font_weight }};
+                font-style: {{ slideshow_font_style }};
+              }
+            </style>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    {%- render 'no-blocks' -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.hero.name",
+	  "class": "hero-section",
+	  "max_blocks": 4,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_on_desktop",
+        "label": "t:sections.hero.settings.show_on_desktop.label",
+        "default": true
+      },
+       {
+        "type": "checkbox",
+        "id": "show_on_mobile",
+        "label": "t:sections.hero.settings.show_on_mobile.label",
+        "default": true
+      },
+	    {
+        "type": "select",
+        "id": "section_height",
+        "label": "t:sections.hero.settings.section_height.label",
+        "default": "xlarge",
+        "options": [
+          {
+            "label": "t:sections.hero.settings.section_height.options__1.label",
+            "value": "xsmall"
+          },
+          {
+            "label": "t:sections.hero.settings.section_height.options__2.label",
+            "value": "small"
+          },
+          {
+            "label": "t:sections.hero.settings.section_height.options__3.label",
+            "value": "medium"
+          },
+          {
+            "label": "t:sections.hero.settings.section_height.options__4.label",
+            "value": "large"
+          },
+          {
+            "label": "t:sections.hero.settings.section_height.options__5.label",
+            "value": "xlarge"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "section_height_mobile",
+        "label": "t:sections.hero.settings.section_height_mobile.label",
+        "default": "xlarge",
+        "options": [
+          {
+            "label": "t:sections.hero.settings.section_height_mobile.options__1.label",
+            "value": "xsmall"
+          },
+          {
+            "label": "t:sections.hero.settings.section_height_mobile.options__2.label",
+            "value": "small"
+          },
+          {
+            "label": "t:sections.hero.settings.section_height_mobile.options__3.label",
+            "value": "medium"
+          },
+          {
+            "label": "t:sections.hero.settings.section_height_mobile.options__4.label",
+            "value": "large"
+          },
+          {
+            "label": "t:sections.hero.settings.section_height_mobile.options__5.label",
+            "value": "xlarge"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.hero.settings.header__1.content"
+      },
+      {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "t:sections.hero.settings.arrows.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "t:sections.hero.settings.dots.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "t:sections.hero.settings.autoplay.label",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "autoplayspeed",
+        "label": "t:sections.hero.settings.autoplayspeed.label",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "unit": "s",
+        "default": 8
+      }
+    ],
+	  "blocks" : [
+      {
+        "type": "slide",
+        "name": "t:sections.hero.blocks.slide.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.hero.blocks.slide.settings.title.label",
+            "info": "t:sections.hero.blocks.slide.settings.title.info"
+          },
+		      {
+            "type": "header",
+            "content": "t:sections.hero.blocks.slide.settings.header__1.content",
+            "info": "t:sections.hero.blocks.slide.settings.header__1.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "overlay",
+            "label": "t:sections.hero.blocks.slide.settings.overlay.label",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.hero.blocks.slide.settings.image.label",
+            "info": "t:sections.hero.blocks.slide.settings.image.info"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "t:sections.hero.blocks.slide.settings.image_mobile.label",
+            "info": "t:sections.hero.blocks.slide.settings.image_mobile.info"
+          },
+          {
+            "type": "select",
+            "id": "image_position",
+            "label": "t:sections.hero.blocks.slide.settings.image_position.label",
+            "default": "center center",
+            "options": [
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position.options__1.label",
+                "value": "top left"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position.options__2.label",
+                "value": "top center"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position.options__3.label",
+                "value": "top right"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position.options__4.label",
+                "value": "center left"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position.options__5.label",
+                "value": "center center"
+              },
+              {
+                "label":"t:sections.hero.blocks.slide.settings.image_position.options__6.label",
+                "value": "center right"
+              },
+              {
+                "label":"t:sections.hero.blocks.slide.settings.image_position.options__7.label",
+                "value": "bottom left"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position.options__8.label",
+                "value": "bottom center"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position.options__9.label",
+                "value": "bottom right"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "image_position_mobile",
+            "label": "t:sections.hero.blocks.slide.settings.image_position_mobile.label",
+            "default": "center center",
+            "options": [
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position_mobile.options__1.label",
+                "value": "top left"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position_mobile.options__2.label",
+                "value": "top center"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position_mobile.options__3.label",
+                "value": "top right"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position_mobile.options__4.label",
+                "value": "center left"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position_mobile.options__5.label",
+                "value": "center center"
+              },
+              {
+                "label":"t:sections.hero.blocks.slide.settings.image_position_mobile.options__6.label",
+                "value": "center right"
+              },
+              {
+                "label":"t:sections.hero.blocks.slide.settings.image_position_mobile.options__7.label",
+                "value": "bottom left"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position_mobile.options__8.label",
+                "value": "bottom center"
+              },
+              {
+                "label": "t:sections.hero.blocks.slide.settings.image_position_mobile.options__9.label",
+                "value": "bottom right"
+              }
+            ]
+          },
+          {
+            "type": "url",
+            "id": "slide_link",
+            "label": "t:sections.hero.blocks.slide.settings.slide_link.label",
+            "info": "t:sections.hero.blocks.slide.settings.slide_link.info"
+          },
+          {
+            "type": "header",
+		      	"content": "t:sections.hero.blocks.slide.settings.header__2.content"
+          },
+          {
+            "type": "text",
+            "id": "video",
+            "label": "t:sections.hero.blocks.slide.settings.video.label",
+            "info": "t:sections.hero.blocks.slide.settings.video.info",
+            "placeholder": "background-video.mp4"
+          },
+          {
+            "type": "header",
+			      "content": "t:sections.hero.blocks.slide.settings.header__3.content"
+          },
+          {
+            "type": "text",
+            "id": "heading_text",
+            "label": "t:sections.hero.blocks.slide.settings.heading_text.label",
+            "default": "Slideshow"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "t:sections.hero.blocks.slide.settings.text.label",
+            "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your story.</p>"
+          },
+          {
+            "type": "select",
+            "id": "text_position",
+            "label": "t:sections.hero.blocks.slide.settings.text_position.label",
+            "default": "align-center",
+            "options": [
+              {
+                "value": "align-top",
+                "label": "t:sections.hero.blocks.slide.settings.text_position.options__1.label"
+              },
+              {
+                "value": "align-center",
+                "label": "t:sections.hero.blocks.slide.settings.text_position.options__2.label"
+              },
+              {
+                "value": "align-bottom",
+                "label": "t:sections.hero.blocks.slide.settings.text_position.options__3.label"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_position_mobile",
+            "label": "t:sections.hero.blocks.slide.settings.text_position_mobile.label",
+            "default": "align-center",
+            "options": [
+              {
+                "value": "align-top",
+                "label": "t:sections.hero.blocks.slide.settings.text_position_mobile.options__1.label"
+              },
+              {
+                "value": "align-center",
+                "label": "t:sections.hero.blocks.slide.settings.text_position_mobile.options__2.label"
+              },
+              {
+                "value": "align-bottom",
+                "label": "t:sections.hero.blocks.slide.settings.text_position_mobile.options__3.label"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_alignment",
+            "label": "t:sections.hero.blocks.slide.settings.text_alignment.label",
+            "default": "text-center",
+            "options": [
+              {
+                "value": "text-left",
+                "label": "t:sections.hero.blocks.slide.settings.text_alignment.options__1.label"
+              },
+              {
+                "value": "text-center",
+                "label": "t:sections.hero.blocks.slide.settings.text_alignment.options__2.label"
+              },
+              {
+                "value": "text-right",
+                "label": "t:sections.hero.blocks.slide.settings.text_alignment.options__3.label"
+              },
+              {
+                "value": "text-justify",
+                "label": "t:sections.hero.blocks.slide.settings.text_alignment.options__4.label"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_alignment_mobile",
+            "label": "t:sections.hero.blocks.slide.settings.text_alignment_mobile.label",
+            "default": "text-center",
+            "options": [
+              {
+                "value": "text-left",
+                "label": "t:sections.hero.blocks.slide.settings.text_alignment_mobile.options__1.label"
+              },
+              {
+                "value": "text-center",
+                "label": "t:sections.hero.blocks.slide.settings.text_alignment_mobile.options__2.label"
+              },
+              {
+                "value": "text-right",
+                "label": "t:sections.hero.blocks.slide.settings.text_alignment_mobile.options__3.label"
+              },
+              {
+                "value": "text-justify",
+                "label": "t:sections.hero.blocks.slide.settings.text_alignment_mobile.options__4.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.hero.blocks.slide.settings.header__4.content"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_custom_fonts",
+            "label": "t:sections.hero.blocks.slide.settings.enable_custom_fonts.label",
+            "default": false,
+            "info" : "t:sections.hero.blocks.slide.settings.enable_custom_fonts.info"
+          },
+          {
+            "type": "font_picker",
+            "id": "slideshow_family",
+            "label": "t:sections.hero.blocks.slide.settings.slideshow_family.label",
+            "default": "poppins_n4"
+          },
+          {
+            "type": "header",
+		      	"content": "t:sections.hero.blocks.slide.settings.header__5.content"
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "t:sections.hero.blocks.slide.settings.button_label.label",
+		      	"default": "Shop now"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "t:sections.hero.blocks.slide.settings.button_link.label",
+		      	"default": "/collections/all"
+          },
+          {
+            "type": "select",
+            "id": "button_style",
+            "label": "t:sections.hero.blocks.slide.settings.button_style.label",
+            "default": "btn--primary",
+            "options": [
+              {
+                "value": "",
+                "label": "t:sections.hero.blocks.slide.settings.button_style.options__1.label"
+              },
+              {
+                "value": "btn--primary",
+                "label": "t:sections.hero.blocks.slide.settings.button_style.options__2.label"
+              },
+              {
+                "value": "btn-outline-primary",
+                "label": "t:sections.hero.blocks.slide.settings.button_style.options__3.label"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "button_label_2",
+            "label": "t:sections.hero.blocks.slide.settings.button_label_2.label",
+		      	"default": "Learn more"
+          },
+          {
+            "type": "url",
+            "id": "button_link_2",
+            "label": "t:sections.hero.blocks.slide.settings.button_link_2.label",
+			      "default": "/collections/all"
+          },
+          {
+            "type": "select",
+            "id": "button_style_2",
+            "label": "t:sections.hero.blocks.slide.settings.button_style_2.label",
+            "default": "",
+            "options": [
+              {
+                "value": "",
+                "label": "t:sections.hero.blocks.slide.settings.button_style_2.options__1.label"
+              },
+              {
+                "value": "btn--primary",
+                "label": "t:sections.hero.blocks.slide.settings.button_style_2.options__2.label"
+              },
+              {
+                "value": "btn-outline-primary",
+                "label": "t:sections.hero.blocks.slide.settings.button_style_2.options__3.label"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.hero.presets.name",
+        "category": "t:sections.hero.presets.category"
+      }
+    ]
+  }
+{% endschema %}

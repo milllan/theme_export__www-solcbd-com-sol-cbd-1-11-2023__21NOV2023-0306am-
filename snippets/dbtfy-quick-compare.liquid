@@ -1,0 +1,140 @@
+{%- if settings.dbtfy_quick_compare -%}
+  {%- liquid
+    assign button_icon = settings.dbtfy_quick_compare_button_icon
+    assign button_position_x = settings.dbtfy_quick_compare_button_position
+    assign button_position_y = settings.dbtfy_quick_compare_distance_from_bottom
+
+    assign show_title = settings.dbtfy_quick_compare_product_field_title
+    assign show_price = settings.dbtfy_quick_compare_product_field_price
+    assign show_type = settings.dbtfy_quick_compare_product_field_type
+    assign show_vendor = settings.dbtfy_quick_compare_product_field_vendor
+    assign show_collections = settings.dbtfy_quick_compare_product_field_collections
+    assign show_tags = settings.dbtfy_quick_compare_product_field_tags
+    assign show_short_description = settings.dbtfy_quick_compare_product_field_descriptions
+
+    assign add_to_quick_compare_text = 'add-ons.quick_compare.add_to_compare_text' | t
+    assign remove_from_quick_compare_text = 'add-ons.quick_compare.remove_from_compare_text' | t
+    assign modal_title = 'add-ons.quick_compare.title_modal' | t
+  -%}
+
+  {%- if type == "page" -%}
+    <div class="dbtfy dbtfy-quick_compare">
+      <button type="button" class="qc-floating-btn stacked-on-top-of-content {% unless button_position_x == 'left' %}qc-floating-btn--right{% endunless %} btn btn--square btn-top-center btn-top-visible">
+        <span class="qc-icon-bubble">
+          <span class="qc-count"></span>
+        </span>
+        <span class="{{ settings.icon }} material-icons-outlined" aria-hidden="true">{{ button_icon }}</span>
+      </button>
+    </div>
+  {%- elsif type == "grid" or type == "list" -%}
+    <div class="dbtfy dbtfy-quick_compare qc-grid-product">
+      <button class="qc-icon qc-add-btn btn btn-reveal-primary btn-square-xsmall"
+        data-product-handle="{{ product.handle }}"
+        data-add-to-quick-compare-text="{{ add_to_quick_compare_text }}"
+        data-remove-from-quick-compare-text="{{ remove_from_quick_compare_text }}"
+        aria-label="{{ add_to_quick_compare_text }}"
+        title="{{ add_to_quick_compare_text }}">
+
+        <span class="btn__text">
+          <span class="{{ settings.icon }} icon-width">{{ button_icon }}</span>
+        </span>
+      </button>
+    </div>
+  {%- elsif type == "markup" -%}
+    <div class="dbtfy dbtfy-quick_compare">
+      <div id="quickCompareModal" class="modal stacked-on-top-of-content sc-info sc-{{ block.id }}" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content overlay-content" aria-hidden="true" tabindex="-1">
+            <div class="modal-header">
+              {%- if modal_title != blank -%}
+                <h4 class="modal-title">{{ modal_title }}</h4>
+              {%- endif -%}
+
+              <button type="button" class="modal-close btn btn-square-small"
+                title="{{ 'general.password_page.close' | t }}"
+                aria-label="{{ 'general.password_page.close' | t }}"
+                data-modal-close="#quickCompareModal">
+
+                <span class="{{ settings.icon }} icon-width">close</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <div class="qc-no-item text-center" style="display: none">
+                <p>{{ 'add-ons.quick_compare.empty_table' | t }}</p>
+                <a href="{{ settings.browsing_link }}"
+                  class="btn btn--primary cart--continue-browsing">{{ "cart.general.continue_browsing_html" | t }}</a>
+              </div>
+
+              <div class="qc-table-wrapper">
+                <table class="qc-table">
+                  <tbody>
+                    <tr class="images-row">
+                      <td class="images-cell qc-first-cell">{{ 'add-ons.quick_compare.images_cell' | t }}</td>
+                    </tr>
+
+                    {%- if show_title -%}
+                      <tr class="title-row">
+                        <td class="title-cell qc-first-cell">{{ 'add-ons.quick_compare.title_cell' | t }}</td>
+                      </tr>
+                    {%- endif -%}
+
+                    {%- if show_price -%}
+                      <tr class="price-row">
+                        <td class="price-cell qc-first-cell">{{ 'add-ons.quick_compare.price_cell' | t }}</td>
+                      </tr>
+                    {%- endif -%}
+
+                    {%- if show_type -%}
+                      <tr class="type-row">
+                        <td class="type-cell qc-first-cell">{{ 'add-ons.quick_compare.type_cell' | t }}</td>
+                      </tr>
+                    {%- endif -%}
+
+                    {%- if show_vendor -%}
+                      <tr class="vendor-row">
+                        <td class="vendor-cell qc-first-cell">{{ 'add-ons.quick_compare.vendor_cell' | t }}</td>
+                      </tr>
+                    {%- endif -%}
+
+                    {%- if show_collections -%}
+                      <tr class="collections-row">
+                        <td class="collections-cell qc-first-cell">{{ 'add-ons.quick_compare.collections_cell' | t }}</td>
+                      </tr>
+                    {%- endif -%}
+
+                    {%- if show_tags -%}
+                      <tr class="tags-row">
+                        <td class="tags-cell qc-first-cell">{{ 'add-ons.quick_compare.tags_cell' | t }}</td>
+                      </tr>
+                    {%- endif -%}
+
+                    {%- if show_short_description -%}
+                      <tr class="description-row">
+                        <td class="description-cell qc-first-cell">{{ 'add-ons.quick_compare.short_description_cell' | t }}</td>
+                      </tr>
+                    {%- endif -%}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay-modal overlay-backdrop"></div>
+    </div>
+  {%- else -%}
+    <div class="dbtfy dbtfy-quick_compare qc-product-page spacer-left">
+      <button class="btn btn-reveal-primary qc-add-btn btn--xsmall"
+        data-product-handle="{{ product.handle }}"
+        data-add-to-quick-compare-text="{{ add_to_quick_compare_text }}"
+        data-remove-from-quick-compare-text="{{ remove_from_quick_compare_text }}"
+        aria-label="{{ add_to_quick_compare_text }}"
+        title="{{ add_to_quick_compare_text }}">
+        <span class="{{ settings.icon }} icon-width">{{ button_icon }}</span>
+        <span class="qc-btn-text">{{ add_to_quick_compare_text }}</span>
+      </button>
+    </div>
+  {%- endif -%}
+{%- endif -%}

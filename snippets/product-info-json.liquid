@@ -1,0 +1,11 @@
+{%- if product != blank -%}
+  <script class="product-info-JSON" type="application/json">
+    {
+      "id": {{ product.id | json }},
+      "handle": {{ product.handle | json }},
+      "type": {{ product.type | json }},
+      "tags": {{ product.tags | json }},
+      "collections": {{ product.collections | json }}
+    }
+  </script>
+{%- endif -%}

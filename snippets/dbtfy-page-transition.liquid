@@ -1,0 +1,21 @@
+{%- if settings.dbtfy_page_transition -%}
+  <div class="dbtfy dbtfy-page_transition">
+    <div class="pt-wrapper flex align-center justify-center">
+      {%- liquid
+        if settings.dbtfy_page_transition_svg != blank
+          assign pt_image = settings.dbtfy_page_transition_svg
+          assign pt_image_type = 'svg'
+        elsif settings.dbtfy_page_transition_image != blank
+          assign pt_image = settings.dbtfy_page_transition_image
+          assign pt_image_type = 'retina'
+        endif
+      -%}
+
+      {%- if pt_image != blank -%}
+        <img class="pt-image imgset lazyload radius-none pulse slow infinite"
+        {%- render 'lazysizes', img: pt_image, img_type: pt_image_type, img_width: settings.dbtfy_page_transition_width -%}
+        alt="{{ shop.name }}">
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

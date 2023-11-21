@@ -1,0 +1,37 @@
+{%- if request.design_mode -%}
+  <div id="AddonsLimitReachedPopup" class="toast">
+    <div class="card overlay-content">
+      <div class="card-header">
+        <div class="toast-image">
+          {%- render "svg-definitions" with "debutify-logo" -%}
+        </div>
+
+        <h6 class="spacer-bottom-none">
+          {{ 'general.addons_limit_reached.heading' | t }}
+        </h6>
+
+        <button type="button"
+                data-toast-close
+                class="btn btn-square-small spacer-left-auto flex-shrink"
+                title="{{ 'general.password_page.close' | t }}"
+                aria-label="{{ 'general.password_page.close' | t }}">
+          <span class="{{ settings.icon }}">close</span>
+        </button>
+      </div>
+
+      <div class="card-body">
+        <p class="text-small addons-limit-popup-text">{{ 'general.addons_limit_reached.text' | t: name: shop.name | newline_to_br }}</p>
+
+        <div class="spacer-bottom">
+          <a href="https://debutify.com/app/plans"
+              target="_blank"
+              class="btn btn--small btn--primary to-link-btn full addons-limit-popup-button">
+            {{ 'general.addons_limit_reached.upgrade_now' | t }}
+          </a>
+        </div>
+
+        <p class="text-small addons-limit-popup-note">{{'general.addons_limit_reached.note' | t }}</p>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

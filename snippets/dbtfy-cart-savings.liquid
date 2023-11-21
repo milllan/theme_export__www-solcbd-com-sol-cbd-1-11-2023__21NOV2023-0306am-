@@ -1,0 +1,23 @@
+{%- if settings.dbtfy_cart_savings -%}
+  {%- liquid
+    assign total_compare_at_price = total_compare_at_price
+    assign total_savings = total_compare_at_price | minus: cart.total_price
+    assign label = 'add-ons.cart_savings.label' | t
+  -%}
+
+  <div class="grid grid-small flex-nowrap cart_savings-wrapper"
+       data-total-with-compare-price="{{ total_compare_at_price }}"
+       data-total-savings-by-compare-price="{{ total_savings }}"
+      {%- if total_savings <= 0 -%}hidden{%- endif -%}>
+
+    <div class="grid__item flex-fill overflow-hidden">
+      <p class="text-money text-secondary spacer-bottom-none text-ellipsis">{{ label }}</p>
+    </div>
+
+    <div class="grid__item flex-auto text-right">
+      <p class="text-money text-secondary spacer-bottom-none cart_savings-wrapper-text">
+        <span class="money">{{ total_savings | money }}</span>
+      </p>
+    </div>
+  </div>
+{%- endif -%}

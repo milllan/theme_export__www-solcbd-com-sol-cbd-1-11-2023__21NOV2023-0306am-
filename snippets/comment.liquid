@@ -1,0 +1,20 @@
+<!-- /snippets/comment.liquid -->
+<div id="{{ comment.id }}" class="comment card">
+  <div class="card-body">
+    <div class="grid grid-small flex-nowrap align-center spacer-bottom-sm">
+      <div class="grid__item flex-auto">
+        <span class="btn btn--square">
+          {{ comment.author | first }}
+        </span>
+      </div>
+      <div class="grid__item flex-fill overflow-hidden">
+        <span class="h5 comment-author text-ellipsis spacer-bottom-xs">{{ comment.author }}</span>
+        <span class="{{ settings.icon }}">calendar_today</span>
+        <time datetime="{{ comment.created_at | date: '%Y-%m-%d' }}" class="comment-date">{{ comment.created_at | date: format: 'month_day_year' }}</time>
+      </div>
+    </div>
+    <div class="rte spacer-bottom-none text-lead" {% if disabled_by_yoast_seo %}itemtype="http://schema.org/CreativeWork"{% endif %} {% if disabled_by_yoast_seo %}itemprop="comment"{% endif %}>
+      {{ comment.content }}
+    </div>
+  </div>
+</div>

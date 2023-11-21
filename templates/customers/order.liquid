@@ -1,0 +1,202 @@
+<!-- /templates/customers/order.liquid -->
+<div class="box">
+  <div class="wrapper">
+
+    <div class="section-header">
+      <div class="page-title-wrapper">
+        <h1 class="page-title">{{ 'customer.account.title' | t }}</h1>
+      </div>
+      <a href="{{ routes.account_url }}">
+        <span class="{{ settings.icon }}" aria-hidden="true">arrow_back</span> {{ 'customer.account.return' | t }}
+      </a>
+    </div>
+
+    <div class="grid grid-spacer">
+      <div class="grid__item large--three-twelfths medium--three-twelfths large--sticky mediumm--sticky sticky-check-header">
+
+        <h3>{{ 'customer.order.billing_address' | t }}</h3>
+
+        <div class="card spacer-bottom">
+          <div class="card-body">
+            <p>
+              {{ 'customer.order.payment_status' | t }}:
+              <span class="badge">{{ order.financial_status_label }}</span>
+            </p>
+            <p>
+              {{ order.billing_address.name }}
+              {%- if order.billing_address.company != '' -%}
+                {{ order.billing_address.company }}<br>
+              {%- endif -%}
+              {{ order.billing_address.street }}<br>
+              {{ order.billing_address.city }}<br>
+              {%- if order.billing_address.province != '' -%}
+                {{ order.billing_address.province }}<br>
+              {%- endif -%}
+              {{ order.billing_address.zip | upcase }}<br>
+              {{ order.billing_address.country }}<br>
+              {{ order.billing_address.phone }}
+            </p>
+          </div>
+        </div>
+
+        <h3>{{ 'customer.order.shipping_address' | t }}</h3>
+
+        <div class="card">
+          <div class="card-body">
+            <p>
+              {{ 'customer.order.fulfillment_status' | t }}:
+              <span class="badge">{{ order.fulfillment_status_label }}</span>
+            </p>
+            <p>
+              {{ order.shipping_address.name }}
+              {%- if order.shipping_address.company != '' -%}
+                {{ order.shipping_address.company }}<br>
+              {%- endif -%}
+              {{ order.shipping_address.street }}<br>
+              {{ order.shipping_address.city }}<br>
+              {%- if order.shipping_address.province != '' -%}
+                {{ order.shipping_address.province }}<br>
+              {%- endif -%}
+              {{ order.shipping_address.zip | upcase }}<br>
+              {{ order.shipping_address.country }}<br>
+              {{ order.shipping_address.phone }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid__item large--nine-twelfths medium--nine-twelfths">
+        <div class="grid">
+          <div class="grid__item large--six-twelfths medium--six-twelfths">
+            <h2 class="h3">{{ 'customer.order.title' | t: name: order.name }}</h2>
+          </div>
+          <div class="grid__item large--six-twelfths medium--six-twelfths large--text-right medium--text-right">
+            <p>
+              <span class="{{ settings.icon }}">calendar_today</span>
+              <span class="date">{{ 'customer.order.date' | t: date: order.created_at | date: "%B %d, %Y %I:%M%p" }}</span>
+            </p>
+          </div>
+        </div>
+
+        {%- if order.cancelled -%}
+          <div class="errors">
+            {%- assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" -%}
+            <p class="h5">{{ 'customer.order.cancelled' | t: date: cancelled_at }}</p>
+            <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason }}</p>
+          </div>
+        {%- endif -%}
+
+        <div class="table-wrap">
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th class="text-left">{{ 'customer.order.product' | t }}</th>
+                <th>{{ 'customer.order.sku' | t }}</th>
+                <th class="text-right">{{ 'customer.order.price' | t }}</th>
+                <th class="text-right">{{ 'customer.order.quantity' | t }}</th>
+                <th class="text-right">{{ 'customer.order.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for line_item in order.line_items -%}
+              <tr id="{{ line_item.key }}" class="table__section">
+                <td class="text-left">
+                  <div class="grid grid-small align-center">
+                    {% if line_item.image != blank %}
+                    <div class="grid__item large--three-twelfths medium--three-twelfths flex-shrink">
+                      <a href="{{ line_item.product.url }}" class="product--wrapper media-wrapper image-link" style="padding-top:{{ 1 | divided_by: line_item.image.aspect_ratio | times: 100}}%;">
+                        <img class="product--image media lazyload"
+                        {%- render 'lazysizes', img: line_item.image, img_type: 'responsive' -%}
+                        alt="{{ block.settings.image.alt }}">
+                      </a>
+                    </div>
+                    {% endif %}
+
+                    <div class="grid__item small--hide">
+                      {{ line_item.title | link_to: line_item.product.url }}
+                    </div>
+                  </div>
+
+                  {%- if line_item.fulfillment -%}
+                    <div class="order-notes">
+                      {%- assign created_at = line_item.fulfillment.created_at | date: format: 'month_day_year' -%}
+                      {{ 'customer.order.fulfilled_at' | t: date: created_at }}
+                      <div>
+                        {%- if line_item.fulfillment.tracking_url -%}
+                          <a href="{{ line_item.fulfillment.tracking_url }}">
+                            {{ 'customer.order.track_shipment' | t }}
+                          </a>
+                        {%- endif -%}
+                        <div>
+                          {{ line_item.fulfillment.tracking_company }}
+                          {%- if line_item.fulfillment.tracking_number -%} #{{ line_item.fulfillment.tracking_number }} {%- endif -%}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                </td>
+                <td>{{ line_item.sku }}</td>
+                <td class="text-right"><span><span class="money">{{ line_item.price | money }}</span></span></td>
+                <td class="text-right">{{ line_item.quantity }}</td>
+                <td class="text-right"><span><span class="money">{{ line_item.quantity | times: line_item.price | money }}</span></span></td>
+              </tr>
+              {%- endfor -%}
+            </tbody>
+            <tfoot class="text-right">
+              <tr>
+                <td colspan="4">{{ 'customer.order.subtotal' | t }}</td>
+                <td><span><span class="money">{{ order.line_items_subtotal_price | money }}</span></span></td>
+              </tr>
+
+              {%- if order.cart_level_discount_applications != blank -%}
+              <tr class="order_summary discount">
+                {%- for discount_application in order.cart_level_discount_applications -%}
+                  <td colspan="4" class="text-secondary">
+                    {{ 'customer.order.discount' | t }}
+
+                    {% if discount_application.title != blank %}
+                    <span class="table-discount-code">
+                      <span class="{{ settings.icon }}">local_offer</span>
+                      {{ discount_application.title }}
+                    </span>
+                    {% endif %}
+                  </td>
+
+                  <td class="text-sale">
+                    <span>-<span class="money">{{ discount_application.total_allocated_amount | money }}</span></span>
+                  </td>
+                {%- endfor -%}
+              </tr>
+              {%- endif -%}
+
+              {%- for shipping_method in order.shipping_methods -%}
+              <tr>
+                <td colspan="4">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
+                <td><span><span class="money">{{ shipping_method.price | money }}</span></span></td>
+              </tr>
+              {%- endfor -%}
+
+              {%- for tax_line in order.tax_lines -%}
+                <tr>
+                  <td colspan="4">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate_percentage }})</td>
+                  <td>
+                    <span>
+                      <span class="money">{{ tax_line.price | money }}</span>
+                    </span>
+                  </td>
+                </tr>
+              {%- endfor -%}
+
+              <tr>
+                <th colspan="4" class="table__title">{{ 'customer.order.total' | t }}</th>
+                <th class="table__title"><span><span class="money">{{ order.total_price | money }}</span></span></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

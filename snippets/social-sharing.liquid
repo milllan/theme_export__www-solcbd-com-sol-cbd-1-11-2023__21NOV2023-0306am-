@@ -1,0 +1,152 @@
+{%- if settings.share_facebook
+      or settings.share_twitter
+      or settings.share_pinterest
+      or settings.share_whatsapp
+      or settings.share_linkedin
+      or settings.share_reddit
+      or settings.share_email
+      or settings.share_messenger
+-%}
+
+  {%- liquid
+    assign share_image = page_image
+    assign share_title = page_title
+
+    assign share_permalink = request.host | append: request.path | prepend: "https://"
+
+    if page_description != blank
+      assign share_description = page_description | truncatewords: 20
+    else
+      assign share_description = shop.name | capitalize
+    endif
+
+    assign share_content = share_title | append: " — " | append: share_description
+
+    if request.page_type == 'product'
+      assign share_image = product.featured_media
+    elsif request.page_type == 'article' and article.image != blank
+      assign share_image = article.image
+    elsif request.page_type == 'collection' and collection.image != blank
+      assign share_image = collection.image
+    endif
+  -%}
+
+  <div class="social-sharing {{ container_class }}" {{ style }}>
+    <ul class="inline-list">
+      <li class="share-label">
+        <span class="{{ settings.icon }}" aria-hidden="true">share</span>
+        {% if share_label != blank %}
+          {{ share_label }}
+        {% else %}
+          {{ 'general.social.share_on_facebook' | t }}
+        {% endif %}
+      </li>
+
+      {%- if settings.share_facebook -%}
+        <li>
+          <a target="_blank"
+             href="//www.facebook.com/sharer/sharer.php?u={{ share_permalink }}&quote={{ share_content | url_param_escape }}"
+             class="btn-facebook {{ share_button }}"
+             aria-label="{{ 'general.social.alt_text.share_on_facebook' | t }}"
+             title="{{ 'general.social.alt_text.share_on_facebook' | t }}"
+             data-share-content="{{ share_content | url_param_escape }}">
+            {%- render 'svg-definitions' with 'facebook' -%}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if settings.share_twitter -%}
+        <li>
+          <a target="_blank"
+             href="//twitter.com/intent/tweet?source={{ share_permalink }}&text={{ share_permalink }}%20{{ share_content | url_param_escape }}"
+             class="btn-twitter {{ share_button }}"
+             aria-label="{{ 'general.social.alt_text.share_on_twitter' | t }}"
+             title="{{ 'general.social.alt_text.share_on_twitter' | t }}"
+             data-share-content="{{ share_content | url_param_escape }}">
+             {%- render 'svg-definitions' with 'twitter' -%}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if settings.share_pinterest -%}
+        <li>
+          <a target="_blank"
+             href="//pinterest.com/pin/create/button/?url={{ share_permalink }}&media={{ share_image | img_url: '1200x1200' }}&description={{ share_content | url_param_escape }}"
+             class="btn-pinterest {{ share_button }}"
+             aria-label="{{ 'general.social.alt_text.share_on_pinterest' | t }}"
+             title="{{ 'general.social.alt_text.share_on_pinterest' | t }}"
+             data-share-content="{{ share_content | url_param_escape }}"
+             data-share-media="{{ share_image | img_url: '1200x1200' }}">
+             {%- render 'svg-definitions' with 'pinterest' -%}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if settings.share_whatsapp -%}
+        <li>
+           <a target="_blank"
+              href="//api.whatsapp.com/send?text={{ share_permalink }}"
+              class="btn-whatsapp {{ share_button }}"
+              aria-label="{{ 'general.social.alt_text.share_on_whatsapp' | t }}"
+              title="{{ 'general.social.alt_text.share_on_whatsapp' | t }}">
+              {%- render 'svg-definitions' with 'whatsapp' -%}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if settings.share_linkedin -%}
+        <li>
+          <a target="_blank"
+             href="//www.linkedin.com/shareArticle?mini=true&url={{ share_permalink }}&title={{ share_title | url_param_escape }}&summary={{ share_description | url_param_escape }}&source={{ share_permalink }}"
+             class="btn-linkedin {{ share_button }}"
+             aria-label="{{ 'general.social.alt_text.share_on_linkedin' | t }}"
+             title="{{ 'general.social.alt_text.share_on_linkedin' | t }}"
+             data-share-title="{{ share_title | url_param_escape }}"
+             data-share-description="{{ share_description | url_param_escape }}">
+             {%- render 'svg-definitions' with 'linkedin' -%}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if settings.share_reddit -%}
+        <li>
+          <a target="_blank"
+             href="//www.reddit.com/submit?url={{ share_permalink }}&title={{ share_content | url_param_escape }}"
+             class="btn-reddit {{ share_button }}"
+             aria-label="{{ 'general.social.alt_text.share_on_reddit' | t }}"
+             title="{{ 'general.social.alt_text.share_on_reddit' | t }}"
+             data-share-content="{{ share_content | url_param_escape }}">
+             {%- render 'svg-definitions' with 'reddit' -%}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if settings.share_email -%}
+        <li>
+          <a target="_blank"
+             href="mailto:?subject={{ share_title | url_param_escape }}&body={{ share_permalink }}%0D%0D{{ share_content | url_param_escape }}%0D"
+             class="btn-email {{ share_button }}"
+             aria-label="{{ 'general.social.alt_text.share_on_email' | t }}"
+             title="{{ 'general.social.alt_text.share_on_email' | t }}"
+             data-share-content="{{ share_content | url_param_escape }}"
+             data-share-title="{{ share_title | url_param_escape }}">
+             {%- render 'svg-definitions' with 'gmail' -%}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if settings.share_messenger -%}
+        <li class="medium--hide large--hide">
+          <a target="_blank"
+             href="fb-messenger://share/?link={{ share_permalink }}&app_id={{ settings.facebook_page_id }}"
+             class="btn-messenger {{ share_button }}"
+             aria-label="{{ 'general.social.alt_text.share_on_messenger' | t }}"
+             title="{{ 'general.social.alt_text.share_on_messenger' | t }}"
+             data-facebook-id="{{ settings.facebook_page_id }}">
+             {%- render 'svg-definitions' with 'messenger' -%}
+          </a>
+        </li>
+      {%- endif -%}
+    </ul>
+  </div>
+{%- endif -%}

@@ -1,0 +1,49 @@
+{%- if settings.dbtfy_delivery_date -%}
+  {%- liquid
+    assign required_to_checkout = settings.dbtfy_delivery_date_required
+    assign label_icon = settings.dbtfy_delivery_date_icon
+    assign input_icon = settings.dbtfy_delivery_date_input_icon
+
+    assign exclude_days = settings.dbtfy_delivery_date_exclude_days
+    assign label = 'add-ons.delivery_date.label' | t
+    assign placeholder = 'add-ons.delivery_date.placeholder' | t
+    assign error_message = 'add-ons.delivery_date.error_message' | t
+  -%}
+
+  <div class="dbtfy dbtfy-delivery_date{% if position == 'cart_drawer' %} drawer__inner-section ajaxcart__discount{% endif %}{% if position == 'cart_page' %} card card-mobile spacer-top{% endif %}">
+    <div class="DeliveryDate{% if position == 'cart_page' %} card-body{% endif %}">
+      {% unless label == blank %}
+        <label for="dd-input-{{ position }}">
+          <span class="{{ settings.icon }} icon-width" aria-hidden="true">
+            {{ label_icon }}
+          </span>
+
+          {{ label }}
+        </label>
+      {% endunless %}
+
+      <div class="input-group">
+        <input
+            {% if required_to_checkout %}required{% endif %}
+            id="dd-input-{{ position }}"
+            class="dd-input-date-time input--small input-group-field"
+            autocomplete="off"
+            data-exclude-days="{{ exclude_days }}"
+            data-is-required-to-checkout="{{ required_to_checkout }}"
+            type="text"
+            name="attributes[Delivery date]"
+            value="{{ cart.attributes.delivery_date }}"
+            placeholder="{{ placeholder }}"/>
+              <button type="button" class="btn clear-field-button" hidden>
+                <span class="{{ settings.icon }} icon-width dd-icon" aria-hidden="true">close</span>
+              </button>
+
+              <span class="{{ settings.icon }} icon-width dd-icon">{{ input_icon }}</span>
+      </div>
+
+      {%- if error_message != blank -%}
+        <p class="dd-error-message errors spacer-bottom-none spacer-top-sm" hidden="hidden"></p>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

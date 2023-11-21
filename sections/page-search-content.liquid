@@ -1,0 +1,87 @@
+{%- paginate search.results by 12 -%}
+  <div data-section-type="search">
+    <div class="box">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+            <div class="section-header">
+              <div class="page-title-wrapper">
+                {%- if search.performed -%}
+                  {%- if search.results_count == 0 -%}
+                    <h1>{{ 'general.search.no_results_html' | t: terms: search.terms }}</h1>
+                  {%- else -%}
+                    <h1>{{ 'general.search.results_for_html' | t: terms: search.terms }}</h1>
+                  {%- endif -%}
+                {%- else -%}
+                  <h1 class="page-title">{{ 'general.search.title' | t }}</h1>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+            {%- if settings.dbtfy_smart_search -%}
+              <predictive-search>
+                {%- render 'search-bar', form_tag: true -%}
+                {%- render "dbtfy-smart-search", type: "page" -%}
+              </predictive-search>
+            {%- else -%}
+              {%- render 'search-bar', form_tag: true -%}
+              {%- render "dbtfy-smart-search", type: "page" -%}
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- if search.performed -%}
+          {%- assign grid_item_width = 'large--four-twelfths medium--six-twelfths' -%}
+          {%- assign gift_wrap_product_id = settings.dbtfy_gift_wrap_product.id -%}
+
+          <div {% if settings.dbtfy_infinite_scroll %}id="infiniteScrollContainer" {% endif %}class="grid grid-spacer spacer-top-lg">
+            {%- for item in search.results -%}
+              {%- capture current -%}{% cycle 1, 2, 3, 4, 5, 6 %}{%- endcapture -%}
+
+              {%- if item.object_type == 'product' -%}
+                {%- assign product = item -%}
+
+                {%- if settings.dbtfy_gift_wrap -%}
+                  {%- unless product.id == gift_wrap_product_id -%}
+                    {%- render 'product-grid-item' with product as product, grid_item_width: grid_item_width, current: current -%}
+                  {%- endunless -%}
+                {%- else -%}
+                  {%- render 'product-grid-item' with product as product, grid_item_width: grid_item_width, current: current -%}
+                {%- endif -%}
+              {%- elsif item.object_type == 'article' -%}
+                {%- assign article = item -%}
+                {%- render 'article-grid-item' with article as article, grid_item_width: grid_item_width, emptyState: emptyState -%}
+              {%- elsif item.object_type == 'page' -%}
+                <div class="grid__item {{ grid_item_width }} flex">
+                  <div class="card text-center">
+                    <a href="{{ item.url }}" class="flex full-height">
+                      <div class="card-body">
+                        <span class="grid-search__page-content">
+                          <span class="h4 text-center">{{ item.title }}</span>
+                          {{ item.content | strip_html | truncatewords: 60 }}
+                        </span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- render "pagination" with paginate as paginate -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "t:sections.page_search_content.name",
+  "settings": []
+}
+{% endschema %}

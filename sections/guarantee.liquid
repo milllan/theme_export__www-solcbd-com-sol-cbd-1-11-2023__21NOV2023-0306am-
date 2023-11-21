@@ -1,0 +1,245 @@
+{%- capture column_width -%}
+  {%- render 'block-width' -%}
+{%- endcapture -%}
+
+{%- if section.blocks.size > 0 and section.settings.show_guarantee -%}
+  <div id="section-{{ section.id }}" class="{{ section.settings.section_style }}" data-section-id="{{ section.id }}" data-section-type="guarantee-template">
+    <div class="box box-small">
+      <div class="wrapper">
+        <div class="grid grid-spacer text-center">
+
+          <!-- Blocks -->
+          {%- for block in section.blocks -%}
+            <div class="grid__item {{ column_width }}" 
+              {{ block.shopify_attributes }}>
+              <div class="guarantee-item {% if block.settings.text == blank and block.settings.button_label == blank %}guarantee-title-only{% endif %}">
+                {%- if block.settings.image != blank -%}
+                <p class="guarantee-image">
+                  <img class="imgset lazyload image-{{ section.settings.guarantee_size }}"
+                  {%- render 'lazysizes', img: block.settings.image, img_type: 'retina', img_height: '50' -%}
+                  alt="{{ block.settings.image.alt }}">
+                </p>
+                {%- elsif block.settings.guarantee_icon != blank -%}
+                <p class="guarantee-icon">
+                  <span class="{{ settings.icon }} icon-width icon-image icon-{{ section.settings.guarantee_size }} text-secondary" aria-hidden="true">{{ block.settings.guarantee_icon }}</span>
+                </p>
+                {%- endif -%}
+                {%- unless block.settings.heading_text == blank -%}
+                <h5 class="guarantee-title">{{ block.settings.heading_text }}</h5>
+                {%- endunless -%}
+                {%- unless block.settings.text == blank -%}
+                <div class="guarantee-text rte spacer-none {{ block.settings.text_alignment }} small--{{ block.settings.text_alignment_mobile }}">{{ block.settings.text }}</div>
+                {%- endunless -%}
+                {%- unless block.settings.button_label == blank -%}
+                <a href="{{ block.settings.button_link }}" class="btn {{ block.settings.button_style }} btn--small spacer-top-sm">
+                  {{ block.settings.button_label | escape }}
+                </a>
+                {%- endunless -%}
+              </div>
+            </div>
+          {%- endfor -%}
+
+          {%- if section.blocks.size == 0 -%}
+            {%- render 'no-blocks' -%}
+          {%- endif -%}
+
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+
+{% schema %}
+  {
+    "name": "t:sections.guarantee.name",
+    "class": "guarantee-section",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_guarantee",
+        "label": "t:sections.guarantee.settings.show_guarantee.label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "guarantee_size",
+        "label": "t:sections.guarantee.settings.guarantee_size.label",
+        "default": "xl",
+        "options": [
+          {
+            "value": "xs",
+            "label": "t:sections.guarantee.settings.guarantee_size.options__1.label"
+          },
+          {
+            "value": "sm",
+            "label": "t:sections.guarantee.settings.guarantee_size.options__2.label"
+          },
+          {
+            "value": "md",
+            "label": "t:sections.guarantee.settings.guarantee_size.options__3.label"
+          },
+          {
+            "value": "lg",
+            "label": "t:sections.guarantee.settings.guarantee_size.options__4.label"
+          },
+          {
+            "value": "xl",
+            "label": "t:sections.guarantee.settings.guarantee_size.options__5.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "t:sections.guarantee.settings.section_style.label",
+        "default": "section-border",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "t:sections.guarantee.settings.section_style.options__1.label"
+          },
+          {
+            "value": "section-default",
+            "label": "t:sections.guarantee.settings.section_style.options__2.label"
+          },
+          {
+            "value": "section-border",
+            "label": "t:sections.guarantee.settings.section_style.options__3.label"
+          }
+        ]
+      }
+  	],
+  	"blocks" : [
+  	  {
+        "type": "text",
+        "name": "t:sections.guarantee.blocks.text.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.guarantee.blocks.text.settings.title.label",
+            "info": "t:sections.guarantee.blocks.text.settings.title.info"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.guarantee.blocks.text.settings.image.label"
+          },
+    		  {
+            "type": "text",
+            "id": "guarantee_icon",
+            "label": "t:sections.guarantee.blocks.text.settings.guarantee_icon.label",
+      			"info": "t:sections.guarantee.blocks.text.settings.guarantee_icon.info",
+            "default": "loyalty",
+            "placeholder": "loyalty"
+          },
+          {
+            "type": "text",
+            "id": "heading_text",
+            "label": "t:sections.guarantee.blocks.text.settings.heading_text.label",
+            "default": "Our Guarantee"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "t:sections.guarantee.blocks.text.settings.text.label",
+            "default":"<p>Share your guarantees with your customers.</p>"
+          },
+          {
+            "type": "select",
+            "id": "text_alignment",
+            "label": "t:sections.guarantee.blocks.text.settings.text_alignment.label",
+            "default": "text-center",
+            "options": [
+              {
+                "value": "text-left",
+                "label": "t:sections.guarantee.blocks.text.settings.text_alignment.options__1.label"
+              },
+              {
+                "value": "text-center",
+                "label": "t:sections.guarantee.blocks.text.settings.text_alignment.options__2.label"
+              },
+              {
+                "value": "text-right",
+                "label": "t:sections.guarantee.blocks.text.settings.text_alignment.options__3.label"
+              },
+              {
+                "value": "text-justify",
+                "label": "t:sections.guarantee.blocks.text.settings.text_alignment.options__4.label"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_alignment_mobile",
+            "label": "t:sections.guarantee.blocks.text.settings.text_alignment_mobile.label",
+            "default": "text-center",
+            "options": [
+              {
+                "value": "text-left",
+                "label": "t:sections.guarantee.blocks.text.settings.text_alignment_mobile.options__1.label"
+              },
+              {
+                "value": "text-center",
+                "label": "t:sections.guarantee.blocks.text.settings.text_alignment_mobile.options__2.label"
+              },
+              {
+                "value": "text-right",
+                "label": "t:sections.guarantee.blocks.text.settings.text_alignment_mobile.options__3.label"
+              },
+              {
+                "value": "text-justify",
+                "label": "t:sections.guarantee.blocks.text.settings.text_alignment_mobile.options__4.label"
+              }
+            ]
+          },
+    		  {
+            "type": "select",
+            "id": "button_style",
+            "label": "t:sections.guarantee.blocks.text.settings.button_style.label",
+            "default": "btn-outline-primary",
+            "options": [
+              {
+                "value": "",
+                "label": "t:sections.guarantee.blocks.text.settings.button_style.options__1.label"
+              },
+              {
+                "value": "btn--primary",
+                "label": "t:sections.guarantee.blocks.text.settings.button_style.options__2.label"
+              },
+              {
+                "value": "btn-outline-primary",
+                "label": "t:sections.guarantee.blocks.text.settings.button_style.options__3.label"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "t:sections.guarantee.blocks.text.settings.button_label.label"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "t:sections.guarantee.blocks.text.settings.button_link.label"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  }
+{% endschema %}

@@ -1,0 +1,13 @@
+{% assign hs_src_tmp = image | img_url: '1x1' %}
+{% assign hs_sizes = "(min-width: 800px) 50vw, (min-width: 480px) 60vw, (min-width: 320px) 75vw, 100vw" %}
+{% capture hs_srcset %}
+  {{ hs_src_tmp | replace: '_1x1.', '_50x.' }} 50w,
+  {{ hs_src_tmp | replace: '_1x1.', '_90x.' }} 90w,
+  {{ hs_src_tmp | replace: '_1x1.', '_180x.' }} 180w,
+  {{ hs_src_tmp | replace: '_1x1.', '_360x.' }} 360w,
+  {{ hs_src_tmp | replace: '_1x1.', '_480x.' }} 720w,
+  {{ hs_src_tmp | replace: '_1x1.', '_720x.' }} 1080w,
+  {{ hs_src_tmp | replace: '_1x1.', '_900x.' }} 1296w,
+  {{ hs_src_tmp | replace: '_1x1.', '_1296x.' }} 1728w,
+  {{ hs_src_tmp | replace: '_1x1.', '_1512x.' }} 2048w
+{% endcapture %}

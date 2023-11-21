@@ -1,0 +1,88 @@
+{%- liquid
+  if settings.newsletter_app == "klaviyo"
+    assign customer_tag_list = source | split: ','
+    assign isTagPresent = false
+
+    for tag in customer_tag_list
+      assign current_tag = tag | lstrip | rstrip | downcase
+
+      if current_tag == "newsletter"
+        assign isTagPresent = true
+        break
+      endif
+    else
+      assign source = source | prepend: 'newsletter'
+      assign isTagPresent = true
+    endfor
+
+    unless isTagPresent
+      assign source = source | prepend: 'newsletter, '
+    endunless
+  endif
+-%}
+
+{%- capture "form_id" %}ContactForm--{{ section.id }}{%- endcapture -%}
+
+{%- assign classes = "form-vertical" -%}
+
+{%- if settings.newsletter_app == "omnisend" -%}
+  {%- assign classes = classes | append: " omnisend-subscribe-form no-loading-state" -%}
+{%- endif -%}
+
+{%- form 'customer', class: classes, id: form_id -%}
+  {%- if form.errors -%}
+    {{ form.errors | default_errors }}
+  {%- endif -%}
+
+  {%- if form.posted_successfully? -%}
+    <div class="note form-success">
+      <span class="{{ settings.icon }}">email</span>
+      {{ 'general.newsletter_form.newsletter_confirmation' | t }}
+    </div>
+  {%- else -%}
+    <input type="hidden" name="contact[tags]" value="{{ source }}">
+
+    {%- if settings.newsletter_name -%}
+      <input type="text"
+            class="input--small{% if settings.newsletter_app == "omnisend" %} omnisend-subscribe-input-first-name{% endif %}"
+            name="contact[first_name]"
+            placeholder="{{ 'customer.register.first_name' | t }}"
+            aria-label="{{ 'customer.register.first_name' | t }}"
+            autocapitalize="words"
+            value="{%- if form.first_name -%}{{ form.first_name }}{%- elsif customer -%}{{ customer.first_name }}{%- endif -%}">
+    {%- endif -%}
+
+    <input type="email"
+          class="input--small newsletter__input {% if form.errors contains 'email' %}input-error{% endif %}{% if settings.newsletter_app == "omnisend" %} omnisend-subscribe-input-email{% endif %}"
+          name="contact[email]"
+          placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}"
+          aria-label="{{ 'general.newsletter_form.newsletter_placeholder' | t }}"
+          autocorrect="off"
+          autocapitalize="off"
+          required="required"
+          pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
+          aria-required="true"
+          value="{%- if form.email -%}{{ form.email }}{%- elsif customer -%}{{ customer.email }}{%- endif -%}"
+          {%- if form.errors contains 'email' -%}
+          aria-invalid="true"
+          {%- endif -%}>
+
+    {% if settings.newsletter_optin %}
+      <input type="hidden" name="customer[accepts_marketing]" value="" />
+      <div class="checkbox">
+        <input id="newsletterOptin-{{ section.id }}"
+              type="checkbox"
+              name="customer[accepts_marketing]"
+              checked="checked" />
+        <label for="newsletterOptin-{{ section.id }}" class="text-small">{{ 'shopify.checkout.marketing.accept_marketing_checkbox_label' | t }}</label>
+      </div>
+    {%- endif -%}
+
+    <button class="btn btn--primary full" type="submit" name="commit">
+      <span class="btn__text">
+        <span class="{{ settings.icon }}" aria-hidden="true">email</span>
+        <span class="submit_btn_text">{{ 'general.newsletter_form.submit' | t }}</span>
+      </span>
+    </button>
+  {%- endif -%}
+{%- endform -%}

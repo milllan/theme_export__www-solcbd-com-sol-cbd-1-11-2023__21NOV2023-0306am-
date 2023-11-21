@@ -1,0 +1,38 @@
+{%- if settings.dbtfy_cart_reminder -%}
+  {%- if template.name != "cart" and cart.item_count > 0 -%}
+    {%- liquid
+      assign button_style = settings.cart_message_button_style
+      assign cart_reminder_text = 'add-ons.cart_reminder.text' | t
+      assign cart_reminder_button_label = 'add-ons.cart_reminder.button_label' | t
+
+      assign cart_reminder_display_time = settings.dbtfy_cart_reminder_display | times : 1000
+      assign cart_reminder_interval_time = settings.dbtfy_cart_reminder_interval | times : 1000
+  
+      assign position = settings.dbtfy_cart_reminder_position 
+      assign cart_reminder_classes = position
+
+      if settings.dbtfy_cart_reminder_hide_desktop
+        assign cart_reminder_classes = cart_reminder_classes | append: ' medium--hide large--hide'
+      endif
+
+      if settings.dbtfy_cart_reminder_hide_mobile
+        assign cart_reminder_classes = cart_reminder_classes | append: ' small--hide'
+      endif
+    -%}
+
+    <div class="dbtfy dbtfy-cart_reminder {{ classes }}">
+      <div class="dbtfy-cart_reminder_wrapper">
+        {% render 'notification-toast', 
+          toast_text: cart_reminder_text,
+          button_style: "text-link",
+          toast_button_label: cart_reminder_button_label,
+          has_toast_image: true,
+          button_below_text: true,
+          additional_toast_classes: cart_reminder_classes,
+          display_time: cart_reminder_display_time,
+          interval_time: cart_reminder_interval_time
+        %}
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

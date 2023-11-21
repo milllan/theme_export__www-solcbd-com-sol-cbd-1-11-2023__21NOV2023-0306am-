@@ -1,0 +1,113 @@
+{%- if settings.dbtfy_social_discount -%}
+  {%- liquid
+    assign button_icon = settings.dbtfy_social_discount_icon
+    assign popup_width = settings.dbtfy_social_discount_width
+    assign discount_name = settings.dbtfy_social_discount_reward_code
+    assign discount_amount = settings.dbtfy_social_discount_reward_amount
+    assign discount_type = settings.dbtfy_social_discount_reward_type
+    assign button_label = 'add-ons.social_discount.button_label' | t
+    assign popup_title = 'add-ons.social_discount.popup_title' | t
+    assign popup_text = 'add-ons.social_discount.popup_text' | t
+    assign popup_success_title = 'add-ons.social_discount.popup_success_title' | t
+    assign popup_success_text = 'add-ons.social_discount.popup_success_text' | t
+    assign popup_button_label = 'add-ons.social_discount.popup_button_label' | t
+  -%}
+
+  <div class="dbtfy dbtfy-social_discount">
+    <div class="SocialDiscount">
+      {%- if type == "button" -%}
+        {%- if button_label != blank -%}
+          <button type="button" class="btn btn-outline-primary btn--small sd-btn spacer-top" data-modal-open="#socialDiscountPopup">
+            {%- if button_icon != blank -%}
+            <span class="{{ settings.icon }}">{{ button_icon }}</span>
+            {% endif %}
+
+            <span>
+              {{ button_label }}
+            </span>
+          </button>
+        {%- endif -%}
+      {%- else -%}
+        <!--- start social-discount modal -->
+        <div id="socialDiscountPopup" class="modal stacked-on-top-of-content sd-content" role="dialog">
+          <div class="modal-dialog {{ popup_width }}">
+            <div class="modal-content overlay-content" aria-hidden="true" tabindex="-1">
+              <div class="modal-header">
+                {%- if popup_title != blank -%}
+                  <h4 class="modal-title">{{ popup_title }}</h4>
+                {%- endif -%}
+
+                <button type="button"
+                        class="btn btn-square-small modal-close"
+                        title="{{ 'general.password_page.close' | t }}"
+                        aria-label="{{ 'general.password_page.close' | t }}"
+                        data-modal-close="#socialDiscountPopup">
+                  <span class="{{ settings.icon }}">close</span>
+                </button>
+              </div>
+              <div class="modal-body text-center">
+                <div class="sd-body">
+                  {%- if popup_text != blank -%}
+                    <p>{{ popup_text }}</p>
+                  {%- endif -%}
+
+                  <div class="sd-social-sharing">
+                    {%- render "social-sharing" -%}
+                  </div>
+                </div>
+
+                <span class="sd-loading icon-spin text-secondary" style="display: none;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlay-modal overlay-backdrop"></div>
+
+        <div id="socialDiscountRewardPopup"
+             class="modal"
+             role="dialog"
+             data-discount-name="{{ discount_name }}"
+             data-discount-type="{{ discount_type }}"
+             data-discount-amount="{{ discount_amount }}">
+
+          <div class="modal-dialog {{ popup_width }}">
+            <div class="modal-content overlay-content" aria-hidden="true" tabindex="-1">
+              <div class="modal-header">
+                {%- if popup_success_title != blank -%}
+                  <h4 class="modal-title">{{ popup_success_title }}</h4>
+                {%- endif -%}
+
+                <button type="button" class="btn btn-square-small modal-close" data-modal-close="#socialDiscountRewardPopup">
+                  <span class="{{ settings.icon }}">close</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {%- if popup_success_text != blank -%}
+                  <div class="rte text-center">
+                    <p>{{ popup_success_text }}</p>
+                  </div>
+                {%- endif -%}
+
+                {%- if discount_name != blank -%}
+                  <div class="sd-reward-code select-box spacer-bottom" tabindex="0">
+                    {{ discount_name }}
+                  </div>
+                {%- endif -%}
+
+                {%- if popup_button_label != blank -%}
+                  <button type="button" class="btn btn--primary btn--full sd-reward-apply" data-modal-close="#socialDiscountRewardPopup">
+                    {{ popup_button_label }}
+                  </button>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlay-modal overlay-backdrop"></div>
+        <!--- End social-discount modal -->
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

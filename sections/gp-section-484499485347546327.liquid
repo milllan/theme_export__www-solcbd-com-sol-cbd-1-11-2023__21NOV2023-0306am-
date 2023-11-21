@@ -1,0 +1,2754 @@
+
+  
+  
+      <style>
+        @font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlEw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlEw.woff) format('woff');
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z11lFd2JQEl8qw.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1JlFd2JQEl8qw.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z11lFd2JQEl8qw.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1JlFd2JQEl8qw.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+      </style>
+    
+  <style>
+    .gps-484499485347546327 .-translate-x-full,.gps-484499485347546327 .-translate-y-1\/2,.gps-484499485347546327 .mobile\:-translate-y-1\/2,.gps-484499485347546327 .mobile\:rotate-0,.gps-484499485347546327 .mobile\:rotate-180,.gps-484499485347546327 .mobile\:translate-x-0,.gps-484499485347546327 .mobile\:translate-y-1\/2,.gps-484499485347546327 .rotate-0,.gps-484499485347546327 .rotate-180,.gps-484499485347546327 .tablet\:-translate-y-1\/2,.gps-484499485347546327 .tablet\:rotate-0,.gps-484499485347546327 .tablet\:rotate-180,.gps-484499485347546327 .tablet\:translate-x-0,.gps-484499485347546327 .tablet\:translate-y-1\/2,.gps-484499485347546327 .translate-x-full,.gps-484499485347546327 .translate-y-1\/2{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1}.gps-484499485347546327 .shadow-md{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}.gps-484499485347546327 .btn-disabled{cursor:default}.gps-484499485347546327 .g-paragraph-1{font-family:var(--g-p1-ff);font-size:var(--g-p1-size);font-style:var(--g-p1-fs);font-weight:var(--g-p1-weight);letter-spacing:var(--g-p1-ls);line-height:var(--g-p1-lh)}.gps-484499485347546327 .pointer-events-none{pointer-events:none}.gps-484499485347546327 .pointer-events-auto{pointer-events:auto}.gps-484499485347546327 .invisible{visibility:hidden}.gps-484499485347546327 .static{position:static}.gps-484499485347546327 .absolute{position:absolute}.gps-484499485347546327 .relative{position:relative}.gps-484499485347546327 .inset-0{inset:0}.gps-484499485347546327 .bottom-0{bottom:0}.gps-484499485347546327 .bottom-1\/2{bottom:50%}.gps-484499485347546327 .left-1{left:4px}.gps-484499485347546327 .left-4{left:16px}.gps-484499485347546327 .right-0{right:0}.gps-484499485347546327 .right-1{right:4px}.gps-484499485347546327 .right-4{right:16px}.gps-484499485347546327 .top-1\/2{top:50%}.gps-484499485347546327 .z-1{z-index:1}.gps-484499485347546327 .z-\[90\]{z-index:90}.gps-484499485347546327 .mx-auto{margin-left:auto;margin-right:auto}.gps-484499485347546327 .my-0{margin-bottom:0;margin-top:0}.gps-484499485347546327 .mb-0{margin-bottom:0}.gps-484499485347546327 .mt-2{margin-top:8px}.gps-484499485347546327 .block{display:block}.gps-484499485347546327 .inline-block{display:inline-block}.gps-484499485347546327 .flex{display:flex}.gps-484499485347546327 .inline-flex{display:inline-flex}.gps-484499485347546327 .grid{display:grid}.gps-484499485347546327 .contents{display:contents}.gps-484499485347546327 .\!hidden{display:none!important}.gps-484499485347546327 .hidden{display:none}.gps-484499485347546327 .aspect-square{aspect-ratio:1/1}.gps-484499485347546327 .h-5{height:20px}.gps-484499485347546327 .h-6{height:24px}.gps-484499485347546327 .h-fit{height:-moz-fit-content;height:fit-content}.gps-484499485347546327 .h-full{height:100%}.gps-484499485347546327 .w-5{width:20px}.gps-484499485347546327 .w-6{width:24px}.gps-484499485347546327 .w-\[12px\]{width:12px}.gps-484499485347546327 .w-full{width:100%}.gps-484499485347546327 .max-w-full{max-width:100%}.gps-484499485347546327 .flex-1{flex:1 1 0%}.gps-484499485347546327 .flex-none{flex:none}.gps-484499485347546327 .-translate-x-full{--tw-translate-x:-100%}.gps-484499485347546327 .-translate-x-full,.gps-484499485347546327 .-translate-y-1\/2{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.gps-484499485347546327 .-translate-y-1\/2{--tw-translate-y:-50%}.gps-484499485347546327 .translate-x-full{--tw-translate-x:100%}.gps-484499485347546327 .translate-x-full,.gps-484499485347546327 .translate-y-1\/2{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.gps-484499485347546327 .translate-y-1\/2{--tw-translate-y:50%}.gps-484499485347546327 .rotate-0{--tw-rotate:0deg}.gps-484499485347546327 .rotate-0,.gps-484499485347546327 .rotate-180{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.gps-484499485347546327 .rotate-180{--tw-rotate:180deg}@keyframes spin{to{transform:rotate(1turn)}}.gps-484499485347546327 .animate-spin{animation:spin 1s linear infinite}.gps-484499485347546327 .cursor-pointer{cursor:pointer}.gps-484499485347546327 .flex-row{flex-direction:row}.gps-484499485347546327 .flex-col{flex-direction:column}.gps-484499485347546327 .flex-wrap{flex-wrap:wrap}.gps-484499485347546327 .items-start{align-items:flex-start}.gps-484499485347546327 .items-center{align-items:center}.gps-484499485347546327 .justify-start{justify-content:flex-start}.gps-484499485347546327 .justify-center{justify-content:center}.gps-484499485347546327 .gap-2{gap:8px}.gps-484499485347546327 .gap-y-0{row-gap:0}.gps-484499485347546327 .overflow-hidden{overflow:hidden}.gps-484499485347546327 .break-words{overflow-wrap:break-word}.gps-484499485347546327 .rounded-full{border-radius:9999px}.gps-484499485347546327 .rounded-none{border-radius:0}.gps-484499485347546327 .bg-black\/50{background-color:rgba(0,0,0,.5)}.gps-484499485347546327 .p-\[1px\]{padding:1px}.gps-484499485347546327 .pb-1{padding-bottom:4px}.gps-484499485347546327 .pr-1{padding-right:4px}.gps-484499485347546327 .text-center{text-align:center}.gps-484499485347546327 .align-middle{vertical-align:middle}.gps-484499485347546327 .leading-\[0\]{line-height:0}.gps-484499485347546327 .text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128/var(--tw-text-opacity))}.gps-484499485347546327 .line-through{text-decoration-line:line-through}.gps-484499485347546327 .no-underline{text-decoration-line:none}.gps-484499485347546327 .decoration-g-text-1{text-decoration-color:var(--g-c-text-1)}.gps-484499485347546327 .opacity-0{opacity:0}.gps-484499485347546327 .opacity-25{opacity:.25}.gps-484499485347546327 .opacity-30{opacity:.3}.gps-484499485347546327 .opacity-75{opacity:.75}.gps-484499485347546327 .shadow-md{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.gps-484499485347546327 .outline{outline-style:solid}.gps-484499485347546327 .outline-1{outline-width:1px}.gps-484499485347546327 .-outline-offset-1{outline-offset:-1px}.gps-484499485347546327 .transition-colors{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-484499485347546327 .transition-opacity{transition-duration:.15s;transition-property:opacity;transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-484499485347546327 .duration-100{transition-duration:.1s}.gps-484499485347546327 .duration-200{transition-duration:.2s}.gps-484499485347546327 .duration-300{transition-duration:.3s}.gps-484499485347546327 .ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-484499485347546327 .disabled\:btn-disabled:disabled{cursor:default}.gps-484499485347546327 .disabled\:pointer-events-none:disabled{pointer-events:none}.gps-484499485347546327 .disabled\:cursor-default:disabled{cursor:default}.gps-484499485347546327 .disabled\:text-gray-300:disabled{--tw-text-opacity:1;color:rgb(209 213 219/var(--tw-text-opacity))}.gps-484499485347546327 .disabled\:opacity-30:disabled{opacity:.3}@media (hover:hover) and (pointer:fine){.gps-484499485347546327 .group:hover .group-hover\:opacity-100{opacity:1}}.gps-484499485347546327 .data-\[hidden\=true\]\:\!hidden[data-hidden=true]{display:none!important}.gps-484499485347546327 .data-\[hidden\=true\]\:hidden[data-hidden=true]{display:none}.gps-484499485347546327 .data-\[outline\=active\]\:p-\[1px\][data-outline=active]{padding:1px}.gps-484499485347546327 .data-\[outline\=active\]\:outline[data-outline=active]{outline-style:solid}.gps-484499485347546327 .group[data-state=loading] .group-data-\[state\=loading\]\:visible{visibility:visible}.gps-484499485347546327 .group[data-state=loading] .group-data-\[state\=loading\]\:invisible{visibility:hidden}.gps-484499485347546327 .scrollbar-thumb\:rounded-2xl::-webkit-scrollbar-thumb,.gps-484499485347546327 .scrollbar-track\:rounded-2xl::-webkit-scrollbar-track{border-radius:16px}.gps-484499485347546327 .scrollbar-thumb\:bg-gray-400::-webkit-scrollbar-thumb{--tw-bg-opacity:1;background-color:rgb(156 163 175/var(--tw-bg-opacity))}@media (max-width:1023px){.gps-484499485347546327 .tablet\:-left-4{left:-16px}.gps-484499485347546327 .tablet\:-right-4{right:-16px}.gps-484499485347546327 .tablet\:bottom-1\/2{bottom:50%}.gps-484499485347546327 .tablet\:left-4{left:16px}.gps-484499485347546327 .tablet\:right-4{right:16px}.gps-484499485347546327 .tablet\:top-1\/2{top:50%}.gps-484499485347546327 .tablet\:mt-2{margin-top:8px}.gps-484499485347546327 .tablet\:block{display:block}.gps-484499485347546327 .tablet\:\!inline{display:inline!important}.gps-484499485347546327 .tablet\:\!flex{display:flex!important}.gps-484499485347546327 .tablet\:\!hidden{display:none!important}.gps-484499485347546327 .tablet\:hidden{display:none}.gps-484499485347546327 .tablet\:w-full{width:100%}.gps-484499485347546327 .tablet\:-translate-y-1\/2{--tw-translate-y:-50%}.gps-484499485347546327 .tablet\:-translate-y-1\/2,.gps-484499485347546327 .tablet\:translate-x-0{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.gps-484499485347546327 .tablet\:translate-x-0{--tw-translate-x:0px}.gps-484499485347546327 .tablet\:translate-y-1\/2{--tw-translate-y:50%}.gps-484499485347546327 .tablet\:rotate-0,.gps-484499485347546327 .tablet\:translate-y-1\/2{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.gps-484499485347546327 .tablet\:rotate-0{--tw-rotate:0deg}.gps-484499485347546327 .tablet\:rotate-180{--tw-rotate:180deg;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.gps-484499485347546327 .tablet\:flex-row{flex-direction:row}.gps-484499485347546327 .tablet\:flex-col{flex-direction:column}.gps-484499485347546327 .tablet\:justify-start{justify-content:flex-start}.gps-484499485347546327 .tablet\:px-0{padding-left:0;padding-right:0}.gps-484499485347546327 .tablet\:pl-1{padding-left:4px}}@media (max-width:767px){.gps-484499485347546327 .mobile\:-left-4{left:-16px}.gps-484499485347546327 .mobile\:-right-4{right:-16px}.gps-484499485347546327 .mobile\:bottom-1\/2{bottom:50%}.gps-484499485347546327 .mobile\:left-4{left:16px}.gps-484499485347546327 .mobile\:right-4{right:16px}.gps-484499485347546327 .mobile\:top-1\/2{top:50%}.gps-484499485347546327 .mobile\:mt-2{margin-top:8px}.gps-484499485347546327 .mobile\:block{display:block}.gps-484499485347546327 .mobile\:\!inline{display:inline!important}.gps-484499485347546327 .mobile\:\!flex{display:flex!important}.gps-484499485347546327 .mobile\:\!hidden{display:none!important}.gps-484499485347546327 .mobile\:hidden{display:none}.gps-484499485347546327 .mobile\:w-full{width:100%}.gps-484499485347546327 .mobile\:-translate-y-1\/2{--tw-translate-y:-50%}.gps-484499485347546327 .mobile\:-translate-y-1\/2,.gps-484499485347546327 .mobile\:translate-x-0{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.gps-484499485347546327 .mobile\:translate-x-0{--tw-translate-x:0px}.gps-484499485347546327 .mobile\:translate-y-1\/2{--tw-translate-y:50%}.gps-484499485347546327 .mobile\:rotate-0,.gps-484499485347546327 .mobile\:translate-y-1\/2{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.gps-484499485347546327 .mobile\:rotate-0{--tw-rotate:0deg}.gps-484499485347546327 .mobile\:rotate-180{--tw-rotate:180deg;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.gps-484499485347546327 .mobile\:flex-row{flex-direction:row}.gps-484499485347546327 .mobile\:flex-col{flex-direction:column}.gps-484499485347546327 .mobile\:justify-start{justify-content:flex-start}.gps-484499485347546327 .mobile\:px-0{padding-left:0;padding-right:0}.gps-484499485347546327 .mobile\:pl-1{padding-left:4px}}.gps-484499485347546327 .\[\&\>svg\]\:h-auto>svg{height:auto}.gps-484499485347546327 .\[\&\>svg\]\:w-full>svg{width:100%}.gps-484499485347546327 .\[\&_\*\]\:max-w-full *{max-width:100%}.gps-484499485347546327 .\[\&_p\]\:inline p{display:inline}.gps-484499485347546327 .\[\&_p\]\:whitespace-pre-line p{white-space:pre-line}.gps-484499485347546327 .\[\&_p\]\:after\:whitespace-pre-wrap p:after{content:var(--tw-content);white-space:pre-wrap}.gps-484499485347546327 .\[\&_p\]\:after\:content-\[\'\\A\'\] p:after{--tw-content:"\A";content:var(--tw-content)}
+  </style>
+  
+      
+      
+            <section
+              class="mx-auto max-w-full"
+              style="--w:calc(var(--g-ct-w, 1200px) + 2 * var(--g-ct-p, 15px));--w-tablet:calc(var(--g-ct-w, 100%) + 2 * var(--g-ct-p, 15px));--w-mobile:calc(var(--g-ct-w, 100%) + 2 * var(--g-ct-p, 15px));--pl:var(--g-ct-p, 15px);--pl-tablet:var(--g-ct-p, 15px);--pl-mobile:var(--g-ct-p, 15px);--pr:var(--g-ct-p, 15px);--pr-tablet:var(--g-ct-p, 15px);--pr-mobile:var(--g-ct-p, 15px)"
+            >
+              
+    <div
+      id="gX7fq1F_ei"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--pb:var(--g-s-4xl);--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:var(--g-ct-w, 1200px);--w-tablet:var(--g-ct-w, 100%);--w-mobile:var(--g-ct-w, 100%);--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gX7fq1F_ei mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="giTZMpg5Ns relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="goDDAkrhy_ "
+        style="--tt:default;--ta:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-s)"
+      >
+      <div class="flex" style="--jc:center">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] g-paragraph-1 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#575757;word-break:break-word"
+        >
+        <p>What Our Customers Are Saying</p>
+        </div>
+      </div>
+    </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-2xl)" class="gs4dpDd7oP ">
+      
+    <div
+      parentTag="Col"
+        class="gs4dpDd7oP "
+        style="--tt:default;--ta:center"
+      >
+      <div class="flex" style="--jc:center">
+        <h2
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#242424;--fs:normal;--ff:var(--g-font-Poppins, Poppins);--weight:600;--ls:normal;--lh:130%;--size:33px;--size-tablet:33px;--size-mobile:29px;word-break:break-word"
+        >
+        <p>+5,000 HAPPY CUSTOMERS</p>
+        </h2>
+      </div>
+    </div>
+      </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-2xl);--pt:var(--g-s-l);--pb:var(--g-s-l)" class="gEYjqF43xe ">
+      
+    <div
+      class="flex justify-center"
+    >
+      <div
+        style="--w:90px;--w-tablet:90px;--w-mobile:90px;--bs:solid;--bbw:1px;--bbw-tablet:1px;--bbw-mobile:1px;--t:rotate(0deg);--bc:#E0E0E0"
+        class="block tablet:block mobile:block"
+      ></div>
+      <div
+        class="items-center hidden tablet:hidden mobile:hidden"
+        style="--w:90px;--w-tablet:90px;--w-mobile:90px;--bc:#E0E0E0;--t:rotate(0deg)"
+      >
+        
+    <div
+      class="hidden"
+      style="--w:90px;--w-tablet:90px;--w-mobile:90px;--bc:#E0E0E0;--bs:solid;--bbw:1px;--bbw-tablet:1px;--bbw-mobile:1px;--minw:90px"
+    ></div>
+  
+        
+            <span
+              class="inline-flex items-center justify-center flex-none"
+              style="--mr:var(--g-s-xs);--w:20px;--h:20px;--t:rotate(0);--c:var(--g-c-text-1, text-1)"
+            >
+              <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M428.8 137.6h-86.177a115.52 115.52 0 0 0 2.176-22.4c0-47.914-35.072-83.2-92-83.2-45.314 0-57.002 48.537-75.707 78.784-7.735 12.413-16.994 23.317-25.851 33.253l-.131.146-.129.148C135.662 161.807 127.764 168 120.8 168h-2.679c-5.747-4.952-13.536-8-22.12-8H32c-17.673 0-32 12.894-32 28.8v230.4C0 435.106 14.327 448 32 448h64c8.584 0 16.373-3.048 22.12-8h2.679c28.688 0 67.137 40 127.2 40h21.299c62.542 0 98.8-38.658 99.94-91.145 12.482-17.813 18.491-40.785 15.985-62.791A93.148 93.148 0 0 0 393.152 304H428.8c45.435 0 83.2-37.584 83.2-83.2 0-45.099-38.101-83.2-83.2-83.2zm0 118.4h-91.026c12.837 14.669 14.415 42.825-4.95 61.05 11.227 19.646 1.687 45.624-12.925 53.625 6.524 39.128-10.076 61.325-50.6 61.325H248c-45.491 0-77.21-35.913-120-39.676V215.571c25.239-2.964 42.966-21.222 59.075-39.596 11.275-12.65 21.725-25.3 30.799-39.875C232.355 112.712 244.006 80 252.8 80c23.375 0 44 8.8 44 35.2 0 35.2-26.4 53.075-26.4 70.4h158.4c18.425 0 35.2 16.5 35.2 35.2 0 18.975-16.225 35.2-35.2 35.2zM88 384c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z" /></svg>
+            </span>
+          
+        
+            <span
+              class="inline-flex items-center justify-center flex-none g-paragraph-1"
+              style="--tt:horizontal;--c:var(--g-c-text-1, text-1);--mr:var(--g-s-s)"
+            >
+              Title
+            </span>
+          
+        
+    <div
+      class="flex"
+      style="--w:90px;--w-tablet:90px;--w-mobile:90px;--bc:#E0E0E0;--bs:solid;--bbw:1px;--bbw-tablet:1px;--bbw-mobile:1px;--minw:90px"
+    ></div>
+  
+      </div>
+    </div>
+  
+      </div>
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-carousel.js" defer="defer"></script>
+    <gp-carousel  id="gp-root-carousel-g3RieOrG__-{{section.id}}" class=" "  gp-data='{"id":"g3RieOrG__-{{section.id}}","setting":{"arrow":{"desktop":true,"mobile":false,"tablet":false},"arrowCustom":" <svg width=\"44\" height=\"44\" viewBox=\"0 0 44 44\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.25 21.9998C13.25 21.8341 13.3158 21.6751 13.4331 21.5579C13.5503 21.4407 13.7092 21.3748 13.875 21.3748H28.6163L24.6825 17.4423C24.5651 17.325 24.4992 17.1658 24.4992 16.9998C24.4992 16.8338 24.5651 16.6747 24.6825 16.5573C24.7999 16.44 24.959 16.374 25.125 16.374C25.291 16.374 25.4501 16.44 25.5675 16.5573L30.5675 21.5573C30.6257 21.6154 30.6719 21.6843 30.7034 21.7603C30.7349 21.8362 30.7511 21.9176 30.7511 21.9998C30.7511 22.082 30.7349 22.1634 30.7034 22.2394C30.6719 22.3153 30.6257 22.3843 30.5675 22.4423L25.5675 27.4423C25.4501 27.5597 25.291 27.6256 25.125 27.6256C24.959 27.6256 24.7999 27.5597 24.6825 27.4423C24.5651 27.325 24.4992 27.1658 24.4992 26.9998C24.4992 26.8338 24.5651 26.6747 24.6825 26.5573L28.6163 22.6248H13.875C13.7092 22.6248 13.5503 22.559 13.4331 22.4418C13.3158 22.3245 13.25 22.1656 13.25 21.9998Z\" fill=\"#575757\"/> <rect x=\"0.5\" y=\"0.5\" width=\"43\" height=\"43\" stroke=\"#E0E0E0\"/> </svg>","autoplay":false,"autoplayTimeout":2,"childItem":["Slide 1","Slide 2","Slide 3"],"controlOverContent":{"desktop":false},"dot":{"desktop":false,"mobile":true,"tablet":true},"dotActiveColor":{"desktop":"brand","tablet":"#126BFF"},"dotColor":{"desktop":"bg-1","mobile":"bg-2","tablet":"bg-2"},"enableDrag":false,"loop":{"desktop":true},"pauseOnHover":true,"slidesToShow":{"desktop":3,"mobile":1,"tablet":2},"vertical":{"desktop":false}},"styles":{"adaptiveHeight":{"desktop":true},"fullWidth":{"desktop":true},"height":{"desktop":"300px"},"spacing":{"desktop":"30"},"width":{"desktop":"300px"}}}' style="">
+      <div class="hidden aspect-square w-[12px] rounded-full shadow-md"></div>
+      <div
+        
+        class="relative mx-auto my-0 tablet:px-0 max-w-full mobile:px-0 gp-carousel-wrapper mobile:block tablet:block block g3RieOrG__"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--h:auto;--w:100%;--w-tablet:100%;--w-mobile:100%;visibility:hidden"
+      >
+        <div
+          class="h-full"
+        >
+          <div id="gp-carousel-g3RieOrG__-{{section.id}}" class="gem-slider h-full overflow-hidden">
+            
+    <div
+      media-type="{{media.media_type}}" 
+      media-poster="{{media.preview_image.src}}" 
+      media-source-url="{{media.sources.first.url}}" 
+      media-last-source-url="{{mediaSourceUrl}}"
+      external-id="{{media.external_id}}"
+      grid-index="{{forloop.index}}"
+      
+      parentTag="Carousel"
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      class="gem-slider-item w-full gem-slider-item- gFPANZshwn"
+    >
+      
+      
+      
+    <div
+      parentTag="CarouselItem" id="gPDuUly1iQ"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--pt:var(--g-s-2xl);--pl:var(--g-s-2xl);--pb:var(--g-s-2xl);--pr:var(--g-s-2xl);--mb-mobile:34px;--mb-tablet:34px;--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:#FBFBFB;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gPDuUly1iQ mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gTN4q4A0sj relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="gpjN-7d0k3"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-l);--cg:var(--g-s-l);--pc:start;--gtc:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gpjN-7d0k3 mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="gSEzgUDLgD relative flex flex-col"
+    >
+      <div
+    
+    role="presentation"
+    class="group/image gTlyLhGa7S"
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+    >
+    <figure
+      class="relative inline-block overflow-hidden align-middle pointer-events-none"
+      style="--w:60px;--w-tablet:60px;--w-mobile:60px;--h:auto;--h-tablet:auto;--h-mobile:auto;border-radius:inherit"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+      >
+        <img
+    quality="70" title="Image Title"
+    draggable="false"
+    class="inline-block w-full h-full max-w-full flex gp_lazyload"
+    data-src="https://ucarecdn.com/f2eab50a-0a42-4cc5-bfb9-067246350961/-/format/auto/-/preview/3000x3000/-/quality/lighter/a1.png" data-srcset="https://ucarecdn.com/f2eab50a-0a42-4cc5-bfb9-067246350961/-/format/auto/-/preview/3000x3000/-/quality/lighter/a1.png 768w,https://ucarecdn.com/f2eab50a-0a42-4cc5-bfb9-067246350961/-/format/auto/-/preview/3000x3000/-/quality/lighter/a1.png 1024w,https://ucarecdn.com/f2eab50a-0a42-4cc5-bfb9-067246350961/-/format/auto/-/preview/3000x3000/-/quality/lighter/a1.png 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="120" height="120" alt="Alt Image" priority
+    sizes="100vw"
+    style="--aspect:auto;--objf:cover;--bs:none;--bw:0px;--bc:transparent;--radius:var(--g-radius-none);--w:100%"
+  />
+      </div>
+    </figure>
+  </div>
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="g4t-pu7nsi relative flex flex-col"
+    >
+      
+    
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xs);--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll">
+        
+    <div 
+            class="flex flex-wrap"
+            style="--cg:var(--g-s-xxs);--jc:left">
+            <div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="g-zPvN76e- ">
+      
+    <div 
+      
+      class="flex w-full flex-col items-center"
+    >
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gAlea-HBtO"
+    >
+      <div class="inline-flex overflow-hidden"
+      style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:#FAAD14;--t:rotate(0deg);--w:10px;--h:10px;--minw:10px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div>
+  
+      </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="gWlzm9EEpt ">
+      
+    <div 
+      
+      class="flex w-full flex-col items-center"
+    >
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] g-hvBRiaky"
+    >
+      <div class="inline-flex overflow-hidden"
+      style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:#FAAD14;--t:rotate(0deg);--w:10px;--h:10px;--minw:10px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div>
+  
+      </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="gm-ihbtnLt ">
+      
+    <div 
+      
+      class="flex w-full flex-col items-center"
+    >
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gl8QqROQkL"
+    >
+      <div class="inline-flex overflow-hidden"
+      style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:#FAAD14;--t:rotate(0deg);--w:10px;--h:10px;--minw:10px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div>
+  
+      </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="gqzUI59R4a ">
+      
+    <div 
+      
+      class="flex w-full flex-col items-center"
+    >
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] g8aFFt4XB4"
+    >
+      <div class="inline-flex overflow-hidden"
+      style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:#FAAD14;--t:rotate(0deg);--w:10px;--h:10px;--minw:10px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div>
+  
+      </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="gyDJxxAExf ">
+      
+    <div 
+      
+      class="flex w-full flex-col items-center"
+    >
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gY3GY0mYCb"
+    >
+      <div class="inline-flex overflow-hidden"
+      style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:#FAAD14;--t:rotate(0deg);--w:10px;--h:10px;--minw:10px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div>
+  
+      </div>
+         </div>
+    </div>
+  
+    <div
+      parentTag="Col"
+        class="g0oep691Dr "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#242424;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Sandra Gill</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  
+    
+    <div
+      parentTag="Col"
+        class="g-oZLX3gL5 "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-l)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] g-paragraph-1 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#575757;word-break:break-word"
+        >
+        <p>"Great pair headphone, very Impressive set! What stood out the most was the build quality and sounds - top notch! The finesse, the quality of sound is the best I have heard. Love it!"</p>
+        </div>
+      </div>
+    </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-l);--pt:var(--g-s-l);--pb:var(--g-s-l)" class="gvsCu-IByC ">
+      
+    <div
+      class="flex justify-start"
+    >
+      <div
+        style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bs:solid;--bbw:1px;--bbw-tablet:1px;--bbw-mobile:1px;--t:rotate(0deg);--bc:#E0E0E0"
+        class="block tablet:block mobile:block"
+      ></div>
+      <div
+        class="items-center hidden tablet:hidden mobile:hidden"
+        style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bc:#E0E0E0;--t:rotate(0deg)"
+      >
+        
+    <div
+      class="hidden"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bc:#E0E0E0;--bs:solid;--bbw:1px;--bbw-tablet:1px;--bbw-mobile:1px;--minw:100px"
+    ></div>
+  
+        
+            <span
+              class="inline-flex items-center justify-center flex-none"
+              style="--mr:var(--g-s-xs);--w:20px;--h:20px;--t:rotate(0);--c:var(--g-c-text-1, text-1)"
+            >
+              <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M428.8 137.6h-86.177a115.52 115.52 0 0 0 2.176-22.4c0-47.914-35.072-83.2-92-83.2-45.314 0-57.002 48.537-75.707 78.784-7.735 12.413-16.994 23.317-25.851 33.253l-.131.146-.129.148C135.662 161.807 127.764 168 120.8 168h-2.679c-5.747-4.952-13.536-8-22.12-8H32c-17.673 0-32 12.894-32 28.8v230.4C0 435.106 14.327 448 32 448h64c8.584 0 16.373-3.048 22.12-8h2.679c28.688 0 67.137 40 127.2 40h21.299c62.542 0 98.8-38.658 99.94-91.145 12.482-17.813 18.491-40.785 15.985-62.791A93.148 93.148 0 0 0 393.152 304H428.8c45.435 0 83.2-37.584 83.2-83.2 0-45.099-38.101-83.2-83.2-83.2zm0 118.4h-91.026c12.837 14.669 14.415 42.825-4.95 61.05 11.227 19.646 1.687 45.624-12.925 53.625 6.524 39.128-10.076 61.325-50.6 61.325H248c-45.491 0-77.21-35.913-120-39.676V215.571c25.239-2.964 42.966-21.222 59.075-39.596 11.275-12.65 21.725-25.3 30.799-39.875C232.355 112.712 244.006 80 252.8 80c23.375 0 44 8.8 44 35.2 0 35.2-26.4 53.075-26.4 70.4h158.4c18.425 0 35.2 16.5 35.2 35.2 0 18.975-16.225 35.2-35.2 35.2zM88 384c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z" /></svg>
+            </span>
+          
+        
+            <span
+              class="inline-flex items-center justify-center flex-none g-paragraph-1"
+              style="--tt:horizontal;--c:var(--g-c-text-1, text-1);--mr:var(--g-s-s)"
+            >
+              Title
+            </span>
+          
+        
+    <div
+      class="flex"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bc:#E0E0E0;--bs:solid;--bbw:1px;--bbw-tablet:1px;--bbw-mobile:1px;--minw:100px"
+    ></div>
+  
+      </div>
+    </div>
+  
+      </div>
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product.v2.js" defer="defer"></script>
+    {%- assign gpBkProduct = product -%}
+    
+        {%- liquid
+          if request.page_type == 'product'
+            if 'static' == 'static'
+              if 'latest' == 'latest'
+                paginate collections.all.products by 100000
+                  assign product = collections.all.products | sort: 'created_at' | reverse | first
+                endpaginate
+              else
+                assign product = all_products['']
+                if product == empty or product == null
+                  paginate collections.all.products by 100000
+                    for item in collections.all.products 
+                      if item.id == 'latest'
+                        assign product = item
+                      endif
+                    endfor
+                  endpaginate
+                endif
+              endif
+            endif
+          else
+            if 'latest' == 'latest'
+              paginate collections.all.products by 100000
+                assign product = collections.all.products | sort: 'created_at'| reverse | first
+              endpaginate
+            else
+              assign product = all_products['']
+              if product == empty or product == null
+                paginate collections.all.products by 100000
+                  for item in collections.all.products 
+                    if item.id == 'latest'
+                      assign product = item
+                    endif
+                  endfor
+                endpaginate
+              endif
+            endif
+          endif
+        -%}
+      
+
+    {%-if product != empty and product != null -%}
+      {%- assign initVariantId =  -%}
+      {%- assign product_form_id = 'product-form-' | append: "gxbNDbgSWD" -%}
+      {%- assign variant = product.selected_or_first_available_variant -%}
+      {%- assign productSelectedVariant = product.selected_or_first_available_variant -%}
+      {%-if productSelectedVariant == empty or productSelectedVariant == null -%}
+        {%- assign productSelectedVariant = product.selected_or_first_available_variant -%}
+      {%- endif -%}
+      {%-if variant == empty or variant == null -%}
+        {%- assign variant = product.selected_or_first_available_variant -%}
+      {%- endif -%}
+      <gp-product class="" gp-context='{"productId": {{ product.id }}, "isSyncProduct": "", "variantSelected": {{ variant | json | escape }}, "quantity": 1, "formId": "{{ product_form_id }}" }'
+        gp-data='{"variantSelected": {{ variant | json | escape }}, "quantity": 1}'>
+        {%- form 'product', product, id: product_form_id, class: 'form contents', data-type: 'add-to-cart-form', autocomplete: 'off'  -%}
+          <input type="hidden" name="id" value="{{ variant.id }}" />
+          <input type="hidden" name="quantity" value="{{ quantity }}" />
+          <button type="submit" onclick="return false;" style="display:none;"></button>
+          
+      
+      
+    <div
+      id
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--cg:var(--g-s-l);--pc:start;--gtc:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%"
+        class="mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gVHLaquEEc relative flex flex-col"
+    >
+      
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-images.js" defer="defer"></script>
+  {% assign featured_image = product.featured_image %}
+  {%- if variant != null and variant.featured_image != null -%}
+  {% assign featured_image = variant.featured_image %}
+  {%- endif -%}
+  <gp-product-images
+    gp-data='
+    {
+      "id":"g5v1IF2Lx9",
+      "setting":{"arrow":{"desktop":true,"mobile":true,"tablet":true},"arrowIcon":"","clickEffect":"none","controlOverContent":{"desktop":true,"mobile":true,"tablet":true},"dot":{"desktop":true,"mobile":true,"tablet":true},"dragToScroll":true,"featureImageVisible":{"desktop":true,"mobile":true,"tablet":true},"galleryVisible":{"desktop":false,"mobile":false,"tablet":false},"hoverEffect":"none","largeViewInPopup":{"desktop":false,"mobile":false,"tablet":false},"loop":{"desktop":true,"mobile":true,"tablet":true},"numberPerRow":{"desktop":5,"mobile":3,"tablet":5},"otherImage":0,"pauseOnHover":true,"showActiveStatus":true,"slidesToShow":{"desktop":5,"mobile":3,"tablet":5},"speed":1,"type":{"desktop":"images","mobile":"images","tablet":"images"},"zoom":1.5,"zoomType":"default"},
+      "styles":{"align":{"desktop":"flex-start","mobile":"flex-start","tablet":"flex-start"},"aspectHeight":{"desktop":0,"mobile":0,"tablet":0},"aspectRatio":{"desktop":"1","mobile":"1","tablet":"1"},"aspectWidth":{"desktop":0,"mobile":0,"tablet":0},"customAspectRadio":{"desktop":{"height":0,"width":0},"mobile":{"height":0,"width":0},"tablet":{"height":0,"width":0}},"dotActiveColor":{"desktop":"highlight"},"dotColor":{"desktop":"bg-1"},"ftAlign":{"desktop":"center","mobile":"center","tablet":"center"},"ftAspectHeight":{"desktop":0,"mobile":0,"tablet":0},"ftAspectRatio":{"desktop":"1","mobile":"1","tablet":"1"},"ftAspectWidth":{"desktop":0,"mobile":0,"tablet":0},"ftCustomAspectRadio":{"desktop":{"height":0,"width":0},"mobile":{"height":0,"width":0},"tablet":{"height":0,"width":0}},"ftFullWidth":{"desktop":false,"mobile":true,"tablet":true},"ftLayout":{"desktop":"cover","mobile":"cover","tablet":"cover"},"ftWidth":{"desktop":"80px","mobile":"100px","tablet":"100px"},"fullWidth":{"desktop":true,"mobile":true,"tablet":true},"gallerySpacing":{"desktop":"var(--g-s-s)","mobile":"var(--g-s-s)"},"layout":{"desktop":"cover","mobile":"cover","tablet":"cover"},"position":{"desktop":"bottom-left"},"spacing":{"desktop":"var(--g-s-s)","mobile":"var(--g-s-s)"},"verticalLayout":{"desktop":false,"mobile":false,"tablet":false},"verticalLayoutRow":{"desktop":true,"mobile":true,"tablet":true},"width":{"desktop":"300px","mobile":"300px","tablet":"300px"}}, 
+      "product":{{ product | json | escape }}
+    }
+  '
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+    class=""
+  >
+    <div
+        class="flex w-full flex-col tablet:flex-col mobile:flex-col"
+        style="--ai:start;--ai-tablet:start;--ai-mobile:start"
+      >
+        <div
+  class="featured-image-root gp-product-images-ft flex"
+  style="--jc:flex-start;--jc-tablet:flex-start;--jc-mobile:flex-start;--d:flex;--d-mobile:flex;--d-tablet:flex;--w:80px;--w-tablet:100px;--w-mobile:100px"
+>
+  <div role="presentation" 
+    media-type="{{product.featured_media.media_type}}"
+    class="featured-image-wrapper relative flex w-full overflow-hidden"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1"
+  >
+  <div class="flex w-full items-start justify-center">
+    <div class="featured-image group relative w-full h-full overflow-hidden flex items-center justify-center">
+      {% assign hasModel3d = false %}
+      {% assign hasImage = false %}
+      {% assign hasVideo = false %}
+      {% assign mediaSourcesModel = null %}
+      {% assign mediaSourceVideo = null %}
+      {% assign mediaVideoAlt = null %}
+
+      {% for media in product.media %}
+        {% if media.media_type == 'model' %}
+          {% assign hasModel3d = true %}
+          {% assign mediaSourcesModel = media.sources %}
+        {% endif %}
+      {% if media.media_type == 'video' %}
+        {% assign hasVideo = true %}
+        {% assign mediaSourceVideo = media.sources.last.url %}
+        {% assign mediaVideoAlt = media.alt %}
+      {% endif %}
+      {% if media.media_type == 'external_video' %}
+        {% assign hasVideo = true %}
+        {% assign mediaSourceVideo = media | external_video_url %}
+        {% assign mediaVideoAlt = media.alt %}
+      {% endif %}
+      {% if media.media_type == 'image' %}
+        {% assign hasImage = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% if hasModel3d == true %}
+      <script type="module" defer="" src="https://cdn.shopify.com/shopifycloud/model-viewer/v1.12/model-viewer.js"></script>
+    {% endif %}
+ 
+    
+    {% assign featureMedia = product.media.first %}
+    {%- assign variant = product.selected_or_first_available_variant -%}
+    {% assign shouldHidden = '' %}
+    {% if featureMedia.media_type == 'model' %}
+      
+    <model-viewer
+      class="w-full h-full model-viewer z-[90]"
+      width="100%" height="100%"
+      
+      
+      
+      
+      src="{{featureMedia.sources.first.url}}"
+      alt="{{featureMedia.preview_image.alt}}"
+      camera-controls="true"
+      poster="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}"
+      data-js-focus-visible=""
+      data-shopify-feature="1.12"
+      ar-status="not-presenting"
+      style="--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1">
+    </model-viewer>
+  
+    {% endif %}
+    {% if featureMedia.media_type == 'video' %}
+      
+    <iframe
+      width="100%" height="100%"
+      class="feature-video w-full h-full relative"
+      src="{{mediaSourceVideo}}"
+      controls="true"
+      allowfullscreen="true"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      frameborder="0"
+      autoplay="true"
+      alt="{{mediaVideoAlt}}"
+      style=""
+    >
+    </iframe>
+  
+    {% endif %}
+    {% if featureMedia.media_type == 'external_video' %}
+      
+    <iframe
+      width="100%" height="100%"
+      class="feature-video w-full h-full relative"
+      src="{{mediaSourceVideo}}"
+      controls="true"
+      allowfullscreen="true"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      frameborder="0"
+      autoplay="true"
+      alt="{{mediaVideoAlt}}"
+      style=""
+    >
+    </iframe>
+  
+    {% endif %}
+    {% if featureMedia.media_type != 'image' %}
+      {% assign shouldHidden = 'hidden' %}
+    {% endif %}
+    
+    <img
+    id="{%- if variant.featured_image != null -%}
+              {{variant.featured_image.id}}
+           {%- elsif variant.featured_image == null -%}
+              {{featureMedia.id}}
+            {%- endif -%}"
+    draggable="false"
+    class="w-full featured-image-only w-full transition-opacity {{shouldHidden}}"
+    data-src="{%- if variant.featured_image != null -%}
+              {{ variant.featured_image.src | img_url: '1024x1024'}}
+            {%- elsif variant.featured_image == null -%}
+              {{ featureMedia.src | img_url: '1024x1024'}}
+            {%- else -%}
+              {{ 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif' }}
+            {%- endif -%}" data-srcset="{%- if variant.featured_image != null -%}
+              {{ variant.featured_image.src | img_url: '1024x1024'}}
+            {%- elsif variant.featured_image == null -%}
+              {{ featureMedia.src | img_url: '1024x1024'}}
+            {%- else -%}
+              {{ 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif' }}
+            {%- endif -%} 768w,{%- if variant.featured_image != null -%}
+              {{ variant.featured_image.src | img_url: '1024x1024'}}
+            {%- elsif variant.featured_image == null -%}
+              {{ featureMedia.src | img_url: '1024x1024'}}
+            {%- else -%}
+              {{ 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif' }}
+            {%- endif -%} 1024w,{%- if variant.featured_image != null -%}
+              {{ variant.featured_image.src | img_url: '1024x1024'}}
+            {%- elsif variant.featured_image == null -%}
+              {{ featureMedia.src | img_url: '1024x1024'}}
+            {%- else -%}
+              {{ 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif' }}
+            {%- endif -%} 1440w" src="{%- if variant.featured_image != null -%}
+              {{ variant.featured_image.src | img_url: '1024x1024'}}
+            {%- elsif variant.featured_image == null -%}
+              {{ featureMedia.src | img_url: '1024x1024'}}
+            {%- else -%}
+              {{ 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif' }}
+            {%- endif -%}" width="{%- if variant.featured_image != null -%}
+                {{variant.featured_image.width}}
+              {%- elsif variant.featured_image == null -%}
+                {{featureMedia.width}}
+              {%- endif -%}" height="{%- if variant.featured_image != null -%}
+                {{variant.featured_image.height}}
+              {%- elsif variant.featured_image == null -%}
+                {{featureMedia.height}}
+              {%- endif -%}" alt="{%- if variant.featured_image != null -%}
+              {{variant.featured_image.alt}}
+            {%- elsif variant.featured_image == null -%}
+              {{featureMedia.alt}}
+            {%- endif -%}" priority="true"
+    sizes="100vw"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1;--objf:cover;--objf-tablet:cover;--objf-mobile:cover;--w:100%"
+  />
+    
+    
+    
+    </div>
+  </div>
+  </div>
+</div>
+        {%- if product.media.size > 1 -%}
+          <div
+            class="gallery-wrapper gp-product-images-gallery inline-flex h-fit max-w-full justify-start tablet:justify-start mobile:justify-start"
+            style="--fs:1.23;--d:none;--d-mobile:none;--d-tablet:none;--w:300px;--w-tablet:300px;--w-mobile:300px;--mt:var(--g-s-s);--mr:0px;--ml:0px;--mt-mobile:var(--g-s-s);--mr-mobile:0px;--ml-mobile:0px;--mt-tablet:var(--g-s-s);--mr-tablet:0px;--ml-tablet:0px"
+          >
+            
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-carousel.js" defer="defer"></script>
+    <gp-carousel type="grid-carousel" id="gp-root-carousel-g5v1IF2Lx9-{{product.id}}-{{section.id}}" class="flex-1 w-full carousel-gallery "  gp-data='{"id":"g5v1IF2Lx9-{{product.id}}-{{section.id}}","setting":{"loop":{"desktop":true,"mobile":true,"tablet":true},"slidesToShow":{"desktop":5,"mobile":3,"tablet":5},"dot":{"desktop":false,"tablet":false,"mobile":false},"arrow":{"desktop":true,"mobile":true,"tablet":true},"controlOverContent":{"desktop":true,"mobile":true,"tablet":true},"enableDrag":true,"vertical":{"desktop":false,"mobile":false,"tablet":false},"dotActiveColor":{"desktop":"highlight"},"dotColor":{"desktop":"bg-1"},"arrowCustom":""},"styles":{"fullWidth":{"desktop":true,"mobile":true,"tablet":true},"width":{"desktop":"100%","tablet":"100%","mobile":"100%"},"spacing":{"desktop":5,"tablet":5,"mobile":5},"adaptiveHeight":{"desktop":true,"mobile":true,"tablet":true}},"isHiddenArrowWhenDisabled":true}' style="--d:none;--d-mobile:none;--d-tablet:none">
+      <div class="hidden aspect-square w-[12px] rounded-full shadow-md"></div>
+      <div
+        
+        class="relative mx-auto my-0 tablet:px-0 max-w-full mobile:px-0 gp-carousel-wrapper mobile:block tablet:block block"
+        style="--h:auto;--h-tablet:auto;--h-mobile:auto;--w:100%;--w-tablet:100%;--w-mobile:100%;visibility:hidden"
+      >
+        <div
+          class="h-full"
+        >
+          <div id="gp-carousel-g5v1IF2Lx9-{{product.id}}-{{section.id}}" class="gem-slider h-full overflow-hidden">
+            
+    {%- if product.media.size > 1 -%}
+    {%- for media in product.media -%}
+    {% if media.media_type == 'image' %}
+      {%- for image in product.images -%}
+        {% if image.src == media.src %}
+          {% assign imageID = image.id %}
+          {% break %}
+        {% endif%}
+      {% endfor %}
+    {% else %}
+      {% assign imageID = '' %}
+    {% endif %}
+      {%- if media.id == product.featured_media.id -%}
+        
+    {% if media.media_type == 'video' %}
+      {% assign mediaSourceUrl = media.sources.last.url %}
+    {% endif %}
+    {% if media.media_type == 'external_video' %}
+      {% assign mediaSourceUrl = media | external_video_url %}
+    {% endif %}
+     {% if media.media_type == 'image' %}
+      {% assign mediaSourceUrl = media.src %}
+    {% endif %}
+    
+    <div
+      media-type="{{media.media_type}}" 
+      media-poster="{{media.preview_image.src}}" 
+      media-source-url="{{media.sources.first.url}}" 
+      media-last-source-url="{{mediaSourceUrl}}"
+      external-id="{{media.external_id}}"
+      grid-index="{{forloop.index}}"
+      data-outline="active"
+      id="{{imageID}}"
+      style="outline-color:var(--g-c-brand, brand)"
+      class="gem-slider-item w-full gem-slider-item-g5v1IF2Lx9-{{product.id}} group flex w-full items-center justify-center overflow-hidden outline-1 -outline-offset-1 image-item data-[outline=active]:outline data-[outline=active]:p-[1px] p-[1px]"
+    >
+      
+      <img
+    
+    draggable="false"
+    class="gp_lazyload"
+    data-src="{{media.preview_image | product_img_url: '1024x1024'}}" data-srcset="{{media.preview_image | product_img_url: '1024x1024'}} 768w,{{media.preview_image | product_img_url: '1024x1024'}} 1024w,{{media.preview_image | product_img_url: '1024x1024'}} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="{{media.width}}" height="{{media.height}}" alt="{{media.alt}}" priority
+    sizes="100vw"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1;--objf:cover;--objf-tablet:cover;--objf-mobile:cover;--w:100%;--w-tablet:100%;--w-mobile:100%"
+  />
+      
+      {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0" >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path d="M17.6869 12.2646L17.6868 12.2646L6.78379 18.4464C6.78378 18.4464 6.78376 18.4464 6.78374 18.4464C6.52931 18.5903 6.1665 18.4179 6.1665 18.0416V5.95844C6.1665 5.58218 6.52917 5.40981 6.7836 5.55354C6.78366 5.55357 6.78373 5.55361 6.78379 5.55365L17.6868 11.7354L17.6869 11.7354C17.8819 11.846 17.8819 12.154 17.6869 12.2646Z" stroke="#F9F9F9" stroke-miterlimit="10"/>
+        </svg>
+      </div>
+      {% endif %}
+
+      {% if media.media_type == 'model' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7441 4.57034C11.9017 4.47655 12.098 4.47655 12.2555 4.57034L18.5889 8.33957C18.7404 8.42971 18.8332 8.59296 18.8332 8.76923V15.2308C18.8332 15.407 18.7404 15.5703 18.5889 15.6604L12.2555 19.4297C12.098 19.5234 11.9017 19.5234 11.7441 19.4297L5.41079 15.6604C5.25932 15.5703 5.1665 15.407 5.1665 15.2308V8.76923C5.1665 8.59296 5.25932 8.42971 5.41079 8.33957L11.7441 4.57034ZM6.1665 9.64865V14.9465L11.4998 18.1206V12.8227L6.1665 9.64865ZM12.4998 12.8227V18.1206L17.8332 14.9465V9.64865L12.4998 12.8227ZM17.3555 8.76923L11.9998 11.9566L6.64417 8.76923L11.9998 5.58185L17.3555 8.76923Z" fill="#F9F9F9"/>
+        </svg>
+      </div>
+      {% endif %}
+      
+      <div class="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50 opacity-0 transition-opacity duration-100 group-hover:opacity-100" 
+      style="--d: none;--d-mobile: none;--d-tablet: none;" 
+      >
+        <svg
+          height="100%"
+          width="100%"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          viewBox="0 0 512 512"
+          color="#fff"
+        >
+          <path
+            fill="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M62.2467 345.253C43.7072 326.714 29.1474 305.116 18.9714 281.057C8.42839 256.13 3.08301 229.671 3.08301 202.418C3.08301 175.165 8.43012 148.707 18.974 123.78C29.15 99.7213 43.7098 78.123 62.2485 59.5834C80.788 41.0439 102.386 26.4841 126.445 16.3081C151.372 5.76422 177.831 0.417969 205.084 0.417969C232.337 0.417969 258.794 5.76421 283.722 16.3064C307.78 26.4823 329.379 41.0422 347.918 59.5817C366.458 78.1212 381.017 99.7196 391.194 123.778C401.737 148.706 407.083 175.163 407.083 202.417C407.083 229.671 401.737 256.129 391.194 281.056C388.406 287.648 385.277 294.048 381.839 300.257L493.397 411.815C514.091 432.511 514.091 466.187 493.395 486.883L484.272 496.006C474.245 506.032 460.915 511.553 446.738 511.553C432.559 511.553 419.228 506.032 409.202 496.006L296.022 382.824C291.996 384.854 287.898 386.762 283.721 388.528C258.794 399.073 232.336 404.419 205.082 404.419C177.828 404.419 151.371 399.071 126.443 388.528C102.385 378.352 80.7863 363.793 62.2467 345.253ZM301.699 336.166C313.928 327.317 324.896 316.835 334.282 305.034C342.149 295.142 348.9 284.325 354.355 272.775C364.433 251.432 370.076 227.586 370.076 202.419C370.076 111.296 296.206 37.4253 205.083 37.4253C113.96 37.4253 40.0895 111.294 40.0895 202.418C40.0895 293.541 113.96 367.411 205.084 367.411C227.413 367.411 248.701 362.967 268.126 354.928C280.091 349.976 291.347 343.658 301.699 336.166ZM467.229 460.716C473.507 454.439 473.507 444.26 467.229 437.982L360.595 331.348C356.601 336.153 352.378 340.794 347.919 345.253C341.671 351.502 335.068 357.286 328.147 362.615L435.371 469.839C438.511 472.977 442.624 474.547 446.739 474.547C450.853 474.547 454.967 472.978 458.106 469.839L467.229 460.716ZM223.582 183.91H281.071C291.292 183.91 299.574 192.194 299.575 202.414C299.575 206.778 298.062 210.786 295.533 213.951C292.143 218.195 286.926 220.916 281.072 220.916H228.303H223.583V225.63V278.406C223.583 287.081 217.613 294.358 209.559 296.361C208.124 296.717 206.625 296.909 205.08 296.909C194.861 296.909 186.577 288.625 186.577 278.406V220.917H129.087C118.868 220.917 110.584 212.633 110.584 202.414C110.584 192.195 118.868 183.911 129.087 183.911H186.576V126.421C186.576 116.202 194.86 107.918 205.079 107.918C215.298 107.918 223.582 116.202 223.582 126.421V183.91Z"
+          />
+        </svg>
+      </div>
+    
+    </div>
+  
+      {% else %}
+        
+    {% if media.media_type == 'video' %}
+      {% assign mediaSourceUrl = media.sources.last.url %}
+    {% endif %}
+    {% if media.media_type == 'external_video' %}
+      {% assign mediaSourceUrl = media | external_video_url %}
+    {% endif %}
+     {% if media.media_type == 'image' %}
+      {% assign mediaSourceUrl = media.src %}
+    {% endif %}
+    
+    <div
+      media-type="{{media.media_type}}" 
+      media-poster="{{media.preview_image.src}}" 
+      media-source-url="{{media.sources.first.url}}" 
+      media-last-source-url="{{mediaSourceUrl}}"
+      external-id="{{media.external_id}}"
+      grid-index="{{forloop.index}}"
+      data-outline="deactive"
+      id="{{imageID}}"
+      style="outline-color:var(--g-c-brand, brand)"
+      class="gem-slider-item w-full gem-slider-item-g5v1IF2Lx9-{{product.id}} group flex w-full items-center justify-center overflow-hidden outline-1 -outline-offset-1 image-item data-[outline=active]:outline data-[outline=active]:p-[1px] undefined"
+    >
+      
+      <img
+    
+    draggable="false"
+    class="gp_lazyload"
+    data-src="{{media.preview_image | product_img_url: '1024x1024'}}" data-srcset="{{media.preview_image | product_img_url: '1024x1024'}} 768w,{{media.preview_image | product_img_url: '1024x1024'}} 1024w,{{media.preview_image | product_img_url: '1024x1024'}} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="{{media.width}}" height="{{media.height}}" alt="{{media.alt}}" priority
+    sizes="100vw"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1;--objf:cover;--objf-tablet:cover;--objf-mobile:cover;--w:100%;--w-tablet:100%;--w-mobile:100%"
+  />
+      
+      {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0" >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path d="M17.6869 12.2646L17.6868 12.2646L6.78379 18.4464C6.78378 18.4464 6.78376 18.4464 6.78374 18.4464C6.52931 18.5903 6.1665 18.4179 6.1665 18.0416V5.95844C6.1665 5.58218 6.52917 5.40981 6.7836 5.55354C6.78366 5.55357 6.78373 5.55361 6.78379 5.55365L17.6868 11.7354L17.6869 11.7354C17.8819 11.846 17.8819 12.154 17.6869 12.2646Z" stroke="#F9F9F9" stroke-miterlimit="10"/>
+        </svg>
+      </div>
+      {% endif %}
+
+      {% if media.media_type == 'model' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7441 4.57034C11.9017 4.47655 12.098 4.47655 12.2555 4.57034L18.5889 8.33957C18.7404 8.42971 18.8332 8.59296 18.8332 8.76923V15.2308C18.8332 15.407 18.7404 15.5703 18.5889 15.6604L12.2555 19.4297C12.098 19.5234 11.9017 19.5234 11.7441 19.4297L5.41079 15.6604C5.25932 15.5703 5.1665 15.407 5.1665 15.2308V8.76923C5.1665 8.59296 5.25932 8.42971 5.41079 8.33957L11.7441 4.57034ZM6.1665 9.64865V14.9465L11.4998 18.1206V12.8227L6.1665 9.64865ZM12.4998 12.8227V18.1206L17.8332 14.9465V9.64865L12.4998 12.8227ZM17.3555 8.76923L11.9998 11.9566L6.64417 8.76923L11.9998 5.58185L17.3555 8.76923Z" fill="#F9F9F9"/>
+        </svg>
+      </div>
+      {% endif %}
+      
+      <div class="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50 opacity-0 transition-opacity duration-100 group-hover:opacity-100" 
+      style="--d: none;--d-mobile: none;--d-tablet: none;" 
+      >
+        <svg
+          height="100%"
+          width="100%"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          viewBox="0 0 512 512"
+          color="#fff"
+        >
+          <path
+            fill="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M62.2467 345.253C43.7072 326.714 29.1474 305.116 18.9714 281.057C8.42839 256.13 3.08301 229.671 3.08301 202.418C3.08301 175.165 8.43012 148.707 18.974 123.78C29.15 99.7213 43.7098 78.123 62.2485 59.5834C80.788 41.0439 102.386 26.4841 126.445 16.3081C151.372 5.76422 177.831 0.417969 205.084 0.417969C232.337 0.417969 258.794 5.76421 283.722 16.3064C307.78 26.4823 329.379 41.0422 347.918 59.5817C366.458 78.1212 381.017 99.7196 391.194 123.778C401.737 148.706 407.083 175.163 407.083 202.417C407.083 229.671 401.737 256.129 391.194 281.056C388.406 287.648 385.277 294.048 381.839 300.257L493.397 411.815C514.091 432.511 514.091 466.187 493.395 486.883L484.272 496.006C474.245 506.032 460.915 511.553 446.738 511.553C432.559 511.553 419.228 506.032 409.202 496.006L296.022 382.824C291.996 384.854 287.898 386.762 283.721 388.528C258.794 399.073 232.336 404.419 205.082 404.419C177.828 404.419 151.371 399.071 126.443 388.528C102.385 378.352 80.7863 363.793 62.2467 345.253ZM301.699 336.166C313.928 327.317 324.896 316.835 334.282 305.034C342.149 295.142 348.9 284.325 354.355 272.775C364.433 251.432 370.076 227.586 370.076 202.419C370.076 111.296 296.206 37.4253 205.083 37.4253C113.96 37.4253 40.0895 111.294 40.0895 202.418C40.0895 293.541 113.96 367.411 205.084 367.411C227.413 367.411 248.701 362.967 268.126 354.928C280.091 349.976 291.347 343.658 301.699 336.166ZM467.229 460.716C473.507 454.439 473.507 444.26 467.229 437.982L360.595 331.348C356.601 336.153 352.378 340.794 347.919 345.253C341.671 351.502 335.068 357.286 328.147 362.615L435.371 469.839C438.511 472.977 442.624 474.547 446.739 474.547C450.853 474.547 454.967 472.978 458.106 469.839L467.229 460.716ZM223.582 183.91H281.071C291.292 183.91 299.574 192.194 299.575 202.414C299.575 206.778 298.062 210.786 295.533 213.951C292.143 218.195 286.926 220.916 281.072 220.916H228.303H223.583V225.63V278.406C223.583 287.081 217.613 294.358 209.559 296.361C208.124 296.717 206.625 296.909 205.08 296.909C194.861 296.909 186.577 288.625 186.577 278.406V220.917H129.087C118.868 220.917 110.584 212.633 110.584 202.414C110.584 192.195 118.868 183.911 129.087 183.911H186.576V126.421C186.576 116.202 194.86 107.918 205.079 107.918C215.298 107.918 223.582 116.202 223.582 126.421V183.91Z"
+          />
+        </svg>
+      </div>
+    
+    </div>
+  
+      {%- endif -%}
+    {% endfor %}
+    {%- endif -%}
+    
+          </div>
+        </div>
+        
+    <button
+      class="gp-carousel-action-back g5v1IF2Lx9-{{product.id}}-{{section.id}} gp-carousel-arrow absolute h-6 w-6 cursor-pointer text-gray-500 disabled:cursor-default disabled:text-gray-300 data-[hidden=true]:!hidden tablet:!inline mobile:!inline left-4 tablet:left-4 tablet:translate-x-0 tablet:pl-1 mobile:left-4 mobile:translate-x-0 mobile:pl-1 rotate-180 tablet:rotate-180 mobile:rotate-180 top-1/2 -translate-y-1/2 tablet:top-1/2 tablet:-translate-y-1/2 mobile:top-1/2 mobile:-translate-y-1/2"
+      
+    >
+      <span 
+  class="inline-flex h-6 w-6 items-center justify-center"
+  style=""
+  >
+    <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+          </svg>
+    </span>
+    </button>
+  
+
+        
+    <button
+      class="gp-carousel-action-next g5v1IF2Lx9-{{product.id}}-{{section.id}} gp-carousel-arrow absolute h-6 w-6 cursor-pointer text-gray-500 disabled:cursor-default disabled:text-gray-300 data-[hidden=true]:!hidden tablet:!inline mobile:!inline right-4 tablet:right-4 tablet:translate-x-0 tablet:pl-1 mobile:right-4 mobile:translate-x-0 mobile:pl-1 rotate-0 tablet:rotate-0 mobile:rotate-0 bottom-1/2 translate-y-1/2 tablet:bottom-1/2 tablet:translate-y-1/2 mobile:bottom-1/2 mobile:translate-y-1/2"
+      
+    >
+      <span 
+  class="inline-flex h-6 w-6 items-center justify-center"
+  style=""
+  >
+    <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+          </svg>
+    </span>
+    </button>
+  
+        
+        <div
+    class="items-center justify-center gap-2 text-center gp-carousel-dot-container gp-carousel-dot-container-g5v1IF2Lx9-{{product.id}}-{{section.id}} hidden flex-row w-full mt-2 tablet:!hidden tablet:flex-row tablet:w-full tablet:mt-2 mobile:!hidden mobile:flex-row mobile:w-full mobile:mt-2" ></div>
+      </div>
+    </gp-carousel>
+  
+  
+            
+  <div type="grid-gallery"
+    class="grid-gallery flex h-fit w-full flex-wrap scrollbar-track:rounded-2xl scrollbar-thumb:rounded-2xl scrollbar-thumb:bg-gray-400"
+    style="--d:flex;--d-mobile:flex;--d-tablet:flex;--gg:5px;--gg-tablet:5px;--gg-mobile:5px"
+  > 
+    {%- if product.media.size > 1 -%}
+      {%- for media in product.media -%}
+        {% if media.media_type == 'image' %}
+          {%- for image in product.images -%}
+            {% if image.src == media.src %}
+              {% assign imageID = image.id %}
+              {% break %}
+            {% endif%}
+          {% endfor %}
+        {% else %}
+          {% assign imageID = '' %}
+        {% endif %}
+        {%- if media.id == product.featured_media.id -%}        
+            
+    {% if media.media_type == 'video' %}
+      {% assign mediaSourceUrl = media.sources.last.url %}
+    {% endif %}
+    {% if media.media_type == 'external_video' %}
+      {% assign mediaSourceUrl = media | external_video_url %}
+      {% assign mediaSource = media | json %}
+    {% endif %}
+    {% if media.media_type == 'image' %}
+      {% assign mediaSourceUrl = media.src %}
+    {% endif %}
+    <div 
+      aria-hidden 
+      id="{{imageID}}" 
+      media-type="{{media.media_type}}" 
+      media-poster="{{media.preview_image.src}}" 
+      media-source-url="{{media.sources.first.url}}" 
+      media-last-source-url="{{mediaSourceUrl}}"
+      external-id="{{media.external_id}}"
+      grid-index="{{forloop.index}}"
+      data-outline="active" class="image-item p-[1px] data-[outline=active]:outline data-[outline=active]:p-[1px] group relative overflow-hidden outline-1 -outline-offset-1 cursor-pointer"
+      style="--aspect: 1;--aspect-tablet: 1;--aspect-mobile: 1;--w: calc(20% - 4px);--w-tablet: calc(20% - 4px);--w-mobile: calc(33.333333333333336% - 3.3333333333333335px);outline-color: var(--g-c-brand, brand);max-width: 100%;"
+      >
+      {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+        <div class="absolute pb-1 pr-1 right-0 bottom-0" >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+            <path d="M17.6869 12.2646L17.6868 12.2646L6.78379 18.4464C6.78378 18.4464 6.78376 18.4464 6.78374 18.4464C6.52931 18.5903 6.1665 18.4179 6.1665 18.0416V5.95844C6.1665 5.58218 6.52917 5.40981 6.7836 5.55354C6.78366 5.55357 6.78373 5.55361 6.78379 5.55365L17.6868 11.7354L17.6869 11.7354C17.8819 11.846 17.8819 12.154 17.6869 12.2646Z" stroke="#F9F9F9" stroke-miterlimit="10"/>
+          </svg>
+        </div>
+      {% endif %}
+
+      {% if media.media_type == 'model' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7441 4.57034C11.9017 4.47655 12.098 4.47655 12.2555 4.57034L18.5889 8.33957C18.7404 8.42971 18.8332 8.59296 18.8332 8.76923V15.2308C18.8332 15.407 18.7404 15.5703 18.5889 15.6604L12.2555 19.4297C12.098 19.5234 11.9017 19.5234 11.7441 19.4297L5.41079 15.6604C5.25932 15.5703 5.1665 15.407 5.1665 15.2308V8.76923C5.1665 8.59296 5.25932 8.42971 5.41079 8.33957L11.7441 4.57034ZM6.1665 9.64865V14.9465L11.4998 18.1206V12.8227L6.1665 9.64865ZM12.4998 12.8227V18.1206L17.8332 14.9465V9.64865L12.4998 12.8227ZM17.3555 8.76923L11.9998 11.9566L6.64417 8.76923L11.9998 5.58185L17.3555 8.76923Z" fill="#F9F9F9"/>
+        </svg>
+      </div>
+      {% endif %}
+
+      <img
+    
+    draggable="false"
+    class="gp_lazyload"
+    data-src="{{media.preview_image | product_img_url: '1024x1024'}}" data-srcset="{{media.preview_image | product_img_url: '1024x1024'}} 768w,{{media.preview_image | product_img_url: '1024x1024'}} 1024w,{{media.preview_image | product_img_url: '1024x1024'}} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="{{media.width}}" height="{{media.height}}" alt="{{media.alt}}" priority
+    sizes="100vw"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1;--objf:cover;--objf-tablet:cover;--objf-mobile:cover;width:100%;height:100%;--w:100%"
+  />
+
+      <div class="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50 opacity-0 transition-opacity duration-100 group-hover:opacity-100" 
+        style="--d: none;--d-mobile: none;--d-tablet: none;" >
+          <svg
+            height="100%"
+            width="100%"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            viewBox="0 0 512 512"
+            color="#fff"
+          >
+            <path
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M62.2467 345.253C43.7072 326.714 29.1474 305.116 18.9714 281.057C8.42839 256.13 3.08301 229.671 3.08301 202.418C3.08301 175.165 8.43012 148.707 18.974 123.78C29.15 99.7213 43.7098 78.123 62.2485 59.5834C80.788 41.0439 102.386 26.4841 126.445 16.3081C151.372 5.76422 177.831 0.417969 205.084 0.417969C232.337 0.417969 258.794 5.76421 283.722 16.3064C307.78 26.4823 329.379 41.0422 347.918 59.5817C366.458 78.1212 381.017 99.7196 391.194 123.778C401.737 148.706 407.083 175.163 407.083 202.417C407.083 229.671 401.737 256.129 391.194 281.056C388.406 287.648 385.277 294.048 381.839 300.257L493.397 411.815C514.091 432.511 514.091 466.187 493.395 486.883L484.272 496.006C474.245 506.032 460.915 511.553 446.738 511.553C432.559 511.553 419.228 506.032 409.202 496.006L296.022 382.824C291.996 384.854 287.898 386.762 283.721 388.528C258.794 399.073 232.336 404.419 205.082 404.419C177.828 404.419 151.371 399.071 126.443 388.528C102.385 378.352 80.7863 363.793 62.2467 345.253ZM301.699 336.166C313.928 327.317 324.896 316.835 334.282 305.034C342.149 295.142 348.9 284.325 354.355 272.775C364.433 251.432 370.076 227.586 370.076 202.419C370.076 111.296 296.206 37.4253 205.083 37.4253C113.96 37.4253 40.0895 111.294 40.0895 202.418C40.0895 293.541 113.96 367.411 205.084 367.411C227.413 367.411 248.701 362.967 268.126 354.928C280.091 349.976 291.347 343.658 301.699 336.166ZM467.229 460.716C473.507 454.439 473.507 444.26 467.229 437.982L360.595 331.348C356.601 336.153 352.378 340.794 347.919 345.253C341.671 351.502 335.068 357.286 328.147 362.615L435.371 469.839C438.511 472.977 442.624 474.547 446.739 474.547C450.853 474.547 454.967 472.978 458.106 469.839L467.229 460.716ZM223.582 183.91H281.071C291.292 183.91 299.574 192.194 299.575 202.414C299.575 206.778 298.062 210.786 295.533 213.951C292.143 218.195 286.926 220.916 281.072 220.916H228.303H223.583V225.63V278.406C223.583 287.081 217.613 294.358 209.559 296.361C208.124 296.717 206.625 296.909 205.08 296.909C194.861 296.909 186.577 288.625 186.577 278.406V220.917H129.087C118.868 220.917 110.584 212.633 110.584 202.414C110.584 192.195 118.868 183.911 129.087 183.911H186.576V126.421C186.576 116.202 194.86 107.918 205.079 107.918C215.298 107.918 223.582 116.202 223.582 126.421V183.91Z"
+            />
+          </svg>
+        </div>
+      </div>
+        {% else %}
+          
+    {% if media.media_type == 'video' %}
+      {% assign mediaSourceUrl = media.sources.last.url %}
+    {% endif %}
+    {% if media.media_type == 'external_video' %}
+      {% assign mediaSourceUrl = media | external_video_url %}
+      {% assign mediaSource = media | json %}
+    {% endif %}
+    {% if media.media_type == 'image' %}
+      {% assign mediaSourceUrl = media.src %}
+    {% endif %}
+    <div 
+      aria-hidden 
+      id="{{imageID}}" 
+      media-type="{{media.media_type}}" 
+      media-poster="{{media.preview_image.src}}" 
+      media-source-url="{{media.sources.first.url}}" 
+      media-last-source-url="{{mediaSourceUrl}}"
+      external-id="{{media.external_id}}"
+      grid-index="{{forloop.index}}"
+      data-outline="deactive" class="image-item undefined data-[outline=active]:outline data-[outline=active]:p-[1px] group relative overflow-hidden outline-1 -outline-offset-1 cursor-pointer"
+      style="--aspect: 1;--aspect-tablet: 1;--aspect-mobile: 1;--w: calc(20% - 4px);--w-tablet: calc(20% - 4px);--w-mobile: calc(33.333333333333336% - 3.3333333333333335px);outline-color: var(--g-c-brand, brand);max-width: 100%;"
+      >
+      {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+        <div class="absolute pb-1 pr-1 right-0 bottom-0" >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+            <path d="M17.6869 12.2646L17.6868 12.2646L6.78379 18.4464C6.78378 18.4464 6.78376 18.4464 6.78374 18.4464C6.52931 18.5903 6.1665 18.4179 6.1665 18.0416V5.95844C6.1665 5.58218 6.52917 5.40981 6.7836 5.55354C6.78366 5.55357 6.78373 5.55361 6.78379 5.55365L17.6868 11.7354L17.6869 11.7354C17.8819 11.846 17.8819 12.154 17.6869 12.2646Z" stroke="#F9F9F9" stroke-miterlimit="10"/>
+          </svg>
+        </div>
+      {% endif %}
+
+      {% if media.media_type == 'model' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7441 4.57034C11.9017 4.47655 12.098 4.47655 12.2555 4.57034L18.5889 8.33957C18.7404 8.42971 18.8332 8.59296 18.8332 8.76923V15.2308C18.8332 15.407 18.7404 15.5703 18.5889 15.6604L12.2555 19.4297C12.098 19.5234 11.9017 19.5234 11.7441 19.4297L5.41079 15.6604C5.25932 15.5703 5.1665 15.407 5.1665 15.2308V8.76923C5.1665 8.59296 5.25932 8.42971 5.41079 8.33957L11.7441 4.57034ZM6.1665 9.64865V14.9465L11.4998 18.1206V12.8227L6.1665 9.64865ZM12.4998 12.8227V18.1206L17.8332 14.9465V9.64865L12.4998 12.8227ZM17.3555 8.76923L11.9998 11.9566L6.64417 8.76923L11.9998 5.58185L17.3555 8.76923Z" fill="#F9F9F9"/>
+        </svg>
+      </div>
+      {% endif %}
+
+      <img
+    
+    draggable="false"
+    class="gp_lazyload"
+    data-src="{{media.preview_image | product_img_url: '1024x1024'}}" data-srcset="{{media.preview_image | product_img_url: '1024x1024'}} 768w,{{media.preview_image | product_img_url: '1024x1024'}} 1024w,{{media.preview_image | product_img_url: '1024x1024'}} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="{{media.width}}" height="{{media.height}}" alt="{{media.alt}}" priority
+    sizes="100vw"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1;--objf:cover;--objf-tablet:cover;--objf-mobile:cover;width:100%;height:100%;--w:100%"
+  />
+
+      <div class="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50 opacity-0 transition-opacity duration-100 group-hover:opacity-100" 
+        style="--d: none;--d-mobile: none;--d-tablet: none;" >
+          <svg
+            height="100%"
+            width="100%"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            viewBox="0 0 512 512"
+            color="#fff"
+          >
+            <path
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M62.2467 345.253C43.7072 326.714 29.1474 305.116 18.9714 281.057C8.42839 256.13 3.08301 229.671 3.08301 202.418C3.08301 175.165 8.43012 148.707 18.974 123.78C29.15 99.7213 43.7098 78.123 62.2485 59.5834C80.788 41.0439 102.386 26.4841 126.445 16.3081C151.372 5.76422 177.831 0.417969 205.084 0.417969C232.337 0.417969 258.794 5.76421 283.722 16.3064C307.78 26.4823 329.379 41.0422 347.918 59.5817C366.458 78.1212 381.017 99.7196 391.194 123.778C401.737 148.706 407.083 175.163 407.083 202.417C407.083 229.671 401.737 256.129 391.194 281.056C388.406 287.648 385.277 294.048 381.839 300.257L493.397 411.815C514.091 432.511 514.091 466.187 493.395 486.883L484.272 496.006C474.245 506.032 460.915 511.553 446.738 511.553C432.559 511.553 419.228 506.032 409.202 496.006L296.022 382.824C291.996 384.854 287.898 386.762 283.721 388.528C258.794 399.073 232.336 404.419 205.082 404.419C177.828 404.419 151.371 399.071 126.443 388.528C102.385 378.352 80.7863 363.793 62.2467 345.253ZM301.699 336.166C313.928 327.317 324.896 316.835 334.282 305.034C342.149 295.142 348.9 284.325 354.355 272.775C364.433 251.432 370.076 227.586 370.076 202.419C370.076 111.296 296.206 37.4253 205.083 37.4253C113.96 37.4253 40.0895 111.294 40.0895 202.418C40.0895 293.541 113.96 367.411 205.084 367.411C227.413 367.411 248.701 362.967 268.126 354.928C280.091 349.976 291.347 343.658 301.699 336.166ZM467.229 460.716C473.507 454.439 473.507 444.26 467.229 437.982L360.595 331.348C356.601 336.153 352.378 340.794 347.919 345.253C341.671 351.502 335.068 357.286 328.147 362.615L435.371 469.839C438.511 472.977 442.624 474.547 446.739 474.547C450.853 474.547 454.967 472.978 458.106 469.839L467.229 460.716ZM223.582 183.91H281.071C291.292 183.91 299.574 192.194 299.575 202.414C299.575 206.778 298.062 210.786 295.533 213.951C292.143 218.195 286.926 220.916 281.072 220.916H228.303H223.583V225.63V278.406C223.583 287.081 217.613 294.358 209.559 296.361C208.124 296.717 206.625 296.909 205.08 296.909C194.861 296.909 186.577 288.625 186.577 278.406V220.917H129.087C118.868 220.917 110.584 212.633 110.584 202.414C110.584 192.195 118.868 183.911 129.087 183.911H186.576V126.421C186.576 116.202 194.86 107.918 205.079 107.918C215.298 107.918 223.582 116.202 223.582 126.421V183.91Z"
+            />
+          </svg>
+        </div>
+      </div>
+        {%- endif -%}
+      {% endfor %}
+    {% endif %}
+  </div>
+          </div>
+        {%- endif -%}
+      </div>
+  </gp-product-images>
+  
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="ge47S3TpNh relative flex flex-col"
+    >
+      <div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xs)" class="g4jMtJ8e1B ">
+      
+    {%- unless product -%}
+      <p>Product not found</p>
+    {%- else -%}
+      
+        
+    <div
+      
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <h2
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A']"
+          style="--w:100%;--ta:left;--line-clamp:1;--c:#242424;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:600;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;word-break:break-word"
+        >
+        {{ product.title }}
+        </h2>
+      </div>
+    </div>
+      
+    {%- endunless -%}
+  
+      </div>
+      
+      
+    <div
+      parentTag="Col" id="gQ6lAgy4UG"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-s);--cg:var(--g-s-s);--pc:start;--gtc:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gQ6lAgy4UG mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="gB8l_HRbGG relative flex flex-col"
+    >
+      
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-price.js" defer="defer"></script>
+      <gp-product-price
+        gp-data='{"priceType":"regular","uid":"gUGbcyFnmt","locale":"{{shop.locale}}","currency":"{{shop.currency}}","moneyFormat":"{{ shop.money_format | replace: '"', '\\"' | escape }}"}'
+        
+        class=" data-[hidden=true]:hidden"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+        data-hidden="false"
+      >
+        
+    <div
+      id="p-price-gUGbcyFnmt"
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-price decoration-g-text-1"
+          style="--w:100%;--tdc:text-1;--tdt:1;--ta:left;--c:#242424;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        
+                  {% if variant.price %} 
+                    {{ variant.price | money}}
+                  {% endif %}
+                
+        </div>
+      </div>
+    </div>
+      </gp-product-price>
+  
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="g5asGHmgVp relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="gghcGk37-5"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--cg:var(--g-s-xs);--pc:start;--gtc:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gghcGk37-5 mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gGHc_v_f4D relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gLBgDTeBOs "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#575757;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:400;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;word-break:break-word"
+        >
+        <p>was</p>
+        </div>
+      </div>
+    </div>
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="ggj3Lt9u5E relative flex flex-col"
+    >
+      
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-price.js" defer="defer"></script>
+      <gp-product-price
+        gp-data='{"priceType":"compare","uid":"gAJGcLVpmw","locale":"{{shop.locale}}","currency":"{{shop.currency}}","moneyFormat":"{{ shop.money_format | replace: '"', '\\"' | escape }}"}'
+        
+        class=" data-[hidden=true]:hidden"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+        data-hidden="{% if variant.compare_at_price > variant.price and variant.compare_at_price >= 0 %}false{% else %}true{% endif %}"
+      >
+        
+    <div
+      id="p-price-gAJGcLVpmw"
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-price line-through"
+          style="--w:100%;--tdc:#575757;--tdt:1;--ta:left;--c:#575757;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:400;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;word-break:break-word"
+        >
+        
+                  {% if variant.compare_at_price  %} 
+                    {{ variant.compare_at_price | money}}
+                  {% endif %}
+                
+        </div>
+      </div>
+    </div>
+      </gp-product-price>
+  
+    </div>
+    </div>
+  
+    
+    </div>
+    </div>
+  
+    
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-button.js" defer="defer"></script>
+  
+  
+  
+   {%- liquid 
+      assign inventory_quantity = variant.inventory_quantity | default: 0
+    -%}
+    <gp-product-button
+      gp-data='{"setting":{"actionEffect":"open-cart-drawer","customURL":{"link":"/cart","target":"_self"},"errorMessage":"Cannot add product to cart","successMessage":"Add product to cart successfully","label":"Buy Now","outOfStockLabel":"Out of stocks","errorType":"built-in"},"styles":{"errorTypo":{"type":"paragraph-2"},"successTypo":{"type":"paragraph-2"}},"disabled":"{{variant.available}}","variantID":"{{variant.id}}"}'
+    >
+        <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+    class="{% unless variant.available %} !hidden {% endunless %} undefined"
+  >
+    <style>
+    .gE9IA5s6we.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #126BFF;
+  
+      
+      
+      
+      
+      
+      
+    }
+
+    .gE9IA5s6we:hover::before {
+      border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #126BFF;
+  
+      
+    }
+  </style>
+    <button
+      type="submit" data-id="gE9IA5s6we" aria-label="Buy Now"
+      data-state="idle"
+      class="gE9IA5s6we gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none gp-button-atc"
+      style="--hvr-bg:transparent;--bg:transparent;--c:#126BFF;--pl:0px;--pr:0px;--pt:0px;--pb:0px;--pl-tablet:0px;--pr-tablet:0px;--pt-tablet:0px;--pb-tablet:0px;--pl-mobile:0px;--pr-mobile:0px;--pt-mobile:0px;--pb-mobile:0px;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--tt:default;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:150%;--size:14px;--size-tablet:14px;--size-mobile:12px"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="break-words group-data-[state=loading]:invisible [&_p]:whitespace-pre-line z-1 h-full flex items-center overflow-hidden "
+        style="--tt:default"
+      >
+        Buy Now
+      </span>
+    </button>
+  </div>
+        <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+    class="{% if variant.available %} !hidden {% endif %}"
+  >
+    <style>
+    .gE9IA5s6we.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #126BFF;
+  
+      
+      
+      
+      
+      
+      
+    }
+
+    .gE9IA5s6we:hover::before {
+      border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #126BFF;
+  
+      
+    }
+  </style>
+    <button
+      type="button" data-id="gE9IA5s6we" aria-label="Out of stocks"
+      data-state="idle"
+      class="gE9IA5s6we gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none gp-button-sold-out btn-disabled opacity-30 pointer-events-none"
+      style="--hvr-bg:transparent;--bg:transparent;--c:#126BFF;--pl:0px;--pr:0px;--pt:0px;--pb:0px;--pl-tablet:0px;--pr-tablet:0px;--pt-tablet:0px;--pb-tablet:0px;--pl-mobile:0px;--pr-mobile:0px;--pt-mobile:0px;--pb-mobile:0px;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--tt:default;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:150%;--size:14px;--size-tablet:14px;--size-mobile:12px"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="break-words group-data-[state=loading]:invisible [&_p]:whitespace-pre-line z-1 h-full flex items-center overflow-hidden "
+        style="--tt:default"
+      >
+        Out of stocks
+      </span>
+    </button>
+  </div>
+    </gp-product-button>
+  
+    </div>
+    </div>
+  
+    
+        {%- endform -%}
+      </gp-product>
+      {%- assign product = gpBkProduct -%}
+    {% else %}
+      <div class="text-center">Product not found</div>
+    {%- endif -%}
+  
+    </div>
+    </div>
+  
+    
+    </div>
+  
+    <div
+      media-type="{{media.media_type}}" 
+      media-poster="{{media.preview_image.src}}" 
+      media-source-url="{{media.sources.first.url}}" 
+      media-last-source-url="{{mediaSourceUrl}}"
+      external-id="{{media.external_id}}"
+      grid-index="{{forloop.index}}"
+      
+      parentTag="Carousel"
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      class="gem-slider-item w-full gem-slider-item- gMeU1KYIx1"
+    >
+      
+      
+      
+    <div
+      parentTag="CarouselItem" id="g619dEQYtm"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--pt:var(--g-s-2xl);--pl:var(--g-s-2xl);--pb:var(--g-s-2xl);--pr:var(--g-s-2xl);--mb-mobile:36px;--mb-tablet:34px;--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:#FBFBFB;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="g619dEQYtm mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="ggdPSFPxSR relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="gxlGY_0rq1"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-l);--cg:var(--g-s-l);--pc:start;--gtc:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gxlGY_0rq1 mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="gJWkmkPszt relative flex flex-col"
+    >
+      <div
+    
+    role="presentation"
+    class="group/image gWvme5QZcX"
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+    >
+    <figure
+      class="relative inline-block overflow-hidden align-middle pointer-events-none"
+      style="--w:60px;--w-tablet:60px;--w-mobile:60px;--h:auto;--h-tablet:auto;--h-mobile:auto;border-radius:inherit"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+      >
+        <img
+    quality="70" title="Image Title"
+    draggable="false"
+    class="inline-block w-full h-full max-w-full flex gp_lazyload"
+    data-src="https://ucarecdn.com/55998002-2325-4b4d-9a2c-da2b4c67ff2a/-/format/auto/-/preview/3000x3000/-/quality/lighter/a2.png" data-srcset="https://ucarecdn.com/55998002-2325-4b4d-9a2c-da2b4c67ff2a/-/format/auto/-/preview/3000x3000/-/quality/lighter/a2.png 768w,https://ucarecdn.com/55998002-2325-4b4d-9a2c-da2b4c67ff2a/-/format/auto/-/preview/3000x3000/-/quality/lighter/a2.png 1024w,https://ucarecdn.com/55998002-2325-4b4d-9a2c-da2b4c67ff2a/-/format/auto/-/preview/3000x3000/-/quality/lighter/a2.png 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="120" height="120" alt="Alt Image" priority
+    sizes="100vw"
+    style="--aspect:auto;--objf:cover;--bs:none;--bw:0px;--bc:transparent;--radius:var(--g-radius-none);--w:100%"
+  />
+      </div>
+    </figure>
+  </div>
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="gJHjQdyIjs relative flex flex-col"
+    >
+      
+    
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xs);--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll">
+        
+    <div 
+            class="flex flex-wrap"
+            style="--cg:var(--g-s-xxs);--jc:left">
+            <div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="gA9gAgjaMZ ">
+      
+    <div 
+      
+      class="flex w-full flex-col items-center"
+    >
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] ggrV22fufg"
+    >
+      <div class="inline-flex overflow-hidden"
+      style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:#FAAD14;--t:rotate(0deg);--w:10px;--h:10px;--minw:10px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div>
+  
+      </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="gM6Rjp3FpG ">
+      
+    <div 
+      
+      class="flex w-full flex-col items-center"
+    >
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gJm6drbQs2"
+    >
+      <div class="inline-flex overflow-hidden"
+      style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:#FAAD14;--t:rotate(0deg);--w:10px;--h:10px;--minw:10px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div>
+  
+      </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="gGxx0YRfBt ">
+      
+    <div 
+      
+      class="flex w-full flex-col items-center"
+    >
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] ggOAZhI94M"
+    >
+      <div class="inline-flex overflow-hidden"
+      style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:#FAAD14;--t:rotate(0deg);--w:10px;--h:10px;--minw:10px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div>
+  
+      </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="g2w4s4VTsk ">
+      
+    <div 
+      
+      class="flex w-full flex-col items-center"
+    >
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gLeEkfKm4e"
+    >
+      <div class="inline-flex overflow-hidden"
+      style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:#FAAD14;--t:rotate(0deg);--w:10px;--h:10px;--minw:10px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div>
+  
+      </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="gR8T0RAlsF ">
+      
+    <div 
+      
+      class="flex w-full flex-col items-center"
+    >
+    <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gLlOJMIXnx"
+    >
+      <div class="inline-flex overflow-hidden"
+      style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:#FAAD14;--t:rotate(0deg);--w:10px;--h:10px;--minw:10px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div>
+  
+      </div>
+         </div>
+    </div>
+  
+    <div
+      parentTag="Col"
+        class="gjuBJfGugw "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#242424;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Denis Hampton</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  
+    
+    <div
+      parentTag="Col"
+        class="g6yYHDKHHG "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-l)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] g-paragraph-1 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#575757;word-break:break-word"
+        >
+        <p>"Absolutely love this speaker. The look and feel is amazing with great sound. Connecting via Bluetooth was extremely simple and easy, the speaker itself puts out exceptionally loud volume. Love it!"</p>
+        </div>
+      </div>
+    </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-l);--pt:var(--g-s-l);--pb:var(--g-s-l)" class="gtAIv40k_V ">
+      
+    <div
+      class="flex justify-start"
+    >
+      <div
+        style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bs:solid;--bbw:1px;--bbw-tablet:1px;--bbw-mobile:1px;--t:rotate(0deg);--bc:#E0E0E0"
+        class="block tablet:block mobile:block"
+      ></div>
+      <div
+        class="items-center hidden tablet:hidden mobile:hidden"
+        style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bc:#E0E0E0;--t:rotate(0deg)"
+      >
+        
+    <div
+      class="hidden"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bc:#E0E0E0;--bs:solid;--bbw:1px;--bbw-tablet:1px;--bbw-mobile:1px;--minw:100px"
+    ></div>
+  
+        
+            <span
+              class="inline-flex items-center justify-center flex-none"
+              style="--mr:var(--g-s-xs);--w:20px;--h:20px;--t:rotate(0);--c:var(--g-c-text-1, text-1)"
+            >
+              <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M428.8 137.6h-86.177a115.52 115.52 0 0 0 2.176-22.4c0-47.914-35.072-83.2-92-83.2-45.314 0-57.002 48.537-75.707 78.784-7.735 12.413-16.994 23.317-25.851 33.253l-.131.146-.129.148C135.662 161.807 127.764 168 120.8 168h-2.679c-5.747-4.952-13.536-8-22.12-8H32c-17.673 0-32 12.894-32 28.8v230.4C0 435.106 14.327 448 32 448h64c8.584 0 16.373-3.048 22.12-8h2.679c28.688 0 67.137 40 127.2 40h21.299c62.542 0 98.8-38.658 99.94-91.145 12.482-17.813 18.491-40.785 15.985-62.791A93.148 93.148 0 0 0 393.152 304H428.8c45.435 0 83.2-37.584 83.2-83.2 0-45.099-38.101-83.2-83.2-83.2zm0 118.4h-91.026c12.837 14.669 14.415 42.825-4.95 61.05 11.227 19.646 1.687 45.624-12.925 53.625 6.524 39.128-10.076 61.325-50.6 61.325H248c-45.491 0-77.21-35.913-120-39.676V215.571c25.239-2.964 42.966-21.222 59.075-39.596 11.275-12.65 21.725-25.3 30.799-39.875C232.355 112.712 244.006 80 252.8 80c23.375 0 44 8.8 44 35.2 0 35.2-26.4 53.075-26.4 70.4h158.4c18.425 0 35.2 16.5 35.2 35.2 0 18.975-16.225 35.2-35.2 35.2zM88 384c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z" /></svg>
+            </span>
+          
+        
+            <span
+              class="inline-flex items-center justify-center flex-none g-paragraph-1"
+              style="--tt:horizontal;--c:var(--g-c-text-1, text-1);--mr:var(--g-s-s)"
+            >
+              Title
+            </span>
+          
+        
+    <div
+      class="flex"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bc:#E0E0E0;--bs:solid;--bbw:1px;--bbw-tablet:1px;--bbw-mobile:1px;--minw:100px"
+    ></div>
+  
+      </div>
+    </div>
+  
+      </div>
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product.v2.js" defer="defer"></script>
+    {%- assign gpBkProduct = product -%}
+    
+        {%- liquid
+          if request.page_type == 'product'
+            if 'static' == 'static'
+              if 'latest' == 'latest'
+                paginate collections.all.products by 100000
+                  assign product = collections.all.products | sort: 'created_at' | reverse | first
+                endpaginate
+              else
+                assign product = all_products['']
+                if product == empty or product == null
+                  paginate collections.all.products by 100000
+                    for item in collections.all.products 
+                      if item.id == 'latest'
+                        assign product = item
+                      endif
+                    endfor
+                  endpaginate
+                endif
+              endif
+            endif
+          else
+            if 'latest' == 'latest'
+              paginate collections.all.products by 100000
+                assign product = collections.all.products | sort: 'created_at'| reverse | first
+              endpaginate
+            else
+              assign product = all_products['']
+              if product == empty or product == null
+                paginate collections.all.products by 100000
+                  for item in collections.all.products 
+                    if item.id == 'latest'
+                      assign product = item
+                    endif
+                  endfor
+                endpaginate
+              endif
+            endif
+          endif
+        -%}
+      
+
+    {%-if product != empty and product != null -%}
+      {%- assign initVariantId =  -%}
+      {%- assign product_form_id = 'product-form-' | append: "gGAzm7FbrP" -%}
+      {%- assign variant = product.selected_or_first_available_variant -%}
+      {%- assign productSelectedVariant = product.selected_or_first_available_variant -%}
+      {%-if productSelectedVariant == empty or productSelectedVariant == null -%}
+        {%- assign productSelectedVariant = product.selected_or_first_available_variant -%}
+      {%- endif -%}
+      {%-if variant == empty or variant == null -%}
+        {%- assign variant = product.selected_or_first_available_variant -%}
+      {%- endif -%}
+      <gp-product class="" gp-context='{"productId": {{ product.id }}, "isSyncProduct": "", "variantSelected": {{ variant | json | escape }}, "quantity": 1, "formId": "{{ product_form_id }}" }'
+        gp-data='{"variantSelected": {{ variant | json | escape }}, "quantity": 1}'>
+        {%- form 'product', product, id: product_form_id, class: 'form contents', data-type: 'add-to-cart-form', autocomplete: 'off'  -%}
+          <input type="hidden" name="id" value="{{ variant.id }}" />
+          <input type="hidden" name="quantity" value="{{ quantity }}" />
+          <button type="submit" onclick="return false;" style="display:none;"></button>
+          
+      
+      
+    <div
+      id
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--cg:var(--g-s-l);--pc:start;--gtc:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%"
+        class="mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="g-k6FMDnqV relative flex flex-col"
+    >
+      
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-images.js" defer="defer"></script>
+  {% assign featured_image = product.featured_image %}
+  {%- if variant != null and variant.featured_image != null -%}
+  {% assign featured_image = variant.featured_image %}
+  {%- endif -%}
+  <gp-product-images
+    gp-data='
+    {
+      "id":"gBQM0C9Z9a",
+      "setting":{"arrow":{"desktop":true,"mobile":true,"tablet":true},"arrowIcon":"","clickEffect":"none","controlOverContent":{"desktop":true,"mobile":true,"tablet":true},"dot":{"desktop":true,"mobile":true,"tablet":true},"dragToScroll":true,"featureImageVisible":{"desktop":true,"mobile":true,"tablet":true},"galleryVisible":{"desktop":false,"mobile":false,"tablet":false},"hoverEffect":"none","largeViewInPopup":{"desktop":false,"mobile":false,"tablet":false},"loop":{"desktop":true,"mobile":true,"tablet":true},"numberPerRow":{"desktop":5,"mobile":3,"tablet":5},"otherImage":0,"pauseOnHover":true,"showActiveStatus":true,"slidesToShow":{"desktop":5,"mobile":3,"tablet":5},"speed":1,"type":{"desktop":"images","mobile":"images","tablet":"images"},"zoom":1.5,"zoomType":"default"},
+      "styles":{"align":{"desktop":"flex-start","mobile":"flex-start","tablet":"flex-start"},"aspectHeight":{"desktop":0,"mobile":0,"tablet":0},"aspectRatio":{"desktop":"1","mobile":"1","tablet":"1"},"aspectWidth":{"desktop":0,"mobile":0,"tablet":0},"customAspectRadio":{"desktop":{"height":0,"width":0},"mobile":{"height":0,"width":0},"tablet":{"height":0,"width":0}},"dotActiveColor":{"desktop":"highlight"},"dotColor":{"desktop":"bg-1"},"ftAlign":{"desktop":"center","mobile":"center","tablet":"center"},"ftAspectHeight":{"desktop":0,"mobile":0,"tablet":0},"ftAspectRatio":{"desktop":"1","mobile":"1","tablet":"1"},"ftAspectWidth":{"desktop":0,"mobile":0,"tablet":0},"ftCustomAspectRadio":{"desktop":{"height":0,"width":0},"mobile":{"height":0,"width":0},"tablet":{"height":0,"width":0}},"ftFullWidth":{"desktop":false,"mobile":true,"tablet":true},"ftLayout":{"desktop":"cover","mobile":"cover","tablet":"cover"},"ftWidth":{"desktop":"80px","mobile":"100px","tablet":"100px"},"fullWidth":{"desktop":true,"mobile":true,"tablet":true},"gallerySpacing":{"desktop":"var(--g-s-s)","mobile":"var(--g-s-s)"},"layout":{"desktop":"cover","mobile":"cover","tablet":"cover"},"position":{"desktop":"bottom-left"},"spacing":{"desktop":"var(--g-s-s)","mobile":"var(--g-s-s)"},"verticalLayout":{"desktop":false,"mobile":false,"tablet":false},"verticalLayoutRow":{"desktop":true,"mobile":true,"tablet":true},"width":{"desktop":"300px","mobile":"300px","tablet":"300px"}}, 
+      "product":{{ product | json | escape }}
+    }
+  '
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+    class=""
+  >
+    <div
+        class="flex w-full flex-col tablet:flex-col mobile:flex-col"
+        style="--ai:start;--ai-tablet:start;--ai-mobile:start"
+      >
+        <div
+  class="featured-image-root gp-product-images-ft flex"
+  style="--jc:flex-start;--jc-tablet:flex-start;--jc-mobile:flex-start;--d:flex;--d-mobile:flex;--d-tablet:flex;--w:80px;--w-tablet:100px;--w-mobile:100px"
+>
+  <div role="presentation" 
+    media-type="{{product.featured_media.media_type}}"
+    class="featured-image-wrapper relative flex w-full overflow-hidden"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1"
+  >
+  <div class="flex w-full items-start justify-center">
+    <div class="featured-image group relative w-full h-full overflow-hidden flex items-center justify-center">
+      {% assign hasModel3d = false %}
+      {% assign hasImage = false %}
+      {% assign hasVideo = false %}
+      {% assign mediaSourcesModel = null %}
+      {% assign mediaSourceVideo = null %}
+      {% assign mediaVideoAlt = null %}
+
+      {% for media in product.media %}
+        {% if media.media_type == 'model' %}
+          {% assign hasModel3d = true %}
+          {% assign mediaSourcesModel = media.sources %}
+        {% endif %}
+      {% if media.media_type == 'video' %}
+        {% assign hasVideo = true %}
+        {% assign mediaSourceVideo = media.sources.last.url %}
+        {% assign mediaVideoAlt = media.alt %}
+      {% endif %}
+      {% if media.media_type == 'external_video' %}
+        {% assign hasVideo = true %}
+        {% assign mediaSourceVideo = media | external_video_url %}
+        {% assign mediaVideoAlt = media.alt %}
+      {% endif %}
+      {% if media.media_type == 'image' %}
+        {% assign hasImage = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% if hasModel3d == true %}
+      <script type="module" defer="" src="https://cdn.shopify.com/shopifycloud/model-viewer/v1.12/model-viewer.js"></script>
+    {% endif %}
+ 
+    
+    {% assign featureMedia = product.media.first %}
+    {%- assign variant = product.selected_or_first_available_variant -%}
+    {% assign shouldHidden = '' %}
+    {% if featureMedia.media_type == 'model' %}
+      
+    <model-viewer
+      class="w-full h-full model-viewer z-[90]"
+      width="100%" height="100%"
+      
+      
+      
+      
+      src="{{featureMedia.sources.first.url}}"
+      alt="{{featureMedia.preview_image.alt}}"
+      camera-controls="true"
+      poster="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}"
+      data-js-focus-visible=""
+      data-shopify-feature="1.12"
+      ar-status="not-presenting"
+      style="--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1">
+    </model-viewer>
+  
+    {% endif %}
+    {% if featureMedia.media_type == 'video' %}
+      
+    <iframe
+      width="100%" height="100%"
+      class="feature-video w-full h-full relative"
+      src="{{mediaSourceVideo}}"
+      controls="true"
+      allowfullscreen="true"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      frameborder="0"
+      autoplay="true"
+      alt="{{mediaVideoAlt}}"
+      style=""
+    >
+    </iframe>
+  
+    {% endif %}
+    {% if featureMedia.media_type == 'external_video' %}
+      
+    <iframe
+      width="100%" height="100%"
+      class="feature-video w-full h-full relative"
+      src="{{mediaSourceVideo}}"
+      controls="true"
+      allowfullscreen="true"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      frameborder="0"
+      autoplay="true"
+      alt="{{mediaVideoAlt}}"
+      style=""
+    >
+    </iframe>
+  
+    {% endif %}
+    {% if featureMedia.media_type != 'image' %}
+      {% assign shouldHidden = 'hidden' %}
+    {% endif %}
+    
+    <img
+    id="{%- if variant.featured_image != null -%}
+              {{variant.featured_image.id}}
+           {%- elsif variant.featured_image == null -%}
+              {{featureMedia.id}}
+            {%- endif -%}"
+    draggable="false"
+    class="w-full featured-image-only w-full transition-opacity {{shouldHidden}}"
+    data-src="{%- if variant.featured_image != null -%}
+              {{ variant.featured_image.src | img_url: '1024x1024'}}
+            {%- elsif variant.featured_image == null -%}
+              {{ featureMedia.src | img_url: '1024x1024'}}
+            {%- else -%}
+              {{ 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif' }}
+            {%- endif -%}" data-srcset="{%- if variant.featured_image != null -%}
+              {{ variant.featured_image.src | img_url: '1024x1024'}}
+            {%- elsif variant.featured_image == null -%}
+              {{ featureMedia.src | img_url: '1024x1024'}}
+            {%- else -%}
+              {{ 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif' }}
+            {%- endif -%} 768w,{%- if variant.featured_image != null -%}
+              {{ variant.featured_image.src | img_url: '1024x1024'}}
+            {%- elsif variant.featured_image == null -%}
+              {{ featureMedia.src | img_url: '1024x1024'}}
+            {%- else -%}
+              {{ 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif' }}
+            {%- endif -%} 1024w,{%- if variant.featured_image != null -%}
+              {{ variant.featured_image.src | img_url: '1024x1024'}}
+            {%- elsif variant.featured_image == null -%}
+              {{ featureMedia.src | img_url: '1024x1024'}}
+            {%- else -%}
+              {{ 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif' }}
+            {%- endif -%} 1440w" src="{%- if variant.featured_image != null -%}
+              {{ variant.featured_image.src | img_url: '1024x1024'}}
+            {%- elsif variant.featured_image == null -%}
+              {{ featureMedia.src | img_url: '1024x1024'}}
+            {%- else -%}
+              {{ 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif' }}
+            {%- endif -%}" width="{%- if variant.featured_image != null -%}
+                {{variant.featured_image.width}}
+              {%- elsif variant.featured_image == null -%}
+                {{featureMedia.width}}
+              {%- endif -%}" height="{%- if variant.featured_image != null -%}
+                {{variant.featured_image.height}}
+              {%- elsif variant.featured_image == null -%}
+                {{featureMedia.height}}
+              {%- endif -%}" alt="{%- if variant.featured_image != null -%}
+              {{variant.featured_image.alt}}
+            {%- elsif variant.featured_image == null -%}
+              {{featureMedia.alt}}
+            {%- endif -%}" priority="true"
+    sizes="100vw"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1;--objf:cover;--objf-tablet:cover;--objf-mobile:cover;--w:100%"
+  />
+    
+    
+    
+    </div>
+  </div>
+  </div>
+</div>
+        {%- if product.media.size > 1 -%}
+          <div
+            class="gallery-wrapper gp-product-images-gallery inline-flex h-fit max-w-full justify-start tablet:justify-start mobile:justify-start"
+            style="--fs:1.23;--d:none;--d-mobile:none;--d-tablet:none;--w:300px;--w-tablet:300px;--w-mobile:300px;--mt:var(--g-s-s);--mr:0px;--ml:0px;--mt-mobile:var(--g-s-s);--mr-mobile:0px;--ml-mobile:0px;--mt-tablet:var(--g-s-s);--mr-tablet:0px;--ml-tablet:0px"
+          >
+            
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-carousel.js" defer="defer"></script>
+    <gp-carousel type="grid-carousel" id="gp-root-carousel-gBQM0C9Z9a-{{product.id}}-{{section.id}}" class="flex-1 w-full carousel-gallery "  gp-data='{"id":"gBQM0C9Z9a-{{product.id}}-{{section.id}}","setting":{"loop":{"desktop":true,"mobile":true,"tablet":true},"slidesToShow":{"desktop":5,"mobile":3,"tablet":5},"dot":{"desktop":false,"tablet":false,"mobile":false},"arrow":{"desktop":true,"mobile":true,"tablet":true},"controlOverContent":{"desktop":true,"mobile":true,"tablet":true},"enableDrag":true,"vertical":{"desktop":false,"mobile":false,"tablet":false},"dotActiveColor":{"desktop":"highlight"},"dotColor":{"desktop":"bg-1"},"arrowCustom":""},"styles":{"fullWidth":{"desktop":true,"mobile":true,"tablet":true},"width":{"desktop":"100%","tablet":"100%","mobile":"100%"},"spacing":{"desktop":5,"tablet":5,"mobile":5},"adaptiveHeight":{"desktop":true,"mobile":true,"tablet":true}},"isHiddenArrowWhenDisabled":true}' style="--d:none;--d-mobile:none;--d-tablet:none">
+      <div class="hidden aspect-square w-[12px] rounded-full shadow-md"></div>
+      <div
+        
+        class="relative mx-auto my-0 tablet:px-0 max-w-full mobile:px-0 gp-carousel-wrapper mobile:block tablet:block block"
+        style="--h:auto;--h-tablet:auto;--h-mobile:auto;--w:100%;--w-tablet:100%;--w-mobile:100%;visibility:hidden"
+      >
+        <div
+          class="h-full"
+        >
+          <div id="gp-carousel-gBQM0C9Z9a-{{product.id}}-{{section.id}}" class="gem-slider h-full overflow-hidden">
+            
+    {%- if product.media.size > 1 -%}
+    {%- for media in product.media -%}
+    {% if media.media_type == 'image' %}
+      {%- for image in product.images -%}
+        {% if image.src == media.src %}
+          {% assign imageID = image.id %}
+          {% break %}
+        {% endif%}
+      {% endfor %}
+    {% else %}
+      {% assign imageID = '' %}
+    {% endif %}
+      {%- if media.id == product.featured_media.id -%}
+        
+    {% if media.media_type == 'video' %}
+      {% assign mediaSourceUrl = media.sources.last.url %}
+    {% endif %}
+    {% if media.media_type == 'external_video' %}
+      {% assign mediaSourceUrl = media | external_video_url %}
+    {% endif %}
+     {% if media.media_type == 'image' %}
+      {% assign mediaSourceUrl = media.src %}
+    {% endif %}
+    
+    <div
+      media-type="{{media.media_type}}" 
+      media-poster="{{media.preview_image.src}}" 
+      media-source-url="{{media.sources.first.url}}" 
+      media-last-source-url="{{mediaSourceUrl}}"
+      external-id="{{media.external_id}}"
+      grid-index="{{forloop.index}}"
+      data-outline="active"
+      id="{{imageID}}"
+      style="outline-color:var(--g-c-brand, brand)"
+      class="gem-slider-item w-full gem-slider-item-gBQM0C9Z9a-{{product.id}} group flex w-full items-center justify-center overflow-hidden outline-1 -outline-offset-1 image-item data-[outline=active]:outline data-[outline=active]:p-[1px] p-[1px]"
+    >
+      
+      <img
+    
+    draggable="false"
+    class="gp_lazyload"
+    data-src="{{media.preview_image | product_img_url: '1024x1024'}}" data-srcset="{{media.preview_image | product_img_url: '1024x1024'}} 768w,{{media.preview_image | product_img_url: '1024x1024'}} 1024w,{{media.preview_image | product_img_url: '1024x1024'}} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="{{media.width}}" height="{{media.height}}" alt="{{media.alt}}" priority
+    sizes="100vw"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1;--objf:cover;--objf-tablet:cover;--objf-mobile:cover;--w:100%;--w-tablet:100%;--w-mobile:100%"
+  />
+      
+      {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0" >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path d="M17.6869 12.2646L17.6868 12.2646L6.78379 18.4464C6.78378 18.4464 6.78376 18.4464 6.78374 18.4464C6.52931 18.5903 6.1665 18.4179 6.1665 18.0416V5.95844C6.1665 5.58218 6.52917 5.40981 6.7836 5.55354C6.78366 5.55357 6.78373 5.55361 6.78379 5.55365L17.6868 11.7354L17.6869 11.7354C17.8819 11.846 17.8819 12.154 17.6869 12.2646Z" stroke="#F9F9F9" stroke-miterlimit="10"/>
+        </svg>
+      </div>
+      {% endif %}
+
+      {% if media.media_type == 'model' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7441 4.57034C11.9017 4.47655 12.098 4.47655 12.2555 4.57034L18.5889 8.33957C18.7404 8.42971 18.8332 8.59296 18.8332 8.76923V15.2308C18.8332 15.407 18.7404 15.5703 18.5889 15.6604L12.2555 19.4297C12.098 19.5234 11.9017 19.5234 11.7441 19.4297L5.41079 15.6604C5.25932 15.5703 5.1665 15.407 5.1665 15.2308V8.76923C5.1665 8.59296 5.25932 8.42971 5.41079 8.33957L11.7441 4.57034ZM6.1665 9.64865V14.9465L11.4998 18.1206V12.8227L6.1665 9.64865ZM12.4998 12.8227V18.1206L17.8332 14.9465V9.64865L12.4998 12.8227ZM17.3555 8.76923L11.9998 11.9566L6.64417 8.76923L11.9998 5.58185L17.3555 8.76923Z" fill="#F9F9F9"/>
+        </svg>
+      </div>
+      {% endif %}
+      
+      <div class="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50 opacity-0 transition-opacity duration-100 group-hover:opacity-100" 
+      style="--d: none;--d-mobile: none;--d-tablet: none;" 
+      >
+        <svg
+          height="100%"
+          width="100%"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          viewBox="0 0 512 512"
+          color="#fff"
+        >
+          <path
+            fill="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M62.2467 345.253C43.7072 326.714 29.1474 305.116 18.9714 281.057C8.42839 256.13 3.08301 229.671 3.08301 202.418C3.08301 175.165 8.43012 148.707 18.974 123.78C29.15 99.7213 43.7098 78.123 62.2485 59.5834C80.788 41.0439 102.386 26.4841 126.445 16.3081C151.372 5.76422 177.831 0.417969 205.084 0.417969C232.337 0.417969 258.794 5.76421 283.722 16.3064C307.78 26.4823 329.379 41.0422 347.918 59.5817C366.458 78.1212 381.017 99.7196 391.194 123.778C401.737 148.706 407.083 175.163 407.083 202.417C407.083 229.671 401.737 256.129 391.194 281.056C388.406 287.648 385.277 294.048 381.839 300.257L493.397 411.815C514.091 432.511 514.091 466.187 493.395 486.883L484.272 496.006C474.245 506.032 460.915 511.553 446.738 511.553C432.559 511.553 419.228 506.032 409.202 496.006L296.022 382.824C291.996 384.854 287.898 386.762 283.721 388.528C258.794 399.073 232.336 404.419 205.082 404.419C177.828 404.419 151.371 399.071 126.443 388.528C102.385 378.352 80.7863 363.793 62.2467 345.253ZM301.699 336.166C313.928 327.317 324.896 316.835 334.282 305.034C342.149 295.142 348.9 284.325 354.355 272.775C364.433 251.432 370.076 227.586 370.076 202.419C370.076 111.296 296.206 37.4253 205.083 37.4253C113.96 37.4253 40.0895 111.294 40.0895 202.418C40.0895 293.541 113.96 367.411 205.084 367.411C227.413 367.411 248.701 362.967 268.126 354.928C280.091 349.976 291.347 343.658 301.699 336.166ZM467.229 460.716C473.507 454.439 473.507 444.26 467.229 437.982L360.595 331.348C356.601 336.153 352.378 340.794 347.919 345.253C341.671 351.502 335.068 357.286 328.147 362.615L435.371 469.839C438.511 472.977 442.624 474.547 446.739 474.547C450.853 474.547 454.967 472.978 458.106 469.839L467.229 460.716ZM223.582 183.91H281.071C291.292 183.91 299.574 192.194 299.575 202.414C299.575 206.778 298.062 210.786 295.533 213.951C292.143 218.195 286.926 220.916 281.072 220.916H228.303H223.583V225.63V278.406C223.583 287.081 217.613 294.358 209.559 296.361C208.124 296.717 206.625 296.909 205.08 296.909C194.861 296.909 186.577 288.625 186.577 278.406V220.917H129.087C118.868 220.917 110.584 212.633 110.584 202.414C110.584 192.195 118.868 183.911 129.087 183.911H186.576V126.421C186.576 116.202 194.86 107.918 205.079 107.918C215.298 107.918 223.582 116.202 223.582 126.421V183.91Z"
+          />
+        </svg>
+      </div>
+    
+    </div>
+  
+      {% else %}
+        
+    {% if media.media_type == 'video' %}
+      {% assign mediaSourceUrl = media.sources.last.url %}
+    {% endif %}
+    {% if media.media_type == 'external_video' %}
+      {% assign mediaSourceUrl = media | external_video_url %}
+    {% endif %}
+     {% if media.media_type == 'image' %}
+      {% assign mediaSourceUrl = media.src %}
+    {% endif %}
+    
+    <div
+      media-type="{{media.media_type}}" 
+      media-poster="{{media.preview_image.src}}" 
+      media-source-url="{{media.sources.first.url}}" 
+      media-last-source-url="{{mediaSourceUrl}}"
+      external-id="{{media.external_id}}"
+      grid-index="{{forloop.index}}"
+      data-outline="deactive"
+      id="{{imageID}}"
+      style="outline-color:var(--g-c-brand, brand)"
+      class="gem-slider-item w-full gem-slider-item-gBQM0C9Z9a-{{product.id}} group flex w-full items-center justify-center overflow-hidden outline-1 -outline-offset-1 image-item data-[outline=active]:outline data-[outline=active]:p-[1px] undefined"
+    >
+      
+      <img
+    
+    draggable="false"
+    class="gp_lazyload"
+    data-src="{{media.preview_image | product_img_url: '1024x1024'}}" data-srcset="{{media.preview_image | product_img_url: '1024x1024'}} 768w,{{media.preview_image | product_img_url: '1024x1024'}} 1024w,{{media.preview_image | product_img_url: '1024x1024'}} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="{{media.width}}" height="{{media.height}}" alt="{{media.alt}}" priority
+    sizes="100vw"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1;--objf:cover;--objf-tablet:cover;--objf-mobile:cover;--w:100%;--w-tablet:100%;--w-mobile:100%"
+  />
+      
+      {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0" >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path d="M17.6869 12.2646L17.6868 12.2646L6.78379 18.4464C6.78378 18.4464 6.78376 18.4464 6.78374 18.4464C6.52931 18.5903 6.1665 18.4179 6.1665 18.0416V5.95844C6.1665 5.58218 6.52917 5.40981 6.7836 5.55354C6.78366 5.55357 6.78373 5.55361 6.78379 5.55365L17.6868 11.7354L17.6869 11.7354C17.8819 11.846 17.8819 12.154 17.6869 12.2646Z" stroke="#F9F9F9" stroke-miterlimit="10"/>
+        </svg>
+      </div>
+      {% endif %}
+
+      {% if media.media_type == 'model' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7441 4.57034C11.9017 4.47655 12.098 4.47655 12.2555 4.57034L18.5889 8.33957C18.7404 8.42971 18.8332 8.59296 18.8332 8.76923V15.2308C18.8332 15.407 18.7404 15.5703 18.5889 15.6604L12.2555 19.4297C12.098 19.5234 11.9017 19.5234 11.7441 19.4297L5.41079 15.6604C5.25932 15.5703 5.1665 15.407 5.1665 15.2308V8.76923C5.1665 8.59296 5.25932 8.42971 5.41079 8.33957L11.7441 4.57034ZM6.1665 9.64865V14.9465L11.4998 18.1206V12.8227L6.1665 9.64865ZM12.4998 12.8227V18.1206L17.8332 14.9465V9.64865L12.4998 12.8227ZM17.3555 8.76923L11.9998 11.9566L6.64417 8.76923L11.9998 5.58185L17.3555 8.76923Z" fill="#F9F9F9"/>
+        </svg>
+      </div>
+      {% endif %}
+      
+      <div class="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50 opacity-0 transition-opacity duration-100 group-hover:opacity-100" 
+      style="--d: none;--d-mobile: none;--d-tablet: none;" 
+      >
+        <svg
+          height="100%"
+          width="100%"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          viewBox="0 0 512 512"
+          color="#fff"
+        >
+          <path
+            fill="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M62.2467 345.253C43.7072 326.714 29.1474 305.116 18.9714 281.057C8.42839 256.13 3.08301 229.671 3.08301 202.418C3.08301 175.165 8.43012 148.707 18.974 123.78C29.15 99.7213 43.7098 78.123 62.2485 59.5834C80.788 41.0439 102.386 26.4841 126.445 16.3081C151.372 5.76422 177.831 0.417969 205.084 0.417969C232.337 0.417969 258.794 5.76421 283.722 16.3064C307.78 26.4823 329.379 41.0422 347.918 59.5817C366.458 78.1212 381.017 99.7196 391.194 123.778C401.737 148.706 407.083 175.163 407.083 202.417C407.083 229.671 401.737 256.129 391.194 281.056C388.406 287.648 385.277 294.048 381.839 300.257L493.397 411.815C514.091 432.511 514.091 466.187 493.395 486.883L484.272 496.006C474.245 506.032 460.915 511.553 446.738 511.553C432.559 511.553 419.228 506.032 409.202 496.006L296.022 382.824C291.996 384.854 287.898 386.762 283.721 388.528C258.794 399.073 232.336 404.419 205.082 404.419C177.828 404.419 151.371 399.071 126.443 388.528C102.385 378.352 80.7863 363.793 62.2467 345.253ZM301.699 336.166C313.928 327.317 324.896 316.835 334.282 305.034C342.149 295.142 348.9 284.325 354.355 272.775C364.433 251.432 370.076 227.586 370.076 202.419C370.076 111.296 296.206 37.4253 205.083 37.4253C113.96 37.4253 40.0895 111.294 40.0895 202.418C40.0895 293.541 113.96 367.411 205.084 367.411C227.413 367.411 248.701 362.967 268.126 354.928C280.091 349.976 291.347 343.658 301.699 336.166ZM467.229 460.716C473.507 454.439 473.507 444.26 467.229 437.982L360.595 331.348C356.601 336.153 352.378 340.794 347.919 345.253C341.671 351.502 335.068 357.286 328.147 362.615L435.371 469.839C438.511 472.977 442.624 474.547 446.739 474.547C450.853 474.547 454.967 472.978 458.106 469.839L467.229 460.716ZM223.582 183.91H281.071C291.292 183.91 299.574 192.194 299.575 202.414C299.575 206.778 298.062 210.786 295.533 213.951C292.143 218.195 286.926 220.916 281.072 220.916H228.303H223.583V225.63V278.406C223.583 287.081 217.613 294.358 209.559 296.361C208.124 296.717 206.625 296.909 205.08 296.909C194.861 296.909 186.577 288.625 186.577 278.406V220.917H129.087C118.868 220.917 110.584 212.633 110.584 202.414C110.584 192.195 118.868 183.911 129.087 183.911H186.576V126.421C186.576 116.202 194.86 107.918 205.079 107.918C215.298 107.918 223.582 116.202 223.582 126.421V183.91Z"
+          />
+        </svg>
+      </div>
+    
+    </div>
+  
+      {%- endif -%}
+    {% endfor %}
+    {%- endif -%}
+    
+          </div>
+        </div>
+        
+    <button
+      class="gp-carousel-action-back gBQM0C9Z9a-{{product.id}}-{{section.id}} gp-carousel-arrow absolute h-6 w-6 cursor-pointer text-gray-500 disabled:cursor-default disabled:text-gray-300 data-[hidden=true]:!hidden tablet:!inline mobile:!inline left-4 tablet:left-4 tablet:translate-x-0 tablet:pl-1 mobile:left-4 mobile:translate-x-0 mobile:pl-1 rotate-180 tablet:rotate-180 mobile:rotate-180 top-1/2 -translate-y-1/2 tablet:top-1/2 tablet:-translate-y-1/2 mobile:top-1/2 mobile:-translate-y-1/2"
+      
+    >
+      <span 
+  class="inline-flex h-6 w-6 items-center justify-center"
+  style=""
+  >
+    <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+          </svg>
+    </span>
+    </button>
+  
+
+        
+    <button
+      class="gp-carousel-action-next gBQM0C9Z9a-{{product.id}}-{{section.id}} gp-carousel-arrow absolute h-6 w-6 cursor-pointer text-gray-500 disabled:cursor-default disabled:text-gray-300 data-[hidden=true]:!hidden tablet:!inline mobile:!inline right-4 tablet:right-4 tablet:translate-x-0 tablet:pl-1 mobile:right-4 mobile:translate-x-0 mobile:pl-1 rotate-0 tablet:rotate-0 mobile:rotate-0 bottom-1/2 translate-y-1/2 tablet:bottom-1/2 tablet:translate-y-1/2 mobile:bottom-1/2 mobile:translate-y-1/2"
+      
+    >
+      <span 
+  class="inline-flex h-6 w-6 items-center justify-center"
+  style=""
+  >
+    <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+          </svg>
+    </span>
+    </button>
+  
+        
+        <div
+    class="items-center justify-center gap-2 text-center gp-carousel-dot-container gp-carousel-dot-container-gBQM0C9Z9a-{{product.id}}-{{section.id}} hidden flex-row w-full mt-2 tablet:!hidden tablet:flex-row tablet:w-full tablet:mt-2 mobile:!hidden mobile:flex-row mobile:w-full mobile:mt-2" ></div>
+      </div>
+    </gp-carousel>
+  
+  
+            
+  <div type="grid-gallery"
+    class="grid-gallery flex h-fit w-full flex-wrap scrollbar-track:rounded-2xl scrollbar-thumb:rounded-2xl scrollbar-thumb:bg-gray-400"
+    style="--d:flex;--d-mobile:flex;--d-tablet:flex;--gg:5px;--gg-tablet:5px;--gg-mobile:5px"
+  > 
+    {%- if product.media.size > 1 -%}
+      {%- for media in product.media -%}
+        {% if media.media_type == 'image' %}
+          {%- for image in product.images -%}
+            {% if image.src == media.src %}
+              {% assign imageID = image.id %}
+              {% break %}
+            {% endif%}
+          {% endfor %}
+        {% else %}
+          {% assign imageID = '' %}
+        {% endif %}
+        {%- if media.id == product.featured_media.id -%}        
+            
+    {% if media.media_type == 'video' %}
+      {% assign mediaSourceUrl = media.sources.last.url %}
+    {% endif %}
+    {% if media.media_type == 'external_video' %}
+      {% assign mediaSourceUrl = media | external_video_url %}
+      {% assign mediaSource = media | json %}
+    {% endif %}
+    {% if media.media_type == 'image' %}
+      {% assign mediaSourceUrl = media.src %}
+    {% endif %}
+    <div 
+      aria-hidden 
+      id="{{imageID}}" 
+      media-type="{{media.media_type}}" 
+      media-poster="{{media.preview_image.src}}" 
+      media-source-url="{{media.sources.first.url}}" 
+      media-last-source-url="{{mediaSourceUrl}}"
+      external-id="{{media.external_id}}"
+      grid-index="{{forloop.index}}"
+      data-outline="active" class="image-item p-[1px] data-[outline=active]:outline data-[outline=active]:p-[1px] group relative overflow-hidden outline-1 -outline-offset-1 cursor-pointer"
+      style="--aspect: 1;--aspect-tablet: 1;--aspect-mobile: 1;--w: calc(20% - 4px);--w-tablet: calc(20% - 4px);--w-mobile: calc(33.333333333333336% - 3.3333333333333335px);outline-color: var(--g-c-brand, brand);max-width: 100%;"
+      >
+      {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+        <div class="absolute pb-1 pr-1 right-0 bottom-0" >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+            <path d="M17.6869 12.2646L17.6868 12.2646L6.78379 18.4464C6.78378 18.4464 6.78376 18.4464 6.78374 18.4464C6.52931 18.5903 6.1665 18.4179 6.1665 18.0416V5.95844C6.1665 5.58218 6.52917 5.40981 6.7836 5.55354C6.78366 5.55357 6.78373 5.55361 6.78379 5.55365L17.6868 11.7354L17.6869 11.7354C17.8819 11.846 17.8819 12.154 17.6869 12.2646Z" stroke="#F9F9F9" stroke-miterlimit="10"/>
+          </svg>
+        </div>
+      {% endif %}
+
+      {% if media.media_type == 'model' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7441 4.57034C11.9017 4.47655 12.098 4.47655 12.2555 4.57034L18.5889 8.33957C18.7404 8.42971 18.8332 8.59296 18.8332 8.76923V15.2308C18.8332 15.407 18.7404 15.5703 18.5889 15.6604L12.2555 19.4297C12.098 19.5234 11.9017 19.5234 11.7441 19.4297L5.41079 15.6604C5.25932 15.5703 5.1665 15.407 5.1665 15.2308V8.76923C5.1665 8.59296 5.25932 8.42971 5.41079 8.33957L11.7441 4.57034ZM6.1665 9.64865V14.9465L11.4998 18.1206V12.8227L6.1665 9.64865ZM12.4998 12.8227V18.1206L17.8332 14.9465V9.64865L12.4998 12.8227ZM17.3555 8.76923L11.9998 11.9566L6.64417 8.76923L11.9998 5.58185L17.3555 8.76923Z" fill="#F9F9F9"/>
+        </svg>
+      </div>
+      {% endif %}
+
+      <img
+    
+    draggable="false"
+    class="gp_lazyload"
+    data-src="{{media.preview_image | product_img_url: '1024x1024'}}" data-srcset="{{media.preview_image | product_img_url: '1024x1024'}} 768w,{{media.preview_image | product_img_url: '1024x1024'}} 1024w,{{media.preview_image | product_img_url: '1024x1024'}} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="{{media.width}}" height="{{media.height}}" alt="{{media.alt}}" priority
+    sizes="100vw"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1;--objf:cover;--objf-tablet:cover;--objf-mobile:cover;width:100%;height:100%;--w:100%"
+  />
+
+      <div class="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50 opacity-0 transition-opacity duration-100 group-hover:opacity-100" 
+        style="--d: none;--d-mobile: none;--d-tablet: none;" >
+          <svg
+            height="100%"
+            width="100%"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            viewBox="0 0 512 512"
+            color="#fff"
+          >
+            <path
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M62.2467 345.253C43.7072 326.714 29.1474 305.116 18.9714 281.057C8.42839 256.13 3.08301 229.671 3.08301 202.418C3.08301 175.165 8.43012 148.707 18.974 123.78C29.15 99.7213 43.7098 78.123 62.2485 59.5834C80.788 41.0439 102.386 26.4841 126.445 16.3081C151.372 5.76422 177.831 0.417969 205.084 0.417969C232.337 0.417969 258.794 5.76421 283.722 16.3064C307.78 26.4823 329.379 41.0422 347.918 59.5817C366.458 78.1212 381.017 99.7196 391.194 123.778C401.737 148.706 407.083 175.163 407.083 202.417C407.083 229.671 401.737 256.129 391.194 281.056C388.406 287.648 385.277 294.048 381.839 300.257L493.397 411.815C514.091 432.511 514.091 466.187 493.395 486.883L484.272 496.006C474.245 506.032 460.915 511.553 446.738 511.553C432.559 511.553 419.228 506.032 409.202 496.006L296.022 382.824C291.996 384.854 287.898 386.762 283.721 388.528C258.794 399.073 232.336 404.419 205.082 404.419C177.828 404.419 151.371 399.071 126.443 388.528C102.385 378.352 80.7863 363.793 62.2467 345.253ZM301.699 336.166C313.928 327.317 324.896 316.835 334.282 305.034C342.149 295.142 348.9 284.325 354.355 272.775C364.433 251.432 370.076 227.586 370.076 202.419C370.076 111.296 296.206 37.4253 205.083 37.4253C113.96 37.4253 40.0895 111.294 40.0895 202.418C40.0895 293.541 113.96 367.411 205.084 367.411C227.413 367.411 248.701 362.967 268.126 354.928C280.091 349.976 291.347 343.658 301.699 336.166ZM467.229 460.716C473.507 454.439 473.507 444.26 467.229 437.982L360.595 331.348C356.601 336.153 352.378 340.794 347.919 345.253C341.671 351.502 335.068 357.286 328.147 362.615L435.371 469.839C438.511 472.977 442.624 474.547 446.739 474.547C450.853 474.547 454.967 472.978 458.106 469.839L467.229 460.716ZM223.582 183.91H281.071C291.292 183.91 299.574 192.194 299.575 202.414C299.575 206.778 298.062 210.786 295.533 213.951C292.143 218.195 286.926 220.916 281.072 220.916H228.303H223.583V225.63V278.406C223.583 287.081 217.613 294.358 209.559 296.361C208.124 296.717 206.625 296.909 205.08 296.909C194.861 296.909 186.577 288.625 186.577 278.406V220.917H129.087C118.868 220.917 110.584 212.633 110.584 202.414C110.584 192.195 118.868 183.911 129.087 183.911H186.576V126.421C186.576 116.202 194.86 107.918 205.079 107.918C215.298 107.918 223.582 116.202 223.582 126.421V183.91Z"
+            />
+          </svg>
+        </div>
+      </div>
+        {% else %}
+          
+    {% if media.media_type == 'video' %}
+      {% assign mediaSourceUrl = media.sources.last.url %}
+    {% endif %}
+    {% if media.media_type == 'external_video' %}
+      {% assign mediaSourceUrl = media | external_video_url %}
+      {% assign mediaSource = media | json %}
+    {% endif %}
+    {% if media.media_type == 'image' %}
+      {% assign mediaSourceUrl = media.src %}
+    {% endif %}
+    <div 
+      aria-hidden 
+      id="{{imageID}}" 
+      media-type="{{media.media_type}}" 
+      media-poster="{{media.preview_image.src}}" 
+      media-source-url="{{media.sources.first.url}}" 
+      media-last-source-url="{{mediaSourceUrl}}"
+      external-id="{{media.external_id}}"
+      grid-index="{{forloop.index}}"
+      data-outline="deactive" class="image-item undefined data-[outline=active]:outline data-[outline=active]:p-[1px] group relative overflow-hidden outline-1 -outline-offset-1 cursor-pointer"
+      style="--aspect: 1;--aspect-tablet: 1;--aspect-mobile: 1;--w: calc(20% - 4px);--w-tablet: calc(20% - 4px);--w-mobile: calc(33.333333333333336% - 3.3333333333333335px);outline-color: var(--g-c-brand, brand);max-width: 100%;"
+      >
+      {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+        <div class="absolute pb-1 pr-1 right-0 bottom-0" >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+            <path d="M17.6869 12.2646L17.6868 12.2646L6.78379 18.4464C6.78378 18.4464 6.78376 18.4464 6.78374 18.4464C6.52931 18.5903 6.1665 18.4179 6.1665 18.0416V5.95844C6.1665 5.58218 6.52917 5.40981 6.7836 5.55354C6.78366 5.55357 6.78373 5.55361 6.78379 5.55365L17.6868 11.7354L17.6869 11.7354C17.8819 11.846 17.8819 12.154 17.6869 12.2646Z" stroke="#F9F9F9" stroke-miterlimit="10"/>
+          </svg>
+        </div>
+      {% endif %}
+
+      {% if media.media_type == 'model' %}
+      <div class="absolute pb-1 pr-1 right-0 bottom-0">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7441 4.57034C11.9017 4.47655 12.098 4.47655 12.2555 4.57034L18.5889 8.33957C18.7404 8.42971 18.8332 8.59296 18.8332 8.76923V15.2308C18.8332 15.407 18.7404 15.5703 18.5889 15.6604L12.2555 19.4297C12.098 19.5234 11.9017 19.5234 11.7441 19.4297L5.41079 15.6604C5.25932 15.5703 5.1665 15.407 5.1665 15.2308V8.76923C5.1665 8.59296 5.25932 8.42971 5.41079 8.33957L11.7441 4.57034ZM6.1665 9.64865V14.9465L11.4998 18.1206V12.8227L6.1665 9.64865ZM12.4998 12.8227V18.1206L17.8332 14.9465V9.64865L12.4998 12.8227ZM17.3555 8.76923L11.9998 11.9566L6.64417 8.76923L11.9998 5.58185L17.3555 8.76923Z" fill="#F9F9F9"/>
+        </svg>
+      </div>
+      {% endif %}
+
+      <img
+    
+    draggable="false"
+    class="gp_lazyload"
+    data-src="{{media.preview_image | product_img_url: '1024x1024'}}" data-srcset="{{media.preview_image | product_img_url: '1024x1024'}} 768w,{{media.preview_image | product_img_url: '1024x1024'}} 1024w,{{media.preview_image | product_img_url: '1024x1024'}} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="{{media.width}}" height="{{media.height}}" alt="{{media.alt}}" priority
+    sizes="100vw"
+    style="--aspect:1;--aspect-tablet:1;--aspect-mobile:1;--objf:cover;--objf-tablet:cover;--objf-mobile:cover;width:100%;height:100%;--w:100%"
+  />
+
+      <div class="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50 opacity-0 transition-opacity duration-100 group-hover:opacity-100" 
+        style="--d: none;--d-mobile: none;--d-tablet: none;" >
+          <svg
+            height="100%"
+            width="100%"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            viewBox="0 0 512 512"
+            color="#fff"
+          >
+            <path
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M62.2467 345.253C43.7072 326.714 29.1474 305.116 18.9714 281.057C8.42839 256.13 3.08301 229.671 3.08301 202.418C3.08301 175.165 8.43012 148.707 18.974 123.78C29.15 99.7213 43.7098 78.123 62.2485 59.5834C80.788 41.0439 102.386 26.4841 126.445 16.3081C151.372 5.76422 177.831 0.417969 205.084 0.417969C232.337 0.417969 258.794 5.76421 283.722 16.3064C307.78 26.4823 329.379 41.0422 347.918 59.5817C366.458 78.1212 381.017 99.7196 391.194 123.778C401.737 148.706 407.083 175.163 407.083 202.417C407.083 229.671 401.737 256.129 391.194 281.056C388.406 287.648 385.277 294.048 381.839 300.257L493.397 411.815C514.091 432.511 514.091 466.187 493.395 486.883L484.272 496.006C474.245 506.032 460.915 511.553 446.738 511.553C432.559 511.553 419.228 506.032 409.202 496.006L296.022 382.824C291.996 384.854 287.898 386.762 283.721 388.528C258.794 399.073 232.336 404.419 205.082 404.419C177.828 404.419 151.371 399.071 126.443 388.528C102.385 378.352 80.7863 363.793 62.2467 345.253ZM301.699 336.166C313.928 327.317 324.896 316.835 334.282 305.034C342.149 295.142 348.9 284.325 354.355 272.775C364.433 251.432 370.076 227.586 370.076 202.419C370.076 111.296 296.206 37.4253 205.083 37.4253C113.96 37.4253 40.0895 111.294 40.0895 202.418C40.0895 293.541 113.96 367.411 205.084 367.411C227.413 367.411 248.701 362.967 268.126 354.928C280.091 349.976 291.347 343.658 301.699 336.166ZM467.229 460.716C473.507 454.439 473.507 444.26 467.229 437.982L360.595 331.348C356.601 336.153 352.378 340.794 347.919 345.253C341.671 351.502 335.068 357.286 328.147 362.615L435.371 469.839C438.511 472.977 442.624 474.547 446.739 474.547C450.853 474.547 454.967 472.978 458.106 469.839L467.229 460.716ZM223.582 183.91H281.071C291.292 183.91 299.574 192.194 299.575 202.414C299.575 206.778 298.062 210.786 295.533 213.951C292.143 218.195 286.926 220.916 281.072 220.916H228.303H223.583V225.63V278.406C223.583 287.081 217.613 294.358 209.559 296.361C208.124 296.717 206.625 296.909 205.08 296.909C194.861 296.909 186.577 288.625 186.577 278.406V220.917H129.087C118.868 220.917 110.584 212.633 110.584 202.414C110.584 192.195 118.868 183.911 129.087 183.911H186.576V126.421C186.576 116.202 194.86 107.918 205.079 107.918C215.298 107.918 223.582 116.202 223.582 126.421V183.91Z"
+            />
+          </svg>
+        </div>
+      </div>
+        {%- endif -%}
+      {% endfor %}
+    {% endif %}
+  </div>
+          </div>
+        {%- endif -%}
+      </div>
+  </gp-product-images>
+  
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gFAo_k6rIi relative flex flex-col"
+    >
+      <div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xs)" class="gsqlfj_Dfb ">
+      
+    {%- unless product -%}
+      <p>Product not found</p>
+    {%- else -%}
+      
+        
+    <div
+      
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <h2
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A']"
+          style="--w:100%;--ta:left;--line-clamp:1;--c:#242424;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:600;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;word-break:break-word"
+        >
+        {{ product.title }}
+        </h2>
+      </div>
+    </div>
+      
+    {%- endunless -%}
+  
+      </div>
+      
+      
+    <div
+      parentTag="Col" id="gviSKToaka"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-s);--cg:var(--g-s-s);--pc:start;--gtc:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gviSKToaka mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="gBtO-oFw4G relative flex flex-col"
+    >
+      
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-price.js" defer="defer"></script>
+      <gp-product-price
+        gp-data='{"priceType":"regular","uid":"gRn_nOc1s9","locale":"{{shop.locale}}","currency":"{{shop.currency}}","moneyFormat":"{{ shop.money_format | replace: '"', '\\"' | escape }}"}'
+        
+        class=" data-[hidden=true]:hidden"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+        data-hidden="false"
+      >
+        
+    <div
+      id="p-price-gRn_nOc1s9"
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-price decoration-g-text-1"
+          style="--w:100%;--tdc:text-1;--tdt:1;--ta:left;--c:#242424;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        
+                  {% if variant.price %} 
+                    {{ variant.price | money}}
+                  {% endif %}
+                
+        </div>
+      </div>
+    </div>
+      </gp-product-price>
+  
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="gGRzWC70-n relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="gX6i4AGkrL"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--cg:var(--g-s-xs);--pc:start;--gtc:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gX6i4AGkrL mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="ggDjzgGzmE relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gTdtwu3m74 "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#575757;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:400;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;word-break:break-word"
+        >
+        <p>was</p>
+        </div>
+      </div>
+    </div>
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gnpfc5A-EI relative flex flex-col"
+    >
+      
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-price.js" defer="defer"></script>
+      <gp-product-price
+        gp-data='{"priceType":"compare","uid":"gBa4IT0NA8","locale":"{{shop.locale}}","currency":"{{shop.currency}}","moneyFormat":"{{ shop.money_format | replace: '"', '\\"' | escape }}"}'
+        
+        class=" data-[hidden=true]:hidden"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+        data-hidden="{% if variant.compare_at_price > variant.price and variant.compare_at_price >= 0 %}false{% else %}true{% endif %}"
+      >
+        
+    <div
+      id="p-price-gBa4IT0NA8"
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-price line-through"
+          style="--w:100%;--tdc:#575757;--tdt:1;--ta:left;--c:#575757;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:400;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;word-break:break-word"
+        >
+        
+                  {% if variant.compare_at_price  %} 
+                    {{ variant.compare_at_price | money}}
+                  {% endif %}
+                
+        </div>
+      </div>
+    </div>
+      </gp-product-price>
+  
+    </div>
+    </div>
+  
+    
+    </div>
+    </div>
+  
+    
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-button.js" defer="defer"></script>
+  
+  
+  
+   {%- liquid 
+      assign inventory_quantity = variant.inventory_quantity | default: 0
+    -%}
+    <gp-product-button
+      gp-data='{"setting":{"actionEffect":"open-cart-drawer","customURL":{"link":"/cart","target":"_self"},"errorMessage":"Cannot add product to cart","successMessage":"Add product to cart successfully","label":"Buy Now","outOfStockLabel":"Out of stocks","errorType":"built-in"},"styles":{"errorTypo":{"type":"paragraph-2"},"successTypo":{"type":"paragraph-2"}},"disabled":"{{variant.available}}","variantID":"{{variant.id}}"}'
+    >
+        <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+    class="{% unless variant.available %} !hidden {% endunless %} undefined"
+  >
+    <style>
+    .g-KPs2mek1.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #126BFF;
+  
+      
+      
+      
+      
+      
+      
+    }
+
+    .g-KPs2mek1:hover::before {
+      border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #126BFF;
+  
+      
+    }
+  </style>
+    <button
+      type="submit" data-id="g-KPs2mek1" aria-label="Buy Now"
+      data-state="idle"
+      class="g-KPs2mek1 gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none gp-button-atc"
+      style="--hvr-bg:transparent;--bg:transparent;--c:#126BFF;--pl:0px;--pr:0px;--pt:0px;--pb:0px;--pl-tablet:0px;--pr-tablet:0px;--pt-tablet:0px;--pb-tablet:0px;--pl-mobile:0px;--pr-mobile:0px;--pt-mobile:0px;--pb-mobile:0px;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--tt:default;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:150%;--size:14px;--size-tablet:14px;--size-mobile:12px"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="break-words group-data-[state=loading]:invisible [&_p]:whitespace-pre-line z-1 h-full flex items-center overflow-hidden "
+        style="--tt:default"
+      >
+        Buy Now
+      </span>
+    </button>
+  </div>
+        <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+    class="{% if variant.available %} !hidden {% endif %}"
+  >
+    <style>
+    .g-KPs2mek1.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #126BFF;
+  
+      
+      
+      
+      
+      
+      
+    }
+
+    .g-KPs2mek1:hover::before {
+      border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #126BFF;
+  
+      
+    }
+  </style>
+    <button
+      type="button" data-id="g-KPs2mek1" aria-label="Out of stocks"
+      data-state="idle"
+      class="g-KPs2mek1 gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none gp-button-sold-out btn-disabled opacity-30 pointer-events-none"
+      style="--hvr-bg:transparent;--bg:transparent;--c:#126BFF;--pl:0px;--pr:0px;--pt:0px;--pb:0px;--pl-tablet:0px;--pr-tablet:0px;--pt-tablet:0px;--pb-tablet:0px;--pl-mobile:0px;--pr-mobile:0px;--pt-mobile:0px;--pb-mobile:0px;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--tt:default;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:150%;--size:14px;--size-tablet:14px;--size-mobile:12px"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="break-words group-data-[state=loading]:invisible [&_p]:whitespace-pre-line z-1 h-full flex items-center overflow-hidden "
+        style="--tt:default"
+      >
+        Out of stocks
+      </span>
+    </button>
+  </div>
+    </gp-product-button>
+  
+    </div>
+    </div>
+  
+    
+        {%- endform -%}
+      </gp-product>
+      {%- assign product = gpBkProduct -%}
+    {% else %}
+      <div class="text-center">Product not found</div>
+    {%- endif -%}
+  
+    </div>
+    </div>
+  
+    
+    </div>
+  {% render 'gp-section-484499485347546327-0', product: product, variant: variant, product_form_id: product_form_id, productSelectedVariant: productSelectedVariant  %}
+          </div>
+        </div>
+        
+    <button
+      class="gp-carousel-action-back g3RieOrG__-{{section.id}} gp-carousel-arrow absolute h-6 w-6 cursor-pointer text-gray-500 disabled:cursor-default disabled:text-gray-300 data-[hidden=true]:!hidden tablet:!hidden mobile:!hidden left-1 -translate-x-full tablet:-left-4 tablet:translate-x-0 tablet:pl-1 mobile:-left-4 mobile:translate-x-0 mobile:pl-1 rotate-180 tablet:rotate-180 mobile:rotate-180 top-1/2 -translate-y-1/2 tablet:top-1/2 tablet:-translate-y-1/2 mobile:top-1/2 mobile:-translate-y-1/2"
+      
+    >
+      <span 
+  class="inline-flex h-6 w-6 items-center justify-center"
+  style=""
+  >
+     <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 21.9998C13.25 21.8341 13.3158 21.6751 13.4331 21.5579C13.5503 21.4407 13.7092 21.3748 13.875 21.3748H28.6163L24.6825 17.4423C24.5651 17.325 24.4992 17.1658 24.4992 16.9998C24.4992 16.8338 24.5651 16.6747 24.6825 16.5573C24.7999 16.44 24.959 16.374 25.125 16.374C25.291 16.374 25.4501 16.44 25.5675 16.5573L30.5675 21.5573C30.6257 21.6154 30.6719 21.6843 30.7034 21.7603C30.7349 21.8362 30.7511 21.9176 30.7511 21.9998C30.7511 22.082 30.7349 22.1634 30.7034 22.2394C30.6719 22.3153 30.6257 22.3843 30.5675 22.4423L25.5675 27.4423C25.4501 27.5597 25.291 27.6256 25.125 27.6256C24.959 27.6256 24.7999 27.5597 24.6825 27.4423C24.5651 27.325 24.4992 27.1658 24.4992 26.9998C24.4992 26.8338 24.5651 26.6747 24.6825 26.5573L28.6163 22.6248H13.875C13.7092 22.6248 13.5503 22.559 13.4331 22.4418C13.3158 22.3245 13.25 22.1656 13.25 21.9998Z" fill="#575757"/> <rect x="0.5" y="0.5" width="43" height="43" stroke="#E0E0E0"/> </svg>
+    </span>
+    </button>
+  
+
+        
+    <button
+      class="gp-carousel-action-next g3RieOrG__-{{section.id}} gp-carousel-arrow absolute h-6 w-6 cursor-pointer text-gray-500 disabled:cursor-default disabled:text-gray-300 data-[hidden=true]:!hidden tablet:!hidden mobile:!hidden right-1 translate-x-full tablet:-right-4 tablet:translate-x-0 tablet:pl-1 mobile:-right-4 mobile:translate-x-0 mobile:pl-1 rotate-0 tablet:rotate-0 mobile:rotate-0 bottom-1/2 translate-y-1/2 tablet:bottom-1/2 tablet:translate-y-1/2 mobile:bottom-1/2 mobile:translate-y-1/2"
+      
+    >
+      <span 
+  class="inline-flex h-6 w-6 items-center justify-center"
+  style=""
+  >
+     <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 21.9998C13.25 21.8341 13.3158 21.6751 13.4331 21.5579C13.5503 21.4407 13.7092 21.3748 13.875 21.3748H28.6163L24.6825 17.4423C24.5651 17.325 24.4992 17.1658 24.4992 16.9998C24.4992 16.8338 24.5651 16.6747 24.6825 16.5573C24.7999 16.44 24.959 16.374 25.125 16.374C25.291 16.374 25.4501 16.44 25.5675 16.5573L30.5675 21.5573C30.6257 21.6154 30.6719 21.6843 30.7034 21.7603C30.7349 21.8362 30.7511 21.9176 30.7511 21.9998C30.7511 22.082 30.7349 22.1634 30.7034 22.2394C30.6719 22.3153 30.6257 22.3843 30.5675 22.4423L25.5675 27.4423C25.4501 27.5597 25.291 27.6256 25.125 27.6256C24.959 27.6256 24.7999 27.5597 24.6825 27.4423C24.5651 27.325 24.4992 27.1658 24.4992 26.9998C24.4992 26.8338 24.5651 26.6747 24.6825 26.5573L28.6163 22.6248H13.875C13.7092 22.6248 13.5503 22.559 13.4331 22.4418C13.3158 22.3245 13.25 22.1656 13.25 21.9998Z" fill="#575757"/> <rect x="0.5" y="0.5" width="43" height="43" stroke="#E0E0E0"/> </svg>
+    </span>
+    </button>
+  
+        
+        <div
+    class="items-center justify-center gap-2 text-center gp-carousel-dot-container gp-carousel-dot-container-g3RieOrG__-{{section.id}} hidden flex-row w-full mt-2 tablet:!flex tablet:flex-row tablet:w-full tablet:mt-2 mobile:!flex mobile:flex-row mobile:w-full mobile:mt-2" ></div>
+      </div>
+    </gp-carousel>
+  
+    </div>
+    </div>
+  
+            </section>
+          
+    
+{% schema %}
+  {
+    
+    "name": "Section 13",
+    "tag": "section",
+    "class": "gps-484499485347546327 gps gpsi",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Section design by GemPages. [Click here to start design](https://builder.gempages.net/instant/hyperlink/edit?type=section&section_id=484499485347546327&template_id=482463146242475100)"
+      }
+    ],
+    "blocks": [{"type": "@app"}]
+  }
+{% endschema %}

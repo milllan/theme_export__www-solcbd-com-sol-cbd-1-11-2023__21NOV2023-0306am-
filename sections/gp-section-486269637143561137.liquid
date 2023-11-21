@@ -1,0 +1,520 @@
+
+  
+  
+      <style>
+        @font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6uyw4BMUTPHjx4wWA.woff) format('woff');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVSwiPHw.woff) format('woff');
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+      </style>
+    
+  <style>
+    .gps-486269637143561137 .-rotate-90,.gps-486269637143561137 .rotate-90{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1}.gps-486269637143561137 .relative{position:relative}.gps-486269637143561137 .mx-auto{margin-left:auto;margin-right:auto}.gps-486269637143561137 .mb-0{margin-bottom:0}.gps-486269637143561137 .mr-\[12px\]{margin-right:12px}.gps-486269637143561137 .flex{display:flex}.gps-486269637143561137 .inline-flex{display:inline-flex}.gps-486269637143561137 .grid{display:grid}.gps-486269637143561137 .hidden{display:none}.gps-486269637143561137 .w-full{width:100%}.gps-486269637143561137 .max-w-full{max-width:100%}.gps-486269637143561137 .shrink-0{flex-shrink:0}.gps-486269637143561137 .-rotate-90{--tw-rotate:-90deg}.gps-486269637143561137 .-rotate-90,.gps-486269637143561137 .rotate-90{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.gps-486269637143561137 .rotate-90{--tw-rotate:90deg}.gps-486269637143561137 .cursor-pointer{cursor:pointer}.gps-486269637143561137 .flex-col{flex-direction:column}.gps-486269637143561137 .items-center{align-items:center}.gps-486269637143561137 .gap-y-0{row-gap:0}.gps-486269637143561137 .overflow-hidden{overflow:hidden}.gps-486269637143561137 .border{border-width:1px}.gps-486269637143561137 .transition-all{transition-duration:.15s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-486269637143561137 .transition-colors{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-486269637143561137 .duration-200{transition-duration:.2s}.gps-486269637143561137 .ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-486269637143561137 .\[\&_\*\]\:max-w-full *{max-width:100%}.gps-486269637143561137 .\[\&_p\]\:inline p{display:inline}.gps-486269637143561137 .\[\&_p\]\:after\:whitespace-pre-wrap p:after{content:var(--tw-content);white-space:pre-wrap}.gps-486269637143561137 .\[\&_p\]\:after\:content-\[\'\\A\'\] p:after{--tw-content:"\A";content:var(--tw-content)}
+  </style>
+  
+      
+      
+            <section
+              class="mx-auto max-w-full"
+              style="--w:100%;--w-tablet:100%;--w-mobile:100%;--pl:0px;--pl-tablet:0px;--pl-mobile:0px;--pr:0px;--pr-tablet:0px;--pr-mobile:0px"
+            >
+              
+    <div
+      id="gUSMQIt9f5"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--pt:72px;--pl:15px;--pb:72px;--pr:15px;--pt-tablet:64px;--pb-tablet:64px;--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:#FFFFFF;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gUSMQIt9f5 mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gpW30YaKeY relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="gaX-jAd5j3"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(undefined);--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:776px;--w-tablet:776px;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gaX-jAd5j3 mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gXCo-oar-I relative flex flex-col"
+    >
+      <div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:56px;--mb-tablet:49px" class="gvtDJ0NIdU ">
+      
+    <div
+      parentTag="Col"
+        class="gvtDJ0NIdU "
+        style="--tt:default;--ta:center"
+      >
+      <div class="flex" style="--jc:center">
+        <h2
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#242424;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:700;--ls:normal;--lh:130%;--size:51px;--size-tablet:51px;--size-mobile:44px;word-break:break-word"
+        >
+        <p>Frequently Asked Questions</p>
+        </h2>
+      </div>
+    </div>
+      </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(undefined)" class="gdOPvJcyBP ">
+      
+    <gp-accordion
+      class="flex w-full flex-col "
+      style="--rg:var(--g-s-2xl)"
+      gp-data='{"setting":{"expanded":false,"expandItem":false,"activeKey":1,"isIconPlus":false,"iconPosition":"right"},"styles":{"bgColor":{"normal":"transparent"},"color":{"normal":"#000000"},"headerBorder":{"normal":{"border":"none","borderLabel":"None","borderType":"none","color":"transparent","isCustom":false,"width":"0px 0px 0px 0px"}},"itemBorder":{"normal":{"border":"solid","borderLabel":"Style 1","borderType":"style-1","color":"#EDEEEE","isCustom":true,"width":"1px 1px 1px 1px"}},"itemRounded":{"normal":{"radiusType":"none"}},"width":{"desktop":"1170px"},"fullWidth":{"desktop":true},"textColor":{"normal":"#242424"},"itemHeaderSpacing":{"custom":{"desktop":{"horizontal":"30px","vertical":"30px"}}}},"uid":"gdOPvJcyBP"}'
+    >
+    <div
+                class="flex"
+                style="--jc:left"
+              >
+                
+    <div
+      data-index="0"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bs:solid;--bw:1px 1px 1px 1px;--bc:#EDEEEE"
+      class="gdOPvJcyBP gp-accordion-item overflow-hidden"
+    >
+      <div class="hidden rotate-90"></div>
+      <div
+        aria-hidden
+        data-index="0"
+        class="gdOPvJcyBP flex items-center gp-accordion-item_header cursor-pointer"
+        style="--pl:30px;--pr:30px;--pt:30px;--pb:30px;--fd:row-reverse;--jc:space-between;--bgc:transparent;--c:#242424;--bs:none;--bw:0px 0px 0px 0px;--bc:transparent"
+      >
+        <div class="mr-[12px] shrink-0">
+          <span
+            style="--c:#000000"
+            data-index="0"
+            class="gdOPvJcyBP gp-accordion-item_icon -rotate-90 inline-flex transition-all duration-200"
+          ><div style="rotate: 180deg"><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.64645 2.64645C5.84171 2.45118 6.15829 2.45118 6.35355 2.64645L11.3536 7.64645C11.5488 7.84171 11.5488 8.15829 11.3536 8.35355L6.35355 13.3536C6.15829 13.5488 5.84171 13.5488 5.64645 13.3536C5.45118 13.1583 5.45118 12.8417 5.64645 12.6464L10.2929 8L5.64645 3.35355C5.45118 3.15829 5.45118 2.84171 5.64645 2.64645Z" fill="currentColor"/>
+                  </svg></div></span>
+        </div>
+        
+    <div
+      
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <span
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] overflow-hidden"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:700;--ls:normal;--lh:150%;--size:28px;--size-tablet:28px;--size-mobile:24px;word-break:break-word"
+        >
+        How long does shipping take?
+        </span>
+      </div>
+    </div>
+      </div>
+      <div
+        uid="gGjHH06pQb"
+        data-index="0"
+        class="gdOPvJcyBP gp-accordion-item_body hidden"
+        style="--pl:30px;--pr:30px;--pt:0px;--pb:0px"
+      >
+        <div
+      label="Block" tag="Col" type="component"
+      style=""
+      class="gBhG2TH-l6 relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="guoq5Lcosj "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mt:-8px;--mb:var(undefined);--pb:30px"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#424242;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Standard shipping usually takes from 3 to 5 days. We do provide express next-day shipping at an extra cost.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+      </div>
+    </div>
+  
+              </div>
+            <div
+                class="flex"
+                style="--jc:left"
+              >
+                
+    <div
+      data-index="1"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bs:solid;--bw:1px 1px 1px 1px;--bc:#EDEEEE"
+      class="gdOPvJcyBP gp-accordion-item overflow-hidden"
+    >
+      <div class="hidden rotate-90"></div>
+      <div
+        aria-hidden
+        data-index="1"
+        class="gdOPvJcyBP flex items-center gp-accordion-item_header cursor-pointer"
+        style="--pl:30px;--pr:30px;--pt:30px;--pb:30px;--fd:row-reverse;--jc:space-between;--bgc:transparent;--c:#242424;--bs:none;--bw:0px 0px 0px 0px;--bc:transparent"
+      >
+        <div class="mr-[12px] shrink-0">
+          <span
+            style="--c:#000000"
+            data-index="1"
+            class="gdOPvJcyBP gp-accordion-item_icon -rotate-90 inline-flex transition-all duration-200"
+          ><div style="rotate: 180deg"><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.64645 2.64645C5.84171 2.45118 6.15829 2.45118 6.35355 2.64645L11.3536 7.64645C11.5488 7.84171 11.5488 8.15829 11.3536 8.35355L6.35355 13.3536C6.15829 13.5488 5.84171 13.5488 5.64645 13.3536C5.45118 13.1583 5.45118 12.8417 5.64645 12.6464L10.2929 8L5.64645 3.35355C5.45118 3.15829 5.45118 2.84171 5.64645 2.64645Z" fill="currentColor"/>
+                  </svg></div></span>
+        </div>
+        
+    <div
+      
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <span
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] overflow-hidden"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:700;--ls:normal;--lh:150%;--size:28px;--size-tablet:28px;--size-mobile:24px;word-break:break-word"
+        >
+        How can I make a payment?
+        </span>
+      </div>
+    </div>
+      </div>
+      <div
+        uid="gPHHYpnkug"
+        data-index="1"
+        class="gdOPvJcyBP gp-accordion-item_body hidden"
+        style="--pl:30px;--pr:30px;--pt:0px;--pb:0px"
+      >
+        <div
+      label="Block" tag="Col" type="component"
+      style=""
+      class="gEzyI7a6PH relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gcNUidVt44 "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mt:-8px;--mb:var(undefined);--pb:30px"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#424242;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Standard shipping usually takes from 3 to 5 days. We do provide express next-day shipping at an extra cost.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+      </div>
+    </div>
+  
+              </div>
+            <div
+                class="flex"
+                style="--jc:left"
+              >
+                
+    <div
+      data-index="2"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bs:solid;--bw:1px 1px 1px 1px;--bc:#EDEEEE"
+      class="gdOPvJcyBP gp-accordion-item overflow-hidden"
+    >
+      <div class="hidden rotate-90"></div>
+      <div
+        aria-hidden
+        data-index="2"
+        class="gdOPvJcyBP flex items-center gp-accordion-item_header cursor-pointer"
+        style="--pl:30px;--pr:30px;--pt:30px;--pb:30px;--fd:row-reverse;--jc:space-between;--bgc:transparent;--c:#242424;--bs:none;--bw:0px 0px 0px 0px;--bc:transparent"
+      >
+        <div class="mr-[12px] shrink-0">
+          <span
+            style="--c:#000000"
+            data-index="2"
+            class="gdOPvJcyBP gp-accordion-item_icon -rotate-90 inline-flex transition-all duration-200"
+          ><div style="rotate: 180deg"><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.64645 2.64645C5.84171 2.45118 6.15829 2.45118 6.35355 2.64645L11.3536 7.64645C11.5488 7.84171 11.5488 8.15829 11.3536 8.35355L6.35355 13.3536C6.15829 13.5488 5.84171 13.5488 5.64645 13.3536C5.45118 13.1583 5.45118 12.8417 5.64645 12.6464L10.2929 8L5.64645 3.35355C5.45118 3.15829 5.45118 2.84171 5.64645 2.64645Z" fill="currentColor"/>
+                  </svg></div></span>
+        </div>
+        
+    <div
+      
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <span
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] overflow-hidden"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:700;--ls:normal;--lh:150%;--size:28px;--size-tablet:28px;--size-mobile:24px;word-break:break-word"
+        >
+        Can I inspect the goods before I receive them?
+        </span>
+      </div>
+    </div>
+      </div>
+      <div
+        uid="gLNn6rU0hX"
+        data-index="2"
+        class="gdOPvJcyBP gp-accordion-item_body hidden"
+        style="--pl:30px;--pr:30px;--pt:0px;--pb:0px"
+      >
+        <div
+      label="Block" tag="Col" type="component"
+      style=""
+      class="gAmiVlAJZa relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gT0RIW-Udh "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mt:-8px;--mb:var(undefined);--pb:30px"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#424242;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Standard shipping usually takes from 3 to 5 days. We do provide express next-day shipping at an extra cost.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+      </div>
+    </div>
+  
+              </div>
+            <div
+                class="flex"
+                style="--jc:left"
+              >
+                
+    <div
+      data-index="3"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bs:solid;--bw:1px 1px 1px 1px;--bc:#EDEEEE"
+      class="gdOPvJcyBP gp-accordion-item overflow-hidden"
+    >
+      <div class="hidden rotate-90"></div>
+      <div
+        aria-hidden
+        data-index="3"
+        class="gdOPvJcyBP flex items-center gp-accordion-item_header cursor-pointer"
+        style="--pl:30px;--pr:30px;--pt:30px;--pb:30px;--fd:row-reverse;--jc:space-between;--bgc:transparent;--c:#242424;--bs:none;--bw:0px 0px 0px 0px;--bc:transparent"
+      >
+        <div class="mr-[12px] shrink-0">
+          <span
+            style="--c:#000000"
+            data-index="3"
+            class="gdOPvJcyBP gp-accordion-item_icon -rotate-90 inline-flex transition-all duration-200"
+          ><div style="rotate: 180deg"><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.64645 2.64645C5.84171 2.45118 6.15829 2.45118 6.35355 2.64645L11.3536 7.64645C11.5488 7.84171 11.5488 8.15829 11.3536 8.35355L6.35355 13.3536C6.15829 13.5488 5.84171 13.5488 5.64645 13.3536C5.45118 13.1583 5.45118 12.8417 5.64645 12.6464L10.2929 8L5.64645 3.35355C5.45118 3.15829 5.45118 2.84171 5.64645 2.64645Z" fill="currentColor"/>
+                  </svg></div></span>
+        </div>
+        
+    <div
+      
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <span
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] overflow-hidden"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:700;--ls:normal;--lh:150%;--size:28px;--size-tablet:28px;--size-mobile:24px;word-break:break-word"
+        >
+        What is the policy for returns and exchanges?
+        </span>
+      </div>
+    </div>
+      </div>
+      <div
+        uid="g_sEhsUnHk"
+        data-index="3"
+        class="gdOPvJcyBP gp-accordion-item_body hidden"
+        style="--pl:30px;--pr:30px;--pt:0px;--pb:0px"
+      >
+        <div
+      tag="Col" type="component"
+      style="--ai:normal;--jc:normal;--o:0"
+      class="grAE7q5axH relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gV2ztv0FDH "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mt:-8px;--mb:var(undefined);--pb:30px"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#424242;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Standard shipping usually takes from 3 to 5 days. We do provide express next-day shipping at an extra cost.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+      </div>
+    </div>
+  
+              </div>
+            <div
+                class="flex"
+                style="--jc:left"
+              >
+                
+    <div
+      data-index="4"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--bs:solid;--bw:1px 1px 1px 1px;--bc:#EDEEEE"
+      class="gdOPvJcyBP gp-accordion-item overflow-hidden"
+    >
+      <div class="hidden rotate-90"></div>
+      <div
+        aria-hidden
+        data-index="4"
+        class="gdOPvJcyBP flex items-center gp-accordion-item_header cursor-pointer"
+        style="--pl:30px;--pr:30px;--pt:30px;--pb:30px;--fd:row-reverse;--jc:space-between;--bgc:transparent;--c:#242424;--bs:none;--bw:0px 0px 0px 0px;--bc:transparent"
+      >
+        <div class="mr-[12px] shrink-0">
+          <span
+            style="--c:#000000"
+            data-index="4"
+            class="gdOPvJcyBP gp-accordion-item_icon -rotate-90 inline-flex transition-all duration-200"
+          ><div style="rotate: 180deg"><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.64645 2.64645C5.84171 2.45118 6.15829 2.45118 6.35355 2.64645L11.3536 7.64645C11.5488 7.84171 11.5488 8.15829 11.3536 8.35355L6.35355 13.3536C6.15829 13.5488 5.84171 13.5488 5.64645 13.3536C5.45118 13.1583 5.45118 12.8417 5.64645 12.6464L10.2929 8L5.64645 3.35355C5.45118 3.15829 5.45118 2.84171 5.64645 2.64645Z" fill="currentColor"/>
+                  </svg></div></span>
+        </div>
+        
+    <div
+      
+        class=" "
+        style=""
+      >
+      <div class="" style="">
+        <span
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] overflow-hidden"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:700;--ls:normal;--lh:150%;--size:28px;--size-tablet:28px;--size-mobile:24px;word-break:break-word"
+        >
+        Is international shipping available at the store?
+        </span>
+      </div>
+    </div>
+      </div>
+      <div
+        uid="g_WbqSWPAy"
+        data-index="4"
+        class="gdOPvJcyBP gp-accordion-item_body hidden"
+        style="--pl:30px;--pr:30px;--pt:0px;--pb:0px"
+      >
+        <div
+      tag="Col" type="component"
+      style="--ai:normal;--jc:normal;--o:0"
+      class="grXOufBSbm relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="g1CAqawBY6 "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mt:-8px;--mb:var(undefined);--pb:30px"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#424242;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Standard shipping usually takes from 3 to 5 days. We do provide express next-day shipping at an extra cost.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+      </div>
+    </div>
+  
+              </div>
+            
+    </gp-accordion>
+    <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-accordion.js" defer="defer"></script>
+  
+      </div>
+    </div>
+    </div>
+  
+    
+    </div>
+    </div>
+  
+            </section>
+          
+    
+{% schema %}
+  {
+    
+    "name": "Section 10",
+    "tag": "section",
+    "class": "gps-486269637143561137 gps gpsi",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Section design by GemPages. [Click here to start design](https://builder.gempages.net/instant/hyperlink/edit?type=section&section_id=486269637143561137&template_id=482463146242475100)"
+      }
+    ],
+    "blocks": [{"type": "@app"}]
+  }
+{% endschema %}

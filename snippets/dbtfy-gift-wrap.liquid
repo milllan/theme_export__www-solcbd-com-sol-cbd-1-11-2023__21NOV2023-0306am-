@@ -1,0 +1,79 @@
+{%- if settings.dbtfy_gift_wrap -%}
+  {%- liquid
+    assign gift_wrap_product = settings.dbtfy_gift_wrap_product
+    assign display_gift_wrap_price = settings.dbtfy_gift_wrap_display_price
+    assign checkbox_label = 'add-ons.gift_wrap.checkbox_label' | t
+    assign message_label = 'add-ons.gift_wrap.text_field_label' | t
+    assign message_placeholder = 'add-ons.gift_wrap.text_field_placeholder' | t
+
+    assign variant_id = gift_wrap_product.variants.first.id
+    assign product_id = gift_wrap_product.id
+    assign gift_wraps_in_cart = 0
+    assign gift_wraps_message = cart.attributes["Gift wrap"]
+
+    if gift_wraps_message != blank
+      assign message_attribute = gift_wraps_message
+    endif
+
+    for item in cart.items
+      if item.id == variant_id
+        assign gift_wraps_in_cart = item.quantity
+      endif
+    endfor
+  -%}
+
+  {%- if gift_wrap_product != blank -%}
+    {%- if checkbox_label != blank or gift_wraps_in_cart > 0 -%}
+      {%- if position == "cart_drawer" -%}
+        <div class="drawer__inner-section">
+      {%- endif -%}
+
+        <div class="dbtfy dbtfy-gift_wrap"
+             data-wraps-in-cart="{{ gift_wraps_in_cart }}"
+             data-gift-wrap-product-id="{{ product_id }}"
+             data-gift-wrap-variant-id="{{ variant_id }}">
+
+        {%- if checkbox_label != blank -%}
+          <div class="gw-checkbox checkbox rte spacer-bottom-none">
+            <input class="gw-input"
+                   id="gift-wrapping-{{ position }}"
+                   type="checkbox"
+                {%- if gift_wraps_in_cart > 0 -%}
+                   checked="checked"
+                {%- endif -%}>
+
+            <label for="gift-wrapping-{{ position }}">
+              {{ checkbox_label }}
+
+              {%- if display_gift_wrap_price -%}
+                <span class="money-wrapper">(<span class="money">{{ gift_wrap_product.price | money }}</span>)</span>
+              {%- endif -%}
+            </label>
+          </div>
+        {%- endif -%}
+
+        {%- if gift_wraps_in_cart > 0 -%}
+          <div class="cart__row card spacer-top">
+            <div class="cart__note card-body">
+              <label for="GiftWrapMessage-{{ position }}">
+                {{ message_label }}
+              </label>
+
+              <textarea name="attributes[Gift wrap]"
+                        rows="3"
+                        name="note"
+                        class="gw-message input-full"
+                        placeholder="{{ message_placeholder }}"
+                        id="GiftWrapMessage-{{ position }}">{{ message_attribute }}</textarea>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if position == 'cart_drawer' -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+

@@ -1,0 +1,22 @@
+<!-- /snippets/pagination.liquid -->
+{%- if paginate.pages > 1 -%}
+  {%- render 'dbtfy-infinite-scroll' with paginate as paginate -%}
+
+  {%- capture previous_label -%}
+    <span aria-label="{{ 'general.pagination.previous' | t }}" title="{{ 'general.pagination.previous' | t }}">
+      <span class="{{ settings.icon }}" aria-hidden="true">arrow_back</span>
+    </span>
+  {%- endcapture -%}
+
+  {%- capture next_label -%}
+    <span aria-label="{{ 'general.pagination.next' | t }}" title="{{ 'general.pagination.next' | t }}">
+      <span class="{{ settings.icon }}" aria-hidden="true">arrow_forward</span>
+    </span>
+  {%- endcapture -%}
+
+  <div class="pagination text-center spacer-top-lg {{ class }}">
+    <div class="inline-list">
+      {{- paginate | default_pagination: previous: previous_label, next: next_label | strip_newlines -}}
+    </div>
+  </div>
+{%- endif -%}

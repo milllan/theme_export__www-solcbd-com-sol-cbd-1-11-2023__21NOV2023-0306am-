@@ -1,0 +1,29 @@
+{%- assign social_services = "twitter, facebook, pinterest, instagram, tumblr, youtube, vimeo, snapchat, whatsapp, telegram, tiktok, linkedin, reddit, messenger, gmail" | split: ', ' -%}
+
+{%- assign social_enable = false -%}
+
+{%- for service in (1..social_services.size) -%}
+  {%- capture service_id -%}social_{{ social_services[forloop.index] }}_link{%- endcapture -%}
+  {%- if settings[service_id] != blank -%}
+    {%- assign social_enable = true -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if social_enable -%}
+<ul class="social-medias inline-list">
+  {%- for service in (1..social_services.size) -%}
+    {%- capture service_id -%}social_{{ social_services[forloop.index0] }}_link{%- endcapture -%}
+    {%- assign platform = social_services[forloop.index0] | replace: '_', ' ' -%}
+    {%- assign platform_capitalize = platform | capitalize -%}
+
+    {%- if settings[service_id] != blank -%}
+    <li>
+      <a class="" target="_blank" href="{{ settings[service_id] | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: platform_capitalize }}">
+        {%- render 'svg-definitions' with platform -%}
+      </a>
+    </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+{%- endif -%}

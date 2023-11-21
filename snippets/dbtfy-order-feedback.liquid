@@ -1,0 +1,82 @@
+{%- if settings.dbtfy_order_feedback -%}
+  {%- liquid
+    assign required_to_checkout = settings.dbtfy_order_feedback_required
+    assign select_title = 'add-ons.order_feedback.select_title' | t
+    assign default_options_text = 'add-ons.order_feedback.default_options_text' | t
+    assign select_options = 'add-ons.order_feedback.select_options' | t
+    assign error_message = 'add-ons.order_feedback.error_message' | t
+    assign other_option_text = 'add-ons.order_feedback.other_option_text' | t
+    assign other_option_placeholder = 'add-ons.order_feedback.other_option_placeholder' | t
+    assign other_error_message = 'add-ons.order_feedback.other_error_message' | t
+    assign title = 'add-ons.order_feedback.title' | t
+    assign other_title = 'add-ons.order_feedback.other_title' | t
+  -%}
+
+  {%- if position == 'cart_drawer' -%}
+    <div class="drawer__inner-section">
+  {%- endif -%}
+
+    <div class="dbtfy dbtfy-order_feedback{% unless position == 'cart_drawer' %} spacer-top{% endunless %}"
+         data-select-required="{{ required_to_checkout }}">
+
+      <div class="card form-vertical">
+        <div class="card-body">
+          <label class="of-label spacer-bottom-sm"
+                 for="order-feedback">{{ select_title }}</label>
+
+          <p class="of-error errors spacer-bottom-sm" hidden>{{ error_message }}</p>
+
+          {%- assign other_field = other_option_text -%}
+
+          <select id="order-feedback"
+                  class="order-feedback select--small spacer-top-xs"
+                  name="attributes[{{ title }}]"
+                  {% if required_to_checkout %}required{% endif %}
+                  data-select-required="{{ required_to_checkout }}"
+                  data-other-field="{{ other_field }}">
+
+            {%- if default_options_text != blank -%}
+                <option value=""{% if cart.attributes[title] == "" %} selected{% endif %}>{{ default_options_text }}</option>
+            {%- endif -%}
+
+            {%- assign optionsArray = select_options | split: ',' -%}
+
+            {%- for feedback in optionsArray -%}
+              {%- assign option = feedback | strip -%}
+
+              <option value="{{ option }}"{% if cart.attributes[title] == option %} selected{% endif %}>
+                  {{ option }}
+              </option>
+            {%- endfor -%}
+
+            {%- if other_field != blank -%}
+              <option data-is-other-option
+                      {% if other_title != blank %}data-name="attributes[{{ other_title }}]"{% endif%}
+                      value="{{ other_field }}"
+                      {% if cart.attributes[title] == other_field %}selected{% endif %}>
+                {{ other_field }}
+              </option>
+            {%- endif -%}
+          </select>
+
+          {%- if other_field != blank -%}
+            <div class="other-form-wrapper spacer-top"{% unless cart.attributes[title] == other_field %} hidden{% endunless %}>
+              <label class="of-other-label" for="order-feedback-other">{{ other_field }}</label>
+
+              <p class="of-other-error errors" hidden>{{ other_error_message }}</p>
+
+              <input id="order-feedback-other" class="order-feedback-other input--small" type="text"
+                     {% if other_title != blank %}name="attributes[{{ other_title }}]"{% endif %}
+                     value="{{ cart.attributes[other_title] }}"
+                     placeholder="{{ other_option_placeholder }}"
+                     data-select-required="{{ required_to_checkout }}">
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+  {%- if position == 'cart_drawer' -%}
+    </div>
+  {%- endif-%}
+{%- endif -%}

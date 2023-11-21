@@ -1,0 +1,369 @@
+{% layout none %}
+
+{%- assign total_compare_at_price = 0 -%}
+{%- assign gift_wrap_product_id = settings.dbtfy_gift_wrap_product.id -%}
+
+<form id="ajaxCartForm"
+      class="ajaxcart-form flex full flex-column"
+      action="{{ routes.cart_url }}"
+      method="post"
+      novalidate>
+
+  <div class="drawer__header">
+    <div class="drawer__title">
+      <a href="{{ routes.cart_url }}">
+        <span class="{{ settings.icon }} icon-width"
+              aria-hidden="true">{{ settings.icon_cart }}</span>
+          {{ 'cart.general.title' | t }}
+
+        <span>({{ cart.item_count }})</span>
+      </a>
+    </div>
+
+    <button type="button"
+            class="btn btn-square-small js-drawer-close modal-close js-modal-close"
+            aria-label="{{ 'cart.general.close_cart' | t }}"
+            title="{{ 'cart.general.close_cart' | t }}"
+            {%- if settings.cart_type == 'modal' -%} data-modal-close="#CartModal" {%- endif -%}>
+
+      <span class="{{ settings.icon }}" aria-hidden="true">close</span>
+    </button>
+  </div>
+
+  <div class="drawer__inner {% if cart.item_count == 0 %}flex align-center justify-center{% endif %}">
+    {%- if cart.item_count == 0 -%}
+      <div class="text-center">
+        <p class="spacer-top">{{ 'cart.general.empty' | t }}</p>
+        <p class="cookie-message">{{ 'cart.general.cookies_required' | t }}</p>
+      </div>
+    {%- else -%}
+
+      <div class="cart-products ajaxcart-products drawer__inner-section">
+        {%- for item in cart.items -%}
+{% comment %}
+    LOOP SUBSCRIPTIONS (https://apps.shopify.com/loop-subscriptions)
+    DO NOT modify this source code because
+    It is automatically generated from LOOP SUBSCRIPTIONS BUNDLE DESIGN
+    If you need to make change, please contact the Loop support team
+    LOOP BUNDLE CODE STARTS
+{% endcomment %}
+    {% assign isBundleItem = false %}
+    {%- for property in item.properties -%}
+        {% if property.first == '_bundleId' %}
+            {% assign isBundleItem = true %}
+            {% break %}
+        {% endif %}
+    {%- endfor -%}
+    {% if isBundleItem == true %}
+        {% continue %}
+    {% endif %}
+{% comment %}
+    LOOP BUNDLE CODE ENDS
+{% endcomment %}
+
+          {%- liquid
+            if item.original_line_price != item.final_line_price
+              assign has_discount = true
+            else
+              assign has_discount = false
+            endif
+
+            if item.variant.compare_at_price > item.variant.price
+              assign on_sale = true
+            else
+              assign on_sale = false
+            endif
+
+            if on_sale
+              assign total_compare_at_price = item.variant.compare_at_price | times: item.quantity | plus: total_compare_at_price
+            else
+              assign total_compare_at_price = item.variant.price | times: item.quantity | plus: total_compare_at_price
+            endif
+          -%}
+
+          <div class="cart__row ajaxcart_row cart-item drawer__inner-section"
+                data-product-handle="{{ item.product.handle }}"
+                data-product-id="{{ item.product.id }}"
+                data-line="{{ forloop.index }}"
+                data-product-variant-id="{{ item.variant.id }}"
+                {% if item.variant.inventory_management == "shopify" %}
+                  {% if item.variant.inventory_quantity > 0 %}
+                    data-product-quantity="{{ item.variant.inventory_quantity }}"
+                  {% else %}
+                    {% if item.variant.inventory_policy == "continue" %}
+                      data-product-quantity="99999"
+                    {% endif %}
+                  {% endif %}
+                {% else %}
+                  data-product-quantity="99999"
+                {% endif %}
+          >
+            <div class="grid grid-small {% if has_discount or on_sale %} cart__product-has-discount{% endif %}">
+              <div class="grid__item four-twelfths">
+                <a href="{{ item.product.url | within: collections.all }}"
+                   class="{% if item.image != blank %}product--wrapper {% endif %}media-wrapper image-link"
+                   style="padding-top: {{ 1 | divided_by: item.image.aspect_ratio | times: 100 }}%;">
+
+                  {%- if item.image != blank -%}
+                    <img class="product--image media lazyload"
+                        {% render 'lazysizes', img: item.image, img_type: 'responsive' %}
+                         alt="{{ item.title | escape }}">
+                  {%- else -%}
+                    {{ "product-1" | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </a>
+              </div>
+
+              <div class="grid__item eight-twelfths flex flex-column justify-center">
+                <div class="spacer-auto-xs">
+                  <div class="cart__product-name h6 flex justify-between spacer-bottom-xs">
+                    <a href="{{ item.product.url | within: collections.all }}"
+                    {% unless settings.enable_full_product_titles %} class="text-ellipsis" {% endunless %}>
+                      {{ item.product.title }}
+                    </a>
+
+                    <button
+                        class="cart__product-remove"
+                        data-line="{{ forloop.index }}"
+                        type="button"
+                        aria-label="{{ 'cart.general.remove' | t }}"
+                        title="{{ 'cart.general.remove' | t }}">
+
+                      <span class="btn__text">
+                        <span class="{{ settings.icon }} icon-width" aria-hidden="true">delete</span>
+                      </span>
+                    </button>
+                  </div>
+
+                  {%- unless item.variant.title contains 'Default' -%}
+                    <p class="text-small">
+                      {{ item.variant.title }}
+                    </p>
+                  {%- endunless -%}
+
+                  {%- liquid
+                    assign property_size = item.properties | size
+                  -%}
+
+                  {%- if property_size > 0 -%}
+                    {%- for p in item.properties -%}
+                      {%- assign first_character_in_key = p.first | truncate: 1, '' -%}
+
+                      {%- unless p.last == blank or first_character_in_key == '_' -%}
+                        <div class="text-small">
+                          {{- p.first | append: ':' | append: ' ' -}}
+                          {%- if p.last contains '/uploads/' -%}
+                            <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                          {%- else -%}
+                            {{- p.last -}}
+                          {%- endif -%}
+                        </div>
+                      {%- endunless -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                </div>
+
+                {%- if item.line_level_discount_allocations != blank -%}
+                  <div class="grid grid-small">
+                    {%- for discount_allocation in item.line_level_discount_allocations -%}
+                      <div class="grid__item six-twelfths">
+                        <p class="product-discount text-secondary"
+                            aria-label="{{ 'customer.order.discount' | t }}">
+                          <span class="{{ settings.icon }} icon-width" aria-hidden="true">local_offer</span>
+                          <span class="visually-hidden">{{ 'customer.order.discount' | t }}:</span>
+                          {{ discount_allocation.discount_application.title }}
+                        </p>
+                      </div>
+
+                      <div class="grid__item six-twelfths text-right">
+                        <p class="product-discount text-sale">
+                          -<span class="money">{{ discount_allocation.amount | money }}</span>
+                        </p>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+
+                <div class="grid grid-small flex-nowrap align-center spacer-top-xs">
+                  {%- capture quantity_selector -%}
+                    <div class="grid__item flex-auto">
+                      {%- assign quantity_id = 'updates_ajax-' | append: item.key -%}
+
+                      <label for="{{ quantity_id }}"
+                             class="visually-hidden">{{ 'cart.label.quantity' | t }}</label>
+
+                      {%- render 'quantity-selector' with item as item, type: 'cart', id: quantity_id -%}
+                    </div>
+                  {%- endcapture -%}
+
+                  {%- if settings.dbtfy_gift_wrap -%}
+                    {%- unless item.product.id == gift_wrap_product_id -%}
+                      {{ quantity_selector }}
+                    {%- endunless -%}
+                  {%- else -%}
+                    {{ quantity_selector }}
+                  {%- endif -%}
+
+                  <div class="grid__item flex-fill cart__price-wrapper text-right">
+                    <div class="text-money inline-flex flex-column">
+                      {%- if has_discount -%}
+                        <span class="cart__price text-sale" aria-label="{{ 'products.general.sale_price' | t }}"><span class="money">{{ item.final_line_price | money }}</span></span>
+                        <span class="cart__price cart__price--compare text-muted text-strike" aria-label="{{ 'products.general.regular_price' | t }}"><span class="money">{{ item.original_line_price | money }}</span></span>
+                      {%- elsif on_sale -%}
+                        <span class="cart__price text-sale" aria-label="{{ 'products.general.sale_price' | t }}"><span class="money">{{ item.variant.price | times: item.quantity | money }}</span></span>
+                        <span class="cart__price cart__price--compare text-muted text-strike" aria-label="{{ 'products.general.regular_price' | t }}"><span class="money">{{ item.variant.compare_at_price | times: item.quantity | money }}</span></span>
+                      {% else %}
+                        <span class="cart__price" aria-label="{{ 'products.general.regular_price' | t }}"><span class="money">{{ item.original_line_price | money }}</span></span>
+                      {%- endif -%}
+
+                      {%- if item.unit_price_measurement -%}
+                        <span class="visually-hidden">{{ 'products.general.unit_price' | t }}</span>
+                        <span class="cart__unit-price">
+                          {%- capture unit_price_separator -%}
+                            <span aria-hidden="true">/</span><span class="visually-hidden">&nbsp;{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+                          {%- endcapture -%}
+
+                          {%- capture unit_price_base_unit -%}
+                            {%- if item.unit_price_measurement.reference_value != 1 -%}
+                              {{- item.unit_price_measurement.reference_value -}}
+                            {%- endif -%}
+
+                            {{ item.unit_price_measurement.reference_unit }}
+                          {%- endcapture -%}
+
+                        <span data-unit-price><span class="money">{{ item.unit_price | money }}</span></span>{{- unit_price_separator -}}{{- unit_price_base_unit -}}
+                      </span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- render "dbtfy-delivery-date", position: "cart_drawer" -%}
+      {%- render "dbtfy-cart-discount", position: "cart_drawer" -%}
+
+      {%- render "dbtfy-gift-wrap", position: "cart_drawer" -%}
+
+      <div class="drawer__inner-section">
+        {%- if cart.cart_level_discount_applications != blank -%}
+          {%- for discount_application in cart.cart_level_discount_applications -%}
+          <div class="grid grid-small">
+            <div class="grid__item six-twelfths">
+              <p class="order-discount">
+                <span class="{{ settings.icon }}" aria-hidden="true">local_offer</span>
+                <span class="visually-hidden">{{ 'customer.order.discount' | t }}:</span>
+                {{- discount_application.title -}}
+              </p>
+            </div>
+            <div class="grid__item six-twelfths text-right">
+              <p class="order-discount">-<span class="money">{{ discount_application.total_allocated_amount | money }}</span></p>
+            </div>
+          </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+        <div class="cart__total-price-info">
+          <div class="grid grid-small flex-nowrap cart__subtotal-wrapper">
+            <div class="grid__item flex-fill overflow-hidden">
+              <p class="cart__subtotal text-money text-large spacer-bottom-none text-ellipsis">{{ 'cart.general.subtotal' | t }}</p>
+            </div>
+            <div class="grid__item cart__subtotal-price flex-auto text-right">
+              <p class="cart__subtotal text-money text-large spacer-bottom-none" data-cart-total><span class="money">{{ cart.total_price | money }}</span></p>
+            </div>
+          </div>
+
+          {%- render "dbtfy-cart-savings", cart: cart, total_compare_at_price: total_compare_at_price -%}
+        </div>
+
+        <!-- Custom currency message -->
+        {%- assign currency_message = 'cart.general.custom_currency_html' | t: shopCurrency: shop.currency -%}
+
+        {%- if settings.dbtfy_custom_currencies and currency_message != blank -%}
+          {%- if settings.currency_message -%}
+            <div class="Cart_currencyinfo spacer-top spacer-bottom">
+              <div class="card card-body text-left">
+                <p class="rte spacer-bottom-none">{{ currency_message }}</p>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- render "dbtfy-agree-to-terms", location: "cart-drawer" -%}
+      </div>
+
+      {%- if settings.dbtfy_trust_badge_position_in_cart_drawer == "separate_section" -%}
+        <div class="drawer__inner-section">
+          {%- render "dbtfy-trust-badge", position: "cart_drawer" -%}
+        </div>
+      {%- endif -%}
+
+      {%- render "dbtfy-order-feedback", position: "cart_drawer" -%}
+
+      {%- if settings.cart_notes_enable -%}
+        <div class="drawer__inner-section">
+          <label for="CartSpecialInstructions">
+            <span class="{{ settings.icon }} icon-width" aria-hidden="true">info</span> {{ 'cart.general.note' | t }}
+          </label>
+
+          <textarea rows="3" name="note" class="input-full" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+
+  <div class="drawer__footer">
+    {%- if cart.item_count == 0 -%}
+      <a href="{{ settings.browsing_link }}"
+        class="btn btn--primary full">{{ 'cart.general.continue_browsing_html' | t }}</a>
+    {%- else -%}
+      {%- capture taxes_shipping_checkout -%}
+        {%- if shop.taxes_included and shop.shipping_policy.body != blank -%}
+          {{ 'cart.general.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+        {%- elsif shop.taxes_included -%}
+          {{ 'cart.general.taxes_included_but_shipping_at_checkout' | t }}
+        {%- elsif shop.shipping_policy.body != blank -%}
+          {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+        {%- else -%}
+          {{ 'cart.general.taxes_and_shipping_at_checkout' | t }}
+        {%- endif -%}
+      {%- endcapture -%}
+
+      {%- if taxes_shipping_checkout != blank -%}
+      <p class="text-center text-small spacer-bottom-sm rte">
+        {{ taxes_shipping_checkout }}
+      </p>
+      {%- endif -%}
+
+      {%- if settings.tracking_app == "route" -%}
+        <div class="route-div"></div>
+      {%- endif -%}
+
+      {%- if settings.dbtfy_minimum_order -%}
+        {%- render "dbtfy-minimum-order", cart_type: "drawer" -%}
+      {%- else -%}
+        {%- render "checkout-button", type: "drawer" -%}
+      {%- endif -%}
+
+      {%- if settings.dbtfy_trust_badge_position_in_cart_drawer == "under_checkout_button" -%}
+        {%- render "dbtfy-trust-badge", position: "cart_drawer" -%}
+      {%- endif -%}
+
+      {%- unless request.design_mode -%}
+        {%- if additional_checkout_buttons and settings.enable_payment_button and settings.position != 'drawer' -%}
+          <div class="additional_checkout_buttons">{{ content_for_additional_checkout_buttons }}</div>
+        {%- endif -%}
+      {%- endunless -%}
+    {%- endif -%}
+  </div>
+
+</form>
+
+<script defer="defer">
+  window.Loop = {};
+  window.Loop.bundleCartAllItems = {{ cart.items | json }};
+  bootstrap("BUNDLE_CONTAINER_CLASS");
+</script>

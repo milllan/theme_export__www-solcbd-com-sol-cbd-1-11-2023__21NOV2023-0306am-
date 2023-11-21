@@ -1,0 +1,900 @@
+
+  
+  
+      <style>
+        @font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6uyw4BMUTPHjx4wWA.woff) format('woff');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVSwiPHw.woff) format('woff');
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+      </style>
+    
+  <style>
+    .gps-486269637562991831 .pointer-events-none{pointer-events:none}.gps-486269637562991831 .pointer-events-auto{pointer-events:auto}.gps-486269637562991831 .relative{position:relative}.gps-486269637562991831 .mx-auto{margin-left:auto;margin-right:auto}.gps-486269637562991831 .mb-0{margin-bottom:0}.gps-486269637562991831 .inline-block{display:inline-block}.gps-486269637562991831 .flex{display:flex}.gps-486269637562991831 .inline-flex{display:inline-flex}.gps-486269637562991831 .grid{display:grid}.gps-486269637562991831 .h-6{height:24px}.gps-486269637562991831 .h-full{height:100%}.gps-486269637562991831 .w-6{width:24px}.gps-486269637562991831 .w-full{width:100%}.gps-486269637562991831 .max-w-full{max-width:100%}.gps-486269637562991831 .flex-col{flex-direction:column}.gps-486269637562991831 .items-center{align-items:center}.gps-486269637562991831 .justify-center{justify-content:center}.gps-486269637562991831 .gap-y-0{row-gap:0}.gps-486269637562991831 .overflow-hidden{overflow:hidden}.gps-486269637562991831 .align-middle{vertical-align:middle}.gps-486269637562991831 .leading-\[0\]{line-height:0}.gps-486269637562991831 .text-g-bg-3{color:var(--g-c-bg-3)}.gps-486269637562991831 .transition-colors{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-486269637562991831 .duration-200{transition-duration:.2s}.gps-486269637562991831 .ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-486269637562991831 .\[\&\>svg\]\:h-auto>svg{height:auto}.gps-486269637562991831 .\[\&\>svg\]\:w-full>svg{width:100%}.gps-486269637562991831 .\[\&_\*\]\:max-w-full *{max-width:100%}.gps-486269637562991831 .\[\&_p\]\:inline p{display:inline}.gps-486269637562991831 .\[\&_p\]\:after\:whitespace-pre-wrap p:after{content:var(--tw-content);white-space:pre-wrap}.gps-486269637562991831 .\[\&_p\]\:after\:content-\[\'\\A\'\] p:after{--tw-content:"\A";content:var(--tw-content)}
+  </style>
+  
+      
+      
+            <section
+              class="mx-auto max-w-full"
+              style="--w:100%;--w-tablet:100%;--w-mobile:100%;--pl:0px;--pl-tablet:0px;--pl-mobile:0px;--pr:0px;--pr-tablet:0px;--pr-mobile:0px"
+            >
+              
+    <div
+      id="gKWeeSALJW"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--pt:var(undefined);--pb:var(undefined);--cg:auto;--pc:start;--gtc:minmax(0, 12fr);--gtc-mobile:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gKWeeSALJW mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="gvVWl-dUF8 relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="g8wlOb4Yz9"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(undefined);--cg:auto;--pc:start;--gtc:minmax(0, 6fr) minmax(0, 6fr);--gtc-mobile:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:#242424;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="g8wlOb4Yz9 mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="g9EtOhqz1x relative flex flex-col"
+    >
+      <div
+    
+    role="presentation"
+    class="group/image gIRqiWlgGJ"
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(undefined);--ta:left"
+    >
+    <figure
+      class="relative inline-block overflow-hidden align-middle pointer-events-none"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--h:auto;--h-tablet:auto;--h-mobile:auto;border-radius:inherit"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+      >
+        <img
+    quality="70" title="Image Title"
+    draggable="false"
+    class="inline-block w-full h-full max-w-full flex gp_lazyload"
+    data-src="https://ucarecdn.com/ed522d7d-0768-428f-86cf-0d45a6792d16/-/format/auto/" data-srcset="https://ucarecdn.com/ed522d7d-0768-428f-86cf-0d45a6792d16/-/format/auto/ 768w,https://ucarecdn.com/ed522d7d-0768-428f-86cf-0d45a6792d16/-/format/auto/ 1024w,https://ucarecdn.com/ed522d7d-0768-428f-86cf-0d45a6792d16/-/format/auto/ 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="1081" height="864" alt="Alt Image" priority
+    sizes="100vw"
+    style="--aspect:auto;--objf:cover;--bs:none;--bw:0px;--bc:transparent;--radius:var(--g-radius-none);--w:100%"
+  />
+      </div>
+    </figure>
+  </div>
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="gtD8iYS5JV relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="gMVraVwPQZ"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(undefined);--pt-mobile:56px;--pl-mobile:15px;--pb-mobile:56px;--pr-mobile:15px;--pl-tablet:15px;--pr-tablet:15px;--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:470px;--w-tablet:470px;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gMVraVwPQZ mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gyfSX0RFl5 relative flex flex-col"
+    >
+      <div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-2xl);--mb-mobile:var(--g-s-2xl);--mb-tablet:49px" class="guljFoYoPY ">
+      
+    <div
+      parentTag="Col"
+        class="guljFoYoPY "
+        style="--tt:default;--ta:left"
+      >
+      <div class="flex" style="--jc:left">
+        <h2
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:700;--ls:normal;--lh:130%;--size:51px;--size-tablet:51px;--size-mobile:44px;word-break:break-word"
+        >
+        <p>Avacera - let hair be your attraction</p>
+        </h2>
+      </div>
+    </div>
+      </div>
+    
+    <div
+      uid="gzRn_WFI7R"
+       style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px;--ta:left;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll">
+     
+     <ul
+        class="inline-flex flex-col"
+        style="--rg:var(--g-s-l)"
+        >
+        
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="gmfne7xTSp relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gmUjc4yVR7"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="goNjOnQMOY relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="g8DICIU-cx "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Organic &amp; transformative formulas</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="glAbo2LKAB relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gbbQFV-W0E"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="grtyTc1EDS relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="g5PI0qXP3r "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Guaranteed results from 4 to 8 weeks</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="gBoWvh02M6 relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] govAJjaquM"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="gV533gIq2- relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gt352A2rJS "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>No Sulfate, Phthalate and Phosphate</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="gLGOEjj_z0 relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gg6g01TFS6"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="gCiIsA9H_- relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="guV9rl7DSN "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>For every hair type and texture</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="gimFuGD6q3 relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] g2TY2GVvG6"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="gAQYrS5gec relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gIvH6mC4S7 "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Vegan, cruelty-free &amp; gluten-free&nbsp;</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="g5iQnEgmJa relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gPcHPq_Bzn"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="gzO7wfRwNt relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="go3qaQ1PX2 "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Eco-friendly practices and packaging</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+      </ul>
+  </div>
+  
+    </div>
+    </div>
+  
+    
+    </div>
+    </div>
+  
+    
+      
+      
+    <div
+      parentTag="Col" id="g19FKfLbAS"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(undefined);--cg:auto;--pc:start;--gtc:minmax(0, 6fr) minmax(0, 6fr);--gtc-mobile:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:#639651;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="g19FKfLbAS mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:center;--o-mobile:1"
+      class="g8xIDDC3Xq relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="ge7BXlM0uI"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(undefined);--pt-mobile:56px;--pl-mobile:15px;--pb-mobile:56px;--pr-mobile:15px;--pl-tablet:15px;--pr-tablet:15px;--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:470px;--w-tablet:470px;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="ge7BXlM0uI mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gtNVb8iAT_ relative flex flex-col"
+    >
+      <div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-2xl);--mb-mobile:var(--g-s-2xl);--mb-tablet:49px" class="ggPc9iIYTL ">
+      
+    <div
+      parentTag="Col"
+        class="ggPc9iIYTL "
+        style="--tt:default;--ta:left"
+      >
+      <div class="flex" style="--jc:left">
+        <h2
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:700;--ls:normal;--lh:130%;--size:51px;--size-tablet:51px;--size-mobile:44px;word-break:break-word"
+        >
+        <p>Hairdressing salon standard at home</p>
+        </h2>
+      </div>
+    </div>
+      </div>
+    
+    <div
+      uid="gSoy980Mpw"
+       style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px;--ta:left;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll">
+     
+     <ul
+        class="inline-flex flex-col"
+        style="--rg:var(--g-s-l)"
+        >
+        
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="g3n0PqS-v8 relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gxRqix9nT_"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="gvlnTG31BY relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gf0LVwc8S7 "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Organic &amp; transformative formulas</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="gp-E145oOC relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] growxg8tI1"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="g1iUTqQBri relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gxJxWYgL_H "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Guaranteed results from 4 to 8 weeks</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="gJHpsSLZ2P relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] ghggZ1Re45"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="g_GqEP5vmt relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gTtG06E3W2 "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>No Sulfate, Phthalate and Phosphate</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="g9L-SnfWTz relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gD-WOxbvSd"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="gcZY0AHM1B relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gAEzdpHLg7 "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>For every hair type and texture</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="g2PjBSjXZb relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] g1seOBEEKF"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="gdYZQwT__a relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gQ5ln5n6yA "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Vegan, cruelty-free &amp; gluten-free&nbsp;</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+    <li
+      class="flex w-full items-center gp-icon-list-item"
+      style="--cg:var(--g-s-xl)"
+    >
+    <div
+      
+      style=""
+      class="gHfxTFlKov relative flex flex-col"
+    >
+      <div
+      
+      style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+      class="leading-[0] gRlGlZn1Af"
+    >
+      <div class="inline-flex overflow-hidden g-s-icon-none"
+      style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+      >
+      <div
+      
+    >
+      <span
+        style="--c:var(--g-c-bg-3, bg-3);--t:rotate(0deg);--w:20px;--h:20px;--minw:20px"
+        class="inline-flex items-center justify-center overflow-hidden [&>svg]:w-full [&>svg]:h-auto text-g-bg-3"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M256 42.048C398.016 -103.936 753.088 151.52 256 480 -241.088 151.552 113.984 -103.936 256 42.048z" /></svg></span>
+    </div>
+      </div>
+    </div>
+    </div><div
+      
+      style=""
+      class="g9IFbvB1M4 relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gAkpfKBY8Y "
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Lato, Lato);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Eco-friendly practices and packaging</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </li>
+      </ul>
+  </div>
+  
+    </div>
+    </div>
+  
+    
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:center;--o-mobile:0"
+      class="g3TUpNJoxT relative flex flex-col"
+    >
+      <div
+    
+    role="presentation"
+    class="group/image gt-f9QztAC"
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(undefined);--ta:left"
+    >
+    <figure
+      class="relative inline-block overflow-hidden align-middle pointer-events-none"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--h:auto;--h-tablet:auto;--h-mobile:auto;border-radius:inherit"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+      >
+        <img
+    quality="70" title="Image Title"
+    draggable="false"
+    class="inline-block w-full h-full max-w-full flex gp_lazyload"
+    data-src="https://ucarecdn.com/816657a2-098b-4b0e-af89-8b66de637d3f/-/format/auto/" data-srcset="https://ucarecdn.com/816657a2-098b-4b0e-af89-8b66de637d3f/-/format/auto/ 768w,https://ucarecdn.com/816657a2-098b-4b0e-af89-8b66de637d3f/-/format/auto/ 1024w,https://ucarecdn.com/816657a2-098b-4b0e-af89-8b66de637d3f/-/format/auto/ 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="1081" height="864" alt="Alt Image" priority
+    sizes="100vw"
+    style="--aspect:auto;--objf:cover;--bs:none;--bw:0px;--bc:transparent;--radius:var(--g-radius-none);--w:100%"
+  />
+      </div>
+    </figure>
+  </div>
+    </div>
+    </div>
+  
+    
+    </div>
+    </div>
+  
+            </section>
+          
+    
+{% schema %}
+  {
+    
+    "name": "Section 15",
+    "tag": "section",
+    "class": "gps-486269637562991831 gps gpsi",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Section design by GemPages. [Click here to start design](https://builder.gempages.net/instant/hyperlink/edit?type=section&section_id=486269637562991831&template_id=482463146242475100)"
+      }
+    ],
+    "blocks": [{"type": "@app"}]
+  }
+{% endschema %}

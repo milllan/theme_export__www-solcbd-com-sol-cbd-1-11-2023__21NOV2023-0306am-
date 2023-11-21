@@ -1,0 +1,855 @@
+{%- if settings.dbtfy_product_bullet_points and section.blocks.size > 0 -%}
+  <div class="dbtfy dbtfy-product_bullet_points hide"
+       data-position="{{ section.settings.dbtfy_bullet_points_position }}"
+       data-alignment="{{ section.settings.dbtfy_bullet_points_alignment }}"
+       data-display-type="{{ section.settings.dbtfy_bullet_points_display_type }}">
+
+    <ul>
+      {%- for block in section.blocks -%}
+
+        {%- for i in (1..10)-%}
+          {%- capture index -%}{{ forloop.index }}{%- endcapture -%}
+          {%- capture bullet_point_text_selector -%}dbtfy_bullet_point_text_{{index}}{%- endcapture -%}
+          {%- capture bullet_point_icon_selector -%}dbtfy_bullet_point_icon_{{index}}{%- endcapture -%}
+          {%- capture product_type_selector -%}dbtfy_bullet_point_type_{{index}}{%- endcapture -%}
+          {%- capture product_tag_selector -%}dbtfy_bullet_point_tag_{{index}}{%- endcapture -%}
+          {%- capture product_selector -%}dbtfy_bullet_point_product_{{index}}{%- endcapture -%}
+          {%- capture collection_selector -%}dbtfy_bullet_point_collection_{{index}}{%- endcapture -%}
+          {%- capture visibility_selector -%}visibility_{{index}}{%- endcapture -%}
+
+          {%- assign point_text = block.settings[bullet_point_text_selector] | remove: "<p>" | remove: "</p>" -%}
+          {%- assign point_icon = block.settings[bullet_point_icon_selector] -%}
+          {%- assign visibility = block.settings[visibility_selector] -%}
+
+          {%- assign visibility_types = block.settings[product_type_selector] -%}
+          {%- assign visibility_tags = block.settings[product_tag_selector] -%}
+          {%- assign visibility_product = block.settings[product_selector] -%}
+          {%- assign visibility_collection = block.settings[collection_selector] -%}
+
+          {%- if point_text != blank -%}
+            <li class="pbp-point"
+                data-visibility-type="{{ visibility }}"
+                data-visibility-product="{{ visibility_product.id }}"
+                data-visibility-collection="{{ visibility_collection }}"
+                data-visibility-product-types="{{ visibility_types }}"
+                data-visibility-product-tags="{{ visibility_tags }}">
+
+              {%- if point_icon != blank -%}
+                <span class="{{ settings.icon }} icon-width text-secondary">{{ point_icon }}</span>
+              {%- endif -%}
+
+              <span> {{ point_text }}</span>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}
+
+{%- schema -%}
+  {
+    "name": "Product Bullet Points",
+	  "class": "dbtfy-product-bullet-points",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Help Center"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Follow our step-by-step tutorial](https://help.debutify.com/en/articles/5227389-how-to-show-product-bullet-points-in-the-debutify-theme)"
+      },
+      {
+        "type": "paragraph",
+        "content": "To enable/disable this add-on, go to Theme settings > Debutify Add-ons."
+      },
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_bullet_points_position",
+        "label": "Position",
+        "default": "under-product-price",
+        "options": [
+          {
+            "value": "under-product-price",
+            "label": "Under product price"
+          },
+          {
+            "value": "under-addtocart-button",
+            "label": "Under the add-to-cart button"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_bullet_points_alignment",
+        "label": "Position",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_bullet_points_display_type",
+        "label": "Display type",
+        "default": "inline",
+        "options": [
+          {
+            "value": "inline",
+            "label": "Inline display"
+          },
+          {
+            "value": "newline",
+            "label": "One bullet point per line"
+          }
+        ]
+      }
+    ],
+    "blocks" : [
+	    {
+        "type": "point",
+        "name": "Bullet Point",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Block name",
+            "info": "Used for internal identification"
+          },
+          {
+            "type": "header",
+            "content": "Bullet point 1"
+          },
+          {
+            "type": "richtext",
+            "id": "dbtfy_bullet_point_text_1",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_icon_1",
+            "label": "Icon",
+            "default": "check_circle",
+            "info": "[View all available icons](https://material.io/resources/icons)"
+          },
+          {
+            "type": "header",
+            "content": "Visibility settings",
+            "info": "Show for specific products, collections, tags, types or leave empty to show on all product pages."
+          },
+          {
+            "type": "radio",
+            "id": "visibility_1",
+            "label": "Visibility",
+            "info": "From lowest to higher priority.",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "collection",
+                "label": "Collection based"
+              },
+              {
+                "value": "type",
+                "label": "Type based"
+              },
+              {
+                "value": "tag",
+                "label": "Tag based"
+              },
+              {
+                "value": "product",
+                "label": "Product based"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_bullet_point_collection_1",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_type_1",
+            "label": "Product types",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_tag_1",
+            "label": "Product tags",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_bullet_point_product_1",
+            "label": "Product"
+          },
+          {
+            "type": "header",
+            "content": "Bullet point 2"
+          },
+          {
+            "type": "richtext",
+            "id": "dbtfy_bullet_point_text_2",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_icon_2",
+            "label": "Icon",
+            "default": "check_circle",
+            "info": "[View all available icons](https://material.io/resources/icons)"
+          },
+          {
+            "type": "header",
+            "content": "Visibility settings",
+            "info": "Show for specific products, collections, tags, types or leave empty to show on all product pages."
+          },
+          {
+            "type": "radio",
+            "id": "visibility_2",
+            "label": "Visibility",
+            "info": "From lowest to higher priority.",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "collection",
+                "label": "Collection based"
+              },
+              {
+                "value": "type",
+                "label": "Type based"
+              },
+              {
+                "value": "tag",
+                "label": "Tag based"
+              },
+              {
+                "value": "product",
+                "label": "Product based"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_bullet_point_collection_2",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_type_2",
+            "label": "Product types",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_tag_2",
+            "label": "Product tags",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_bullet_point_product_2",
+            "label": "Product"
+          },
+          {
+            "type": "header",
+            "content": "Bullet point 3"
+          },
+          {
+            "type": "richtext",
+            "id": "dbtfy_bullet_point_text_3",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_icon_3",
+            "label": "Icon",
+            "default": "check_circle",
+            "info": "[View all available icons](https://material.io/resources/icons)"
+          },
+          {
+            "type": "header",
+            "content": "Visibility settings",
+            "info": "Show for specific products, collections, tags, types or leave empty to show on all product pages."
+          },
+          {
+            "type": "radio",
+            "id": "visibility_3",
+            "label": "Visibility",
+            "info": "From lowest to higher priority.",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "collection",
+                "label": "Collection based"
+              },
+              {
+                "value": "type",
+                "label": "Type based"
+              },
+              {
+                "value": "tag",
+                "label": "Tag based"
+              },
+              {
+                "value": "product",
+                "label": "Product based"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_bullet_point_collection_3",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_type_3",
+            "label": "Product types",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_tag_3",
+            "label": "Product tags",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_bullet_point_product_3",
+            "label": "Product"
+          },
+          {
+            "type": "header",
+            "content": "Bullet point 4"
+          },
+          {
+            "type": "richtext",
+            "id": "dbtfy_bullet_point_text_4",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_icon_4",
+            "label": "Icon",
+            "default": "check_circle",
+            "info": "[View all available icons](https://material.io/resources/icons)"
+          },
+          {
+            "type": "header",
+            "content": "Visibility settings",
+            "info": "Show for specific products, collections, tags, types or leave empty to show on all product pages."
+          },
+          {
+            "type": "radio",
+            "id": "visibility_4",
+            "label": "Visibility",
+            "info": "From lowest to higher priority.",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "collection",
+                "label": "Collection based"
+              },
+              {
+                "value": "type",
+                "label": "Type based"
+              },
+              {
+                "value": "tag",
+                "label": "Tag based"
+              },
+              {
+                "value": "product",
+                "label": "Product based"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_bullet_point_collection_4",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_type_4",
+            "label": "Product types",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_tag_4",
+            "label": "Product tags",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_bullet_point_product_4",
+            "label": "Product"
+          },
+          {
+            "type": "header",
+            "content": "Bullet point 5"
+          },
+          {
+            "type": "richtext",
+            "id": "dbtfy_bullet_point_text_5",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_icon_5",
+            "label": "Icon",
+            "default": "check_circle",
+            "info": "[View all available icons](https://material.io/resources/icons)"
+          },
+          {
+            "type": "header",
+            "content": "Visibility settings",
+            "info": "Show for specific products, collections, tags, types or leave empty to show on all product pages."
+          },
+          {
+            "type": "radio",
+            "id": "visibility_5",
+            "label": "Visibility",
+            "info": "From lowest to higher priority.",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "collection",
+                "label": "Collection based"
+              },
+              {
+                "value": "type",
+                "label": "Type based"
+              },
+              {
+                "value": "tag",
+                "label": "Tag based"
+              },
+              {
+                "value": "product",
+                "label": "Product based"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_bullet_point_collection_5",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_type_5",
+            "label": "Product types",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_tag_5",
+            "label": "Product tags",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_bullet_point_product_5",
+            "label": "Product"
+          },
+          {
+            "type": "header",
+            "content": "Bullet point 6"
+          },
+          {
+            "type": "richtext",
+            "id": "dbtfy_bullet_point_text_6",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_icon_6",
+            "label": "Icon",
+            "default": "check_circle",
+            "info": "[View all available icons](https://material.io/resources/icons)"
+          },
+          {
+            "type": "header",
+            "content": "Visibility settings",
+            "info": "Show for specific products, collections, tags, types or leave empty to show on all product pages."
+          },
+          {
+            "type": "radio",
+            "id": "visibility_6",
+            "label": "Visibility",
+            "info": "From lowest to higher priority.",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "collection",
+                "label": "Collection based"
+              },
+              {
+                "value": "type",
+                "label": "Type based"
+              },
+              {
+                "value": "tag",
+                "label": "Tag based"
+              },
+              {
+                "value": "product",
+                "label": "Product based"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_bullet_point_collection_6",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_type_6",
+            "label": "Product types",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_tag_6",
+            "label": "Product tags",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_bullet_point_product_6",
+            "label": "Product"
+          },
+          {
+            "type": "header",
+            "content": "Bullet point 7"
+          },
+          {
+            "type": "richtext",
+            "id": "dbtfy_bullet_point_text_7",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_icon_7",
+            "label": "Icon",
+            "default": "check_circle",
+            "info": "[View all available icons](https://material.io/resources/icons)"
+          },
+          {
+            "type": "header",
+            "content": "Visibility settings",
+            "info": "Show for specific products, collections, tags, types or leave empty to show on all product pages."
+          },
+          {
+            "type": "radio",
+            "id": "visibility_7",
+            "label": "Visibility",
+            "info": "From lowest to higher priority.",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "collection",
+                "label": "Collection based"
+              },
+              {
+                "value": "type",
+                "label": "Type based"
+              },
+              {
+                "value": "tag",
+                "label": "Tag based"
+              },
+              {
+                "value": "product",
+                "label": "Product based"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_bullet_point_collection_7",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_type_7",
+            "label": "Product types",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_tag_7",
+            "label": "Product tags",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_bullet_point_product_7",
+            "label": "Product"
+          },
+          {
+            "type": "header",
+            "content": "Bullet point 8"
+          },
+          {
+            "type": "richtext",
+            "id": "dbtfy_bullet_point_text_8",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_icon_8",
+            "label": "Icon",
+            "default": "check_circle",
+            "info": "[View all available icons](https://material.io/resources/icons)"
+          },
+          {
+            "type": "header",
+            "content": "Visibility settings",
+            "info": "Show for specific products, collections, tags, types or leave empty to show on all product pages."
+          },
+          {
+            "type": "radio",
+            "id": "visibility_8",
+            "label": "Visibility",
+            "info": "From lowest to higher priority.",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "collection",
+                "label": "Collection based"
+              },
+              {
+                "value": "type",
+                "label": "Type based"
+              },
+              {
+                "value": "tag",
+                "label": "Tag based"
+              },
+              {
+                "value": "product",
+                "label": "Product based"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_bullet_point_collection_8",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_type_8",
+            "label": "Product types",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_tag_8",
+            "label": "Product tags",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_bullet_point_product_8",
+            "label": "Product"
+          },
+          {
+            "type": "header",
+            "content": "Bullet point 9"
+          },
+          {
+            "type": "richtext",
+            "id": "dbtfy_bullet_point_text_9",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_icon_9",
+            "label": "Icon",
+            "default": "check_circle",
+            "info": "[View all available icons](https://material.io/resources/icons)"
+          },
+          {
+            "type": "header",
+            "content": "Visibility settings",
+            "info": "Show for specific products, collections, tags, types or leave empty to show on all product pages."
+          },
+          {
+            "type": "radio",
+            "id": "visibility_9",
+            "label": "Visibility",
+            "info": "From lowest to higher priority.",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "collection",
+                "label": "Collection based"
+              },
+              {
+                "value": "type",
+                "label": "Type based"
+              },
+              {
+                "value": "tag",
+                "label": "Tag based"
+              },
+              {
+                "value": "product",
+                "label": "Product based"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_bullet_point_collection_9",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_type_9",
+            "label": "Product types",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_tag_9",
+            "label": "Product tags",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_bullet_point_product_9",
+            "label": "Product"
+          },
+          {
+            "type": "header",
+            "content": "Bullet point 10"
+          },
+          {
+            "type": "richtext",
+            "id": "dbtfy_bullet_point_text_10",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_icon_10",
+            "label": "Icon",
+            "default": "check_circle",
+            "info": "[View all available icons](https://material.io/resources/icons)"
+          },
+          {
+            "type": "header",
+            "content": "Visibility settings",
+            "info": "Show for specific products, collections, tags, types or leave empty to show on all product pages."
+          },
+          {
+            "type": "radio",
+            "id": "visibility_10",
+            "label": "Visibility",
+            "info": "From lowest to higher priority.",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "collection",
+                "label": "Collection based"
+              },
+              {
+                "value": "type",
+                "label": "Type based"
+              },
+              {
+                "value": "tag",
+                "label": "Tag based"
+              },
+              {
+                "value": "product",
+                "label": "Product based"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_bullet_point_collection_10",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_type_10",
+            "label": "Product types",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_bullet_point_tag_10",
+            "label": "Product tags",
+            "info": "Comma-separated"
+          },
+          {
+            "type": "product",
+            "id": "dbtfy_bullet_point_product_10",
+            "label": "Product"
+          }
+        ]
+      }
+    ]
+  }
+{%- endschema -%}

@@ -1,0 +1,148 @@
+<script defer src="{{ 'jquery-ui.min.js' | asset_url }}"></script>
+<script defer src="{{ 'jquery.ui.autocomplete.scroll.min.js' | asset_url }}"></script>
+
+<div id="FaqPage-{{ section.id }}" class="fq-main
+      {% unless section.settings.show_on_mobile %} small--hide{% endunless %}
+      {% unless section.settings.show_on_desktop %} medium--hide large--hide{% endunless %}
+      {% if page.template_suffix != 'faq' %}
+      {{ section.settings.section_style }}
+      {% endif %}"
+      data-section-id="{{ section.id }}"
+      data-section-type="faq-page">
+
+  <div class="box {% if template.name == "page" %}faq-spacer-top-none{% endif %}">
+    <div class="wrapper">
+      {%- unless section.settings.title == blank and section.settings.subtitle == blank -%}
+        <div class="grid">
+          <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+            <div class="section-header">
+              {%- unless section.settings.title == blank -%}
+                <h2 class="section-header__title">{{ section.settings.title | escape }}</h2>
+              {%- endunless -%}
+
+              {%- unless section.settings.subtitle == blank -%}
+                <p class="section-header__subtitle">{{ section.settings.subtitle | escape }}</p>
+              {%- endunless -%}
+            </div>
+          </div>
+        </div>
+      {%- endunless -%}
+
+      {%- if section.settings.dbtfy_faq_searchbox -%}
+        <div class="grid">
+          <div class="grid__item large--four-twelfths push--large--four-twelfths text-center">
+            <input type="text" class="input-full spacer-bottom" placeholder="{{ section.settings.dbtfy_faq_search_placeholder }}" id="FaqSearch-{{section.id}}">
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="grid">
+        <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+          {%- assign in_card_group = false -%}
+          
+          <!-- Blocks -->
+          {%- for block in section.blocks -%}
+            {%- if block.type == "category_block" -%}
+              {%- assign dbtfy_faq_category = block.settings.dbtfy_faq_category -%}
+              {%- assign dbtfy_faq_icons = block.settings.dbtfy_faq_icons -%}
+
+              {%- if in_card_group -%}
+              </div>
+              {%- endif -%}
+
+              {%- assign in_card_group = false -%}
+
+              {%- unless dbtfy_faq_category == blank -%}
+                <h3 class="fp-category-title spacer-top-lg">
+                  {%- unless dbtfy_faq_icons == blank -%}
+                    <span class="{{ settings.icon }} icon-width">{{ dbtfy_faq_icons }}</span>
+                  {%- endunless -%}
+
+                  {{ dbtfy_faq_category }}
+                </h3>
+              {%- endunless -%}
+            {%- elsif block.type == "text_block" -%}
+              {%- unless in_card_group -%}
+                <div class="card-group"
+                  {{ block.shopify_attributes }}>
+              {%- endunless -%}
+
+              {%- assign in_card_group = true -%}
+
+              {%- for i in (1..10) -%}
+                {%- capture index -%}{{ forloop.index }}{%- endcapture -%}
+                {%- capture dbtfy_faq_page_open -%}dbtfy_faq_page_open_{{index}}{%- endcapture -%}
+                {%- capture dbtfy_faq_page_icon -%}dbtfy_faq_page_icon_{{index}}{%- endcapture -%}
+                {%- capture question -%}question_{{index}}{%- endcapture -%}
+                {%- capture text -%}text_{{index}}{%- endcapture -%}
+
+                {%- assign current_faq_page_open = block.settings[dbtfy_faq_page_open] -%}
+                {%- assign current_faq_page_icon = block.settings[dbtfy_faq_page_icon] -%}
+                {%- assign current_question = block.settings[question] -%}
+                {%- assign current_answer = block.settings[text] -%}
+
+                {%- if current_question != blank -%}
+                  <div class="card tab fp-item" data-index="{{ section.id }}_{{ forloop.index }}" data-question="{{ current_question }}" {{ block.shopify_attributes }}>
+                    <button type="button"
+                    id="tab-button-{{ forloop.index }}{{ block.id }}"
+                    class="card-header tab-header tab-header-{{ block.id }} {% if current_faq_page_open %} active{% endif %}"
+                    role="tab"
+                    aria-controls="tab-content-{{ forloop.index }}{{ block.id }}"
+                    {% if current_faq_page_open %} aria-selected="true"{% else %} aria-selected="false"{% endif %}>
+                      {%- unless current_faq_page_icon == blank -%}
+                        <span class="{{ settings.icon }} card-header-icon text-secondary">{{ current_faq_page_icon }}</span>
+                      {%- endunless -%}
+
+                      {%- unless current_question == blank -%}
+                        <span class="tab-header-title">{{ current_question }}</span>
+                      {%- endunless -%}
+                    </button>
+
+                    <div class="card-body tab-body {{ section.settings.text_alignment }} small--{{ section.settings.text_alignment_mobile }}" id="tab-content-{{ forloop.index }}{{ block.id }}" aria-labelledby="tab-button-{{ forloop.index }}{{ block.id }}" role="tabpanel">
+                      <div class="tab-content rte">
+                        {{ current_answer }}
+                      </div>
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- if forloop.last and in_card_group -%}
+                </div>
+              {%- endif -%}
+              
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if section.settings.dbtfy_faq_bannerbox -%}
+            <div class="fp-banner spacer-top-lg">
+              <div class="card card-default text-center">
+                <div class="card-body">
+                  {%- unless section.settings.dbtfy_faq_banner_icon == blank -%}
+                    <p>
+                      <span class="{{ settings.icon }} icon-xl text-secondary icon-image">{{ section.settings.dbtfy_faq_banner_icon }}</span>
+                    </p>
+                  {%- endunless -%}
+
+                  {%- unless section.settings.dbtfy_faq_banner_text == blank -%}
+                    <h4>{{ section.settings.dbtfy_faq_banner_text }}</h4>
+                  {%- endunless -%}
+
+                  {%- unless section.settings.dbtfy_faq_banner_subtitle == blank -%}
+                    <p>{{ section.settings.dbtfy_faq_banner_subtitle }}</p>
+                  {%- endunless -%}
+
+                  {%- unless section.settings.dbtfy_faq_btn == blank -%}
+                    <div>
+                      <a class="btn btn-outline-primary" href="{{ section.settings.dbtfy_faq_link }}">{{ section.settings.dbtfy_faq_btn }}</a>
+                    </div>
+                  {%- endunless -%}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

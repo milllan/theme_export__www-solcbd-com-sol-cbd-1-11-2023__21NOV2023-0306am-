@@ -1,0 +1,164 @@
+{%- if settings.dbtfy_announcement_bar -%}
+  {%- assign small_text_on_mobile = section.settings.small_announcement_text -%}
+
+  <div id="announcement"
+       data-section-id="{{ section.id }}"
+       data-section-type="announcement-section"
+       data-template="{{ template.name }}">
+
+    <div class="wrapper">
+    <div class="grid grid-small flex-nowrap align-center announcement-grid whitespace-nowrap fadeIn">
+      <div class="grid__item three-twelfths flex announcement-item announcement-left overflow-hidden small--hide align-center">
+        {%- if section.settings.show_social -%}
+          {%- render "social-medias" -%}
+        {%- endif -%}
+
+        {%- if section.settings.left_message -%}
+          <span class="announcement-left-message rte">{{- section.settings.left_message -}}</span>
+        {%- endif -%}
+      </div>
+
+      <div class="grid__item large-six-twelfths medium--six-twelfths announcement-item announcement-message overflow-hidden text-center{% if section.blocks.size > 1 %} slick slick-announcement{% endif %}"
+        data-autoplayspeed="{{ section.settings.announcement_autoplayspeed | times: 1000 }}">
+
+        {%- for block in section.blocks -%}
+          {%- assign announcement_text = block.settings.announcement_text -%}
+
+          {%- unless announcement_text == blank -%}
+            <div class="announcement-message-item announcement-{{ block.id }} rte{% if small_text_on_mobile %} text-small-mobile{% endif %}" 
+              {{ block.shopify_attributes }}>
+              {{ announcement_text }}
+            </div>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="grid__item three-twelfths flex justify-end announcement-item announcement-right overflow-hidden small--hide align-center">
+        {%- if section.settings.right_message -%}
+          <span class="announcement-right-message rte">{{- section.settings.right_message -}}</span>
+        {%- endif -%}
+        <ul class="inline-list">
+          {%- if section.settings.phone -%}
+          <li>
+            <a href="tel:{{ shop.phone | remove: '-' | replace: ' ', '' }}" title="{{ shop.phone }}" aria-label="{{ shop.phone }}">
+              <span class="{{ settings.icon }}" aria-hidden="true">phone</span>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- if section.settings.email -%}
+          <li>
+            <a href="mailto:{{ shop.email | escape }}" title="{{ shop.email }}" aria-label="{{ shop.email }}">
+              <span class="{{ settings.icon }}" aria-hidden="true">email</span>
+            </a>
+          </li>
+          {%- endif -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "t:sections.announcement.name",
+	  "class": "announcement-section stacked-on-top-of-content",
+    "max_blocks": 5,
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.announcement.settings.header__1.content"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.announcement.settings.paragraph__1.content"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.announcement.settings.paragraph__2.content"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.announcement.settings.header__2.content"
+      },
+      {
+        "type": "checkbox",
+        "id": "small_announcement_text",
+        "label": "t:sections.announcement.settings.enable_small_text_on_mobile.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social",
+        "label": "t:sections.announcement.settings.show_social_medias.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "email",
+        "label": "t:sections.announcement.settings.show_email_address.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "phone",
+        "label": "t:sections.announcement.settings.show_phone_number.label",
+        "default": true
+      },
+      {
+        "type": "richtext",
+        "id": "left_message",
+        "label": "t:sections.announcement.settings.left_message.label",
+        "default": "<p>Follow us!</p>"
+      },
+      {
+        "type": "richtext",
+        "id": "right_message",
+        "label": "t:sections.announcement.settings.right_message.label",
+        "default": "<p>Get in touch with us</p>"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.announcement.settings.header__3.content",
+        "info": "t:sections.announcement.settings.header__3.info"
+      },
+      {
+        "type": "range",
+        "id": "announcement_autoplayspeed",
+        "label": "t:sections.announcement.settings.rotation_speed.label",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "unit": "s",
+        "default": 5
+      }
+    ],
+	  "blocks": [
+	    {
+        "type": "message",
+        "name": "t:sections.announcement.blocks.message.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.announcement.blocks.message.settings.block_name.label",
+            "info": "t:sections.announcement.blocks.message.settings.block_name.info"
+          },
+          {
+            "type": "richtext",
+            "id": "announcement_text",
+            "label": "t:sections.announcement.blocks.message.settings.text.label",
+            "default": "<p>Free shipping worldwide | 30-Day free returns</p>"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "message"
+        }
+      ]
+    }
+  }
+{% endschema %}

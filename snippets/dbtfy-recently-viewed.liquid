@@ -1,0 +1,57 @@
+{%- if settings.dbtfy_recently_viewed -%}
+  {%- liquid
+    assign heading = 'add-ons.recently_viewed.heading' | t
+    assign products_limit = settings.dbtfy_recently_viewed_products_limit
+    assign floating_bar_show_desktop = settings.dbtfy_recently_viewed_show_desktop
+    assign floating_bar_show_mobile = settings.dbtfy_recently_viewed_show_mobile
+    assign floating_bar_position = settings.dbtfy_recently_viewed_bar_position
+    assign section_enable_slider = settings.dbtfy_recently_viewed_enable_slider
+    assign section_slider_arrows = settings.dbtfy_recently_viewed_slider_arrows
+    assign section_slider_dots = settings.dbtfy_recently_viewed_slider_dots
+    assign section_slider_autoplay = settings.dbtfy_recently_viewed_slider_autoplay
+    assign section_slider_autoplayspeed = settings.dbtfy_recently_viewed_slider_autoplayspeed | times: 1000
+    assign section_slider_products_in_row = settings.dbtfy_recently_viewed_section_products_to_show
+  -%}
+
+  <div class="dbtfy dbtfy-recently_viewed"
+       data-products-limit="{{ products_limit }}"
+       data-root-url="{{ routes.root_url }}">
+
+    <div class="rv-floating-bar rv-floating-bar-{{ floating_bar_position }} fadeIn{{ floating_bar_position | capitalize }} {% unless floating_bar_show_desktop %} medium--hide large--hide{% endunless %}{% unless floating_bar_show_mobile %} small--hide{% endunless %}"
+         hidden>
+
+      <div class="rv-floating-bar-content">
+        {%- if heading != blank -%}
+          <h3 class="title text-small text-center">
+            {{ heading }}
+          </h3>
+        {%- endif -%}
+
+        <div class="rv-floating-bar-products"></div>
+      </div>
+    </div>
+
+    <div class="rv-section section-border"
+         hidden>
+
+      <div class="box">
+        <div class="wrapper">
+          {%- if heading != blank -%}
+            <div class="section-header">
+              <h2 class="section-header__title">
+                {{ heading }}
+              </h2>
+            </div>
+          {%- endif -%}
+
+          <div class="rv-section-products grid grid-spacer{% if section_enable_slider %} slick-product-grid{% endif %}"
+               data-arrows="{{ section_slider_arrows }}"
+               data-dots="{{ section_slider_dots }}"
+               data-autoplay="{{ section_slider_autoplay }}"
+               data-autoplayspeed="{{ section_slider_autoplayspeed }}"
+               data-slidetoshow="{{ section_slider_products_in_row }}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

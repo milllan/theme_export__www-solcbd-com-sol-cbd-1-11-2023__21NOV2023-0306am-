@@ -1,0 +1,152 @@
+{% include 'product-content.zipifypages', contentprt: 'header' %}{%- liquid
+  comment
+    Template only used for AJAX reference
+  endcomment
+
+  layout none
+
+  assign current_variant = product.selected_or_first_available_variant
+
+  if product.available
+    assign sold_out = false
+  else
+    assign sold_out = true
+  endif
+
+  capture product_collections
+    for collection in product.collections
+      echo collection.handle
+
+      unless forloop.last
+        echo ","
+      endunless
+    endfor
+  endcapture
+-%}
+
+<table class="table-column">
+  <td
+    class="product-images-data-cell"
+    data-upsell-target-id="{{ product.id }}"
+    data-product-collections="{{ product_collections }}"
+    data-product-id="{{ product.id }}"
+    >
+    <div class="qc-photos">
+      <button class="qc-item-remove-btn btn btn-reveal-primary btn-square-xsmall"
+        data-product-handle="{{ product.handle }}"
+        aria-label="{{ 'add-ons.quick_compare.remove_from_compare_text' | t }}"
+        title="{{ 'add-ons.quick_compare.remove_from_compare_text' | t }}">
+
+        <span class="btn__text">
+          <span class="{{ settings.icon }}">delete_outline</span>
+        </span>
+      </button>
+
+      <div class="qc-slick grid grid-small slick qc-slick-image{% if product.media.size == 1 %} slick-disabled{% endif %} product-single__media-group">
+        {%- for media in product.media -%}
+          <div class="grid__item qc-image-{{ media.id }}{% if media == current_variant.featured_image %} qc-featured-image{% endif %}"
+               data-index="{{ forloop.index0 }}">
+
+            {%- assign featured = false -%}
+
+            {%- if media == featured_media -%}
+              {%- assign featured = true -%}
+            {%- endif -%}
+
+            {%- assign height = 850 -%}
+            {%- assign width = 575 -%}
+
+            {%- render 'media' with media, enable_image_zoom: false, stacked: false, featured: featured, width: width, height: height, id: id, video_looping: true -%}
+          </div>
+        {%- else -%}
+          <div class="grid__item">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="product-single__media-group-wrapper large--sticky medium--sticky sticky-check-header">
+        <div class="grid grid-small product-single__thumbnails qc-slick-thumbnails slick{% if product.images.size < 6  %} slick-disabled{% endif %}">
+          {%- for media in product.media -%}
+            <div class="grid__item three-twelfths">
+              {%- capture thumbnail_alt -%}
+                {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                  {{ 'products.product.video_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+                {%- elsif media.media_type == 'model' -%}
+                  {{ 'products.product.model_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+                {%- else -%}
+                  {{ 'products.product.gallery_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+                {%- endif -%}
+              {%- endcapture -%}
+
+              {% assign media_aspect_ratio = media.aspect_ratio | default: media.preview_image.aspect_ratio %}
+
+              <a class="product--wrapper product-single__thumbnail media-wrapper image-link{% if media == featured_media %} active-thumb{% endif %}"
+                data-product-thumbnail data-media-id="{{ media.id }}"
+                style="padding-top: {{ 1 | divided_by: media_aspect_ratio | times: 100 }}%;">
+
+                <img class="product--image product-single__thumb media lazyload"
+                  {%- render 'lazysizes', img: media, img_type: 'responsive' -%} alt="{{ thumbnail_alt }}"
+                  data-media-id="{{ media.id }}">
+
+                {%- if media.media_type == 'video' or media.media_type == 'external_video' or media.media_type == 'model' -%}
+                  <div class="product-single__thumbnail-badge">
+                    {% render 'svg-definitions' with media.media_type %}
+                  </div>
+                {%- endif -%}
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    {%- if settings.dbtfy_collection_addtocart -%}
+      {%- render "dbtfy-collection-addtocart" with product as product, sold_out: sold_out -%}
+    {%- else -%}
+      <a href="{{ product.url }}" class="btn--add-to-cart qc-addtocart-button btn btn--primary btn--full">
+        <span class="btn__text">
+          <span class="{{ settings.icon }}">
+            {{ settings.icon_cart }}
+          </span>
+
+          <span class="btn__add-to-cart-text">
+            {%- if current_variant.available -%}
+              {{ "products.product.add_to_cart" | t }}
+            {%- else -%}
+              {{ "products.product.sold_out" | t }}
+            {%- endif -%}
+          </span>
+        </span>
+      </a>
+    {%- endif -%}
+  </td>
+
+  <td class="product-title-data-cell">
+    <a href="{{ product.url }}" class="text-link continue-link">{{ product.title }}</a>
+  </td>
+
+  <td class="product-price-data-cell">{{ product.price | money }}</td>
+  <td class="product-type-data-cell">{{ product.type }}</td>
+  <td class="product-vendor-data-cell">{{ product.vendor }}</td>
+  <td class="product-collections-data-cell">
+    {%- for collection in product.collections -%}
+      {{ collection.title }}{% unless forloop.last %}, {% endunless %}
+    {%- endfor -%}
+  </td>
+
+  <td class="product-tags-data-cell">
+    {%- for tag in product.tags -%}
+      {{ tag }}{% unless forloop.last %}, {% endunless %}
+    {%- endfor -%}
+  </td>
+
+  <td class="product-description-data-cell">
+    {%- if product.description != blank -%}
+      <div>{{ product.description | strip_html | split: "[split_description]" | first | truncate : 100 }}</div>
+    {%- endif -%}
+
+    <a href="{{ product.url }}" class="text-link continue-link">{{ 'products.product.view_more' | t }}</a>
+  </td>
+</table>
+{% include 'product-content.zipifypages', contentprt: 'footer' %}

@@ -1,0 +1,19 @@
+<!-- /snippets/tags-article.liquid -->
+{%- if article.tags.size > 0 -%}
+  <div class="article-tags spacer-top">
+    <ul class="inline-list">
+      {%- unless hide_label -%}
+        <li class="tag-label">
+          <span class="{{ settings.icon }}">local_offer</span>
+          {{ 'blogs.article.tags' | t }}
+        </li>
+      {%- endunless -%}
+
+      {%- for tag in article.tags -%}
+        <li>
+          <a class="btn btn-reveal-primary btn--xsmall" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}

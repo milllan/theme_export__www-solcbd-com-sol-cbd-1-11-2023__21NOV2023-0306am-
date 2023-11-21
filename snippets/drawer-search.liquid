@@ -1,0 +1,30 @@
+{%- capture search_content -%}
+  <form action="{{ routes.search_url }}" method="get" class="search-bar {{ input_type }}" role="search">
+    <div class="drawer__inner-section">
+      <div class="grid grid-small flex-nowrap align-center">
+        <div class="grid__item flex-fill">
+          {%- render 'search-bar', search_location: 'drawer', form_tag: false  -%}
+        </div>
+        <div class="grid__item flex-auto">
+          <button type="button" class="btn btn-square-small drawer__close-button js-drawer-close"  aria-label="{{ 'general.drawers.close_menu' | t }}" title="{{ 'general.drawers.close_menu' | t }}">
+            <span class="{{ settings.icon }}" aria-hidden="true">close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    {%- render "dbtfy-smart-search" -%}
+  </form>
+{%- endcapture -%}
+
+<div id="SearchDrawer" class="drawer drawer--top overlay-content" aria-hidden="true" tabindex="-1">
+  <div class="drawer__inner">
+    {%- if settings.dbtfy_smart_search -%}
+      <predictive-search>
+        {{ search_content }}
+      </predictive-search>
+    {%- else -%}
+      {{ search_content }}
+    {%- endif -%}
+  </div>
+</div>
+<div class="overlay-backdrop overlay-drawer"></div>

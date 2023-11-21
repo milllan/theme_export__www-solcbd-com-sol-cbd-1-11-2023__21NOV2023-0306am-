@@ -1,0 +1,63 @@
+{%- if img_type == 'responsive' -%}
+    src="{{ img |img_url: img_size }}"
+    {%- assign img_url = img | img_url: '1x1', crop: crop | replace: '_1x1', '_{width}x{height}' -%}
+    data-src="{{ img_url }}"
+    data-sizes="auto"
+    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+
+    {%- if crop -%}
+    data-aspectratio="1.0"
+    {%- else -%}
+    data-aspectratio="{{ img.aspect_ratio | default: img.preview_image.aspect_ratio }}"
+    {%- endif -%}
+
+{%- elsif img_type == 'retina' -%}
+    {%- if img_width -%}
+    width="{{ img_width }}"
+    {%- endif -%}
+
+    {%- if img_height -%}
+    height="{{ img_height }}"
+    {%- endif -%}
+
+    {%- capture img_size %}{{ img_width }}x{{ img_height }}{%- endcapture -%}
+    
+    data-src="{{ img | img_url: img_size, crop: crop }}"
+    data-srcset="{{ img | img_url: img_size, crop: crop }} 1x, {{ img | img_url: img_size, scale: 2, crop: crop }} 2x" 
+{%- elsif img_type == 'svg' -%}
+    data-src="{{ img | asset_url }}"
+
+    {%- if img_width -%}
+    width="{{ img_width }}"
+    {%- endif -%}
+
+    {%- if img_height -%}
+    height="{{ img_height }}"
+    {%- endif -%}
+{%- elsif img_type == 'background' -%}
+    {%- capture bgset -%}
+        {%- if img_mobile != blank -%}
+            {%- if img_mobile.width > 180 -%}{{ img_mobile | img_url: '180x' }} 180w {{ 180 | divided_by: img_mobile.aspect_ratio | round }}h,{%- endif -%}
+            {%- if img_mobile.width > 360 -%}{{ img_mobile | img_url: '360x' }} 360w {{ 360 | divided_by: img_mobile.aspect_ratio | round }}h,{%- endif -%}
+            {%- if img_mobile.width > 540 -%}{{ img_mobile | img_url: '540x' }} 540w {{ 540 | divided_by: img_mobile.aspect_ratio | round }}h,{%- endif -%}
+            {%- if img_mobile.width > 720 -%}{{ img_mobile | img_url: '720x' }} 720w {{ 720 | divided_by: img_mobile.aspect_ratio | round }}h,{%- endif -%}
+            {%- if img_mobile.width > 900 -%}{{ img_mobile | img_url: '900x' }} 900w {{ 900 | divided_by: img_mobile.aspect_ratio | round }}h,{%- endif -%}
+            {%- if img_mobile.width > 1080 -%}{{ img_mobile | img_url: '1080x' }} 1080w {{ 1080 | divided_by: img_mobile.aspect_ratio | round }}h,{%- endif -%}
+            {{- ' [--small] | ' -}}
+        {%- endif -%}
+
+        {%- if img.width > 180 -%}{{ img | img_url: '180x' }} 180w {{ 180 | divided_by: img.aspect_ratio | round }}h,{%- endif -%}
+        {%- if img.width > 360 -%}{{ img | img_url: '360x' }} 360w {{ 360 | divided_by: img.aspect_ratio | round }}h,{%- endif -%}
+        {%- if img.width > 540 -%}{{ img | img_url: '540x' }} 540w {{ 540 | divided_by: img.aspect_ratio | round }}h,{%- endif -%}
+        {%- if img.width > 720 -%}{{ img | img_url: '720x' }} 720w {{ 720 | divided_by: img.aspect_ratio | round }}h,{%- endif -%}
+        {%- if img.width > 900 -%}{{ img | img_url: '900x' }} 900w {{ 900 | divided_by: img.aspect_ratio | round }}h,{%- endif -%}
+        {%- if img.width > 1080 -%}{{ img | img_url: '1080x' }} 1080w {{ 1080 | divided_by: img.aspect_ratio | round }}h,{%- endif -%}
+        {%- if img.width > 1296 -%}{{ img | img_url: '1296x' }} 1296w {{ 1296 | divided_by: img.aspect_ratio | round }}h,{%- endif -%}
+        {%- if img.width > 1512 -%}{{ img | img_url: '1512x' }} 1512w {{ 1512 | divided_by: img.aspect_ratio | round }}h,{%- endif -%}
+        {%- if img.width > 1728 -%}{{ img | img_url: '1728x' }} 1728w {{ 1728 | divided_by: img.aspect_ratio | round }}h,{%- endif -%}
+        {{ img | img_url: 'master' }} {{ img.width }}w {{ img.height }}h
+    {%- endcapture -%}
+    data-bgset="{{ bgset }}"
+    data-sizes="auto"
+    data-parent-fit="cover"
+{%- endif -%}

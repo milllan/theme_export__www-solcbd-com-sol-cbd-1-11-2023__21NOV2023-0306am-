@@ -1,0 +1,46 @@
+<div class="notification-toast stacked-on-top-of-content {{ additional_toast_classes }}">
+  <div 
+    id="notificationToastPop" 
+    class="nt-card radius-circle"
+    {%- if display_time != blank -%}data-display-time="{{ display_time }}"{%- endif -%}
+    {%- if interval_time != blank -%}data-interval-time="{{ interval_time }}"{%- endif -%}
+  >
+    <div class="nt-card-body overlay-content">
+      <div class="grid grid-xsmall flex-nowrap align-center">
+        {%- if has_toast_image -%}
+          <div class="grid__item flex-auto">
+            <div class="notification-toast-image"></div>
+          </div>
+        {%- endif -%}
+
+        {%- if button_below_text -%}
+          <div class="grid__item toast-text-content-wrapper align-center flex-fill spacer-left-sm">
+        {%- endif -%}
+            
+        {%- if toast_text != blank -%}
+          <div class="grid__item toast-text-wrapper flex-fill overflow-hidden">
+            <p class="toast-text text-ellipsis spacer-right-sm">{{ toast_text }}</p>
+          </div>
+        {%- endif -%}
+
+        {%- if toast_button_label != blank -%}
+          <div class="grid__item toast-button-wrapper flex-auto">
+            <button class="nt-cart-view-btn text-ellipsis spacer-right-sm{% unless button_style == 'text-link' %} btn btn--small{% endunless %}{% if button_style != blank %} {{ button_style }}{% endif %}">
+              <span class="text-ellipsis">{{ toast_button_label }}</span>
+            </button>
+          </div>
+        {%- endif -%}
+
+        {%- if button_below_text -%}
+          </div>
+        {%- endif -%}
+
+        <div class="grid__item flex-auto">
+          <button class="btn btn-square-small nt-close-btn">
+            <span class="{{ settings.icon }}">close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

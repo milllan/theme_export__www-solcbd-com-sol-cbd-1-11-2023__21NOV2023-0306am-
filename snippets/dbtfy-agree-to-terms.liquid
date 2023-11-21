@@ -1,0 +1,28 @@
+{%- if settings.dbtfy_agree_to_terms -%}
+  {%- liquid
+    assign label = 'add-ons.agree_to_terms.label' | t
+    assign warning_text = 'add-ons.agree_to_terms.warning_text' | t
+    assign order_title = 'add-ons.agree_to_terms.order_title' | t
+    assign yes_label = 'add-ons.agree_to_terms.yes_label' | t
+  -%}
+
+  <div class="dbtfy dbtfy-agree_to_terms{% if location == 'cart-drawer' %} spacer-top{% else %} spacer-bottom{% endif %}">
+    {%- if label != blank -%}
+      <div class="at-terms-checkbox checkbox rte spacer-bottom-none">
+        <input class="at-terms-input"
+               id="agree-terms"
+               type="checkbox"
+               name="attributes[{{ order_title }}]"
+               value="{{ yes_label }}">
+
+        <label for="agree-terms">
+          {{ label }}
+        </label>
+      </div>
+    {%- endif -%}
+
+    {%- if warning_text != blank -%}
+      <p class="at-terms-error-message errors spacer-bottom-none spacer-top-sm" hidden="hidden"></p>
+    {%- endif -%}
+  </div>
+{% endif %}

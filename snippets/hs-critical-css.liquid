@@ -1,0 +1,5 @@
+
+{% if template.name == 'index' %}<style id='hs-critical-css'>{% render 'hs-critical-home.css' %}</style>
+{% elsif template.name == 'collection' %}<style id='hs-critical-css'>{% render 'hs-critical-collections.css' %}</style>
+{% elsif template.name == 'product' %}<style id='hs-critical-css'>{% render 'hs-critical-product.css' %}</style>
+{% endif %}

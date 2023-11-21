@@ -1,0 +1,548 @@
+{
+  "general": {
+    "404": {
+      "title": "404 Seite nicht gefunden",
+      "subtext_html": "Die gesuchte Seite existiert nicht."
+    },
+    "accessibility": {
+      "refresh_page": "Die Auswahl einer Auswahl führt zu einer vollständigen Seitenaktualisierung.",
+      "selection_help": "Drücken Sie die Leertaste und dann die Pfeiltasten, um eine Auswahl zu treffen.",
+      "unit_price_separator": "pro"
+    },
+    "meta": {
+      "tags": "Getaggt \"{{ tags }}\"",
+      "page": "Seite {{ page }}"
+    },
+    "pagination": {
+      "previous": "Vorherige",
+      "next": "Nächste"
+    },
+    "password_page": {
+      "login_form_heading": "Geben Sie den Store mit dem Passwort ein:",
+      "login_form_password_label": "Passwort",
+      "login_form_password_placeholder": "Ihr Passwort",
+      "login_form_submit": "Eingeben",
+      "signup_form_email_label": "Email",
+      "signup_form_success": "Wir senden Ihnen kurz vor der Eröffnung eine E-Mail!",
+      "admin_link_html": "Sind Sie der Ladenbesitzer? <a href=\"\/admin\" class=\"text-link\">Hier anmelden<\/a>",
+      "password_link": "Mit Passwort eingeben",
+      "powered_by_shopify_html": "Dieser Shop wird betrieben von {{ shopify }}",
+      "close": "schließen (esc)"
+    },
+    "dates": {
+      "year": "Jahr",
+      "month": "Monat",
+      "day": "Tag"
+    },
+    "months": {
+      "full": {
+        "january": "Januar",
+        "february": "Februar",
+        "march": "Marsch",
+        "april": "April",
+        "may": "Dürfen",
+        "june": "Juni",
+        "july": "Juli",
+        "august": "August",
+        "september": "September",
+        "october": "Oktober",
+        "november": "November",
+        "december": "Dezember"
+      },
+      "short": {
+        "january": "Jan",
+        "february": "Feb",
+        "march": "Beschädigen",
+        "april": "Apr",
+        "may": "Dürfen",
+        "june": "Jun",
+        "july": "Juli",
+        "august": "Aug",
+        "september": "Sep",
+        "october": "Okt",
+        "november": "Nov",
+        "december": "Dez"
+      }
+    },
+    "weekdays": {
+      "full": {
+        "monday": "Montag",
+        "tuesday": "Dienstag",
+        "wednesday": "Mittwoch",
+        "thursday": "Donnerstag",
+        "friday": "Freitag",
+        "saturday": "Samstag",
+        "sunday": "Sonntag"
+      },
+      "short": {
+        "monday": "Mein",
+        "tuesday": "Di",
+        "wednesday": "Heiraten",
+        "thursday": "Sammeln",
+        "friday": "Fr",
+        "saturday": "Sa",
+        "sunday": "Sonne"
+      }
+    },
+    "social": {
+      "share_on_facebook": "Aktie",
+      "share_on_twitter": "Twittern",
+      "share_on_pinterest": "Pin es",
+      "share_on_email": "Email",
+      "share_on_whatsapp": "WhatsApp",
+      "share_on_linkedin": "LinkedIn",
+      "share_on_reddit": "Reddit",
+      "share_on_messenger": "Bote",
+      "alt_text": {
+        "share_on_facebook": "Auf Facebook teilen",
+        "share_on_twitter": "Twittern Sie auf Twitter",
+        "share_on_pinterest": "Auf Pinterest pinnen",
+        "share_on_email": "Per E-Mail teilen",
+        "share_on_whatsapp": "Auf WhatsApp teilen",
+        "share_on_linkedin": "Auf LinkedIn teilen",
+        "share_on_reddit": "Auf Reddit teilen",
+        "share_on_messenger": "Im Messenger teilen"
+      }
+    },
+    "newsletter_form": {
+      "newsletter_email": "Tragen Sie sich in unsere Mailingliste ein",
+      "newsletter_placeholder": "Deine E-Mail",
+      "newsletter_confirmation": "Danke fürs Abonnieren",
+      "submit": "Abonnieren"
+    },
+    "search": {
+      "no_results_html": "Ihre Suche nach \"{{ terms }}\" ergab keine Ergebnisse.",
+      "results_for_html": "Ihre Suche nach \"{{ terms }}\" ergab Folgendes:",
+      "title": "Suchen",
+      "placeholder": "Suchen Sie in unserem Shop",
+      "submit": "Suchen"
+    },
+    "drawers": {
+      "navigation": "Speisekarte",
+      "close_menu": "Menü schließen",
+      "expand_submenu": "Untermenü erweitern",
+      "collapse_submenu": "Untermenü minimieren"
+    },
+    "payment": {
+      "method": "Zahlungsarten"
+    },
+    "currency": {
+      "dropdown_label": "Währung"
+    },
+    "language": {
+      "dropdown_label": "Sprache"
+    },
+    "localization": {
+      "submit_label": "Einstellungen aktualisieren"
+    },
+    "trial_over": {
+      "heading": "Ihre kostenlose Testversion ist abgelaufen",
+      "text": "Hallo, {{ name }}. Anscheinend ist Ihre kostenlose 14-tägige Enterprise Plan-Testversion bereits abgelaufen. Das bedeutet, dass alle Ihre Add-Ons jetzt deaktiviert sind.\n\nAber Sie möchten wahrscheinlich nicht die Konversions- und Umsatzsteigerung verlieren, die Sie durch Ihre Add-Ons erhalten haben, oder?\n\nWählen Sie einen Plan, der am besten zu Ihren Zielen passt, und genießen Sie weiterhin höhere Konversionsraten.",
+      "pick_a_plan": "Wähle einen Plan"
+    },
+    "addons_limit_reached": {
+      "heading": "Woah! Ganz ruhig, Tiger!",
+      "text": "Scheint, als würden Sie mehr Add-Ons benötigen.\n\nIhr aktueller Plan [plan_name] aktiviert nur bis zu [current_limit] Add-ons. [upgraded_plan] ermöglicht es Ihnen, [upgraded_limit] Add-ons zu aktivieren. Aktualisieren Sie Ihren Plan, um ALLE Premium-Funktionen freizuschalten.",
+      "upgrade_now": "Jetzt upgraden",
+      "note": "*Hinweis: Wenn mehr als [current_limit] Add-ons ausgewählt sind, werden nur die ersten angekreuzten [current_limit] Add-ons aktiviert. <a href=\"https:\/\/help.debutify.com\/en\/articles\/4656443-how-to-uninstall-an-add-on-in-debutify-3-0\" class=\"text-link\">Wie deaktiviere ich überschüssige Add-Ons?<\/a>"
+    }
+  },
+  "add-ons": {
+    "age_check": {
+      "title": "Altersprüfung",
+      "description": "Bitte bestätigen Sie Ihr Alter, um fortzufahren.",
+      "error_message": "Sie sind zu jung, um diese Website anzusehen.",
+      "yes_label": "Ja",
+      "no_label": "NEIN",
+      "button_label": "Eingeben"
+    },
+    "agree_to_terms": {
+      "label": "Ich stimme den AGB zu.",
+      "warning_text": "Sie müssen den Verkaufsbedingungen zustimmen, um zur Kasse zu gehen.",
+      "order_title": "Ich stimme den Allgemeinen Geschäftsbedingungen zu.",
+      "yes_label": "Ja"
+    },
+    "back_in_stock": {
+      "form_text": "Benachrichtigen Sie mich, wenn dieses Produkt verfügbar ist:",
+      "button_label": "Benachrichtige mich",
+      "success_message": "Benachrichtige mich",
+      "body_message": "Bitte benachrichtigen Sie mich, wenn {{ product_name }} verfügbar ist - {{ product_url }}"
+    },
+    "cart_discount": {
+      "label": "Rabattcode",
+      "placeholder": "Geben Sie hier den Rabattcode ein",
+      "button_label": "Rabattcode anwenden"
+    },
+    "cart_reminder": {
+      "text": "Nicht verpassen!",
+      "button_label": "Schließen Sie Ihren Einkauf ab"
+    },
+    "cart_savings": {
+      "label": "Gesamtersparnis"
+    },
+    "collection_filters": {
+      "label": "Filter"
+    },
+    "cookie_box": {
+      "text_html": "<strong>Magst du Kekse?<\/strong> 🍪 Wir verwenden Cookies, um sicherzustellen, dass Sie die beste Erfahrung auf unserer Website machen.",
+      "button_label": "Cookies akzeptieren"
+    },
+    "delivery_date": {
+      "label": "Bevorzugtes Lieferdatum auswählen",
+      "placeholder": "Datum und Uhrzeit auswählen*",
+      "error_message": "Treffen Sie eine Auswahl, um fortzufahren"
+    },
+    "gift_wrap": {
+      "checkbox_label": "Fügen Sie eine Geschenkbox\/-verpackung hinzu",
+      "text_field_label": "Geschenknachricht",
+      "text_field_placeholder": "Schreiben Sie hier Ihre Geschenknachricht..."
+    },
+    "inactive_tab_message": {
+      "first_message": "🔥 Vergesst das nicht...",
+      "second_message": "🔥 Komm zurück!"
+    },
+    "infinite_scroll": {
+      "load_more": "Mehr laden"
+    },
+    "inventory_quantity": {
+      "prefix_text": "Nur",
+      "suffix_text": "auf Lager gelassen",
+      "in_stock_text": "Auf Lager"
+    },
+    "minimum_order": {
+      "amount_reached_text": "Mindestbestellwert erreicht. Sie können zur Kasse gehen.",
+      "amount_unreached_text": "Sie haben den Mindestbestellwert noch nicht erreicht. Fügen Sie {left_amount} hinzu, um fortzufahren."
+    },
+    "newsletter_popup": {
+      "floating_bar_text": "Erhalten Sie 20% Rabatt!",
+      "popup_title": "Abonniere unseren Newsletter!",
+      "popup_text": "Erhalten Sie 10% Rabatt auf Ihren ersten Einkauf, indem Sie unseren Newsletter abonnieren.",
+      "popup_close_text": "Nein danke, ich mag keine Rabatte.",
+      "popup_title_success": "Danke schön!",
+      "popup_text_success": "Kopieren Sie den untenstehenden Rabattcode und fügen Sie ihn an der Kasse ein, um Ihren Rabatt zu erhalten!",
+      "popup_reward_button": "Rabattcode anwenden"
+    },
+    "order_feedback": {
+      "select_title": "Wie sind Sie auf uns aufmerksam geworden?",
+      "default_options_text": "Dieser Optionswert ist leer",
+      "select_options": "Facebook, Twitter, Google, Instagram, Youtube",
+      "error_message": "Bitte wählen Sie unten eine Option aus",
+      "other_option_text": "Andere",
+      "other_option_placeholder": "Z.B. Mein Freund Leo",
+      "other_error_message": "Bitte füllen Sie das Textfeld unten aus",
+      "title": "Wie sind Sie auf uns aufmerksam geworden?",
+      "other_title": "Wie haben Sie von anderen von uns erfahren?"
+    },
+    "order_tracking": {
+      "input_placeholder": "Geben Sie Ihre Tracking-Nummer ein...",
+      "button_text": "Meine Bestellung verfolgen"
+    },
+    "quick_compare": {
+      "remove_from_compare_text": "Aus Schnellvergleich entfernen",
+      "add_to_compare_text": "Zum Schnellvergleich hinzufügen",
+      "title_modal": "Schnell vergleichen",
+      "empty_table": "Derzeit befinden sich keine Artikel in der Schnellvergleichsliste",
+      "images_cell": "Produktbild",
+      "title_cell": "Produktname",
+      "price_cell": "Preis",
+      "type_cell": "Typ",
+      "vendor_cell": "Verkäufer",
+      "collections_cell": "Sammlungen",
+      "tags_cell": "Stichworte",
+      "short_description_cell": "Kurzbeschreibungen"
+    },
+    "recently_viewed": {
+      "heading": "Zuletzt angesehen"
+    },
+    "smart_search": {
+      "products_text": "Produkte",
+      "collections_text": "Sammlungen",
+      "articles_text": "Artikel",
+      "pages_text": "Seiten",
+      "all_results_text": "Alle Ergebnisse anzeigen für"
+    },
+    "social_discount": {
+      "button_label": "Teilen und 15% Rabatt sichern!",
+      "popup_title": "Teilen und 15% Rabatt sichern!",
+      "popup_text": "Teilen Sie dieses Produkt einfach in einem der folgenden sozialen Netzwerke und Sie erhalten 15 % Rabatt!",
+      "popup_success_title": "Ich danke Ihnen für das Teilen!",
+      "popup_success_text": "Kopieren Sie den untenstehenden Rabattcode und fügen Sie ihn an der Kasse ein, um Ihren Rabatt zu erhalten!",
+      "popup_button_label": "Rabattcode anwenden"
+    },
+    "trust_badge": {
+      "text": "Garantiert sicherer Checkout"
+    },
+    "wishlist": {
+      "add_to_wishlist_text": "Zur Wunschliste hinzufügen",
+      "remove_from_wishlist_text": "Von der Wunschliste entfernen",
+      "empty_wishlist_text": "Ihre Wunschliste ist derzeit leer.",
+      "share_wishlist_text": "Wunschliste teilen"
+    }
+  },
+  "blogs": {
+    "article": {
+      "tags": "Stichworte",
+      "read_more": "Weiterlesen",
+      "view_all": "Alle ansehen",
+      "back_to_blog": "Zurück zu {{ title }}"
+    },
+    "comments": {
+      "title": "Hinterlasse einen Kommentar",
+      "name": "Name",
+      "email": "Email",
+      "message": "Nachricht",
+      "post": "Kommentar hinzufügen",
+      "moderated": "Bitte beachte, dass Kommentare vor der Veröffentlichung genehmigt werden müssen",
+      "success_moderated": "Ihr Kommentar wurde erfolgreich veröffentlicht. Wir werden es in Kürze veröffentlichen, da unser Blog moderiert wird.",
+      "success": "Ihr Kommentar wurde erfolgreich veröffentlicht! Danke schön!",
+      "with_count": {
+        "one": "{{ count }} Kommentar",
+        "other": "{0 Kommentare"
+      }
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Ihr Einkaufswagen",
+      "remove": "Entfernen",
+      "note": "Besondere Anweisungen für den Verkäufer",
+      "subtotal": "Zwischensumme",
+      "taxes_and_shipping_at_checkout": "Steuern und Versandkosten werden an der Kasse berechnet",
+      "taxes_and_shipping_policy_at_checkout_html": "Steuern und <a href=\"{{ link }}\">Versandkosten<\/a> werden an der Kasse berechnet",
+      "taxes_included_but_shipping_at_checkout": "Inklusive MwSt. und Versandkosten werden an der Kasse berechnet",
+      "taxes_included_and_shipping_policy_html": "Steuern inklusive. <a href=\"{{ link }}\">Versand<\/a> wird an der Kasse berechnet.",
+      "update": "Warenkorb aktualisieren",
+      "checkout": "Kasse",
+      "empty": "Ihr Warenkorb ist derzeit leer.",
+      "continue_browsing_html": "Surfen Sie weiter",
+      "close_cart": "Warenkorb schließen",
+      "savings_html": "Du sparst {{ savings }}",
+      "reduce_quantity": "Reduzieren Sie die Artikelmenge um eins",
+      "increase_quantity": "Artikelmenge um eins erhöhen",
+      "cookies_required": "Aktivieren Sie Cookies, um den Warenkorb zu verwenden",
+      "custom_currency_html": "Alle Bestellungen werden in {{ shopCurrency }} bearbeitet. Während der Inhalt Ihres Warenkorbs derzeit in angezeigt wird<span class='selected-currency'><\/span> , bezahlen Sie mit {{ shopCurrency }} zum aktuellsten Wechselkurs."
+    },
+    "label": {
+      "quantity": "Menge",
+      "total": "Gesamt"
+    },
+    "cart_message": {
+      "text": "Artikel wurde hinzugefügt",
+      "button_label": "Warenkorb ansehen"
+    }
+  },
+  "collections": {
+    "general": {
+      "catalog_title": "Katalog",
+      "all_of_collection": "Alle",
+      "no_matches": "Entschuldigung, es gibt keine Produkte in dieser Sammlung."
+    },
+    "sorting": {
+      "title": "Sortiere nach",
+      "title_tags": "Filtern nach",
+      "all_of_collection": "Alle {{ collection }}"
+    },
+    "grid": {
+      "button_label": "Jetzt einkaufen"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Telefonnummer",
+      "message": "Nachricht",
+      "send": "Schicken",
+      "post_success": "Danke, dass sie uns kontaktiert haben. Wir werden uns so schnell wie möglich bei Ihnen melden."
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Mein Konto",
+      "details": "Kontodetails",
+      "view_addresses": "Adressen anzeigen",
+      "return": "Zurück zu Kontodetails"
+    },
+    "activate_account": {
+      "title": "Konto aktivieren",
+      "subtext": "Erstellen Sie Ihr Passwort, um Ihr Konto zu aktivieren.",
+      "password": "Passwort",
+      "password_confirm": "Bestätige das Passwort",
+      "submit": "Konto aktivieren",
+      "cancel": "Einladung ablehnen"
+    },
+    "addresses": {
+      "title": "Ihre Adressen",
+      "default": "Standard",
+      "add_new": "Füge eine neue Adresse hinzu",
+      "edit_address": "Adresse bearbeiten",
+      "first_name": "Vorname",
+      "last_name": "Familienname, Nachname",
+      "company": "Unternehmen",
+      "address1": "Adresse 1",
+      "address2": "Adresse 2",
+      "city": "Stadt",
+      "country": "Land\/Region",
+      "province": "Provinz",
+      "zip": "Postleitzahl",
+      "phone": "Telefon",
+      "set_default": "Als Standardadresse festlegen",
+      "add": "Adresse hinzufügen",
+      "update": "Adresse aktualisieren",
+      "cancel": "Stornieren",
+      "edit": "Bearbeiten",
+      "delete": "Löschen"
+    },
+    "login": {
+      "title": "Anmeldung",
+      "email": "Email",
+      "password": "Passwort",
+      "forgot_password": "Haben Sie Ihr Passwort vergessen?",
+      "sign_in": "Anmelden",
+      "cancel": "Zurück zum Shop",
+      "guest_title": "Als Gast fortfahren",
+      "guest_continue": "Weitermachen"
+    },
+    "orders": {
+      "title": "Bestellverlauf",
+      "order_number": "Befehl",
+      "date": "Datum",
+      "payment_status": "Zahlungsstatus",
+      "fulfillment_status": "Erfüllungsstatus",
+      "total": "Gesamt",
+      "none": "Sie haben noch keine Bestellungen aufgegeben."
+    },
+    "order": {
+      "title": "Bestellung {{ name }}",
+      "date": "Platziert auf {{ date }}",
+      "cancelled": "Bestellung am {{ date }} storniert",
+      "cancelled_reason": "Grund: {{ reason }}",
+      "billing_address": "Rechnungsadresse",
+      "payment_status": "Zahlungsstatus",
+      "shipping_address": "Lieferanschrift",
+      "fulfillment_status": "Erfüllungsstatus",
+      "discount": "Rabatt",
+      "shipping": "Versand",
+      "tax": "Steuer",
+      "product": "Produkt",
+      "sku": "Artikelnummer",
+      "price": "Preis",
+      "quantity": "Menge",
+      "total": "Gesamt",
+      "fulfilled_at": "Erfüllt {{ date }}",
+      "subtotal": "Zwischensumme",
+      "track_shipment": "Sendung verfolgen"
+    },
+    "recover_password": {
+      "title": "Setze dein Passwort zurück",
+      "email": "Email",
+      "submit": "Einreichen",
+      "cancel": "Stornieren",
+      "subtext": "Wir senden Ihnen eine E-Mail, um Ihr Passwort zurückzusetzen.",
+      "success": "Wir haben Ihnen eine E-Mail mit einem Link zum Aktualisieren Ihres Passworts gesendet."
+    },
+    "reset_password": {
+      "title": "Kontokennwort zurücksetzen",
+      "subtext": "Geben Sie ein neues Passwort für {{ email }} ein",
+      "password": "Passwort",
+      "password_confirm": "Bestätige das Passwort",
+      "submit": "Passwort zurücksetzen"
+    },
+    "register": {
+      "title": "Benutzerkonto erstellen",
+      "first_name": "Vorname",
+      "last_name": "Familienname, Nachname",
+      "email": "Email",
+      "password": "Passwort",
+      "submit": "Erstellen",
+      "cancel": "Zurück zum Shop"
+    }
+  },
+  "home_page": {
+    "slideshow": {
+      "navigation_instructions": "Verwenden Sie die Pfeile nach links\/rechts, um durch die Diashow zu navigieren, oder wischen Sie nach links\/rechts, wenn Sie ein mobiles Gerät verwenden",
+      "next_slide": "Nächste Folie",
+      "previous_slide": "Vorherige Folie",
+      "play": "Diashow abspielen",
+      "pause": "Diashow anhalten",
+      "load_slide": "Folie {{ slide_number }} laden",
+      "active_slide": "Folie {{ slide_number }}, aktuell"
+    },
+    "onboarding": {
+      "product_vendor": "Produktanbieter",
+      "product_title": "Beispiel Produkttitel",
+      "collection_title": "Titel einer Beispielsammlung",
+      "blog_title": "Der Titel Ihres Beitrags",
+      "blog_excerpt": "Ihr Shop hat noch keine Blog-Posts veröffentlicht. Ein Blog kann verwendet werden, um über neue Produkteinführungen, Tipps oder andere Neuigkeiten zu sprechen, die Sie mit Ihren Kunden teilen möchten. Im E-Commerce-Blog von Shopify finden Sie Inspiration und Ratschläge für Ihren eigenen Shop und Blog.",
+      "no_content": "Dieser Abschnitt enthält derzeit keine Inhalte. Fügen Sie diesem Abschnitt mithilfe der Seitenleiste Inhalte hinzu."
+    },
+    "map": {
+      "address_error": "Fehler beim Suchen dieser Adresse",
+      "address_no_results": "Keine Ergebnisse für diese Adresse",
+      "address_query_limit_html": "Sie haben das Google-API-Nutzungslimit überschritten. Erwägen Sie ein Upgrade auf einen <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Premium Plan<\/a> .",
+      "auth_error_html": "Bei der Authentifizierung Ihres Google Maps-Kontos ist ein Problem aufgetreten."
+    }
+  },
+  "layout": {
+    "cart": {
+      "title": "Wagen"
+    },
+    "customer": {
+      "account": "Konto",
+      "log_out": "Ausloggen",
+      "log_in": "Anmeldung",
+      "create_account": "Benutzerkonto erstellen"
+    },
+    "footer": {
+      "social_platform": "{{ name }} auf {{ platform }}"
+    }
+  },
+  "products": {
+    "general": {
+      "save_html": "{{ saved_amount }} speichern",
+      "collection_return": "Zurück zu {{ collection }}",
+      "sale_price": "Verkaufspreis",
+      "regular_price": "Regulärer Preis",
+      "include_taxes": "Steuern inklusive.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Versandkosten<\/a> werden an der Kasse berechnet.",
+      "unit_price": "Einzelpreis"
+    },
+    "product": {
+      "sold_out": "Ausverkauft",
+      "sold_out_html": "Ausverkauft",
+      "unavailable": "Nicht verfügbar",
+      "quantity": "Menge",
+      "add_to_cart": "in den Warenkorb legen",
+      "replace": "Ersetzen",
+      "full_details": "Alle Einzelheiten",
+      "view_more": "Mehr sehen",
+      "view_in_space": "Sehen Sie sich in Ihrem Raum an",
+      "view_in_space_label": "Ansicht in Ihrem Bereich, lädt Artikel in Augmented-Reality-Fenster",
+      "slide_label": "Folie {{ slide_number }} von {{ slide_max }}.",
+      "gallery_thumbnail_alt": "Laden Sie das Bild in den Galerie-Viewer, {{ imageAlt }}",
+      "video_thumbnail_alt": "Laden und spielen Sie das Video im Galerie-Viewer ab, {{ imageAlt }}",
+      "model_thumbnail_alt": "Laden Sie das 3D-Modell in den Galerie-Viewer, {{ imageAlt }}"
+    },
+    "zoom": {
+      "next": "Weiter (Pfeiltaste rechts)",
+      "prev": "Zurück (Linke Pfeiltaste)",
+      "close": "Schließen (Esc)"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Hier ist Ihre {{ value }}-Geschenkkarte für {{ shop }}!",
+      "subtext": "Hier ist Ihr Geschenkgutschein!",
+      "disabled": "Behinderte",
+      "expired": "Abgelaufen am {{ expiry }}",
+      "active": "Läuft am {{ expiry }} ab",
+      "redeem": "Verwenden Sie diesen Code an der Kasse, um Ihren Geschenkgutschein einzulösen",
+      "shop_link": "Beginn mit dem Einkauf",
+      "print": "Drucken",
+      "add_to_apple_wallet": "Zu Apple Wallet hinzufügen"
+    }
+  },
+  "date_formats": {
+    "month_day_year": "%a %b %d"
+  }
+}

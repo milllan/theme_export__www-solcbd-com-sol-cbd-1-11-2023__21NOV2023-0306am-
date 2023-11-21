@@ -1,0 +1,35 @@
+{%- if settings.dbtfy_infinite_scroll -%}
+    {%- assign scroll_options = settings.dbtfy_infinite_scroll_options -%}
+
+    <div class="dbtfy dbtfy-infinite_scroll" data-endless-type="{{ scroll_options }}">
+        <div id="infiniteScrollPagination">
+            {%- if paginate.next -%}
+                {%- assign next_url     = paginate.next.url -%}
+                {%- assign loading_text = 'add-ons.infinite_scroll.load_more' | t -%}
+
+                <div class="text-center spacer-top-lg">
+                    {%- if scroll_options == 'click' -%}
+                        <a href="{{ next_url }}" class="btn {{ settings.dbtfy_infinite_scroll_button_style }}">
+                            <span class="btn__text">
+                                {{- loading_text -}}
+                            </span>
+                        </a>
+                    {%- else -%}
+                        {%- assign loading_img = settings.dbtfy_infinite_scroll_loading_img -%}
+                        {%- assign aria_label = loading_text -%}
+
+                        {%- if aria_label == blank -%}
+                            {%- assign aria_label = 'general.pagination.next' | t -%}
+                        {%- endif -%}
+
+                        <a
+                            href="{{ next_url }}"
+                            aria-label="{{ aria_label }}"
+                            {% if loading_img != blank %}data-loading-image="{{ loading_img | img_url }}"{% endif %}
+                        ></a>
+                    {%- endif -%}
+                </div>
+            {%- endif -%}
+        </div>
+    </div>
+{%- endif -%}

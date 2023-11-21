@@ -1,0 +1,907 @@
+{%- assign nav_type = section.settings.navigation_type -%}
+
+<div class="header-container nav-{{ nav_type }}"
+     data-section-id="{{ section.id }}"
+     data-section-type="header-section"
+     data-template="{{ request.page_type }}">
+
+  <!-- Header -->
+  <header class="site-header flex align-center fadeIn" role="banner">
+    <div class="wrapper header-wrapper full">
+      <div class="grid grid-small flex-nowrap align-center header-grid">
+
+        <!-- left icons -->
+        <div class="grid__item large--hide flex-fill whitespace-nowrap nav-containers nav-container-left-icons">
+          <ul class="inner-nav-containers">
+            <li class="site-nav__item site-nav--open">
+              <a href="" class="site-nav__link site-nav__link--icon js-drawer-open-button-left" aria-controls="NavDrawer" aria-label="{{ 'general.drawers.navigation' | t }}" title="{{ 'general.drawers.navigation' | t }}">
+                <span class="{{ settings.icon }}" aria-hidden="true">menu</span>
+              </a>
+            </li>
+
+            {%- render 'dbtfy-wish-list', type: 'menu' -%}
+
+            {%- if settings.search_enabled -%}
+              <li class="site-nav__item">
+                <a href="/search" class="site-nav__link site-nav__link--icon js-drawer-open-button-top" aria-controls="SearchDrawer" aria-label="{{ 'general.search.title' | t }}" title="{{ 'general.search.title' | t }}">
+                  <span class="{{ settings.icon }}" aria-hidden="true">search</span>
+                </a>
+              </li>
+            {%- endif -%}
+          </ul>
+        </div>
+
+        <!-- Logo -->
+        <div class="grid__item{% if nav_type == 'center' %} large--flex-fill{% else %} large--flex-auto{% endif %} medium--flex-auto small--flex-auto nav-containers nav-container-logo">
+          <div class="inner-nav-containers">
+            {%- if request.page_type == 'index' -%}
+              <h1 class="site-header__logo flex" {% if disabled_by_yoast_seo %}itemscope{% endif %} {% if disabled_by_yoast_seo %}itemtype="http://schema.org/Organization"{% endif %}>
+            {%- else -%}
+              <div class="site-header__logo flex" {% if disabled_by_yoast_seo %}itemscope{% endif %} {% if disabled_by_yoast_seo %}itemtype="http://schema.org/Organization"{% endif %}>
+            {%- endif -%}
+
+              {%- liquid
+                if section.settings.logo_link
+                  assign logo_link = routes.root_url
+                else
+                  assign logo_link = '#'
+                endif
+              -%}
+
+              <a href="{{ logo_link }}" {% if disabled_by_yoast_seo %}itemprop="url"{% endif %} class="site-header__logo-link flex{% unless section.settings.logo_link %} scroll-top{% endunless %}">
+                {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta {% if disabled_by_yoast_seo %}itemprop="name"{% endif %} content="{{ shop.name }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+
+                <!-- default logo -->
+                {%- liquid
+                  if section.settings.default_logo_svg != blank
+                    assign logo_default = section.settings.default_logo_svg
+                    assign logo_default_type = 'svg'
+                  elsif section.settings.default_logo != blank
+                    assign logo_default = section.settings.default_logo
+                    assign logo_default_type = 'retina'
+                  endif
+
+                  assign logo_default_width = section.settings.logo_width
+                  assign logo_default_current_height = logo_default_width | divided_by: logo_default.aspect_ratio
+
+                  if logo_default.width < section.settings.logo_width
+                    assign logo_default_height = logo_default.width | divided_by: logo_default.aspect_ratio
+
+                    if logo_default_height > settings.height_header
+                      assign logo_default_width = settings.height_header | minus: 10 | times: logo_default.aspect_ratio | round
+                    endif
+                  elsif logo_default_current_height > settings.height_header
+                    assign logo_default_width = settings.height_header | minus: 10 | times: logo_default.aspect_ratio | round
+                  endif
+                -%}
+
+                {%- if logo_default != blank -%}
+                  <img class="default-logo imgset lazyload radius-none"
+                    {% render 'lazysizes', img: logo_default, img_type: logo_default_type, img_width: logo_default_width %}
+                    alt="{{ shop.name }}"
+                    {% if disabled_by_yoast_seo %}itemprop="logo"{% endif %}>
+                {%- else -%}
+                  <span class="default-logo">{{ shop.name }}</span>
+                {%- endif -%}
+
+                <!-- inverted logo -->
+                {%- liquid
+                  if section.settings.inverted_logo_svg != blank
+                    assign logo_inverted = section.settings.inverted_logo_svg
+                    assign logo_inverted_type = 'svg'
+                  elsif section.settings.inverted_logo != blank
+                    assign logo_inverted = section.settings.inverted_logo
+                    assign logo_inverted_type = 'retina'
+                  endif
+
+                  assign logo_inverted_width = section.settings.logo_width
+                  assign logo_inverted_current_height = logo_inverted_width | divided_by: logo_inverted.aspect_ratio
+
+                  if logo_inverted.width < section.settings.logo_width
+                    assign logo_inverted_height = logo_inverted.width | divided_by: logo_inverted.aspect_ratio
+
+                    if logo_inverted_height > settings.height_header
+                      assign logo_inverted_width = settings.height_header | minus: 10 | times: logo_inverted.aspect_ratio | round
+                    endif
+                  elsif logo_inverted_current_height > settings.height_header
+                    assign logo_inverted_width = settings.height_header | minus: 10 | times: logo_inverted.aspect_ratio | round
+                  endif
+                -%}
+
+                {%- if logo_inverted != blank -%}
+                  <img class="inverted-logo imgset lazyload radius-none"
+                  {% render 'lazysizes', img: logo_inverted, img_type: logo_inverted_type, img_width: logo_inverted_width %}
+                  alt="{{ shop.name }}">
+                {%- else -%}
+                  <span class="inverted-logo">{{ shop.name }}</span>
+                {%- endif -%}
+
+                <!-- mobile logo -->
+                {%- liquid
+                  if section.settings.mobile_logo_svg != blank
+                    assign logo_mobile = section.settings.mobile_logo_svg
+                    assign logo_mobile_type = 'svg'
+                  elsif section.settings.mobile_logo != blank
+                    assign logo_mobile = section.settings.mobile_logo
+                    assign logo_mobile_type = 'retina'
+                  endif
+
+                  assign logo_mobile_width = section.settings.logo_mobile_width
+                -%}
+
+                {%- if logo_mobile != blank -%}
+                  <img class="mobile-logo imgset lazyload radius-none"
+                  {% render 'lazysizes', img: logo_mobile, img_type: logo_mobile_type, img_width: logo_mobile_width %}
+                  alt="{{ shop.name }}">
+                {%- else -%}
+                  <span class="mobile-logo">{{ shop.name }}</span>
+                {%- endif -%}
+              </a>
+
+              {%- if request.page_type == 'index' -%}
+                </h1>
+              {%- else -%}
+                </div>
+              {%- endif -%}
+          </div>
+        </div>
+
+        <!-- Navigation menu -->
+        <div class="grid__item{% if nav_type == 'center' %} large--six-twelfths{% else %} large--flex-fill{% endif %} medium--hide small--hide nav-containers nav-container-menu">
+          <ul class="inner-nav-containers">
+            {%- render "dbtfy-mega-menu" -%}
+
+            {%- for link in linklists[section.settings.main_menu_link_list].links -%}
+              {%- if link.links != blank -%}
+                {%- assign parent_index = forloop.index -%}
+
+                <li class="dropdown site-nav__item{% if link.active %} site-nav--active{% endif %}">
+                  <a id="MenuParentToggle-{{ parent_index }}" href="{{ link.url }}"
+                     class="dropdown-toggle site-nav__link"
+                     aria-controls="MenuParent-{{ parent_index }}"
+                     aria-haspopup="true"
+                     aria-expanded="false"
+                     {% unless request.page_type == 'index' %}{% if link.active %}aria-current="page"{% endif %}{% endunless %}>
+                     {{ link.title | escape }}
+                    <span class="{{ settings.icon }}" aria-hidden="true">keyboard_arrow_down</span>
+                  </a>
+
+                  <ul id="MenuParent-{{ parent_index }}" class="dropdown-menu dropdown-list-parent" aria-labelledby="MenuParentToggle-{{ parent_index }}">
+                    {%- for childlink in link.links -%}
+                      {%- if childlink.links != blank -%}
+                        {%- assign child_index = forloop.index -%}
+
+                        <!-- 2 level dropdown -->
+                        <li class="dropdown-item dropdown dropdown-item-has-grandchild">
+                          <a id="MenuChildrenToggle-{{ parent_index }}-{{ child_index }}"
+                            href="{{ childlink.url }}"
+                            class="dropdown-link dropdown-toggle site-nav__dropdown-link {% if childlink.active %}dropdown-link-active{% endif %}"
+                            aria-controls="MenuChildren-{{ parent_index }}-{{ child_index }}"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            {% unless request.page_type == 'index' %}{% if childlink.active %}aria-current="page"{% endif %}{% endunless %}>
+                            {{ childlink.title | escape }}
+                          </a>
+
+                          <ul id="MenuChildren-{{ parent_index }}-{{ child_index }}" class="dropdown-menu dropdown-menu-grandchild" aria-labelledby="MenuChildrenToggle-{{ parent_index }}-{{ child_index }}">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li class="dropdown-item">
+                                <a href="{{ grandchildlink.url }}"
+                                  class="dropdown-link{% if grandchildlink.active %} dropdown-link-active{% endif %}"
+                                  {% unless request.page_type == 'index' %}{% if grandchildlink.active %}aria-current="page"{% endif %}{% endunless %}>
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </li>
+                      {%- else -%}
+                        <!-- 1 level dropdown -->
+                        <li class="dropdown-item">
+                          <a href="{{ childlink.url }}"
+                            class="dropdown-link{% if childlink.active %} dropdown-link-active{% endif %}"
+                            {% if childlink.active %}aria-current="page"{% endif %}>
+                            {{ childlink.title | escape }}
+                          </a>
+                        </li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                </li>
+              {%- else -%}
+                <!-- only 1 link, no dropdown -->
+                <li class="site-nav__item {% if link.active %} site-nav--active{% endif %}">
+                  <a href="{{ link.url }}"
+                    class="site-nav__link"
+                    {% unless request.page_type == 'index' %}{% if link.active %}aria-current="page"{% endif %}{% endunless %}>
+                    {{ link.title | escape }}
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+
+        <!-- right icons -->
+        <div class="grid__item{% if nav_type == 'left' or nav_type == 'right' %} large--flex-auto{% else %} large--flex-fill{% endif %} medium--flex-fill small--flex-fill whitespace-nowrap text-right nav-containers nav-container-right-icons">
+          <ul class="inner-nav-containers">
+            {%- if shop.customer_accounts_enabled -%}
+              <li class="site-nav__item">
+                <div class="dropdown">
+                  <button type="button"
+                    id="HeaderAccountToggle"
+                    class="dropdown-toggle localization-toggle site-nav__link site-nav__link--icon account-link"
+                    title="{%- if customer -%}{{ 'customer.account.title' | t }}{%- else -%}{{ 'layout.customer.log_in' | t }}{%- endif -%}"
+                    aria-label="{%- if customer -%}{{ 'customer.account.title' | t }}{%- else -%}{{ 'layout.customer.log_in' | t }}{%- endif -%}"
+                    aria-controls="HeaderAccountMenu"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                    {%- if customer -%}
+                    <span class="customer-name text-small small--hide icon-middle">{{ customer.first_name | capitalize }}</span>
+                    {%- endif -%}
+                    <span class="{{ settings.icon }}" aria-hidden="true">account_circle</span>
+                  </button>
+
+                  <ul id="HeaderAccountMenu" class="dropdown-menu dropdown-parent" aria-labelledby="HeaderAccountToggle">
+                    {%- if customer -%}
+                      <li class="dropdown-item">
+                        <a href="{{ routes.account_url }}"
+                          class="dropdown-link{% if request.path == routes.account_url %} dropdown-link-active{% endif %}"
+                          {% if request.path == routes.account_url %}aria-current="page"{% endif %}>
+                          <span class="{{ settings.icon }} icon-width">account_circle</span>
+                          {{ 'customer.account.title' | t }}
+                        </a>
+                      </li>
+
+                      <li class="dropdown-item">
+                        <a href="{{ routes.account_logout_url }}"
+                          class="dropdown-link{% if request.path == routes.account_logout_url %} dropdown-link-active{% endif %}"
+                          {% if request.path == routes.account_logout_url %}aria-current="page"{% endif %}>
+                          <span class="{{ settings.icon }} icon-width">exit_to_app</span>
+                          {{ 'layout.customer.log_out' | t }}
+                        </a>
+                      </li>
+                    {%- else -%}
+                      <li class="dropdown-item">
+                        <a href="{{ routes.account_login_url }}"
+                          class="dropdown-link{% if request.path == routes.account_login_url %} dropdown-link-active{% endif %}"
+                          {% if request.path == routes.account_login_url %}aria-current="page"{% endif %}>
+                          <span class="{{ settings.icon }} icon-width">exit_to_app</span>
+                          {{ 'layout.customer.log_in' | t }}
+                        </a>
+                      </li>
+
+                      <li class="dropdown-item">
+                        <a href="{{ routes.account_register_url }}"
+                          class="dropdown-link{% if request.path == routes.account_register_url %} dropdown-link-active{% endif %}"
+                          {% if request.path == routes.account_register_url %}aria-current="page"{% endif %}>
+                          <span class="{{ settings.icon }} icon-width">person_add</span>
+                          {{ 'layout.customer.create_account' | t }}
+                        </a>
+                      </li>
+                    {%- endif -%}
+                  </ul>
+                </div>
+              </li>
+            {%- endif -%}
+
+            {%- render 'dbtfy-wish-list', type: 'menu', class: 'medium--hide small--hide' -%}
+
+            {%- if settings.search_enabled -%}
+              <li class="site-nav__item medium--hide small--hide">
+                <a href="/search" class="site-nav__link site-nav__link--icon js-drawer-open-button-top" aria-controls="SearchDrawer" aria-label="{{ 'general.search.title' | t }}" title="{{ 'general.search.title' | t }}">
+                  <span class="{{ settings.icon }}" aria-hidden="true">search</span>
+                </a>
+              </li>
+            {%- endif -%}
+
+            {%- if settings.show_locale_selector or settings.show_currency_selector -%}
+              {%- if settings.localization_position == 'header' or settings.localization_position == 'header_and_footer' -%}
+                <li class="site-nav__item">
+                  {%- render "localization-form", position: "header", toggle_class: "site-nav__link site-nav__link--icon" -%}
+                </li>
+              {%- endif -%}
+            {%- endif -%}
+
+            <li class="site-nav__item">
+              <a href="/cart" class="site-nav__link site-nav__link--icon cart-link js-drawer-open-button-right" aria-controls="{%- if settings.cart_type == 'drawer' or settings.cart_type == 'page' -%}CartDrawer{%- else -%}CartModal{%- endif -%}" aria-label="{{ 'layout.cart.title' | t }}" title="{{ 'layout.cart.title' | t }}">
+                <span class="{{ settings.icon }}" aria-hidden="true">{{ settings.icon_cart }}</span>
+
+                {%- if settings.dbtfy_cart_bubble -%}
+                  <span class="cart-link__bubble{% if settings.cart_bubble_animation %} rubberBand infinite slow {% endif %}{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+                {%- endif -%}
+
+                {%- if settings.cart_count -%}
+                  <span class="cart-count">
+                    {%- if cart.item_count <= 99 -%}
+                      {{ cart.item_count }}
+                    {%- else -%}
+                      99+
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.header.name",
+	  "class": "header-section stacked-on-top-of-content",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.header.settings.header__1.content"
+      },
+	    {
+        "type": "link_list",
+        "id": "main_menu_link_list",
+        "label": "t:sections.header.settings.main_menu_link_list.label",
+        "default": "main-menu"
+      },
+	    {
+        "type": "select",
+        "id": "navigation_type",
+        "label": "t:sections.header.settings.navigation_type.label",
+		    "default": "center",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:sections.header.settings.navigation_type.options__1.label"
+          },
+          {
+            "value": "right",
+            "label": "t:sections.header.settings.navigation_type.options__2.label"
+          },
+          {
+            "value": "center",
+            "label": "t:sections.header.settings.navigation_type.options__3.label"
+          },
+          {
+            "value": "center-logo",
+            "label": "t:sections.header.settings.navigation_type.options__4.label"
+          },
+          {
+            "value": "hidden",
+            "label": "t:sections.header.settings.navigation_type.options__5.label"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.header.settings.header__2.content"
+      },
+	    {
+        "type": "checkbox",
+        "id": "logo_link",
+        "label": "t:sections.header.settings.logo_link.label",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "default_logo",
+        "label": "t:sections.header.settings.default_logo.label"
+      },
+	    {
+        "type": "image_picker",
+        "id": "inverted_logo",
+        "label": "t:sections.header.settings.inverted_logo.label"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_logo",
+        "label": "t:sections.header.settings.mobile_logo.label"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.header.settings.header__3.content",
+        "info": "t:sections.header.settings.header__3.info"
+      },
+      {
+        "type": "text",
+        "id": "default_logo_svg",
+        "label": "t:sections.header.settings.default_logo_svg.label",
+        "placeholder": "logo.svg"
+      },
+      {
+        "type": "text",
+        "id": "inverted_logo_svg",
+        "label": "t:sections.header.settings.inverted_logo_svg.label",
+        "placeholder": "logo-inverted.svg"
+      },
+      {
+        "type": "text",
+        "id": "mobile_logo_svg",
+        "label": "t:sections.header.settings.mobile_logo_svg.label",
+        "placeholder": "logo-mobile.svg"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.header.settings.header__4.content",
+    		"info": "t:sections.header.settings.header__4.info"
+      },
+  	  {
+        "type": "range",
+        "id": "logo_width",
+        "label": "t:sections.header.settings.logo_width.label",
+        "min": 30,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "default": 200
+      },
+  	  {
+        "type": "range",
+        "id": "logo_mobile_width",
+        "label": "t:sections.header.settings.logo_mobile_width.label",
+        "min": 30,
+        "max": 150,
+        "step": 2,
+        "unit": "px",
+        "default": 100
+	    }
+    ],
+    "blocks" : [
+      {
+        "type": "mega",
+        "name": "t:sections.header.blocks.mega.name",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "header",
+            "content": "t:sections.header.blocks.mega.settings.header__1.content"
+          },
+          {
+            "type": "paragraph",
+            "content": "t:sections.header.blocks.mega.settings.paragraph__1.content"
+          },
+          {
+            "type": "paragraph",
+            "content": "t:sections.header.blocks.mega.settings.paragraph__2.content"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.header.blocks.mega.settings.title.label",
+            "info": "t:sections.header.blocks.mega.settings.title.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.header.blocks.mega.settings.header__2.content"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_mega_menu_nav_link",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_nav_link.label",
+            "default": "Mega menu"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_nav_link_url",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_nav_link_url.label"
+          },
+          {
+            "type": "range",
+            "id": "dbtfy_mega_menu_position",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_position.label",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 1,
+            "info": "t:sections.header.blocks.mega.settings.mega_menu_position.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.header.blocks.mega.settings.header__3.content"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_mega_menu_header",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_header.label",
+            "default": true
+          },
+          {
+            "type": "link_list",
+            "id": "dbtfy_mega_menu_multi",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi.label"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.header.blocks.mega.settings.header__4.content"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_mega_menu_carousel_title",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_carousel_title.label",
+            "default": "Specials"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_carousel_title_link",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_carousel_title_link.label"
+          },
+          {
+            "id": "dbtfy_mega_menu_collection",
+            "type": "collection",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_collection.label"
+           },
+           {
+            "type": "select",
+            "id": "dbtfy_mega_menu_product_slider_count",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_product_slider_count.label",
+            "default": "2",
+            "options": [
+              {
+                "value": "1",
+                "label": "t:sections.header.blocks.mega.settings.mega_menu_product_slider_count.options__1.label"
+              },
+              {
+                "value": "2",
+                "label": "t:sections.header.blocks.mega.settings.mega_menu_product_slider_count.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "range",
+            "id": "dbtfy_mega_menu_product_slider_total_count",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_product_slider_total_count.label",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 2
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_mega_menu_product_slider_arrows",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_product_slider_arrows.label",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_mega_menu_product_slider_dots",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_product_slider_dots.label",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_mega_menu_product_slider_autoplay",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_product_slider_autoplay.label",
+            "default": false
+          },
+          {
+            "type": "range",
+            "id": "dbtfy_mega_menu_product_slider_autoplayspeed",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_product_slider_autoplayspeed.label",
+            "min": 3,
+            "max": 10,
+            "step": 1,
+            "unit": "s",
+            "default": 5
+          },
+          {
+            "type": "header",
+            "content": "t:sections.header.blocks.mega.settings.header__5.content"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_mega_menu_multi_image_slider_arrows",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_slider_arrows.label",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_mega_menu_multi_image_slider_dots",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_slider_dots.label",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_mega_menu_multi_image_slider_autoplay",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_slider_autoplay.label",
+            "default": false
+          },
+          {
+            "type": "range",
+            "id": "dbtfy_mega_menu_multi_image_slider_autoplayspeed",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_slider_autoplayspeed.label",
+            "min": 3,
+            "max": 10,
+            "step": 1,
+            "unit": "s",
+            "default": 5
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_mega_menu_multi_image_1",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_1.label"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_multi_image_link_1",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_link_1.label"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_mega_menu_multi_image_2",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_2.label"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_multi_image_link_2",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_link_2.label"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_mega_menu_multi_image_3",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_3.label"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_multi_image_link_3",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_link_3.label"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_mega_menu_multi_image_4",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_4.label"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_multi_image_link_4",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_link_4.label"
+          },
+          {
+            "type": "image_picker",
+            "id": "dbtfy_mega_menu_multi_image_5",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_5.label"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_multi_image_link_5",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_link_5.label"
+          },
+           {
+            "type": "image_picker",
+            "id": "dbtfy_mega_menu_multi_image_6",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_6.label"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_multi_image_link_6",
+            "label": "t:sections.header.blocks.mega.settings.mega_menu_multi_image_link_6.label"
+          }
+        ]
+      },
+      {
+        "type": "product",
+        "name": "t:sections.header.blocks.product.name",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.header.blocks.product.settings.title.label",
+            "info": "t:sections.header.blocks.product.settings.title.info"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_mega_menu_nav_link",
+            "label": "t:sections.header.blocks.product.settings.dbtfy_mega_menu_nav_link.label",
+            "default": "Mega menu"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_nav_link_url",
+            "label": "t:sections.header.blocks.product.settings.dbtfy_mega_menu_nav_link_url.label"
+          },
+          {
+            "type": "range",
+            "id": "dbtfy_mega_menu_position",
+            "label": "t:sections.header.blocks.product.settings.dbtfy_mega_menu_position.label",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 1,
+            "info": "t:sections.header.blocks.product.settings.dbtfy_mega_menu_position.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_mega_menu_header",
+            "label": "t:sections.header.blocks.product.settings.dbtfy_mega_menu_header.label",
+            "default": true
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_mega_menu_product",
+            "label": "t:sections.header.blocks.product.settings.dbtfy_mega_menu_product.label"
+          },
+          {
+            "type": "select",
+            "id": "dbtfy_mega_menu_product_grid",
+            "label": "t:sections.header.blocks.product.settings.dbtfy_mega_menu_product_grid.label",
+            "default": "5",
+            "options": [
+              {
+                "value": "4",
+                "label": "t:sections.header.blocks.product.settings.dbtfy_mega_menu_product_grid.options__1.label"
+              },
+              {
+                "value": "5",
+                "label": "t:sections.header.blocks.product.settings.dbtfy_mega_menu_product_grid.options__2.label"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "collection",
+        "name": "t:sections.header.blocks.collection.name",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.header.blocks.collection.settings.title.label",
+            "info": "t:sections.header.blocks.collection.settings.title.info"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_mega_menu_nav_link",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_nav_link.label",
+            "default": "Mega menu"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_nav_link_url",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_nav_link_url.label"
+          },
+          {
+            "type": "range",
+            "id": "dbtfy_mega_menu_position",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_position.label",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 1,
+            "info": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_position.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_mega_menu_header",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_header.label",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_mega_menu_title",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_title.label",
+            "default": "Collections"
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_mega_menu_collection_1",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_collection_1.label"
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_mega_menu_collection_2",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_collection_2.label"
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_mega_menu_collection_3",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_collection_3.label"
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_mega_menu_collection_4",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_collection_4.label"
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_mega_menu_collection_5",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_collection_5.label"
+          },
+          {
+            "type": "collection",
+            "id": "dbtfy_mega_menu_collection_6",
+            "label": "t:sections.header.blocks.collection.settings.dbtfy_mega_menu_collection_6.label"
+          }
+        ]
+      },
+      {
+        "type": "blog",
+        "name": "t:sections.header.blocks.blog.name",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.header.blocks.blog.settings.title.label",
+            "info": "t:sections.header.blocks.blog.settings.title.info"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_mega_menu_nav_link",
+            "label": "t:sections.header.blocks.blog.settings.dbtfy_mega_menu_nav_link.label",
+            "default": "Mega menu"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_nav_link_url",
+            "label": "t:sections.header.blocks.blog.settings.dbtfy_mega_menu_nav_link_url.label"
+          },
+          {
+            "type": "range",
+            "id": "dbtfy_mega_menu_position",
+            "label": "t:sections.header.blocks.blog.settings.dbtfy_mega_menu_position.label",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 1,
+            "info": "t:sections.header.blocks.blog.settings.dbtfy_mega_menu_position.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "dbtfy_mega_menu_header",
+            "label": "t:sections.header.blocks.blog.settings.dbtfy_mega_menu_header.label",
+            "default": true
+          },
+          {
+            "type": "blog",
+            "id": "dbtfy_mega_menu_blog",
+            "label": "t:sections.header.blocks.blog.settings.dbtfy_mega_menu_blog.label"
+          }
+        ]
+      },
+      {
+        "type": "html",
+        "name": "t:sections.header.blocks.html.name",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.header.blocks.html.settings.title.label",
+            "info": "t:sections.header.blocks.html.settings.title.info"
+          },
+          {
+            "type": "text",
+            "id": "dbtfy_mega_menu_nav_link",
+            "label": "t:sections.header.blocks.html.settings.dbtfy_mega_menu_nav_link.label",
+            "default": "Mega menu"
+          },
+          {
+            "type": "url",
+            "id": "dbtfy_mega_menu_nav_link_url",
+            "label": "t:sections.header.blocks.html.settings.dbtfy_mega_menu_nav_link_url.label"
+          },
+          {
+            "type": "range",
+            "id": "dbtfy_mega_menu_position",
+            "label": "t:sections.header.blocks.html.settings.dbtfy_mega_menu_position.label",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 1,
+            "info": "t:sections.header.blocks.html.settings.dbtfy_mega_menu_position.info"
+          },
+          {
+            "type": "html",
+            "id": "dbtfy_mega_menu_html",
+            "label": "t:sections.header.blocks.html.settings.dbtfy_mega_menu_html.label"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

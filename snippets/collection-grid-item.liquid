@@ -1,0 +1,114 @@
+{%- liquid
+  assign button_label = 'collections.grid.button_label' | t
+
+  if collection == blank
+    assign emptyState = true
+  else
+    assign emptyState = false
+  endif
+
+  if emptyState
+    assign collection_link = '/admin/collections'
+    assign collection_title = 'home_page.onboarding.collection_title' | t
+    assign collection_products_count = '0'
+  else
+    assign collection_link = collection.url
+    assign collection_title = collection.title | escape
+    assign collection_products_count = collection.all_products_count
+  endif
+
+  if collection.image
+    assign collection_image = collection.image
+  elsif collection.products.first and collection.products.first.images != blank
+    assign collection_image = collection.products.first.featured_image
+  else
+    assign collection_image = blank
+  endif
+
+  unless grid_item_width
+    assign grid_item_width = 'medium--six-twelfths large--four-twelfths'
+  endunless
+
+  if section_height
+    assign collection_height = section_height
+  else if section.settings.section_height
+    assign collection_height = section.settings.section_height
+  else
+    assign collection_height = 'xsmall'
+  endif
+-%}
+
+{%- capture collection_title_html -%}
+  {%- unless settings.hide_collection_title -%}
+    {%- if no_heading_tag -%}
+      <p class="collection_grid-title h3">
+        {{ collection_title }}
+      </p>
+    {%- else -%}
+      {%- if request.page_type == "list-collections" -%}
+        <h2 class="collection_grid-title h3">
+          {{ collection_title }}
+        </h2>
+      {%- else -%}
+        <h3 class="collection_grid-title">
+          {{ collection_title }}
+        </h3>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endunless -%}
+
+  {%- unless settings.collection_grid_card -%}
+    {%- if settings.collection_grid_products_count -%}
+      <p class="collection_grid-product-count text-small text-italic spacer-bottom-none spacer-top-sm">
+        {{ collection_products_count }}
+        {{ 'shopify.checkout.stock.product_column_header' | t }}
+      </p>
+    {%- endif -%}
+  {%- endunless -%}
+
+  {%- if settings.show_collection_grid_button and button_label != blank -%}
+    <button type="button" class="btn {{ settings.collection_grid_button_style }} {{ settings.collection_grid_button_size }} spacer-top">
+      {{ button_label | escape }}
+    </button>
+  {%- endif -%}
+{%- endcapture -%}
+
+<div class="grid__item {{ grid_item_width }} flex flex-fill {% if block %}collection-{{ block.id }}{% endif %}"
+  {% if block %}{{ block.shopify_attributes }}{% endif %}>
+  <a href="{{ collection_link }}" class="image-link flex full {% if settings.collection_grid_animation %}collection_grid-animation{% endif %} {% if settings.collection_grid_card %}card{% endif %}">
+    <div class="collection_grid-item collection_grid--{{ collection_height }} box media-wrapper {% if settings.collection_grid_card %}card-image{% else %}overlay{% endif %} {{ class }}">
+      {%- if collection_image != blank -%}
+        <div class="collection_grid-image media bgset lazyload"
+          {%- render 'lazysizes', img: collection_image, img_type: 'background' -%}>
+        </div>
+      {%- else -%}
+        {{ 'collection-' | append: current | placeholder_svg_tag: 'media placeholder-svg' }}
+      {%- endif -%}
+
+      {%- if settings.collection_grid_card == false and collection_title_html != blank -%}
+        <div class="collection_grid-inner media-content">
+          <div class="collection_grid-text-wrapper">
+            {{ collection_title_html }}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if settings.collection_grid_card and collection_title_html != blank -%}
+      <div class="collection_grid-title-below card-body text-center">
+        {{ collection_title_html }}
+      </div>
+    {%- endif -%}
+
+    {%- if settings.collection_grid_card -%}
+      <div class="card-footer card-footer-xs">
+        {%- if settings.collection_grid_products_count -%}
+          <p class="collection_grid-product-count text-small text-italic text-center">
+            {{ collection_products_count }}
+            {{ 'shopify.checkout.stock.product_column_header' | t }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </a>
+</div>

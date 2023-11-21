@@ -1,0 +1,34 @@
+{%- liquid
+  assign result_limit = settings.dbtfy_smart_search_limit
+  assign resources_type = ""
+
+  if settings.search_show_collections
+    assign resources_type = resources_type | append: ',' | append: 'collection'
+  endif
+
+  if settings.search_show_products
+    assign resources_type = resources_type | append: ',' | append: 'product'
+  endif
+
+  if settings.search_show_articles
+    assign resources_type = resources_type | append: ',' | append: 'article'
+  endif
+
+  if settings.search_show_pages
+    assign resources_type = resources_type | append: ',' | append: 'page'
+  endif
+
+  assign resources_type = resources_type | remove_first: ','
+-%}
+
+<div class="dbtfy dbtfy-smart_search"
+      tabindex="-1"
+      data-limit="{{ result_limit }}"
+      data-resources-type="{{ resources_type }}">
+
+  <div class="dbtfy-smart-search-wrapper{% if type == "page" %} dbtfy-smart-search-wrapper--page overlay-content full{% endif %}">
+    <div class="ss-section-title ss-loading text-center" hidden></div>
+
+    <div id="ss-section-wrapper" class="ss-section-wrapper" hidden></div>
+  </div>
+</div>

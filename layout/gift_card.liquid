@@ -1,0 +1,98 @@
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
+<head>
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<link rel="canonical" href="{{ canonical_url }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="author" content="Debutify">
+
+  {%- assign icon_split = settings.icon | split: "-" -%}
+  {%- capture icon_family -%}{% for icon in icon_split %}{% unless forloop.last == true %}{{ icon | capitalize | append: " " }}{% else %}{{ icon | capitalize }}{% endunless %}{% endfor %}{%- endcapture -%}
+
+  <link rel="preload" as="font" href="{{ settings.icon | append: ".woff2" | asset_url }}" type="font/woff2" crossorigin>
+
+  <!-- Fav icon ================================================== -->
+  {%- if settings.favicon -%}
+    <link sizes="192x192" rel="shortcut icon" href="{{ settings.favicon | img_url: '192x192' }}" type="image/png">
+  {%- endif -%}
+
+  <!-- Title and description ================================================== -->
+  {%- comment -%}Auto-disabled. Yoast plugin is taking care of SEO output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<title>
+    {{ 'gift_cards.issued.title' | t: value: formatted_initial_value_stripped, shop: shop.name }}
+  </title>
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+  
+  {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta name="description" content="{{ 'gift_cards.issued.subtext' | t }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+
+  <!-- Social meta ================================================== -->
+  {%- render 'social-meta-tags' -%}
+  
+  <!-- CSS ================================================== -->
+  {% render 'hs-defer-css' with filename: 'theme.scss.css', pages: 'collection,index,product' | split: ',', local: true %}
+  {% render 'hs-defer-css' with filename: 'gift-card.scss.css', pages: 'collection,index,product' | split: ',', local: true %}
+
+  <style>
+    @font-face {
+      font-family: {{ icon_family }};
+      font-weight: 400;
+      font-style: normal;
+      font-display: block;
+      src: url({{ settings.icon | append: ".woff2" | asset_url }}) format("woff2");
+    }
+  </style>
+
+  <!-- Vendors ================================================== -->  
+  <script src="{{ 'modernizr.gift-card.js' | shopify_asset_url }}"></script>
+  <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}"></script>
+
+  <!-- Header hook for plugins ================================================== -->
+  {{ content_for_header }}
+</head>
+
+<body class="template-giftcard">
+  <div class="wrapper">
+    {{ content_for_layout }}
+  </div>
+  
+  <script type="text/javascript">
+    /*============================================================================
+      Auto-select gift card code on click, based on ID passed to the function
+        - Use a different method depending on IE or others
+    ==============================================================================*/
+    function selectText(element) {
+      var doc = document,
+          text = doc.getElementById(element);
+
+      if (doc.body.createTextRange) { // ms
+        var range = doc.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+      } else if (window.getSelection) { // moz, opera, webkit
+        var selection = window.getSelection(),
+            range = doc.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,58 @@
+{%- if settings.dbtfy_trust_badge -%}
+  {%- liquid
+    assign show_on_product_page = settings.dbtfy_trust_badge_product
+    assign show_on_cart = settings.dbtfy_trust_badge_cart
+    assign small_text = settings.dbtfy_trust_badge_text_small
+    assign cart_drawer_position = settings.dbtfy_trust_badge_position_in_cart_drawer
+    assign badge_image = settings.dbtfy_trust_badge_image
+    assign text = 'add-ons.trust_badge.text' | t
+    assign text_position = settings.dbtfy_trust_badge_text_position
+    assign image_width = settings.dbtfy_trust_badge_width
+
+    assign valid_badge = false
+
+    if show_on_product_page and position == "product_page"
+      assign valid_badge = true
+    endif
+
+    if show_on_cart
+      if position == "cart_page" or position == "cart_drawer"
+        assign valid_badge = true
+      endif
+    endif
+
+    assign spacer_top = false
+
+    if position == 'cart_page'
+      assign spacer_top = true
+    elsif position == 'cart_drawer' and cart_drawer_position == "under_checkout_button"
+      assign spacer_top = true
+    endif
+  -%}
+
+  {%- if valid_badge -%}
+    <div class="dbtfy dbtfy-trust_badge {% if spacer_top %}spacer-top{% endif %}">
+      <div id="TrustBadge"
+           class="text-{{ text_position }}-trust_badge{% if position == 'product_page' %} card card-body{% endif %}">
+
+        <div class="container-trust_badge text-center">
+          {%- unless text == blank -%}
+            <p class="text-trust_badge{% if small_text %} text-small{% endif %}">
+              {{ text }}
+            </p>
+          {%- endunless -%}
+
+          {%- if badge_image -%}
+            <div class="image-wrapper-trust_badge">
+              {%- assign image_size = image_width | append: "x" -%}
+
+              <img alt="{{ badge_image.alt }}" class="image-trust_badge lazyload hs-lazyload hs-id-d054da16" data-src="{{ badge_image | img_url: image_size }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" srcset="{{ badge_image | img_url: image_size }} 1x, {{ badge_image | img_url: image_size, scale: 2 }} 2x"/>
+            </div>
+          {%- else -%}
+            {%- render "payment-icons" -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

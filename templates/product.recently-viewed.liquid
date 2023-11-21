@@ -1,0 +1,47 @@
+{% include 'product-content.zipifypages', contentprt: 'header' %}{% layout none %}
+
+{%- if product.available -%}
+  {%- assign sold_out = false -%}
+{%- else -%}
+  {%- assign sold_out = true -%}
+{%- endif -%}
+
+{%- assign product_link = product.url | within: collection -%}
+
+<div class="rv-floating-bar-product">
+  {%- assign media = product.media.first -%}
+
+  {%- if media -%}
+    <a href="{{ product_link }}"
+       class="image-link">
+
+      <div id="ProductImageWrapper-{{ media.id }}"
+           class="product--wrapper media-wrapper"
+           style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
+
+        <img class="product--image media lazyload ProductImage-{{ media.id }}"
+            {%- render 'lazysizes', img: media.preview_image, img_type: 'responsive' -%}
+             alt="{{ media.preview_image.alt }}">
+      </div>
+    </a>
+  {%- endif -%}
+</div>
+
+{%- assign desktop_grid = settings.dbtfy_recently_viewed_desktop_grid -%}
+{%- assign mobile_grid = settings.dbtfy_recently_viewed_mobile_grid -%}
+{%- assign gift_wrap_product_id = settings.dbtfy_gift_wrap_product.id -%}
+
+<div class="rv-section-product">
+  {%- capture grid_item_width -%}
+    {%- render 'product-width', desktop: desktop_grid, mobile: mobile_grid -%}
+  {%- endcapture -%}
+
+  {%- if settings.dbtfy_gift_wrap -%}
+    {%- unless product.id == gift_wrap_product_id -%}
+      {%- render 'product-grid-item' with product as product, grid_item_width: grid_item_width, current: 1 -%}
+    {%- endunless -%}
+  {%- else -%}
+    {%- render 'product-grid-item' with product as product, grid_item_width: grid_item_width, current: 1 -%}
+  {%- endif -%}
+</div>
+{% include 'product-content.zipifypages', contentprt: 'footer' %}

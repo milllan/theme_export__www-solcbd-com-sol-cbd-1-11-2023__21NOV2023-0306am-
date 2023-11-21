@@ -1,0 +1,13 @@
+<label for="currency-list-{{ section.id }}" {%- if settings.localization_position == 'footer' or settings.localization_position == 'header_and_footer' -%} class="currency-selector-label" {%- endif -%}>{{ 'general.currency.dropdown_label' | t }}</label>
+<select id="currency-list-{{ section.id }}" class="currencies currency-code select--small" name="dbtfy-custom-currencies" data-default-shop-currency="{{ shop.currency }}">
+  <option value="{{ shop.currency }}" selected="selected">{{ shop.currency }}</option>
+
+  {%- capture codes -%},USD,EUR,GBP,CAD,ARS,AUD,ILS,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,TND,UAH,AED,UYU,VEB,VND,ZMK,{%- endcapture -%}
+  {%- assign supported_codes = settings.supported_currencies | split: ' ' -%}
+
+  {%- for code in supported_codes -%}
+    {%- if code != shop.currency and codes contains code -%}
+      <option value="{{ code }}">{{ code }}</option>
+    {%- endif -%}
+  {%- endfor -%}
+</select>

@@ -1,0 +1,149 @@
+{%- if predictive_search.performed-%}
+  {%- liquid
+    assign products_text = 'add-ons.smart_search.products_text' | t
+    assign collections_text = 'add-ons.smart_search.collections_text' | t
+    assign articles_text = 'add-ons.smart_search.articles_text' | t
+    assign pages_text = 'add-ons.smart_search.pages_text' | t
+    assign all_results_text = 'add-ons.smart_search.all_results_text' | t
+  -%}
+
+  {%- if predictive_search.resources.products.size > 0 -%}
+    {%- liquid
+      assign show_price = settings.dbtfy_smart_search_price
+      assign show_vendor = settings.dbtfy_smart_search_vendor
+      assign gift_wrap_product_id = settings.dbtfy_gift_wrap_product.id
+      assign products_to_show_count = 0
+
+      for product in predictive_search.resources.products
+        if settings.dbtfy_gift_wrap
+          unless product.id == gift_wrap_product_id
+            assign products_to_show_count = products_to_show_count | plus: 1
+          endunless
+        else
+          assign products_to_show_count = products_to_show_count | plus: 1
+        endif
+      endfor
+    -%}
+
+    {%- if products_to_show_count > 0 -%}
+      <div class="ss-section ss-products">
+        <div class="ss-section-title sticky">
+          {{ products_text }}
+        </div>
+
+        <div class="ss-content">
+          {%- for product in predictive_search.resources.products -%}
+            <div class="ss-item">
+              <a href="{{ product.url }}">
+                <div class="ss-thumbnail">
+                  {%- assign image = product.media.first.preview_image -%}
+
+                  {%- if image != blank -%}
+                    <img alt="{{ product.title }}" class="lazyload hs-lazyload hs-id-38a80be2" data-src="{{ image | img_url: '100x' }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+                  {%- else -%}
+                    {{ "product-1" | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="ss-info">
+                  <span class="ss-title h6">{{ product.title }}</span>
+
+                  {%- if show_price -%}
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="ss-price-container price-compare text-small text-money">
+                      <span class="text-sale">
+                        <span class="money">{{ product.price | money }}</span>
+                      </span>
+                      <span class="ss-price text-strike text-muted">
+                        <span class="money">{{ product.compare_at_price | money }}</span>
+                      </span>
+                    </span>
+                    {%- else -%}
+                      <span class="ss-price-container ss-price text-small text-money">
+                      <span class="money">{{ product.price | money }}</span>
+                    </span>
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  {%- if show_vendor and product.vendor != blank -%}
+                    <span class="ss-vendor text-small text-muted text-italic">{{ product.vendor }}</span>
+                  {%- endif -%}
+                </div>
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if predictive_search.resources.collections.size > 0 -%}
+  <div class="ss-section ss-collections">
+    <div class="ss-section-title sticky">
+      {{ collections_text }}
+    </div>
+    <div class="ss-content">
+      {%- for collection in predictive_search.resources.collections -%}
+        <div class="ss-item">
+          <a href="{{ collection.url }}">
+            <span class="ss-thumbnail">
+              {%- if collection.image != blank -%}
+                <img alt="{{ collection.title }}" class="lazyload hs-lazyload hs-id-542b674e" data-src="{{ collection.image | img_url: '100x' }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+              {%- else -%}
+                {{ "collection-1" | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </span>
+            <span class="ss-info">
+              <span class="ss-title">{{ collection.title }}</span>
+            </span>
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- if predictive_search.resources.articles.size > 0 -%}
+  <div class="ss-section ss-posts">
+    <div class="ss-section-title sticky">
+      {{ articles_text }}
+    </div>
+    <div class="ss-content">
+      {%- for article in predictive_search.resources.articles -%}
+        <div class="ss-item">
+          <a href="{{ article.url }}">
+            <span class="ss-thumbnail">
+              <img alt="{{ article.title }}" class="lazyload hs-lazyload hs-id-a509d34c" data-src="{{ article.image | img_url: '100x' }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            </span>
+            <span class="ss-info">
+              <span class="ss-title">{{ article.title }}</span>
+            </span>
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- if predictive_search.resources.pages.size > 0 -%}
+  <div class="ss-section ss-pages">
+    <div class="ss-section-title sticky">
+      {{ pages_text }}
+    </div>
+    <div class="ss-content">
+      {%- for page in predictive_search.resources.pages -%}
+      <div class="ss-item">
+        <a href="{{ page.url }}">
+          <span class="ss-info">
+            <span class="ss-title">{{ page.title }}</span>
+          </span>
+        </a>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+  <div class="ss-showall">
+    <button type="submit" class="btn btn--banner" aria-label="{{ 'general.search.submit' | t }}" title="{{ 'general.search.submit' | t }}">{{ all_results_text }} "{{ predictive_search.terms }}" <i class="{{ settings.icon }}" >keyboard_arrow_right</i></button>
+  </div>
+{%- endif -%}

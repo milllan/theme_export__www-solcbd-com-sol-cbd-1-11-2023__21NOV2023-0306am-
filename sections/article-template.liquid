@@ -1,0 +1,221 @@
+{%- assign number_of_comments = article.comments_count -%}
+
+{%- if comment and comment.created_at -%}
+  {%- assign number_of_comments = article.comments_count | plus: 1 -%}
+{%- endif -%}
+
+{% assign article_words = article.content | strip_html | strip | split: ' ' %}
+
+<div id="ArticleSection" data-section-id="{{ section.id }}" data-section-type="article-template" {% if disabled_by_yoast_seo %}itemscope{% endif %} {% if disabled_by_yoast_seo %}itemtype="http://schema.org/Article"{% endif %}>
+  <meta {% if disabled_by_yoast_seo %}itemtype="http://schema.org/Thing"{% endif %} {% if disabled_by_yoast_seo %}itemprop="url"{% endif %} content="{{ shop.url }}{{ article.url }}">
+  {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta {% if disabled_by_yoast_seo %}itemprop="wordCount"{% endif %} content="{{ article_words | size }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+  <meta {% if disabled_by_yoast_seo %}itemtype="http://schema.org/CreativeWork"{% endif %} {% if disabled_by_yoast_seo %}itemprop="articleSection"{% endif %} content="{{ blog.title }}">
+  <meta {% if disabled_by_yoast_seo %}itemtype="http://schema.org/CreativeWork"{% endif %} {% if disabled_by_yoast_seo %}itemprop="author"{% endif %} content="{{ article.author }}">
+  <meta {% if disabled_by_yoast_seo %}itemtype="http://schema.org/CreativeWork"{% endif %} {% if disabled_by_yoast_seo %}itemprop="datePublished"{% endif %} content="{{ article.published_at }}">
+  <meta {% if disabled_by_yoast_seo %}itemtype="http://schema.org/CreativeWork"{% endif %} {% if disabled_by_yoast_seo %}itemprop="dateModified"{% endif %} content="{{ article.updated_at }}">
+  <meta {% if disabled_by_yoast_seo %}itemtype="http://schema.org/CreativeWork"{% endif %} {% if disabled_by_yoast_seo %}itemprop="commentCount"{% endif %} content="{{ article.comments_count }}">
+  <meta {% if disabled_by_yoast_seo %}itemtype="http://schema.org/CreativeWork"{% endif %} {% if disabled_by_yoast_seo %}itemprop="headline"{% endif %} content="{{ article.title }}">
+  {%- if article.image -%}
+  <meta {% if disabled_by_yoast_seo %}itemtype="http://schema.org/Thing"{% endif %} {% if disabled_by_yoast_seo %}itemprop="image"{% endif %} content="{{ article.image | img_url: 'grande' }}">
+  {%- endif -%}
+
+  <div class="box">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+          <div class="section-header">
+            <div class="page-title-wrapper">
+              <h1 class="page-title" {% if disabled_by_yoast_seo %}itemtype="http://schema.org/Thing"{% endif %} {% if disabled_by_yoast_seo %}itemprop="name"{% endif %}>{{ article.title }}</h1>
+            </div>
+            {%- render 'blog-meta' with article as article, show_author: section.settings.show_author, show_date: section.settings.show_date, show_comments: section.settings.show_comments, number_of_comments: number_of_comments, class: "text-lead" -%}
+          </div>
+
+          {%- if settings.show_hero and article.image -%}
+            <div class="media-wrapper spacer-bottom" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
+              <img class="media lazyload"
+              {%- render 'lazysizes', img: article.image, img_type: 'responsive' -%}
+              alt="{{ article.image.alt }}">
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.show_social_top -%}
+            {%- render 'social-sharing', share_title: article.title, share_permalink: article.url, share_button: "btn btn-square-xsmall", container_class: "spacer-bottom" -%}
+          {%- endif -%}
+
+          {%- if article.content != blank -%}
+            <div class="rte" {% if disabled_by_yoast_seo %}itemprop="articleBody"{% endif %}>
+              {{ article.content }}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.show_social_bottom -%}
+            {%- render 'social-sharing', share_title: article.title, share_permalink: article.url, share_button: "btn btn-square-xsmall", container_class: "spacer-top" -%}
+          {%- endif -%}
+
+          {%- if section.settings.show_tags -%}
+            {%- render 'tags-article' with article as article -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- if blog.comments_enabled? and number_of_comments > 0 -%}
+  <div class="box section-border">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+          <div class="section-header">
+            <h2>
+              <span class="{{ settings.icon }}">comment</span>
+              {{ 'blogs.comments.with_count' | t: count: number_of_comments }}
+            </h2>
+          </div>
+
+          {%- paginate article.comments by 5 -%}
+            <div {% if settings.dbtfy_infinite_scroll %}id="infiniteScrollContainer" {% endif %}class="card-group">
+              {% comment %}
+                Showing the rest of the comments.
+              {% endcomment %}
+              {%- for comment in article.comments -%}
+                {% render 'comment' with comment as comment %}
+              {%- endfor -%}
+            </div>
+
+            {%- render "pagination" with paginate as paginate -%}
+
+          {%- endpaginate -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- if blog.comments_enabled? -%}
+  <div class="box section-border">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+          <div class="section-header">
+            <h2>{{ 'blogs.comments.title' | t }}</h2>
+          </div>
+
+          {% comment %}
+          #comments is required, it is used as an anchor link by Shopify.
+          {% endcomment %}
+          <div id="comments">
+            {%- if comment and comment.created_at -%}
+            <p class="note form-success">
+              {%- if blog.moderated? -%}
+              {{ 'blogs.comments.success_moderated' | t }}
+              {%- else -%}
+              {{ 'blogs.comments.success' | t }}
+              {%- endif -%}
+            </p>
+            {%- endif -%}
+
+            <div class="form-vertical">
+              {%- form 'new_comment', article, class: 'form-vertical' -%}
+                {%- if form.errors -%}
+                {{ form.errors | default_errors }}
+                {%- endif -%}
+
+                <label for="CommentAuthor" class="hidden-label">{{ 'blogs.comments.name' | t }} *</label>
+                <input class="{% if form.errors contains 'author' %} input-error{% endif %}"
+                        type="text"
+                        name="comment[author]"
+                        placeholder="{{ 'blogs.comments.name' | t }}"
+                        id="CommentAuthor"
+                        autocapitalize="words"
+                        required="required"
+                        value="{% if form.author %}{{ form.author }}{% elsif customer %}{{ customer.name }}{% endif %}">
+
+                <label for="CommentEmail" class="hidden-label">{{ 'blogs.comments.email' | t }} *</label>
+                <input class="{% if form.errors contains 'email' %} input-error{% endif %}"
+                        type="email"
+                        name="comment[email]"
+                        placeholder="{{ 'blogs.comments.email' | t }}"
+                        id="CommentEmail"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
+                        required="required"
+                        value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+
+                <label for="CommentBody" class="hidden-label">{{ 'blogs.comments.message' | t }} *</label>
+                <textarea class="{% if form.errors contains 'body' %} input-error{% endif %}"
+                          name="comment[body]"
+                          id="CommentBody"
+                          placeholder="{{ 'blogs.comments.message' | t }}"
+                          required="required">
+                  {%- if form.body -%}{{ form.body }}{%- endif -%}
+                </textarea>
+
+                {%- if blog.moderated? -%}
+                  <p>{{ 'blogs.comments.moderated' | t }}</p>
+                {%- endif -%}
+
+                <button type="submit" class="btn btn--primary small--full">
+                  <span class="btn__text">
+                    {{ 'blogs.comments.post' | t }}
+                    <span class="{{ settings.icon }}" aria-hidden="true">arrow_forward</span>
+                  </span>
+                </button>
+              {%- endform -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.article_template.name",
+	  "class": "article-section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_author",
+        "label": "t:sections.article_template.settings.show_author.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_date",
+        "label": "t:sections.article_template.settings.show_date.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_comments",
+        "label": "t:sections.article_template.settings.show_comments.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social_top",
+        "label": "t:sections.article_template.settings.show_top_sharing_options.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social_bottom",
+        "label": "t:sections.article_template.settings.show_bottom_sharing_options.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_tags",
+        "label": "t:sections.article_template.settings.show_tags.label",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

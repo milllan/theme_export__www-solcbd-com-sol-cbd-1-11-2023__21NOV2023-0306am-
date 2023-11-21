@@ -1,0 +1,37 @@
+{%- liquid
+  assign minimum_order_enabled = false
+  assign minimum_order_reached = false
+  assign minimum_order_amount = settings.dbtfy_minimum_order_amount | times: 100 | round
+  assign cart_checkout_button_disabled = false
+  assign cart_total = cart.total_price
+  assign left_amount = minimum_order_amount | minus: cart_total | money
+  assign left_amount_with_tag = '<span><span class="money">' | append: left_amount | append: '</span></span>'
+  assign minimum_order_text = 'add-ons.minimum_order.amount_unreached_text' | t | replace: '{left_amount}', left_amount_with_tag
+
+  if minimum_order_amount != blank
+    assign minimum_order_enabled = true
+  endif
+
+  if cart_total >= minimum_order_amount
+    assign minimum_order_reached = true
+    assign minimum_order_text = 'add-ons.minimum_order.amount_reached_text' | t
+  endif
+
+  if minimum_order_enabled and minimum_order_reached == false
+    assign cart_checkout_button_disabled = true
+  endif
+-%}
+
+{%- if minimum_order_enabled -%}
+  {%- render "checkout-button", type: cart_type, disabled: cart_checkout_button_disabled -%}
+
+  <div class="dtfy-minimum_order text-small spacer-top-sm flex" data-minimum-amount-not-reached="{{ cart_checkout_button_disabled }}">
+    {%- unless settings.dbtfy_minimum_order_icon == blank -%}
+      <span class="{{ settings.icon }} icon-width text-secondary" aria-hidden="true">{{ settings.dbtfy_minimum_order_icon }}</span>
+    {%- endunless -%}
+
+    <p class="spacer-bottom-none">{{ minimum_order_text }}</p>
+  </div>
+{%- else -%}
+  {%- render "checkout-button", type: cart_type -%}
+{%- endif -%}

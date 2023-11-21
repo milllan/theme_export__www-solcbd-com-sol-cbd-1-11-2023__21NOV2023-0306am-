@@ -1,0 +1,182 @@
+{%- unless settings.review_app == "" -%}
+<div class="review-badge {{ class }}">
+  {%- if position == "product_page" -%}
+
+    {%- case settings.review_app -%}
+      {%- when 'debutify' -%}
+        <link rel="stylesheet" href="https://debutify-prd-reviews.s3.amazonaws.com/debutify-review-ext/star-rating.css" type="text/css" media="all">
+        <script defer src="https://debutify-prd-reviews.s3.amazonaws.com/debutify-review-ext/star-rating.js" type="text/javascript"></script>
+
+        <div id="starRating"
+             data-productId="{{ product.id }}"
+             data-storeName="{{ shop.permanent_domain | split: '.myshopify.com' | first }}">
+        </div>
+
+      {%- when 'product_reviews' -%}
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+
+      {%- when 'judge_me' -%}
+        {%- render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product -%}
+
+      {%- when 'loox' -%}
+        <a href="#looxReviews">
+          <div
+            class="loox-rating"
+            data-id="{{ product.id }}"
+            data-rating="{{ product.metafields.loox.avg_rating }}"
+            data-raters="{{ product.metafields.loox.num_reviews }}">
+          </div>
+        </a>
+
+      {%- when 'ryviu' -%}
+        <div class="review-widget">
+          <ryviu-widget-total
+            reviews_data="{{ product.metafields.ryviu.product_reviews_info | escape }}"
+            product_id="{{ product.id }}"
+            handle="{{ product.handle }}">
+          </ryviu-widget-total>
+        </div>
+
+      {%- when 'stamped_io' -%}
+        <span
+          class="stamped-product-reviews-badge stamped-main-badge"
+          data-id="{{ product.id }}"
+          data-product-sku="{{ product.handle }}"
+          data-product-type="{{ product.type }}"
+          data-product-title="{{ product.title }}"
+          style="display: inline-block;">
+          {{ product.metafields.stamped.badge }}
+        </span>
+
+      {%- when 'ali_reviews' -%}
+        <div
+          product-id="{{ product.id }}"
+          class="alr-display-review-badge"
+          onclick="scroll_to_ali()">
+        </div>
+
+      {%- when 'rivyo' -%}
+        <div
+          class="wc_product_review_badge"
+          data-handle="{{ product.handle }}"
+          data-product_id="{{ product.id }}">
+        </div>
+
+      {%- when 'growave' -%}
+        {% capture the_snippet_review_avg %}{%- render 'ssw-widget-avg-rate-profile' -%}{% endcapture %}
+        {% unless the_snippet_review_avg contains 'Liquid error' %}
+          {{ the_snippet_review_avg }}
+        {% endunless %}
+
+      {%- when 'opinew' -%}
+        <div id="opinew-stars-plugin-product">
+          {% render "opinew_review_stars_product" product: product %}
+        </div>
+
+      {%- when 'automizely' -%}
+        {%- if shop.metafields.automizely_reviews.show_stars_under_product_name == 'true' -%}
+          <div id="automizely_reviews_product_detail_title_star_widget"
+               data-product-id="{{ product.id }}"
+               data-ratings="{{ product.metafields.automizely_reviews.ratings }}"
+               data-raters="{{ product.metafields.automizely_reviews.raters }}">
+          </div>
+        {%- endif -%}
+
+      {%- when 'fera' -%}
+        <div data-fera-container="425221" data-product_id="{{ product.id }}"></div>
+      {%- when 'other' -%}
+        {%- if settings.review_star_rating_code != blank -%}
+          <div class="custom-review-stars">{{ settings.review_star_rating_code }}</div>
+        {%- endif -%}
+    {%- endcase -%}
+
+  {%- elsif position == "product_grid" -%}
+
+    {%- case settings.review_app -%}
+      {%- when 'debutify' -%}
+        <link rel="stylesheet" href="https://debutify-prd-reviews.s3.amazonaws.com/debutify-review-ext/star-rating.css" type="text/css" media="all">
+        <script defer src="https://debutify-prd-reviews.s3.amazonaws.com/debutify-review-ext/star-rating.js" type="text/javascript"></script>
+
+        <div id="starRating"
+             data-productId="{{ product.id }}"
+             data-storeName="{{ shop.permanent_domain | split: '.myshopify.com' | first }}">
+        </div>
+
+      {%- when 'product_reviews' -%}
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+
+      {%- when 'judge_me' -%}
+        {%- render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product -%}
+
+      {%- when 'loox' -%}
+        <div
+          class="loox-rating"
+          data-id="{{ product.id }}"
+          data-rating="{{ product.metafields.loox.avg_rating }}"
+          data-raters="{{ product.metafields.loox.num_reviews }}">
+        </div>
+
+      {%- when 'ryviu' -%}
+        <div class="ryviu-collection">
+          <ryviu-widget-total
+             collection=1
+             reviews_data="{{ product.metafields.ryviu.product_reviews_info | escape }}"
+             product_id="{{ product.id }}"
+             handle="{{ product.handle }}">
+          </ryviu-widget-total>
+        </div>
+
+      {%- when 'stamped_io' -%}
+        <span
+          class="stamped-product-reviews-badge"
+          data-product-sku="{{ product.handle }}"
+          data-id="{{ product.id }}"
+          data-product-type="{{ product.type }}"
+          data-product-title="{{ product.title }}"
+          style="display: block;">
+          {{ product.metafields.stamped.badge }}
+        </span>
+
+      {%- when 'ali_reviews' -%}
+        <div
+          product-id="{{ product.id }}"
+          class="arv-collection arv-collection--{{ product.id }}">
+        </div>
+
+      {%- when 'rivyo' -%}
+        <div
+          class="wc_product_review_badge"
+          data-handle="{{ product.handle }}"
+          data-product_id="{{ product.id }}">
+        </div>
+
+      {%- when 'growave' -%}
+        {% capture the_snippet_review_avg %}{%- render 'ssw-widget-avg-rate-profile' -%}{% endcapture %}
+        {% unless the_snippet_review_avg contains 'Liquid error' %}
+          {{ the_snippet_review_avg }}
+        {% endunless %}
+
+      {%- when 'automizely' -%}
+        {%- if shop.metafields.automizely_reviews.show_stars_under_product_name == 'true' -%}
+          <div id="automizely_reviews_product_detail_title_star_widget"
+               data-product-id="{{ product.id }}"
+               data-ratings="{{ product.metafields.automizely_reviews.ratings }}"
+               data-raters="{{ product.metafields.automizely_reviews.raters }}">
+          </div>
+        {%- endif -%}
+
+      {%- when 'opinew' -%}
+        <div id="opinew-stars-plugin-product">
+          {% render "opinew_review_stars_product" product: product %}
+        </div>
+      {%- when 'fera' -%}
+        <div data-fera-container="425221" data-product_id="{{ product.id }}"></div>
+      {%- when 'other' -%}
+        {%- if settings.review_star_rating_code != blank -%}
+          <div class="custom-review-stars">{{ settings.review_star_rating_code }}</div>
+        {%- endif -%}
+    {%- endcase -%}
+
+  {%- endif -%}
+</div>
+{%- endunless -%}

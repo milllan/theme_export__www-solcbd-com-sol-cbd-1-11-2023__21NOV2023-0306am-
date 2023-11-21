@@ -1,0 +1,35 @@
+{%- if settings.dbtfy_sold_items -%}
+  {%- liquid
+    assign position = settings.dbtfy_sold_items_position
+    assign prefix_text = 'add-ons.sold_items.prefix_text' | t
+    assign suffix_strong_text = 'add-ons.sold_items.suffix_strong_text' | t
+    assign suffix_text = 'add-ons.sold_items.suffix_text' | t
+    assign icon = settings.dbtfy_sold_items_icon
+    assign min = settings.dbtfy_sold_items_min
+  -%}
+
+  <div class="dbtfy dbtfy-sold_items"
+       data-position="{{ position }}"
+       data-id="soldItems-{{ product.id }}">
+
+    {%- unless icon == blank -%}
+      <span class="{{ settings.icon }} icon-width">
+        {{ icon }}
+      </span>
+    {%- endunless -%}
+
+    {%- unless prefix_text == blank -%}
+      <span> {{ prefix_text }}</span>
+    {% endunless %}
+
+    <strong class="number-sold_items"> {{ min }}</strong>
+
+    {% unless suffix_strong_text == blank %}
+      <strong> {{ suffix_strong_text }}</strong>
+    {% endunless %}
+
+    {%- unless suffix_text == blank -%}
+      <span> {{ suffix_text }}</span>
+    {%- endunless -%}
+  </div>
+{%- endif -%}

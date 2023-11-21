@@ -1,0 +1,50 @@
+{%- liquid
+  if emptyState
+    assign article_author = 'Author name'
+    assign article_date = 'now' | date: format: 'date'
+    assign article_comment_count = '6'
+  else
+    assign article_author = article.author
+    assign article_date = article.published_at | date: format: 'date'
+    assign article_comment_count = article.comments_count
+  endif
+
+  if show_author and article_author
+    assign has_author = true
+  endif
+
+  if show_date and article_date != blank
+    assign has_date = true
+  endif
+
+  if emptyState or show_comments and blog.comments_enabled?
+    assign has_comments = true
+  endif
+-%}
+
+{%- if has_author or has_date or has_comments -%}
+  <div class="blog-meta {{ class }}">
+    <ul class="inline-list">
+      {%- if has_author -%}
+        <li class="featured-blog__author">
+          <span class="{{ settings.icon }}">person</span>
+          {{ article_author }}
+        </li>
+      {%- endif -%}
+
+      {%- if has_date -%}
+        <li class="featured-blog__date">
+          <span class="{{ settings.icon }}">calendar_today</span>
+          <time datetime="{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}">{{ article_date | time_tag: '%b %d, %Y' }}</time>
+        </li>
+      {%- endif -%}
+
+      {%- if show_comments -%}
+        <li class="featured-blog__comments">
+          <span class="{{ settings.icon }}">comment</span>
+          {{ 'blogs.comments.with_count' | t: count: article_comment_count }}
+        </li>
+      {%- endif -%}
+    </ul>
+  </div>
+{%- endif -%}

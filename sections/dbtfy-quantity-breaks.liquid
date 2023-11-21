@@ -1,0 +1,925 @@
+{%- if settings.dbtfy_quantity_breaks and section.blocks.size > 0 -%}
+  {%- assign single_break_text = section.settings.dbtfy_quantity_breaks_single_text -%}
+  {%- assign more_discount_before_quantity_text = section.settings.dbtfy_quantity_breaks_more_discount_text_before -%}
+  {%- assign more_discount_after_quantity_text = section.settings.dbtfy_quantity_breaks_more_discount_text_after -%}
+  {%- assign more_discount_after_percentage_text = section.settings.dbtfy_quantity_breaks_more_discount_text_after_percentage -%}
+  {%- assign highest_discount_text = section.settings.dbtfy_quantity_breaks_highest_discount_text -%}
+  {%- assign single_break_price_type = section.settings.dbtfy_quantity_breaks_price_type -%}
+
+  <div class="dbtfy dbtfy-quantity_breaks"
+       data-single-break-text="{{ single_break_text }}"
+       data-more-discount-before-quantity-text="{{ more_discount_before_quantity_text }}"
+       data-more-discount-after-quantity-text="{{ more_discount_after_quantity_text }}"
+       data-more-discount-after-percentage-text="{{ more_discount_after_percentage_text }}"
+       data-highest-discount-text="{{ highest_discount_text }}"
+       data-single-break-price-type="{{ single_break_price_type }}"
+       hidden>
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == "cart-break" -%}
+        {%- for index in (1..10) -%}
+          {%- assign range_key = "cart_break_range_" | append: index -%}
+          {%- assign discount_code_key = "cart_break_discount_code_" | append: index -%}
+          {%- assign discount_amount_key = "cart_break_discount_amount_" | append: index -%}
+          {%- assign discount_type_key = "cart_break_discount_type_" | append: index -%}
+
+          {%- assign range = block.settings[range_key] -%}
+          {%- assign discount_code = block.settings[discount_code_key] -%}
+          {%- assign discount_amount = block.settings[discount_amount_key] -%}
+          {%- assign discount_type = block.settings[discount_type_key] -%}
+
+          {%- if discount_code != blank and discount_amount != blank -%}
+            <div class="qb-cart_break"
+                data-range="{{ range }}"
+                data-discount-code="{{ discount_code }}"
+                data-discount-amount="{{ discount_amount }}"
+                data-discount-type="{{ discount_type }}"
+                data-gift-wrap-product-id="{{ settings.dbtfy_gift_wrap_product.id }}" 
+                {{ block.shopify_attributes }}>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else if block.type == "product-break" -%}
+        {%- assign show_on_product_page = block.settings.product_break_show_on_product_page -%}
+        {%- assign visibility = block.settings.product_break_visibility -%}
+        {%- assign tags = block.settings.product_break_tags -%}
+        {%- assign types = block.settings.product_break_types -%}
+        {%- assign product = block.settings.product_break_product -%}
+        {%- assign collection = block.settings.product_break_collection -%}
+
+        <div class="qb-product_breaks"
+             data-show-on-product-page="{{ show_on_product_page }}"
+             data-visibility-type="{{ visibility }}"
+             data-tags="{{ tags }}"
+             data-types="{{ types }}"
+             data-product-id="{{ product.id }}"
+             data-collection="{{ collection }}" 
+             {{ block.shopify_attributes }}>
+
+          {%- for index in (1..5) -%}
+            {%- assign range_key = "product_break_range_" | append: index -%}
+            {%- assign discount_code_key = "product_break_discount_code_" | append: index -%}
+            {%- assign discount_amount_key = "product_break_discount_amount_" | append: index -%}
+            {%- assign discount_type_key = "product_break_discount_type_" | append: index -%}
+
+            {%- assign range = block.settings[range_key] -%}
+            {%- assign discount_code = block.settings[discount_code_key] -%}
+            {%- assign discount_amount = block.settings[discount_amount_key] -%}
+            {%- assign discount_type = block.settings[discount_type_key] -%}
+
+            {%- if discount_code != blank and discount_amount != blank -%}
+              <div class="qb-product_break"
+                   data-range="{{ range }}"
+                   data-discount-code="{{ discount_code }}"
+                   data-discount-amount="{{ discount_amount }}"
+                   data-discount-type="{{ discount_type }}"></div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{%- schema -%}
+  {
+    "name": "t:sections.dbtfy_quantity_breaks.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.dbtfy_quantity_breaks.settings.header__1.content"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.dbtfy_quantity_breaks.settings.paragraph__1.content"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.dbtfy_quantity_breaks.settings.paragraph__2.content"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.dbtfy_quantity_breaks.settings.header__2.content"
+      },
+      {
+        "type": "textarea",
+        "id": "dbtfy_quantity_breaks_single_text",
+        "label": "t:sections.dbtfy_quantity_breaks.settings.single_break_text.label",
+        "default": "Buy _COUNT_: _PRICE_ _SAVED_AMOUNT_",
+        "info": "t:sections.dbtfy_quantity_breaks.settings.single_break_text.info"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_quantity_breaks_price_type",
+        "label": "t:sections.dbtfy_quantity_breaks.settings.single_break_price_type.label",
+        "default": "total_price",
+        "options": [
+          {
+            "value": "total_price",
+            "label": "t:sections.dbtfy_quantity_breaks.settings.single_break_price_type.options__1.label"
+          },
+          {
+            "value": "single_price",
+            "label": "t:sections.dbtfy_quantity_breaks.settings.single_break_price_type.options__2.label"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.dbtfy_quantity_breaks.settings.header__3.content"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_quantity_breaks_more_discount_text_before",
+        "label": "t:sections.dbtfy_quantity_breaks.settings.text_before_quantity.label",
+        "default": "Add"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_quantity_breaks_more_discount_text_after",
+        "label": "t:sections.dbtfy_quantity_breaks.settings.text_after_quantity.label",
+        "default": "more item to unlock"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_quantity_breaks_more_discount_text_after_percentage",
+        "label": "t:sections.dbtfy_quantity_breaks.settings.text_after_discount.label",
+        "default": "off"
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_quantity_breaks_highest_discount_text",
+        "label": "t:sections.dbtfy_quantity_breaks.settings.highest_discount_text.label",
+        "default": "Highest discount applied!"
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "cart-break",
+        "name": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.block_name.label",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.block_name.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.cart_break__1.content"
+          },
+          {
+            "type": "range",
+            "id": "cart_break_range_1",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__1.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__1.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__1.content",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__1.info"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_code_1",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_name__1.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_amount_1",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_amount__1.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "cart_break_discount_type_1",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__1.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__1.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__1.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.cart_break__2.content"
+          },
+          {
+            "type": "range",
+            "id": "cart_break_range_2",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__2.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__2.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__2.content",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__2.info"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_code_2",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_name__2.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_amount_2",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_amount__2.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "cart_break_discount_type_2",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__2.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__2.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__2.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.cart_break_3.content"
+          },
+          {
+            "type": "range",
+            "id": "cart_break_range_3",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__3.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__3.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__3.content",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__3.info"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_code_3",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_name__3.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_amount_3",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_amount__3.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "cart_break_discount_type_3",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__3.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__3.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__3.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.cart_break_4.content"
+          },
+          {
+            "type": "range",
+            "id": "cart_break_range_4",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__4.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__4.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__4.content",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__4.info"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_code_4",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_name__4.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_amount_4",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_amount__4.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "cart_break_discount_type_4",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__4.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__4.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__4.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.cart_break_5.content"
+          },
+          {
+            "type": "range",
+            "id": "cart_break_range_5",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__5.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__5.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__5.content",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__5.info"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_code_5",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_name__5.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_amount_5",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_amount__5.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "cart_break_discount_type_5",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__5.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__5.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__5.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.cart_break_6.content"
+          },
+          {
+            "type": "range",
+            "id": "cart_break_range_6",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__6.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__6.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__6.content",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__6.info"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_code_6",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_name__6.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_amount_6",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_amount__6.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "cart_break_discount_type_6",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__6.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__6.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__6.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.cart_break_7.content"
+          },
+          {
+            "type": "range",
+            "id": "cart_break_range_7",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__7.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__7.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__7.content",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__7.info"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_code_7",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_name__7.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_amount_7",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_amount__7.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "cart_break_discount_type_7",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__7.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__7.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__7.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.cart_break_8.content"
+          },
+          {
+            "type": "range",
+            "id": "cart_break_range_8",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__8.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__8.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__8.content",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__8.info"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_code_8",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_name__8.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_amount_8",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_amount__8.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "cart_break_discount_type_8",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__8.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__8.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__8.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.cart_break_9.content"
+          },
+          {
+            "type": "range",
+            "id": "cart_break_range_9",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__9.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__9.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__9.content",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__9.info"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_code_9",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_name__9.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_amount_9",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_amount__9.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "cart_break_discount_type_9",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__9.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__9.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__9.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.cart_break_10.content"
+          },
+          {
+            "type": "range",
+            "id": "cart_break_range_10",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__10.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.range__10.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__10.content",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.header__10.info"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_code_10",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_name__10.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "cart_break_discount_amount_10",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_amount__10.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "cart_break_discount_type_10",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__10.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__10.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.cart_break.settings.discount_type__10.options__2.label"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "product-break",
+        "name": "t:sections.dbtfy_quantity_breaks.blocks.product_break.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.block_name.label",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.block_name.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.header__1.content"
+          },
+          {
+            "type": "checkbox",
+            "id": "product_break_show_on_product_page",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.show_on_product_page.label",
+            "default": true
+          },
+          {
+            "type": "radio",
+            "id": "product_break_visibility",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.visibility.label",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.visibility.info",
+            "default": "all",
+            "options": [
+              {
+                "value": "all",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.visibility.options__1.label"
+              },
+              {
+                "value": "collection",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.visibility.options__2.label"
+              },
+              {
+                "value": "type",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.visibility.options__3.label"
+              },
+              {
+                "value": "tag",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.visibility.options__4.label"
+              },
+              {
+                "value": "product",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.visibility.options__5.label"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "product_break_collection",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.collection.label"
+          },
+          {
+            "type": "textarea",
+            "id": "product_break_types",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.product_types.label",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.product_types.info"
+          },
+          {
+            "type": "textarea",
+            "id": "product_break_tags",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.product_tags.label",
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.product_tags.info"
+          },
+          {
+            "type": "product",
+            "id": "product_break_product",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.product.label"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.header__2.content"
+          },
+          {
+            "type": "range",
+            "id": "product_break_range_1",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.range_1.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.range_1.info"
+          },
+          {
+            "type": "text",
+            "id": "product_break_discount_code_1",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_name_1.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "product_break_discount_amount_1",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_amount_1.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "product_break_discount_type_1",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_1.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_1.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_1.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.header__3.content"
+          },
+          {
+            "type": "range",
+            "id": "product_break_range_2",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.range_2.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.range_2.info"
+          },
+          {
+            "type": "text",
+            "id": "product_break_discount_code_2",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_name_2.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "product_break_discount_amount_2",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_amount_2.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "product_break_discount_type_2",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_2.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_2.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_2.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.header__4.content"
+          },
+          {
+            "type": "range",
+            "id": "product_break_range_3",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.range_3.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.range_3.info"
+          },
+          {
+            "type": "text",
+            "id": "product_break_discount_code_3",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_name_3.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "product_break_discount_amount_3",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_amount_3.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "product_break_discount_type_3",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_3.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_3.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_3.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.header__5.content"
+          },
+          {
+            "type": "range",
+            "id": "product_break_range_4",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.range_4.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.range_4.info"
+          },
+          {
+            "type": "text",
+            "id": "product_break_discount_code_4",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_name_4.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "product_break_discount_amount_4",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_amount_4.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "product_break_discount_type_4",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_4.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_4.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_4.options__2.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.header__6.content"
+          },
+          {
+            "type": "range",
+            "id": "product_break_range_5",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.range_5.label",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "default": 2,
+            "info": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.range_5.info"
+          },
+          {
+            "type": "text",
+            "id": "product_break_discount_code_5",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_name_5.label",
+            "placeholder": "20OFF"
+          },
+          {
+            "type": "text",
+            "id": "product_break_discount_amount_5",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_amount_5.label",
+            "placeholder": "20"
+          },
+          {
+            "type": "radio",
+            "id": "product_break_discount_type_5",
+            "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_5.label",
+            "default": "%",
+            "options": [
+              {
+                "value": "%",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_5.options__1.label"
+              },
+              {
+                "value": "$",
+                "label": "t:sections.dbtfy_quantity_breaks.blocks.product_break.settings.discount_type_5.options__2.label"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+{%- endschema -%}

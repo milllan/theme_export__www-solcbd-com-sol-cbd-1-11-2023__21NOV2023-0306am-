@@ -1,0 +1,34 @@
+{%- liquid
+  if desktop
+    assign desktop_grid = desktop
+  else
+    assign desktop_grid = section.settings.desktop_grid
+  endif
+
+  if mobile
+    assign mobile_grid = mobile
+  else
+    assign mobile_grid = section.settings.mobile_grid
+  endif
+
+  case desktop_grid
+    when '2'
+      if mobile_grid == '1'
+        echo "large--six-twelfths medium--six-twelfths"
+      else
+        echo "large--six-twelfths medium--six-twelfths small--six-twelfths"
+      endif
+    when '3'
+      if mobile_grid == '1'
+        echo "large--four-twelfths medium--six-twelfths"
+      else
+        echo "large--four-twelfths medium--six-twelfths small--six-twelfths"
+      endif
+    when '4'
+      if mobile_grid == '1'
+        echo "large--three-twelfths medium--six-twelfths"
+      else
+        echo "large--three-twelfths medium--six-twelfths small--six-twelfths"
+      endif
+  endcase
+-%}

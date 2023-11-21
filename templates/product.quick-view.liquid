@@ -1,0 +1,325 @@
+{% include 'product-content.zipifypages', contentprt: 'header' %}{%- liquid
+  comment
+    Template only used for AJAX reference
+  endcomment
+
+  layout none
+
+  assign current_variant = product.selected_or_first_available_variant
+
+  if product.media.size > 1
+    assign carousel = true
+  else
+    assign carousel = false
+  endif
+
+  if current_variant.compare_at_price > current_variant.price
+    assign on_sale = true
+  else
+    assign on_sale = false
+  endif
+
+  if current_variant.available
+    assign sold_out = false
+  else
+    assign sold_out = true
+  endif
+
+  capture product_collections
+    for collection in product.collections
+      echo collection.handle
+
+      unless forloop.last
+        echo ","
+      endunless
+    endfor
+  endcapture
+-%}
+
+<div id="QuickView-{{ product.handle }}"
+     class="modal stacked-on-top-of-content"
+     data-upsell-target-id="{{ product.id }}"
+     data-product-collections="{{ product_collections }}"
+     data-product-id="{{ product.id }}"
+     role="dialog">
+
+  <div class="modal-dialog modal-large">
+    <div class="modal-content overlay-content" aria-hidden="true" tabindex="-1">
+      <div class="modal-header">
+        <a href="{{ product.url }}"
+           class="modal-title h4">
+          {{ product.title }}
+        </a>
+
+        <button type="button"
+                class="modal-close btn btn-square-small"
+                title="{{ 'general.password_page.close' | t }}"
+                aria-label="{{ 'general.password_page.close' | t }}"
+                data-modal-close="#QuickView-{{ product.handle }}">
+          <span class="{{ settings.icon }}">close</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div data-section-type="quick-view-template" class="qv-grid grid grid-small">
+          <!-- photos -->
+
+          <div class="qv-photos grid__item medium--six-twelfths large--six-twelfths">
+            <div class="qv-slick grid grid-small{% if carousel %} slick qv-slick-image product-single__media-group{% endif %}">
+              {%- for media in product.media -%}
+                <div class="grid__item qv-image-{{ media.id }}{% if media == current_variant.featured_image %} qv-featured-image{% endif %}"
+                    data-index="{{ forloop.index0 }}">
+
+                    {%- assign featured = false -%}
+                    {%- if media == featured_media -%}
+                      {%- assign featured = true -%}
+                    {%- endif -%}
+
+                    {%- assign height = 850 -%}
+                    {%- assign width = 575 -%}
+                    {%- render 'media' with media, enable_image_zoom: true, stacked: false, featured: featured, width: width, height: height, id: id, video_looping: true -%}
+
+                </div>
+              {%- else -%}
+                <div class="grid__item">
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- if carousel -%}
+              <div class="product-single__media-group-wrapper large--sticky medium--sticky sticky-check-header">
+                <div class="grid grid-small product-single__thumbnails slick qv-slick-thumbnails{% if product.images.size < 6  %} slick-disabled{% endif %}">
+                  {%- for media in product.media -%}
+                    <div class="grid__item one-fifth">
+                      {%- capture thumbnail_alt -%}
+                      {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                        {{ 'products.product.video_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+                      {%- elsif media.media_type == 'model' -%}
+                        {{ 'products.product.model_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+                      {%- else -%}
+                        {{ 'products.product.gallery_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+                      {%- endif -%}
+                    {%- endcapture -%}
+
+                    {% assign media_aspect_ratio = media.aspect_ratio | default: media.preview_image.aspect_ratio %}
+
+                    <a class="product--wrapper product-single__thumbnail media-wrapper image-link {% if media == featured_media %} active-thumb{% endif %}"
+                      data-product-thumbnail
+                      data-media-id="{{ media.id }}"
+                      style="padding-top: {{ 1 | divided_by: media_aspect_ratio | times: 100 }}%;">
+                      <img class="product--image product-single__thumb media lazyload"
+                      {%- render 'lazysizes', img: media, img_type: 'responsive' -%}
+                      alt="{{ thumbnail_alt }}"
+                      data-media-id="{{ media.id }}">
+                      {%- if media.media_type == 'video' or media.media_type == 'external_video' or media.media_type == 'model' -%}
+                        <div class="product-single__thumbnail-badge">
+                          {% render 'svg-definitions' with media.media_type %}
+                        </div>
+                      {%- endif -%}
+                    </a>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+
+          <!-- details -->
+          <div class="qv-details grid__item medium--six-twelfths large--six-twelfths{% if sold_out %} variant-soldout{% endif %}">
+            {%- if settings.grid_product_vendor -%}
+              <p class="qv-vendor text-small text-italic">
+                {{ product.vendor }}
+              </p>
+            {%- endif -%}
+
+            <div class="qv-price-wrapper text-money text-large price-container spacer-bottom">
+              <span class="qv-price{% if on_sale %} on-sale text-sale{% endif %}"
+                  {% if on_sale %}
+                  aria-label="{{ 'products.general.sale_price' | t }}"
+                  {% else %}
+                  aria-label="{{ 'products.general.regular_price' | t }}"
+                  {% endif %}>
+                  <span class="money">{{ current_variant.price | money }}</span>
+              </span>
+
+              <span class="qv-price-compare text-strike text-muted{% unless on_sale %} hide{% endunless %}"
+                  aria-label="{{ 'products.general.regular_price' | t }}">
+                  <span class="money">{{ current_variant.compare_at_price | money }}</span>
+              </span>
+            </div>
+
+            {%- render "review-badge", badge_template: "grid" -%}
+
+            {%- unless product.description == blank -%}
+              <div class="qv-description rte">
+                {%- assign desc = product.description | strip_html | replace: '<p>[split_description]</p>', '' | replace: '[split_description]', '' -%}
+
+                {{ desc | truncatewords: 22 }}
+
+                <a href="{{ product.url }}"
+                   class="text-link continue-link">
+                  {{ 'products.product.full_details' | t }}
+                  <span class="{{ settings.icon }}" aria-hidden="true">arrow_forward</span>
+                </a>
+              </div>
+            {%- endunless -%}
+
+            {%- capture "form_id" -%}QuickViewForm-{{ section.id }}-{{ product.id }}{%- endcapture -%}
+            {%- capture "form_classes" -%}
+              add-to-cart__form qv-form product-single__form{% if product.has_only_default_variant %} product-single__form--no-variants{% endif %}
+            {%- endcapture -%}
+
+            {%- form "product", product, class: form_classes, id: form_id -%}
+              {%- unless product.has_only_default_variant -%}
+                <div class="qv-variant-wrapper variant-wrapper grid grid-small">
+                  {%- for option in product.options_with_values -%}
+                    <div class="grid__item qv-variant-item radio-wrapper product-form__item">
+                      <label class="qv-select-label single-option-radio__label"
+                             for="QuickViewSelect-{{ forloop.index0 }}-{{ product.id }}">
+                        {{ option.name | escape }}
+                      </label>
+
+                      <select name="option{{ option.position }}" class="qv-select select--small full single-option-selector__radio"
+                              id="QuickViewSelect-{{ forloop.index0 }}-{{ product.id }}"
+                              data-index="option{{ forloop.index }}">
+
+                        {%- for value in option.values -%}
+                          <option value="{{ value | escape }}"
+                              {% if option.selected_value == value %} selected="selected"{% endif %}>
+                            {{ value | escape }}
+                          </option>
+                        {%- endfor -%}
+                      </select>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- endunless -%}
+
+              <select name="id"
+                      class="qv-master-select"
+                      style="display: none;">
+
+                {%- for variant in product.variants -%}
+                  {%- liquid
+                    assign product_qty = 0
+
+                    if variant.inventory_management == "shopify"
+                      if variant.inventory_policy == "continue"
+                        assign product_qty = 99999
+                      else
+                        if variant.inventory_quantity > 0
+                          assign product_qty = variant.inventory_quantity
+                        else
+                          assign product_qty = 0
+                        endif
+                      endif
+                    else
+                      assign product_qty = 99999
+                    endif
+                  -%}
+
+                  <option
+                      {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                      {% unless variant.available %}disabled="disabled"{% endunless %}
+                      data-sku="{{ variant.sku }}"
+                      data-image="{{variant.image | img_url}}"
+                      data-inventory-policy="{{ variant.inventory_policy }}"
+                      data-inventory-management="{{ variant.inventory_management }}"
+                      data-variant="{{ variant.title | replace: ' / ', '' | escape }}"
+                      data-inventory-quantity="{{ product_qty }}"
+                      data-price="{{ variant.price | money }}"
+                      data-product-qty="{{ product_qty }}"
+                      data-available="{{ variant.available }}"
+                      data-option-1="{{ variant.option1 }}"
+                      data-option-2="{{ variant.option2 }}"
+                      data-option-3="{{ variant.option3 }}"
+                      {% if variant.compare_at_price > variant.price %}data-price-compare="{{ variant.compare_at_price | money }}"{% endif %}
+                      data-image-id="{{ variant.featured_media.id }}"
+                      value="{{ variant.id }}">
+                    {%- if variant.available -%}
+                      {{ variant.title }} - {{ variant.price | money_with_currency }}
+                    {%- else -%}
+                      {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                  </option>
+                {%- endfor -%}
+              </select>
+
+              {%- if settings.dbtfy_quick_view_quantity_selector -%}
+                <div class="qv-quantity-wrapper spacer-bottom">
+                  {%- assign quantity_id = 'quick-view-' | append: product.id -%}
+
+                  <label class="inline-label" for="{{ quantity_id }}">{{ 'products.product.quantity' | t }}</label>
+                  {%- render 'quantity-selector', type: 'product', id: quantity_id -%}
+                </div>
+              {%- endif -%}
+
+              <button type="submit"
+                      name="add"
+                      class="btn--add-to-cart qv-addtocart-button btn btn--primary btn--full"
+                      {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+
+                <span class="btn__text">
+                  <span class="{{ settings.icon }}">
+                    {{ settings.icon_cart }}
+                  </span>
+
+                  <span class="btn__add-to-cart-text">
+                    {%- if current_variant.available -%}
+                      {{ "products.product.add_to_cart" | t }}
+                    {%- else -%}
+                      {{ "products.product.sold_out" | t }}
+                    {%- endif -%}
+                  </span>
+                </span>
+              </button>
+
+              <script type="application/json" class="mainProductJson">
+                {
+                  "available": {{ product.available | json }},
+                  "collections": {{ product.collections | json }},
+                  "compare_at_price": {{ product.compare_at_price | json }},
+                  "compare_at_price_max": {{ product.compare_at_price_max | json }},
+                  "compare_at_price_min": {{ product.compare_at_price_min | json }},
+                  "compare_at_price_varies": {{ product.compare_at_price_varies | json }},
+                  "content": {{ product.content | json }},
+                  "created_at": {{ product.created_at | json }},
+                  "description": {{ product.description | json }},
+                  "featured_image": {{ product.featured_image | json }},
+                  "first_available_variant_compare_at_price": {{ product.selected_or_first_available_variant.compare_at_price | json }},
+                  "handle": {{ product.handle | json }},
+                  "id": {{ product.id | json }},
+                  "images": {{ product.images | json }},
+                  "media": {{ product.media | json }},
+                  "options": {{ product.options | json }},
+                  "options_with_values": {
+                    {% for product_option in product.options_with_values %}
+                      "option{{ product_option.position }}": {{ product_option.values | json }}{% unless forloop.last %},{% endunless %}
+                    {% endfor %}
+                  },
+                  "price": {{ product.price | json }},
+                  "price_max": {{ product.price_max | json }},
+                  "price_min": {{ product.price_min | json }},
+                  "price_varies": {{ product.price_varies | json }},
+                  "published_at": {{ product.published_at | json }},
+                  "requires_selling_plan": {{ product.requires_selling_plan | json }},
+                  "selling_plan_groups": {{ product.selling_plan_groups | json }},
+                  "tags": {{ product.tags | json }},
+                  "title": {{ product.title | json }},
+                  "type": {{ product.type | json }},
+                  "variants": {{ product.variants | json }},
+                  "vendor": {{ product.vendor | json }},
+                  "has_only_default_variant": {{ product.has_only_default_variant | json }}
+                }
+              </script>
+            {%- endform -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay-modal overlay-backdrop"></div>
+{% include 'product-content.zipifypages', contentprt: 'footer' %}

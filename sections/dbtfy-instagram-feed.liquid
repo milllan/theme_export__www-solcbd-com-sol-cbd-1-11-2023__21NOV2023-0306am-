@@ -1,0 +1,267 @@
+{%- if settings.dbtfy_instagram_feed -%}
+  {%- liquid
+    assign limit = section.settings.dbtfy_instagram_feed_desktop_grid | times: section.settings.dbtfy_instagram_feed_rows
+
+    if section.settings.dbtfy_instagram_feed_full_width
+      assign full_width = true
+    endif
+
+    if section.settings.title == blank and section.settings.subtitle == blank and section.settings.dbtfy_instagram_feed_icon == false
+      assign no_header = true
+    endif
+
+    case section.settings.dbtfy_instagram_feed_mobile_grid
+      when "1"
+        assign width_mobile = ""
+      when "2"
+        assign width_mobile = "small--six-twelfths"
+      when "3"
+        assign width_mobile = "small--four-twelfths"
+      when "4"
+        assign width_mobile = "small--three-twelfths"
+    endcase
+
+    case section.settings.dbtfy_instagram_feed_desktop_grid
+      when "3"
+        assign grid_item_width = "large--four-twelfths medium--four-twelfths " | append: width_mobile
+      when "4"
+        assign grid_item_width = "large--three-twelfths medium--three-twelfths " | append: width_mobile
+      when "5"
+        assign grid_item_width = "large--one-fifth medium--one-fifth " | append: width_mobile
+      when "6"
+        assign grid_item_width = "large--two-twelfths medium--four-twelfths " | append: width_mobile
+      when "8"
+        assign grid_item_width = "large--one-eighth medium--three-twelfths " | append: width_mobile
+      when "10"
+        assign grid_item_width = "large--one-tenth medium--one-fifth " | append: width_mobile
+    endcase
+
+    assign meta_title = "layout.footer.social_platform" | t: name: shop.name, platform: "Instagram"
+  -%}
+
+  {%- capture insta_template -%}
+  <div class="grid__item {{ grid_item_width }}">
+    <a href="{% raw %}{{link}}{% endraw %}" target="_blank" class="product--wrapper if-item media-wrapper image-link hover-none" title="{{ meta_title }}">
+      <img class="product--image media if-img image-link lazyload" data-src="{% raw %}{{image}}{% endraw %}"/>
+      <div class="if-content media flex align-center overlay">
+        <div class="media-content text-center">
+          <div class="icon-wrapper-instagram_feed">
+            {%- render "svg-definitions" with "instagram" -%}
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {%- endcapture -%}
+
+  <div id="InstagramFeed"
+      class="{% if full_width %}section-full-width{% endif %} {% if no_header %}section-no-title{% endif %} {{ section.settings.dbtfy_instagram_feed_section_style }}"
+      data-section-id="{{ section.id }}"
+      data-section-type="instagram-feed">
+
+    <script defer src="{{ 'instafeed.min.js' | asset_url }}"></script>
+
+    <div class="box">
+      <div class="{%- if full_width -%}wrapper-full {%- else -%}wrapper {%- endif -%}">
+
+        {%- unless no_header -%}
+        <div class="grid">
+          <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+            <div class="section-header">
+              {%- if section.settings.dbtfy_instagram_feed_icon -%}
+                <p>
+                  <a class="icon-link-instagram_feed text-secondary icon-lg icon-image" target="_blank" href="{{ settings.social_instagram_link }}" title="{{ meta_title }}">
+                    {%- render 'svg-definitions' with 'instagram' -%}
+                  </a>
+                </p>
+              {%- endif -%}
+              {%- unless section.settings.title == blank -%}
+                <h2 class="section-header__title">{{ section.settings.title | escape }}</h2>
+              {%- endunless -%}
+              {%- unless section.settings.subtitle == blank -%}
+                <p class="section-header__subtitle">{{ section.settings.subtitle | escape }}</p>
+              {%- endunless -%}
+            </div>
+          </div>
+        </div>
+        {%- endunless -%}
+
+        {%- if section.settings.dbtfy_instagram_feed_access_token != blank -%}
+          <div id="instafeed"
+          class="grid{% if section.settings.dbtfy_instagram_feed_full_width %} grid-full{% else %} grid-spacer{% endif %}"
+          data-instagram-feed
+          data-access-token="{{ section.settings.dbtfy_instagram_feed_access_token }}"
+          data-user-id="{{ section.settings.dbtfy_instagram_feed_access_token | split: '.' | first }}"
+          data-limit="{{ limit }}"
+          data-template='{{ insta_template }}'></div>
+        {%- else -%}
+          <div class="grid{% if section.settings.dbtfy_instagram_feed_full_width %} grid-full{% else %} grid-spacer{% endif %}">
+            {%- for i in (1..limit) -%}
+            <div class="grid__item {{ grid_item_width }}">
+              {%- capture current -%}{%- cycle 1, 2, 3, 4, 5, 6 -%}{%- endcapture -%}
+              {{ "collection-" | append: current | placeholder_svg_tag: "placeholder-svg" }}
+            </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "t:sections.dbtfy_instagram_feed.name",
+    "class": "instagram-feed-section dbtfy dbtfy-instagram_feed",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.dbtfy_instagram_feed.settings.header__1.content"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.dbtfy_instagram_feed.settings.paragraph__1.content"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.dbtfy_instagram_feed.settings.paragraph__2.content"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.dbtfy_instagram_feed.settings.header__2.content"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_instagram_feed_icon",
+        "label": "t:sections.dbtfy_instagram_feed.settings.show_instagram_icon.label",
+        "info": "t:sections.dbtfy_instagram_feed.settings.show_instagram_icon.info",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "dbtfy_instagram_feed_access_token",
+        "label": "t:sections.dbtfy_instagram_feed.settings.access_token.label",
+        "info": "t:sections.dbtfy_instagram_feed.settings.access_token.info"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.dbtfy_instagram_feed.settings.header__3.content"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_instagram_feed_full_width",
+        "label": "t:sections.dbtfy_instagram_feed.settings.enable_fill_width.label",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "t:sections.dbtfy_instagram_feed.settings.heading.label",
+        "default": "From our Instagram"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "t:sections.dbtfy_instagram_feed.settings.subheading.label"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_instagram_feed_section_style",
+        "label": "t:sections.dbtfy_instagram_feed.settings.section_style.label",
+        "default": "section-border",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "t:sections.dbtfy_instagram_feed.settings.section_style.options__1.label"
+          },
+          {
+            "value": "section-default",
+            "label": "t:sections.dbtfy_instagram_feed.settings.section_style.options__2.label"
+          },
+          {
+            "value": "section-border",
+            "label": "t:sections.dbtfy_instagram_feed.settings.section_style.options__3.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_instagram_feed_rows",
+        "label": "t:sections.dbtfy_instagram_feed.settings.rows_count.label",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_instagram_feed_desktop_grid",
+        "label": "t:sections.dbtfy_instagram_feed.settings.images_per_row_desktop.label",
+        "default": "6",
+        "options": [
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "8",
+            "label": "8"
+          },
+          {
+            "value": "10",
+            "label": "10"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_instagram_feed_mobile_grid",
+        "label": "t:sections.dbtfy_instagram_feed.settings.images_per_row_mobile.label",
+        "default": "3",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

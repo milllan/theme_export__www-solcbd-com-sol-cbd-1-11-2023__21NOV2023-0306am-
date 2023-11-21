@@ -1,0 +1,29 @@
+<div class="box">
+  <div class="wrapper">
+
+    <div class="grid">
+      <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+        <div class="section-header">
+          <div class="page-title-wrapper">
+            <h1 class="page-title">{{ page.title }}</h1>
+          </div>
+        </div>
+
+        {%- unless page.content == blank -%}
+          <div class="page-content rte">
+            {{ page.content }}
+          </div>
+        {%- endunless -%}
+      </div>
+    </div>
+
+    {%- render 'dbtfy-wish-list', type: "page" -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.page_wishlist_content.name",
+  "settings": []
+}
+{% endschema %}

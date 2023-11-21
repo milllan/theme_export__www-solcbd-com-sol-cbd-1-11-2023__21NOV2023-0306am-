@@ -1,0 +1,101 @@
+{% assign hs_product_description = product.description | replace: ' src="', ' loading="lazy" src="' %}
+{%- unless settings.review_app == "" -%}
+<div class="review-widget {{ settings.review_section_style }}"
+  {{ block.shopify_attributes }}>
+  {%- case settings.review_app -%}
+    {%- when 'debutify' -%}
+      <div class="wrapper">
+        {% render 'hs-defer-css' with filename: 'https://debutify-prd-reviews.s3.amazonaws.com/debutify-review-ext/product-review.css', pages: 'collection,index,product' | split: ',', local: false %}
+
+        <script defer src="https://debutify-prd-reviews.s3.amazonaws.com/debutify-review-ext/product-review.js" type="text/javascript"></script>
+
+        <div  id="productReview"
+              data-productId="{{ product.id }}"
+              data-storeName="{{ shop.permanent_domain | split: '.myshopify.com' | first }}">
+        </div>
+      </div>
+
+    {%- when 'product_reviews' -%}
+      <div
+        id="shopify-product-reviews"
+        data-id="{{ product.id }}">
+        {{ product.metafields.spr.reviews }}
+      </div>
+
+    {%- when 'judge_me' -%}
+      {%- render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false, product: product -%}
+
+    {%- when 'loox' -%}
+      <div
+        id="looxReviews"
+        data-product-id="{{ product.id }}"
+        class="loox-reviews-default">
+        {{ product.metafields.loox.reviews }}
+      </div>
+
+    {%- when 'ryviu' -%}
+      <div class="lt-block-reviews">
+        <ryviu-widget
+          handle="{{ product.handle }}"
+          product_id="{{ product.id }}"
+          title_product="{{ product.title }}"
+          total_meta="{{ product.metafields.ryviu.r_count }}"
+          image_product="{{ product.featured_image.src | img_url: '100x' }}">
+        </ryviu-widget>
+      </div>
+
+    {%- when 'stamped_io' -%}
+      <div
+        id="stamped-main-widget"
+        data-widget-style="standard"
+        data-product-id="{{ product.id }}"
+        data-name="{{ product.title | escape }}"
+        data-url="{{ shop.url }}{{ product.url }}"
+        data-image-url="{{ product.featured_image | img_url: 'large' | replace: '?', '%3F' | replace: '&', '%26' }}"
+        data-description="{{ hs_product_description | escape }}"
+        data-product-sku="{{ product.handle }}"
+        data-product-type="{{ product.type }}">
+        {{ product.metafields.stamped.reviews }}
+      </div>
+
+    {%- when 'ali_reviews' -%}
+      <div
+        id="shopify-ali-review"
+        product-id="{{ product.id }}">
+        {{ shop.metafields.review_collector.review_code }}
+      </div>
+
+    {%- when 'rivyo' -%}
+      <div
+        id="wc_review_section"
+        class="wc_review_main_content"
+        data-url="{{ shop.url }}"
+        data-handle="{{ product.handle }}"
+        data-product_id="{{ product.id }}"
+        data-limit="0">
+      </div>
+
+    {%- when 'growave' -%}
+      {% capture the_snippet_reviews %}{%- render 'socialshopwave-widget-recommends' with 1 -%}{% endcapture %}
+      {% unless the_snippet_reviews contains 'Liquid error' %}
+        {{ the_snippet_reviews }}
+      {% endunless %}
+
+    {%- when 'opinew' -%}
+      <div style="clear: both;"></div>
+      <div id="opinew-reviews-product-page-code" class="opw-widget-wrapper-default">
+        <span id="opinew-plugin" data-server-address="https://www.opinew.com"
+          data-opw-prodreviews="{{ product.metafields.opinew_metafields['product_plugin'] }}"
+          data-opinew-shop-id="{{ shop.id }}" data-shop-url="{{ shop.domain }}" data-platform-product-id="{{ product.id }}">
+          <span id="opinew_product_plugin_app"></span>
+        </span>
+      </div>
+    {%- when 'fera' -%}
+      <div data-fera-container="424140" data-product_id="{{ product.id }}"></div>
+    {%- when 'other' -%}
+      {%- if settings.review_widget_code != blank -%}
+        <div class="custom-review-widget">{{ settings.review_widget_code }}</div>
+      {%- endif -%}
+  {%- endcase -%}
+</div>
+{%- endunless -%}

@@ -1,0 +1,874 @@
+{% assign hs_product_description = product.description | replace: ' src="', ' loading="lazy" src="' %}
+<!-- /snippets/product-template.liquid -->
+{%- liquid
+  assign id = section.id
+
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured_media = current_variant.featured_media | default: product.featured_media
+  assign stacked = false
+
+  if section.settings.media_layout == "stacked"
+    assign stacked = true
+  endif
+
+  assign first_media = true
+
+  if product.media.size > 1
+    assign carousel = true
+  else
+    assign carousel = false
+  endif
+
+  if emptyState
+    assign vendor = 'home_page.onboarding.product_vendor' | t
+    assign sku = '12345'
+    assign title = 'home_page.onboarding.product_title' | t
+    assign compare_at_price = 2999
+    assign price = 1999
+  else
+    assign vendor = product.vendor
+    assign sku = current_variant.sku
+    assign title = product.title
+    assign compare_at_price = current_variant.compare_at_price
+    assign price = current_variant.price
+  endif
+
+  if compare_at_price > price
+    assign on_sale = true
+  else
+    assign on_sale = false
+  endif
+
+  if current_variant.available
+    assign sold_out = false
+  else
+    assign sold_out = true
+  endif
+
+  assign enable_zoom = section.settings.enable_zoom
+  assign product_image_zoom_size = '1024x1024'
+  assign product_image_scale = '2'
+  assign product_tabs_position = settings.dbtfy_product_tabs_position
+  assign product_description_position = section.settings.dbtfy_product_description_position
+
+  assign has_description = false
+
+  if section.settings.show_product_description and hs_product_description != blank
+    assign has_description = true
+  endif
+
+  assign is_to_split_description = false
+
+  if has_description and section.settings.enable_split_description and hs_product_description contains "[split_description]"
+    assign is_to_split_description = true
+  endif
+
+  assign show_info_section = false
+
+  if is_to_split_description
+    assign show_info_section = true
+  endif
+
+  if has_description and product_description_position == "separate_section"
+    assign show_info_section = true
+  elsif product_tabs_position == "separate_section"
+      assign show_info_section = true
+  elsif product_description_position == "separate_section"
+      if product_tabs_position != "under_addtocart"
+        if product_tabs_position == "under_description" or product_tabs_position == "above_description"
+          assign show_info_section = true
+        endif
+      endif
+  endif
+
+  case section.settings.image_size
+    when 'small'
+      assign product_image_width = 'large--five-twelfths'
+      assign product_description_width = 'large--seven-twelfths'
+    when 'medium'
+      assign product_image_width = 'large--six-twelfths'
+      assign product_description_width = 'large--six-twelfths'
+    when 'large'
+      assign product_image_width = 'large--seven-twelfths'
+      assign product_description_width = 'large--five-twelfths'
+  endcase
+
+  assign carousel_fade_effect = section.settings.enable_fading_effect
+
+  capture product_collections
+    for collection in product.collections
+      echo collection.handle
+
+      unless forloop.last
+        echo ","
+      endunless
+    endfor
+  endcapture
+-%}
+
+{%- capture product_title -%}
+  <div class="grid grid-xsmall flex-nowrap product-title-container">
+    <div class="grid__item flex-fill">
+      {%- if section.settings.featured_product -%}
+        {% unless emptyState %}
+          <a href="{{ product.url }}" class="product-single__full-details">
+        {% endunless %}
+      {%- endif -%}
+
+        <h1 class="product-single__title{% if section.settings.product_title_large %} page-title{% endif %}"
+            {% if disabled_by_yoast_seo %}itemprop="name"{% endif %}>
+          {{ title }}
+        </h1>
+
+      {%- if section.settings.featured_product -%}
+        {% unless emptyState %}
+          </a>
+        {% endunless %}
+      {%- endif -%}
+    </div>
+
+  </div>
+{%- endcapture -%}
+
+{%- capture product_price -%}
+  <div class="price-container-wrapper">
+    <div class="price-container text-money text-large spacer-bottom flex align-center{% if current_variant.unit_price_measurement %} price-container--unit-available{% endif %}" data-price-container>
+      <span id="ProductPrice"
+        class="product-single__price{% if on_sale %} on-sale text-sale{% endif %}"
+        {% if disabled_by_yoast_seo %}itemprop="price"{% endif %}
+        content="{{ price | divided_by: 100.00 }}"
+        {% if on_sale %}
+        aria-label="{{ 'products.general.sale_price' | t }}"
+        {% else %}
+        aria-label="{{ 'products.general.regular_price' | t }}"
+        {% endif %}>
+        <span class="money">{{ price | money }}</span>
+      </span>
+
+      <span id="ComparePrice"
+        class="product-single__price--compare-at text-muted text-strike{% unless on_sale %} hide{% endunless %}"
+        aria-label="{{ 'products.general.regular_price' | t }}">
+        <span class="money">{{ compare_at_price | money }}</span>
+      </span>
+
+      {%- render "dbtfy-discount-saved" with product as product -%}
+
+      <div class="product-single__unit">
+        {%- capture unit_price_separator -%}
+          <span aria-hidden="true">/</span><span class="visually-hidden">&nbsp;{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+        {%- endcapture -%}
+
+        {%- capture unit_price_base_unit -%}
+          <span data-unit-price-base-unit>
+            {%- liquid
+              if current_variant.unit_price_measurement
+                if current_variant.unit_price_measurement.reference_value != 1
+                  echo current_variant.unit_price_measurement.reference_value
+                endif
+
+                echo current_variant.unit_price_measurement.reference_unit
+              endif
+            -%}
+          </span>
+        {%- endcapture -%}
+        <span class="product-unit-price">
+          <span class="visually-hidden">{{ 'products.general.unit_price' | t }}</span>
+          <span data-unit-price><span class="money"></span>{{ current_variant.unit_price | money }}</span>{{- unit_price_separator -}}{{- unit_price_base_unit -}}
+        </span>
+      </div>
+    </div>
+  </div>
+{%- endcapture -%}
+
+{%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+{%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta {% if disabled_by_yoast_seo %}itemprop="url"{% endif %} content="{{ shop.url }}{{ product.url }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+{%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta {% if disabled_by_yoast_seo %}itemprop="image"{% endif %} content="{{ product.featured_media | img_url: 'grande' }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+{%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta {% if disabled_by_yoast_seo %}itemprop="productID"{% endif %} content="{{ product.id }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+
+<div class="product-single" data-product-handle="{{ product.handle }}" data-product-id="{{ product.id }}" data-product-collections="{{ product_collections }}">
+  <div class="box">
+    <div class="wrapper">
+      <div class="grid product-single">
+        {%- if title_position_mobile == "above" -%}
+          <div class="grid__item product-general-info-mobile medium--hide large--hide">
+            {{ product_title }}
+            {%- render "review-badge" with product as product, position: "product_page", class: "spacer-bottom" -%}
+            {{ product_price }}
+          </div>
+        {%- endif -%}
+
+        <!-- left grid item  -->
+        <div id="ProductMedia-{{ section.id }}" class="grid__item {{ product_image_width }} text-center">
+          {%- if product.media.size > 0 -%}
+            <!-- media group (main media + thumbnails) -->
+            <div id="ProductMediaGroup-{{ section.id }}" class="product-single__media-group-wrapper" data-product-single-media-group-wrapper>
+              <div class="grid grid-small {% if product.media.size > 1 %}grid-spacer {% endif %}product-single__media-group{% unless stacked %} product-single__media-group--single-xr{% endunless %}{% if carousel %} slick{% endif %}"
+                   data-product-single-media-group
+                   {% if carousel_fade_effect %}data-carousel-fade-effect{% endif %}>
+
+                {%- liquid
+                  assign height = 850
+                  assign width = 575
+                  assign first_3d_model = product.media | where: "media_type", "model" | first
+
+                  comment
+                    Display product images
+                  endcomment
+                -%}
+
+                {%- for media in product.media -%}
+                  {%- liquid
+                    assign featured = false
+
+                    if media == featured_media
+                      assign featured = true
+                    endif
+
+                    capture thumbnail_alt
+                      if media.media_type == 'video' or media.media_type == 'external_video'
+                        echo 'products.product.video_thumbnail_alt' | t: imageAlt: media.alt | escape
+                      elsif media.media_type == 'model'
+                        echo 'products.product.model_thumbnail_alt' | t: imageAlt: media.alt | escape
+                      else
+                        echo 'products.product.gallery_thumbnail_alt' | t: imageAlt: media.alt | escape
+                      endif
+                    endcapture
+                  -%}
+
+                  <div class="grid__item product-single__media-flex-wrapper{% if stacked %} product-stacked_media_flex{% endif %}" data-slick-media-label="{{ thumbnail_alt }}" data-product-single-media-flex-wrapper>
+                    <div class="product-single__media-flex">
+                      {%- liquid
+                        render 'media' with media, enable_image_zoom_on_icon_click: enable_image_zoom_on_icon_click, full_screen_image: full_screen_image, stacked: stacked, featured: featured, width: width, height: height, id: id, video_looping: section.settings.enable_video_looping, image_index: forloop.index0
+
+                        comment
+                          Display a "View in your space" button (multi) for the first visible media and each individual model.
+                          Stacked layout only.
+                        endcomment
+
+                        if stacked
+                          assign xr_id = false
+
+                          if first_media and first_3d_model
+                            assign xr_id = first_3d_model.id
+                          elsif media.media_type == 'model'
+                            assign xr_id = media.id
+                          endif
+
+                          if xr_id
+                            render 'xr-button' with model_id: xr_id, multi: true
+                          endif
+
+                          assign first_media = false
+                        endif
+                      -%}
+                    </div>
+                  </div>
+                {%- endfor -%}
+              </div>
+
+              {%- liquid
+                comment
+                  Display a "View in your space" button (single).
+                  Stacked/Thumbnails layout (mobile)
+                  Thumbnail layout only (desktop)
+                endcomment
+
+                if first_3d_model
+                  render 'xr-button' with model_id: first_3d_model.id, multi: false
+                endif
+              -%}
+
+              {%- if product.media.size > 1 -%}
+              <div class="product-single__thumbnails grid grid-small {% if stacked %}medium--hide large--hide{% endif %}{% if carousel %} slick{% endif %}{% if product.images.size <= 5 %} slick-disabled{% endif %}" data-product-thumbnails>
+                {% for media in product.media %}
+                  <div class="grid__item one-fifth product-thumbnail-wrapper" data-product-thumbnail-wrapper>
+                    {%- liquid
+                      capture thumbnail_alt
+                        if media.media_type == 'video' or media.media_type == 'external_video'
+                          echo 'products.product.video_thumbnail_alt' | t: imageAlt: media.alt | escape
+                        elsif media.media_type == 'model'
+                          echo 'products.product.model_thumbnail_alt' | t: imageAlt: media.alt | escape
+                        else
+                          echo 'products.product.gallery_thumbnail_alt' | t: imageAlt: media.alt | escape
+                        endif
+                      endcapture
+
+                      assign media_aspect_ratio = media.aspect_ratio | default: media.preview_image.aspect_ratio
+                    -%}
+
+                    <a class="product--wrapper product-single__thumbnail media-wrapper image-link {% if media == featured_media %} active-thumb{% endif %}"
+                      data-product-thumbnail
+                      data-media-id="{{ media.id }}"
+                      style="padding-top: {{ 1 | divided_by: media_aspect_ratio | times: 100 }}%;">
+                      <img class="product--image product-single__thumb media lazyload"
+                      {%- render 'lazysizes', img: media, img_type: 'responsive' -%}
+                      alt="{{ thumbnail_alt }}"
+                      data-media-id="{{ media.id }}">
+
+                      {%- if media.media_type == 'video' or media.media_type == 'external_video' or media.media_type == 'model' -%}
+                        <div data-media-type="{{ media.media_type }}" class="product-single__thumbnail-badge">
+                          {% render 'svg-definitions' with media.media_type %}
+                        </div>
+                      {%- endif -%}
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+              {%- endif -%}
+            </div>
+          {%- elsif product.images.size < 1 or emptyState -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          <hr class="hr-divider hr-rev product-single-divider medium--hide large--hide">
+        </div>
+
+        <!-- right grid item -->
+        <div id="ProductMeta-{{ section.id }}" class="grid__item product-single__meta--wrapper {{ product_description_width }}{% if emptyState %} large--sticky medium--sticky sticky-check-header{% endif %} {% if sold_out %}variant-soldout{% endif %}">
+          <div class="product-single__meta">
+            {%- liquid
+              assign showProductProperties = false
+
+              if section.settings.show_product_vendor and product.vendor != blank
+                assign showProductProperties = true
+              elsif section.settings.show_product_type and product.type != blank
+                assign showProductProperties = true
+              elsif section.settings.show_product_sku and sku != blank
+                assign showProductProperties = true
+              endif
+            -%}
+
+            {%- if showProductProperties -%}
+            <div class="product-header-wrapper spacer-bottom">
+              <ul class="inline-list">
+                {%- if section.settings.show_product_vendor and product.vendor != blank -%}
+                <li>
+                  <a href="{{ product.vendor | url_for_vendor }}" class="product-single__vendor text-small">
+                    <span class="{{ settings.icon }} icon-middle">store</span>
+                    <span {% if disabled_by_yoast_seo %}itemprop="brand"{% endif %}>{{ product.vendor }}</span>
+                  </a>
+                </li>
+                {%- endif -%}
+
+                {%- if section.settings.show_product_type and product.type != blank -%}
+                <li>
+                  <a href="{{ product.type | url_for_type }}" class="product-single__vendor text-small">
+                    <span class="{{ settings.icon }} icon-middle">folder</span>
+                    {{ product.type }}
+                  </a>
+                </li>
+                {%- endif -%}
+
+                {%- if section.settings.show_product_sku -%}
+                <li>
+                  <span class="product-single__sku text-small{% if sku == blank %} hide{% endif %}">
+                    <span class="{{ settings.icon }} icon-middle">settings</span>
+                    <span>SKU: </span>
+                    <span class="variant-sku" {% if disabled_by_yoast_seo %}itemprop="sku"{% endif %}>{{ sku }}</span>
+                  </span>
+                </li>
+                {%- endif -%}
+              </ul>
+            </div>
+            {%- endif -%}
+              <div class="{%- if title_position_mobile == "above" -%} small--hide {%- endif -%}">
+                {{ product_title }}
+              </div>
+
+            {%- unless emptyState -%}
+              <div class="{%- if title_position_mobile == "above" -%} small--hide {%- endif -%}">
+                {%- render "review-badge" with product as product, position: "product_page", class: "spacer-bottom" -%}
+              </div>
+            {%- endunless -%}
+
+            <div {% if disabled_by_yoast_seo %}itemprop="offers"{% endif %} {% if disabled_by_yoast_seo %}itemscope{% endif %} {% if disabled_by_yoast_seo %}itemtype="http://schema.org/Offer"{% endif %} class="product-single__meta-info">
+              {%- liquid
+                assign product_description = hs_product_description | strip_html | replace: "[split_description]", "" | newline_to_br | split: '<br />'
+                assign filtered_description = ''
+
+                for line in product_description
+                  if line != blank
+                    assign filtered_description = filtered_description | append: line
+                  endif
+                endfor
+              -%}
+
+              {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+{%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta {% if disabled_by_yoast_seo %}itemprop="url"{% endif %} content="{{ shop.url }}{{ product.url }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+              {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta {% if disabled_by_yoast_seo %}itemprop="description"{% endif %} content="{{ filtered_description }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+              {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta {% if disabled_by_yoast_seo %}itemprop="priceCurrency"{% endif %} content="{{ cart.currency.iso_code }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+              {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<link {% if disabled_by_yoast_seo %}itemprop="availability"{% endif %} href="http://schema.org/{%- if product.available -%}InStock{%- else -%}OutOfStock{%- endif -%}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+
+              {%- if current_variant.inventory_quantity > 0 and current_variant.inventory_management == "shopify" -%}
+              {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta {% if disabled_by_yoast_seo %}itemprop="inventoryLevel"{% endif %} content="{{ current_variant.inventory_quantity }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+              {%- endif -%}
+
+                 <div class="price-container-desktop{% if title_position_mobile == "above" %} small--hide{% endif %}">
+                  {{ product_price }}
+                </div>
+
+              {%- if settings.dbtfy_quick_compare or settings.dbtfy_wish_list -%}
+                <div class="product-wl-qc-buttons-wrapper flex spacer-bottom">
+                  {%- render "dbtfy-wish-list", type: "button", product: product -%}
+                  {%- render "dbtfy-quick-compare", product: product -%}
+                </div>
+              {%- endif -%}
+
+              {%- if section.settings.show_product_description -%}
+                {%- if is_to_split_description -%}
+                  <div id="productDescription" class="product-single__description rte spacer-top {{ section.settings.text_alignment }} {{ section.settings.text_alignment_mobile }}">
+                    {%- liquid
+                      assign first_part = hs_product_description | split: '<p>[split_description]</p>' | first
+
+                      unless first_part contains '[split_description]'
+                        echo first_part
+                      else
+                        echo hs_product_description | split: '[split_description]' | first
+                      endunless
+                    -%}
+                  </div>
+                {%- endif -%}
+              {%- endif -%}
+
+              {%- if emptyState -%}
+                <div class="product-single__add-to-cart">
+                  <button type="button" class="btn btn--primary btn--add-to-cart full">
+                    <span class="btn__text">
+                      <span class="{{ settings.icon }} button-cart-icon">{{ settings.icon_cart }}</span>
+                      <span class="btn__add-to-cart-text">
+                        {{ 'products.product.add_to_cart' | t }}
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              {%- else -%}
+                {%- liquid
+                  assign form_classes = "product-single__form"
+
+                  if product.has_only_default_variant
+                    assign form_classes = form_classes | append: " product-single__form--no-variants"
+                  endif
+
+                  assign form_id = "AddToCartForm--" | append: section.id
+
+                  render "dbtfy-color-swatches" with product as product, id: id
+                -%}
+
+                <div class="dbtfy-size-chart-box"></div>
+
+                {%- form 'product', product, class: form_classes, id: form_id, data-product-form: ''  ,data-loop-product-id:product.id -%}
+
+                  {%- unless product.has_only_default_variant -%}
+                    <div class="grid grid-small">
+                    {%- for option in product.options_with_values -%}
+                      {%- liquid
+                        assign is_color_option = false
+
+                        if product.available and product.variants.size >= 1 and settings.dbtfy_color_swatches
+                          assign swatch_list = settings.dbtfy_color_swatches_color | split: ","
+
+                          for swatch in swatch_list
+                            assign swatch_option_name = swatch | handleize
+                            assign option_name = option.name | handleize
+
+                            if option_name == swatch_option_name
+                              assign is_color_option = true
+                            endif
+                          endfor
+                        endif
+
+                        assign first_option_value = current_variant.options[forloop.index0] | escape
+                      -%}
+
+                      <div class="grid__item radio-wrapper product-form__item"{%- if is_color_option -%} hidden{%- endif -%}>
+                        <label class="single-option-radio__label"
+                               for="ProductSelect-option-{{ forloop.index0 }}"
+                               data-option-name="{{ option.name | escape }}">
+                          {{ option.name | escape }}: <span class="variant-label-option-value">{{ first_option_value | escape }}</span>
+                        </label>
+
+                        {%- if section.settings.product_selector == 'radio' -%}
+                          <fieldset class="single-option-radio inline-list"
+                            id="ProductSelect-option-{{ forloop.index0 }}">
+                            {%- assign option_index = forloop.index -%}
+
+                            {%- for value in option.values -%}
+                              {%- liquid
+                                assign variant_label_state = true
+
+                                if product.options.size == 1
+                                  unless product.variants[forloop.index0].available
+                                    assign variant_label_state = false
+                                  endunless
+                                endif
+                              -%}
+
+                              <input type="radio"
+                                {% if option.selected_value == value -%} checked="checked"{% endif %}
+                                value="{{ value | escape }}"
+                                data-index="option{{ option_index }}"
+                                name="option{{ option.position }}"
+                                class="single-option-selector__radio js-single-option-selector"
+                                id="ProductSelect-option-{{ section.id }}-{{ option.name | handleize }}-{{ value | escape }}">
+
+                              <label for="ProductSelect-option-{{ section.id }}-{{ option.name | handleize }}-{{ value | escape }}"{% unless variant_label_state %} class="text-strike"{% endunless %}>{{ value | escape }}</label>
+                            {%- endfor -%}
+                          </fieldset>
+                        {%- else -%}
+                          <select name="option{{ option.position }}"
+                                  class="single-option-list-type single-option-selector__radio single-option-selector-{{ section.id }} product-form__input select--small js-single-option-selector"
+                                  id="SingleOptionSelector-{{ forloop.index0 }}"
+                                  data-index="option{{ forloop.index }}">
+                            {%- for value in option.values -%}
+                              <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value | escape }}</option>
+                            {%- endfor -%}
+                          </select>
+                        {%- endif -%}
+                      </div>
+                    {%- endfor -%}
+                    </div>
+                  {%- endunless -%}
+
+                  <select name="id"
+                          id="MainProductSelect-{{ product.id }}"
+                          class="product-single__variants no-js product-form__item"
+                          data-section-id="{{ section.id }}">
+
+                    {% for variant in product.variants %}
+                      {%- liquid
+                        assign product_qty = 0
+
+                        if variant.inventory_management == "shopify"
+                          if variant.inventory_policy == "continue"
+                            assign product_qty = 99999
+                          else
+                            if variant.inventory_quantity > 0
+                              assign product_qty = variant.inventory_quantity
+                            else
+                              assign product_qty = 0
+                            endif
+                          endif
+                        else
+                          assign product_qty = 99999
+                        endif
+                      -%}
+
+                      <option
+                          {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                          {% unless variant.available %}disabled="disabled"{% endunless %}
+                          data-sku="{{ variant.sku }}"
+                          data-image="{{variant.image | img_url}}"
+                          data-inventory-policy="{{ variant.inventory_policy }}"
+                          data-inventory-quantity="{{ product_qty }}"
+                          data-product-qty="{{ product_qty }}"
+                          data-option-1="{{ variant.option1 }}"
+                          data-option-2="{{ variant.option2 }}"
+                          data-option-3="{{ variant.option3 }}"
+                          value="{{ variant.id }}">
+                        {%- if variant.available -%}
+                          {{ variant.title }} - {{ variant.price | money_with_currency }}
+                        {%- else -%}
+                          {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                      </option>
+                    {% endfor %}
+                  </select>
+                      {% comment %}
+                        DO NOT modify this source code
+                        LOOP WIDGET CODE STARTS
+                      {% endcomment %}
+                      {% assign template_exists = false %}
+                      {% capture template_content %}
+                          {% render 'loop-subscriptions', type: 'product-widget', product: product %}
+                      {% endcapture %}
+                      
+                      {% if template_content contains 'Rendering loop-subscriptions' %}
+                        {% assign template_exists = true %}
+                      {% endif %}
+                      
+                      {% if template_exists %}
+                        {% render 'loop-subscriptions', type: 'product-widget', product: product %}
+                      {% endif %}
+                      {% comment %}
+                        LOOP WIDGET CODE ENDS
+                      {% endcomment %}
+                  {%- liquid
+                    assign hide_quantity_box = true
+
+                    if section.settings.quantity_enabled or settings.dbtfy_quantity_breaks or settings.dbtfy_inventory_quantity
+                      assign hide_quantity_box = false
+                    endif
+                  -%}
+
+                  {%- if section.settings.quantity_enabled or settings.dbtfy_quantity_breaks or settings.dbtfy_inventory_quantity -%}
+                    <div class="product-single__quantity spacer-bottom" {%- if hide_quantity_box -%}hidden{%- endif -%}>
+                      {%- assign quantity_id = 'product-' | append: product.id -%}
+
+                      {%- if section.settings.quantity_enabled or settings.dbtfy_quantity_breaks -%}
+                        <label class="inline-label" for="{{ quantity_id }}" {% if section.settings.quantity_enabled == false and settings.dbtfy_quantity_breaks %}hidden {% endif %}>{{ 'products.product.quantity' | t }}</label>
+                      {%- endif -%}
+
+                      {%- render "dbtfy-inventory-quantity", product: product -%}
+
+                      {%- if section.settings.quantity_enabled -%}
+                       <div class="quantity-product-single-{{product.id}}">
+                          {%- render "quantity-selector", type: "product", id: quantity_id -%}
+                       </div>
+                      {%- elsif settings.dbtfy_quantity_breaks -%}
+                       <div class="quantity-product-single-{{product.id}}">
+                        <div class="qty-container"></div>
+                       </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+
+                  <div class="product-single__add-to-cart">
+                    <button type="submit" name="add" id="AddToCart--{{ section.id }}" class="btn btn--primary btn--add-to-cart full"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                      <span class="btn__text">
+                        <span class="{{ settings.icon }} button-cart-icon">{{ settings.icon_cart }}</span>
+                        <span class="btn__add-to-cart-text">
+                          {%- liquid
+                            if current_variant.available
+                              echo 'products.product.add_to_cart' | t
+                            else
+                              echo 'products.product.sold_out' | t
+                            endif
+                          -%}
+                        </span>
+                      </span>
+                    </button>
+
+                    {%- if settings.enable_payment_button -%}
+                      {{ form | payment_button }}
+                    {%- endif -%}
+                  </div>
+                {%- endform -%}
+
+                {% render "dbtfy-back-in-stock", product: product, current_variant: current_variant %}
+              {%- endif -%}
+            </div>
+
+            {%- render "dbtfy-trust-badge", position: "product_page" -%}
+
+            {%- if settings.dbtfy_product_tabs -%}
+              {%- if product_tabs_position == "under_addtocart" -%}
+                 <div class="dbtfy-product-tab-box"></div>
+              {%- elsif has_description == false and product_tabs_position == "above_description" -%}
+                <div class="dbtfy-product-tab-box"></div>
+              {%- elsif has_description and product_description_position == "under_addtocart" and product_tabs_position == "above_description" -%}
+                <div class="dbtfy-product-tab-box"></div>
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- if section.settings.show_product_description -%}
+              {%- if product_description_position == "under_addtocart" -%}
+                {%- unless is_to_split_description -%}
+                  <div id="productDescription" class="product-single__description spacer-bottom-none rte spacer-top {{ section.settings.text_alignment }} {{ section.settings.text_alignment_mobile }}">
+                    {{ hs_product_description | replace: '<p>[split_description]</p>', '' | replace: '[split_description]', '' }}
+                  </div>
+                {%- endunless -%}
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- liquid
+              if settings.dbtfy_product_tabs
+                if product_tabs_position == "under_description" and product_description_position == "under_addtocart"
+                  echo '<div class="dbtfy-product-tab-box"></div>'
+                endif
+              endif
+
+              render "dbtfy-social-discount", type: "button"
+
+              if section.settings.show_sharing_icons
+                render "social-sharing", share_button: "btn btn-square-xsmall", container_class: "spacer-top"
+              endif
+            -%}
+
+            {%- if section.settings.show_product_tags and product.tags.size > 0 -%}
+            <div class="product-tags spacer-top">
+              <ul class="inline-list">
+                <li class="tag-label">
+                  <span class="{{ settings.icon }}" aria-hidden="true">local_offer</span>
+                  {{ 'blogs.article.tags' | t }}
+                </li>
+                {%- for tag in product.tags -%}
+                <li>
+                  <a class="btn btn-reveal-primary btn--xsmall" href="/collections/all/{{ tag | handleize }}">{{ tag }}</a>
+                </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+            {%- endif -%}
+
+            {%- if section.settings.show_product_collections and product.collections.size > 0 -%}
+            <div class="product-tags spacer-top">
+              <ul class="inline-list">
+                <li class="tag-label">
+                  <span class="{{ settings.icon }}" aria-hidden="true">layers</span>
+                  {{ 'collections.general.catalog_title' | t }}
+                </li>
+                {%- for collection in product.collections -%}
+                <li>
+                  <a class="btn btn-reveal-primary btn--xsmall" href="{{ collection.url }}">{{ collection.title }}</a>
+                </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+            {%- endif -%}
+
+            {%- if section.settings.show_full_details -%}
+            <div class="spacer-top">
+              <a class="product-single__full-details text-link"{% unless emptyState %} href="{{ product.url }}"{% endunless %}>
+                {{ 'products.product.full_details' | t }}
+                <span class="{{ settings.icon }}" aria-hidden="true">arrow_forward</span>
+              </a>
+            </div>
+            {%- endif -%}
+
+          {%- unless emptyState -%}
+            {%- if settings.show_review_widget_under_atc_button -%}
+              <div class="product-single-reviews-wrapper">
+                {% render 'review-widget', product: product %}
+              </div>
+            {%- endif -%}
+          {%- endunless -%}
+          </div>
+        </div>
+
+        {%- render "dbtfy-sticky-addtocart" with product as product, current_variant: current_variant -%}
+
+        {%- render "product-info-json", product: product -%}
+      </div>
+
+    </div><!-- /.wrapper -->
+  </div><!-- /.box -->
+</div><!-- /.product-single -->
+
+{%- if show_info_section -%}
+<div class="section-description box {{ section.settings.description_style }} {{ section.settings.text_alignment }} {{ section.settings.text_alignment_mobile }}">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item{% unless section.settings.description_full %} large--eight-twelfths push--large--two-twelfths{% endunless %}">
+        {%- if settings.dbtfy_product_tabs -%}
+           {%- if product_tabs_position == "separate_section" or product_tabs_position == "above_description" and product_description_position == "separate_section" -%}
+              <div class="dbtfy-product-tab-box"></div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if section.settings.show_product_description -%}
+          {%- if product_description_position == "separate_section" or is_to_split_description -%}
+            <div id="productDescription" class="product-single__description rte spacer-bottom-none">
+              {%- liquid
+                if is_to_split_description
+                  assign second_part = hs_product_description | split: '<p>[split_description]</p>' | last
+
+                  unless second_part contains '[split_description]'
+                    echo second_part
+                  else
+                    echo hs_product_description | split: '[split_description]' | last
+                  endunless
+                else
+                  echo hs_product_description | replace: '<p>[split_description]</p>', '' | replace: '[split_description]', ''
+                endif
+              -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+
+        {%- liquid
+        if settings.dbtfy_product_tabs
+          if product_tabs_position == "under_description" and product_description_position == "separate_section"
+            echo '<div class="dbtfy-product-tab-box"></div>'
+          endif
+        endif
+        -%}
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{%- render "dbtfy-addtocart-animation" -%}
+
+{%- unless emptyState -%}
+<script type="application/json" id="ProductJson-{{ section.id }}" class="mainProductJson">
+{
+  "available": {{ product.available | json }},
+  "collections": {{ product.collections | json }},
+  "compare_at_price": {{ product.compare_at_price | json }},
+  "compare_at_price_max": {{ product.compare_at_price_max | json }},
+  "compare_at_price_min": {{ product.compare_at_price_min | json }},
+  "compare_at_price_varies": {{ product.compare_at_price_varies | json }},
+  "content": {{ product.content | json }},
+  "created_at": {{ product.created_at | json }},
+  "description": {{ hs_product_description | json }},
+  "featured_image": {{ product.featured_image | json }},
+  "first_available_variant_compare_at_price": {{ product.selected_or_first_available_variant.compare_at_price | json }},
+  "handle": {{ product.handle | json }},
+  "id": {{ product.id | json }},
+  "images": {{ product.images | json }},
+  "media": {{ product.media | json }},
+  "options": {{ product.options | json }},
+  "options_with_values": {
+    {% for product_option in product.options_with_values %}
+      "option{{ product_option.position }}": {{ product_option.values | json }}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  },
+  "price": {{ product.price | json }},
+  "price_max": {{ product.price_max | json }},
+  "price_min": {{ product.price_min | json }},
+  "price_varies": {{ product.price_varies | json }},
+  "published_at": {{ product.published_at | json }},
+  "requires_selling_plan": {{ product.requires_selling_plan | json }},
+  "selling_plan_groups": {{ product.selling_plan_groups | json }},
+  "tags": {{ product.tags | json }},
+  "title": {{ product.title | json }},
+  "type": {{ product.type | json }},
+  "variants": {{ product.variants | json }},
+  "vendor": {{ product.vendor | json }},
+  "has_only_default_variant": {{ product.has_only_default_variant | json }}
+}
+</script>
+
+<script type="application/json" id="ModelJson-{{ section.id }}">
+{{ product.media | where: 'media_type', 'model' | json }}
+</script>
+{%- endunless -%}

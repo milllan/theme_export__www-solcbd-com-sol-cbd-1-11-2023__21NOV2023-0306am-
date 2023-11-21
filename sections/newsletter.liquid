@@ -1,0 +1,87 @@
+<div id="section-{{ section.id }}" class="{% unless section.settings.show_on_desktop %} medium--hide large--hide{% endunless %} {% unless section.settings.show_on_mobile %} small--hide{% endunless %} {{ section.settings.section_style }}" data-section-id="{{ section.id }}" data-section-type="newsletter-section">
+  <div class="box">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item large--eight-twelfths push--large--two-twelfths one-whole text-center">
+          {%- unless section.settings.title == blank -%}
+          <h2>{{ section.settings.title | escape }}</h2>
+          {%- endunless -%}
+          {%- unless section.settings.subtitle == blank -%}
+          <p class="text-lead">{{ section.settings.subtitle | escape }}</p>
+          {%- endunless -%}
+          {%- render 'newsletter-form', source: section.settings.customer_tag -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.newsletter.name",
+    "class": "newsletter-section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_on_desktop",
+        "label": "t:sections.newsletter.settings.show_on_desktop.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_on_mobile",
+        "label": "t:sections.newsletter.settings.show_on_mobile.label",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "t:sections.newsletter.settings.title.label",
+        "default": "Subscribe to our newsletter"
+      },
+	    {
+        "type": "text",
+        "id": "subtitle",
+        "label": "t:sections.newsletter.settings.subtitle.label",
+	    	"default": "A short sentence describing what someone will receive by subscribing"
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "t:sections.newsletter.settings.section_style.label",
+        "default": "section-blank",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "t:sections.newsletter.settings.section_style.options__1.label"
+          },
+          {
+            "value": "section-default",
+            "label": "t:sections.newsletter.settings.section_style.options__2.label"
+          },
+          {
+            "value": "section-border",
+            "label": "t:sections.newsletter.settings.section_style.options__3.label"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "customer_tag",
+        "label": "t:sections.newsletter.settings.customer_tag.label",
+        "default": "newsletter",
+        "info": "t:sections.newsletter.settings.customer_tag.info"
+      },
+	    {
+        "type": "paragraph",
+        "content": "t:sections.newsletter.settings.paragraph.content"
+      }
+	  ],
+	  "presets": [
+      {
+        "name": "t:sections.newsletter.presets.name",
+        "category": "t:sections.newsletter.presets.category"
+      }
+    ]
+  }
+{% endschema %}

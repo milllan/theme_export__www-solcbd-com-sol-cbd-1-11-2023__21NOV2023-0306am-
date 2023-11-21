@@ -1,0 +1,93 @@
+<div class="box">
+  <div class="wrapper">
+
+    <div class="grid">
+      <div class="grid__item large--eight-twelfths push--large--two-twelfths">
+
+        <div class="section-header">
+          <div class="page-title-wrapper">
+            <h1 class="page-title">{{ page.title }}</h1>
+          </div>
+        </div>
+
+        {%- unless page.content == blank -%}
+          <div class="page-content rte">
+            {{ page.content }}
+          </div>
+        {%- endunless -%}
+
+        {%- form 'contact', class: 'form-vertical' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="note form-success">
+              {{ 'contact.form.post_success' | t }}
+            </p>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            {{ form.errors | default_errors }}
+          {%- endif -%}
+
+          <div class="grid grid-small">
+            <div class="grid__item large--six-twelfths">
+              <label for="ContactFormName">{{ 'contact.form.name' | t }}</label>
+              <input type="text"
+                     id="ContactFormName"
+                     name="contact[{{ 'contact.form.name' | t }}]"
+                     placeholder="{{ 'contact.form.name' | t }}"
+                     autocapitalize="words"
+                     autofocus="autofocus"
+                     value="{%- if form.name -%}{{ form.name }}{%- elsif customer -%}{{ customer.name }}{%- endif -%}">
+            </div>
+
+            <div class="grid__item large--six-twelfths">
+              <label for="ContactFormEmail">{{ 'contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+              <input type="email" id="ContactFormEmail"
+                     class="{%- if form.errors contains 'email' -%}input-error{%- endif -%}"
+                     name="contact[email]"
+                     placeholder="{{ 'contact.form.email' | t }}"
+                     autocorrect="off"
+                     autocapitalize="off"
+                     pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
+                     required="required"
+                     aria-required="true"
+                     value="{%- if form.email -%}{{ form.email }}{%- elsif customer -%}{{ customer.email }}{%- endif -%}"
+                  {%- if form.errors contains 'email' -%}
+                aria-invalid="true"
+                  {%- endif -%}>
+            </div>
+          </div>
+
+          <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
+          <input type="tel"
+                id="ContactFormPhone"
+                name="contact[{{ 'contact.form.phone' | t }}]"
+                placeholder="{{ 'contact.form.phone' | t }}"
+                pattern="[0-9\-]*"
+                value="{%- if form.phone -%}{{ form.phone }}{%- elsif customer -%}{{ customer.phone }}{%- endif -%}">
+
+          <label for="ContactFormMessage">{{ 'contact.form.message' | t }}</label>
+          <textarea rows="3"
+                    id="ContactFormMessage"
+                    name="contact[body]"
+                    placeholder="{{ 'contact.form.message' | t }}">
+            {%- if form.body -%}{{ form.body }}{%- endif -%}
+          </textarea>
+
+          <button type="submit" class="btn btn--primary small--full">
+            <span class="btn__text">
+              {{ 'contact.form.send' | t }}
+              <span class="{{ settings.icon }} icon-width" aria-hidden="true">arrow_forward</span>
+            </span>
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact_content.name",
+  "settings": []
+}
+{% endschema %}

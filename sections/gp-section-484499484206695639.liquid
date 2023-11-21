@@ -1,0 +1,561 @@
+
+  
+  
+      <style>
+        @font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCu173w5aXw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM73w5aXw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlEw.woff) format('woff');
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WRhyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459W1hyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WZhyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WdhyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WRhyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459W1hyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WZhyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WdhyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WRhyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459W1hyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WZhyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WdhyyTh89ZNpQ.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z11lFd2JQEl8qw.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1JlFd2JQEl8qw.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+      </style>
+    
+  <style>
+    .gps-484499484206695639 .g-s-small{padding:4px 16px}.gps-484499484206695639 .pointer-events-none{pointer-events:none}.gps-484499484206695639 .pointer-events-auto{pointer-events:auto}.gps-484499484206695639 .invisible{visibility:hidden}.gps-484499484206695639 .absolute{position:absolute}.gps-484499484206695639 .relative{position:relative}.gps-484499484206695639 .z-9{z-index:9}.gps-484499484206695639 .mx-auto{margin-left:auto;margin-right:auto}.gps-484499484206695639 .mb-0{margin-bottom:0}.gps-484499484206695639 .inline-block{display:inline-block}.gps-484499484206695639 .flex{display:flex}.gps-484499484206695639 .inline-flex{display:inline-flex}.gps-484499484206695639 .grid{display:grid}.gps-484499484206695639 .\!hidden{display:none!important}.gps-484499484206695639 .h-5{height:20px}.gps-484499484206695639 .h-6{height:24px}.gps-484499484206695639 .h-full{height:100%}.gps-484499484206695639 .w-5{width:20px}.gps-484499484206695639 .w-6{width:24px}.gps-484499484206695639 .w-full{width:100%}.gps-484499484206695639 .w-max{width:-moz-max-content;width:max-content}.gps-484499484206695639 .min-w-max{min-width:-moz-max-content;min-width:max-content}.gps-484499484206695639 .\!max-w-max{max-width:-moz-max-content!important;max-width:max-content!important}.gps-484499484206695639 .max-w-full{max-width:100%}.gps-484499484206695639 .flex-1{flex:1 1 0%}.gps-484499484206695639 .shrink-0{flex-shrink:0}@keyframes spin{to{transform:rotate(1turn)}}.gps-484499484206695639 .animate-spin{animation:spin 1s linear infinite}.gps-484499484206695639 .flex-col{flex-direction:column}.gps-484499484206695639 .flex-wrap{flex-wrap:wrap}.gps-484499484206695639 .items-center{align-items:center}.gps-484499484206695639 .justify-center{justify-content:center}.gps-484499484206695639 .gap-y-0{row-gap:0}.gps-484499484206695639 .overflow-hidden{overflow:hidden}.gps-484499484206695639 .overflow-clip{overflow:clip}.gps-484499484206695639 .truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gps-484499484206695639 .rounded-none{border-radius:0}.gps-484499484206695639 .text-center{text-align:center}.gps-484499484206695639 .align-middle{vertical-align:middle}.gps-484499484206695639 .text-g-bg-3{color:var(--g-c-bg-3)}.gps-484499484206695639 .no-underline{text-decoration-line:none}.gps-484499484206695639 .opacity-25{opacity:.25}.gps-484499484206695639 .opacity-75{opacity:.75}.gps-484499484206695639 .transition-colors{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-484499484206695639 .duration-200{transition-duration:.2s}.gps-484499484206695639 .duration-300{transition-duration:.3s}.gps-484499484206695639 .ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-484499484206695639 .disabled\:btn-disabled:disabled{cursor:default}.gps-484499484206695639 .disabled\:pointer-events-none:disabled{pointer-events:none}.gps-484499484206695639 .disabled\:opacity-30:disabled{opacity:.3}.gps-484499484206695639 .group[data-state=loading] .group-data-\[state\=loading\]\:visible{visibility:visible}.gps-484499484206695639 .group[data-state=loading] .group-data-\[state\=loading\]\:invisible{visibility:hidden}.gps-484499484206695639 .\[\&_\*\]\:max-w-full *{max-width:100%}.gps-484499484206695639 .\[\&_p\]\:inline p{display:inline}.gps-484499484206695639 .\[\&_p\]\:truncate p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gps-484499484206695639 .\[\&_p\]\:after\:whitespace-pre-wrap p:after{content:var(--tw-content);white-space:pre-wrap}.gps-484499484206695639 .\[\&_p\]\:after\:content-\[\'\\A\'\] p:after{--tw-content:"\A";content:var(--tw-content)}
+  </style>
+  
+      
+      
+            <section
+              class="mx-auto max-w-full"
+              style="--w:100%;--w-tablet:100%;--w-mobile:100%;--pl:0px;--pl-tablet:0px;--pl-mobile:0px;--pr:0px;--pr-tablet:0px;--pr-mobile:0px"
+            >
+              
+    <div
+      id="gFB9wHsJdh"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--pt:var(--g-s-4xl);--pb:var(--g-s-4xl);--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:#000000;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gFB9wHsJdh mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gVE2XQOb8_ relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="g7DHEDt904"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--pl:15px;--pr:15px;--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:1000px;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="g7DHEDt904 mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="goLmVOFthE relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gDEuMsePHL  overflow-clip"
+        style="--tt:default;--ta:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xs)"
+      >
+      <div class="flex" style="--jc:center">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Montserrat, Montserrat);--weight:600;--ls:normal;--lh:130%;--size:19px;--size-tablet:19px;--size-mobile:17px;word-break:break-word"
+        >
+        <p>WELCOME TO YOUR VIP BLACK FRIDAY EXPERIENCE!</p>
+        </div>
+      </div>
+    </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-s)" class="gQhS_YGsk1 ">
+      
+    <div
+      parentTag="Col"
+        class="gQhS_YGsk1  overflow-clip"
+        style="--tt:default;--ta:center"
+      >
+      <div class="flex" style="--jc:center">
+        <h2
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Montserrat, Montserrat);--ls:normal;--lh:130%;--size:57px;--size-tablet:57px;--size-mobile:50px;--weight:bold;--tt:uppercase;word-break:break-word"
+        >
+        <p>GET UP TO 35% off &amp;&nbsp;</p><p>Free Products</p>
+        </h2>
+      </div>
+    </div>
+      </div>
+    <div
+      parentTag="Col"
+        class="g9aGZf7VHs  overflow-clip"
+        style="--tt:default;--ta:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xl)"
+      >
+      <div class="flex" style="--jc:center">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--ff:var(--g-font-Montserrat, Montserrat);--weight:400;--lh:180%;--size:22px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Biggest Sale Of the Year, On All Products</p>
+        </div>
+      </div>
+    </div><div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:13px;--ta:center"
+    class=""
+  >
+    <style>
+    .gHZ6JZCtx-.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #FFFFFF;
+  
+      
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      
+    }
+
+    .gHZ6JZCtx-:hover::before {
+      
+      
+    }
+  </style>
+    <a
+      href="#gFB9wHsJdh" target="_self" data-id="gHZ6JZCtx-" aria-label="SHOP DEALS NOW"
+      data-state="idle"
+      class="gHZ6JZCtx- gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none"
+      style="--hvr-bg:#FFC80C;--bg:#FFC80C;--bblr:5px;--bbrr:5px;--btlr:5px;--btrr:5px;--hvr-c:#121212;--c:#121212;--pl:32px;--pr:32px;--pt:12px;--pb:12px;--pl-tablet:32px;--pr-tablet:32px;--pt-tablet:12px;--pb-tablet:12px;--pl-mobile:32px;--pr-mobile:32px;--pt-mobile:12px;--pb-mobile:12px;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--tt:uppercase;--fs:normal;--ff:var(--g-font-Poppins, Poppins);--weight:700;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    <span
+        class="inline-flex shrink-0 items-center justify-center group-data-[state=loading]:invisible z-9"
+        style="--mr:8px;--w:1em"
+      ><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M192 16a16 16 0 0 1 16 -16h96a16 16 0 0 1 0 32H288v34.24a224.032 224.032 0 0 1 104.768 399.168l19.232 19.264a16 16 0 0 1 -22.624 22.656l-23.872 -23.872A223.04 223.04 0 0 1 256 512a223.04 223.04 0 0 1 -109.504 -28.544l-23.872 23.872a16 16 0 0 1 -22.624 -22.656l19.264 -19.264A224.032 224.032 0 0 1 224 66.24V32h-16A16 16 0 0 1 192 16zm80 160a16 16 0 0 0 -32 0v107.584l-45.728 76.16a16 16 0 1 0 27.456 16.48l48 -80A16 16 0 0 0 272 288V176zM27.52 172.384A80 80 0 1 1 140.384 59.52 257.12 257.12 0 0 0 27.52 172.384zM371.616 59.52a80 80 0 1 1 112.864 112.864 257.12 257.12 0 0 0 -112.864 -112.864z" /></svg></span>
+      <span
+        class="truncate group-data-[state=loading]:invisible [&_p]:truncate z-9 "
+        style="--tt:default"
+      >
+        SHOP DEALS NOW
+      </span>
+    </a>
+  </div><div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="gs2GWzUxEc ">
+      
+    <gp-countdown-timer
+     class="flex "
+     gp-data='{"autoHideWhenTimeout":true,"behaviour":"standard","dateStandard":"2023-11-26T06:33:51.483Z","dayLabel":"DAYS","enableDay":true,"enableHour":true,"enableMinute":true,"enableSecond":true,"enableWeek":false,"hourLabel":"HRS","minuteLabel":"MINS","redirectUrl":{"link":"#","target":"_self"},"secondLabel":"SECS","timeZone":"UTC+7","timerDaily":{"format":"am","hours":10,"mins":30},"timerEverygreen":{"days":0,"endTime":1685093631483,"hours":3,"mins":0,"startTime":1685082831483},"weekLabel":"Weeks"}'
+     style="--jc:center;--jc-mobile:center"
+     >
+      <div id="section-countdown" class="flex flex-wrap w-max !hidden" style="gap:10px;--jc:center;--jc-mobile:center">
+           
+          
+    <div
+        style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+    class="flex-1 text-center min-w-max !max-w-max g-s-small">
+    
+    <div
+      id="day"
+        class="  overflow-clip"
+        style="--c:var(--g-c-bg-3, bg-3)"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-countdown-number"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Montserrat, Montserrat);--weight:600;--ls:normal;--lh:130%;--size:26px;--size-tablet:23px;--size-mobile:20px;--c:#FFFFFF;word-break:break-word"
+        >
+        00
+        </div>
+      </div>
+    </div>
+    
+    <div
+      
+        class="  overflow-clip"
+        style="--c:#B4B4B4"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A']"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Montserrat, Montserrat);--weight:400;--ls:normal;--lh:150%;--size:15px;--size-tablet:13px;--size-mobile:12px;--c:#FFFFFF;word-break:break-word"
+        >
+        DAYS
+        </div>
+      </div>
+    </div>
+    </div>
+    
+          
+    <div
+        style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+    class="flex-1 text-center min-w-max !max-w-max g-s-small">
+    
+    <div
+      id="hour"
+        class="  overflow-clip"
+        style="--c:var(--g-c-bg-3, bg-3)"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-countdown-number"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Montserrat, Montserrat);--weight:600;--ls:normal;--lh:130%;--size:26px;--size-tablet:23px;--size-mobile:20px;--c:#FFFFFF;word-break:break-word"
+        >
+        00
+        </div>
+      </div>
+    </div>
+    
+    <div
+      
+        class="  overflow-clip"
+        style="--c:#B4B4B4"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A']"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Montserrat, Montserrat);--weight:400;--ls:normal;--lh:150%;--size:15px;--size-tablet:13px;--size-mobile:12px;--c:#FFFFFF;word-break:break-word"
+        >
+        HRS
+        </div>
+      </div>
+    </div>
+    </div>
+    
+          
+    <div
+        style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+    class="flex-1 text-center min-w-max !max-w-max g-s-small">
+    
+    <div
+      id="minute"
+        class="  overflow-clip"
+        style="--c:var(--g-c-bg-3, bg-3)"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-countdown-number"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Montserrat, Montserrat);--weight:600;--ls:normal;--lh:130%;--size:26px;--size-tablet:23px;--size-mobile:20px;--c:#FFFFFF;word-break:break-word"
+        >
+        00
+        </div>
+      </div>
+    </div>
+    
+    <div
+      
+        class="  overflow-clip"
+        style="--c:#B4B4B4"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A']"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Montserrat, Montserrat);--weight:400;--ls:normal;--lh:150%;--size:15px;--size-tablet:13px;--size-mobile:12px;--c:#FFFFFF;word-break:break-word"
+        >
+        MINS
+        </div>
+      </div>
+    </div>
+    </div>
+    
+          
+    <div
+        style="--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+    class="flex-1 text-center min-w-max !max-w-max g-s-small">
+    
+    <div
+      id="second"
+        class="  overflow-clip"
+        style="--c:var(--g-c-bg-3, bg-3)"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-countdown-number"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Montserrat, Montserrat);--weight:600;--ls:normal;--lh:130%;--size:26px;--size-tablet:23px;--size-mobile:20px;--c:#FFFFFF;word-break:break-word"
+        >
+        00
+        </div>
+      </div>
+    </div>
+    
+    <div
+      
+        class="  overflow-clip"
+        style="--c:#B4B4B4"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A']"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Montserrat, Montserrat);--weight:400;--ls:normal;--lh:150%;--size:15px;--size-tablet:13px;--size-mobile:12px;--c:#FFFFFF;word-break:break-word"
+        >
+        SECS
+        </div>
+      </div>
+    </div>
+    </div>
+    
+      </div>
+     </gp-countdown-timer>
+     <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-countdown.js" defer="defer"></script>
+  
+      </div><div
+    
+    role="presentation"
+    class="group/image gYS31wNER7"
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:1px;--ta:left"
+    >
+    <figure
+      class="relative inline-block overflow-hidden align-middle pointer-events-none"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--h:auto;--h-tablet:auto;--h-mobile:auto;border-radius:inherit"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+      >
+        <img
+    quality="70" title="Image Title"
+    draggable="false"
+    class="inline-block w-full h-full max-w-full flex"
+    data-src="{{ "482463132267054172-77dc33fc-b69c-4b0e-9bdc-e1ccc552f951.png" | asset_url }}" data-srcset="{{ '482463132267054172-77dc33fc-b69c-4b0e-9bdc-e1ccc552f951.png' | asset_img_url: '768x768' }} 768w, {{ '482463132267054172-77dc33fc-b69c-4b0e-9bdc-e1ccc552f951.png' | asset_img_url: '1024x1024' }} 1024w, {{ '482463132267054172-77dc33fc-b69c-4b0e-9bdc-e1ccc552f951.png' | asset_img_url: 'master' }} 1440w" src="{{ "482463132267054172-77dc33fc-b69c-4b0e-9bdc-e1ccc552f951.png" | asset_url }}" width="1020" height="301" alt="Alt Image" priority="true"
+    sizes="100vw"
+    style="--aspect:auto;--objf:cover;--bs:none;--bw:0px;--bc:transparent;--radius:var(--g-radius-none);--w:100%"
+  />
+      </div>
+    </figure>
+  </div>
+    </div>
+    </div>
+  
+    
+    </div>
+    </div>
+  
+            </section>
+          
+    
+{% schema %}
+  {
+    
+    "name": "Section 3",
+    "tag": "section",
+    "class": "gps-484499484206695639 gps gpsi",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Section design by GemPages. [Click here to start design](https://builder.gempages.net/instant/hyperlink/edit?type=section&section_id=484499484206695639&template_id=482463146242475100)"
+      }
+    ],
+    "blocks": [{"type": "@app"}]
+  }
+{% endschema %}

@@ -1,0 +1,548 @@
+{
+  "general": {
+    "404": {
+      "title": "404 Oldal nem található",
+      "subtext_html": "A keresett oldal nem létezik."
+    },
+    "accessibility": {
+      "refresh_page": "A kijelölés kiválasztása az oldal teljes frissítését eredményezi.",
+      "selection_help": "A kijelöléshez nyomja meg a szóköz billentyűt, majd a nyílbillentyűket.",
+      "unit_price_separator": "per"
+    },
+    "meta": {
+      "tags": "Megcímkézve: \"{{ tags }}\"",
+      "page": "{{ page }}. oldal"
+    },
+    "pagination": {
+      "previous": "Előző",
+      "next": "Következő"
+    },
+    "password_page": {
+      "login_form_heading": "Lépjen be az üzletbe jelszóval:",
+      "login_form_password_label": "Jelszó",
+      "login_form_password_placeholder": "A jelszavad",
+      "login_form_submit": "Belép",
+      "signup_form_email_label": "Email",
+      "signup_form_success": "Közvetlenül nyitás előtt e-mailt küldünk Önnek!",
+      "admin_link_html": "Ön az üzlet tulajdonosa? <a href=\"\/admin\" class=\"text-link\">Bejelentkezés itt<\/a>",
+      "password_link": "Lépjen be jelszóval",
+      "powered_by_shopify_html": "Ezt az üzletet a(z) {{ shopify }} fogja működtetni",
+      "close": "bezár (esc)"
+    },
+    "dates": {
+      "year": "Év",
+      "month": "Hónap",
+      "day": "Nap"
+    },
+    "months": {
+      "full": {
+        "january": "január",
+        "february": "február",
+        "march": "március",
+        "april": "április",
+        "may": "Lehet",
+        "june": "június",
+        "july": "július",
+        "august": "augusztus",
+        "september": "szeptember",
+        "october": "október",
+        "november": "november",
+        "december": "december"
+      },
+      "short": {
+        "january": "jan",
+        "february": "Február",
+        "march": "márc",
+        "april": "Április",
+        "may": "Lehet",
+        "june": "Június",
+        "july": "Július",
+        "august": "Augusztus",
+        "september": "szept",
+        "october": "Október",
+        "november": "November",
+        "december": "December"
+      }
+    },
+    "weekdays": {
+      "full": {
+        "monday": "hétfő",
+        "tuesday": "kedd",
+        "wednesday": "szerda",
+        "thursday": "csütörtök",
+        "friday": "péntek",
+        "saturday": "szombat",
+        "sunday": "vasárnap"
+      },
+      "short": {
+        "monday": "Az én",
+        "tuesday": "kedd",
+        "wednesday": "Házasodik",
+        "thursday": "Gyűjt",
+        "friday": "Péntek",
+        "saturday": "Ült",
+        "sunday": "Nap"
+      }
+    },
+    "social": {
+      "share_on_facebook": "Ossza meg",
+      "share_on_twitter": "Csipog",
+      "share_on_pinterest": "Tűzd ki",
+      "share_on_email": "Email",
+      "share_on_whatsapp": "Whatsapp",
+      "share_on_linkedin": "LinkedIn",
+      "share_on_reddit": "Reddit",
+      "share_on_messenger": "Hírnök",
+      "alt_text": {
+        "share_on_facebook": "Megosztani Facebookon",
+        "share_on_twitter": "Tweet a Twitteren",
+        "share_on_pinterest": "Pin a Pinteresten",
+        "share_on_email": "Megosztás e-mailben",
+        "share_on_whatsapp": "Oszd meg a Whatsappon",
+        "share_on_linkedin": "Oszd meg a LinkedIn-en",
+        "share_on_reddit": "Oszd meg a Redditen",
+        "share_on_messenger": "Oszd meg a Messengeren"
+      }
+    },
+    "newsletter_form": {
+      "newsletter_email": "Iratkozzon fel levelezőlistánkra",
+      "newsletter_placeholder": "Az email címed",
+      "newsletter_confirmation": "Köszönjük az előfizetést",
+      "submit": "Iratkozz fel"
+    },
+    "search": {
+      "no_results_html": "\"{{ terms }}\" keresése nem hozott eredményt.",
+      "results_for_html": "A \"{{ terms }}\" kifejezésre végzett keresése a következőket eredményezte:",
+      "title": "Keresés",
+      "placeholder": "Keresse üzletünkben",
+      "submit": "Keresés"
+    },
+    "drawers": {
+      "navigation": "Menü",
+      "close_menu": "Menü bezárása",
+      "expand_submenu": "Az almenü kibontása",
+      "collapse_submenu": "Az almenü összecsukása"
+    },
+    "payment": {
+      "method": "Fizetési módok"
+    },
+    "currency": {
+      "dropdown_label": "Valuta"
+    },
+    "language": {
+      "dropdown_label": "Nyelv"
+    },
+    "localization": {
+      "submit_label": "Frissítse a beállításokat"
+    },
+    "trial_over": {
+      "heading": "Az ingyenes próbaidőszak lejárt",
+      "text": "Szia, {{ name }}! Úgy tűnik, a 14 napos vállalati terv ingyenes próbaidőszaka már lejárt. Ez azt jelenti, hogy az összes kiegészítője le van tiltva.\n\nDe valószínűleg nem szeretné elveszíteni a bővítményeiből származó konverziós és bevételi emelkedést, igaz?\n\nVálassza ki a céljainak leginkább megfelelő tervet, és továbbra is élvezze a magasabb konverziós arányokat.",
+      "pick_a_plan": "Válassz egy tervet"
+    },
+    "addons_limit_reached": {
+      "heading": "Azta! Nyugi, Tigris!",
+      "text": "Úgy tűnik, több kiegészítőre van szüksége.\n\nJelenlegi csomagja [terv_name] legfeljebb [current_limit] bővítményig aktiválható. Az [upgraded_plan] lehetővé teszi az [upgraded_limit] bővítmények aktiválását. Frissítse csomagját az ÖSSZES Prémium szolgáltatás feloldásához.",
+      "upgrade_now": "Frissíts most",
+      "note": "*Megjegyzés: Ha több mint [current_limit] kiegészítő van kiválasztva, csak az első [current_limit] bejelölt bővítmények aktiválódnak. <a href=\"https:\/\/help.debutify.com\/en\/articles\/4656443-how-to-uninstall-an-add-on-in-debutify-3-0\" class=\"text-link\">Hogyan tilthatom le a felesleges kiegészítőket?<\/a>"
+    }
+  },
+  "add-ons": {
+    "age_check": {
+      "title": "Életkor ellenőrzése",
+      "description": "Kérjük, igazolja életkorát a folytatáshoz.",
+      "error_message": "Ön túl fiatal ahhoz, hogy megtekintse ezt a webhelyet.",
+      "yes_label": "Igen",
+      "no_label": "Nem",
+      "button_label": "Belép"
+    },
+    "agree_to_terms": {
+      "label": "Egyetértek a feltételekkel.",
+      "warning_text": "A kijelentkezéshez el kell fogadnia az értékesítési feltételeket.",
+      "order_title": "Elfogadom a feltételeket.",
+      "yes_label": "Igen"
+    },
+    "back_in_stock": {
+      "form_text": "Értesítsen, ha ez a termék elérhető:",
+      "button_label": "Értesítsen",
+      "success_message": "Értesítsen",
+      "body_message": "Kérem, értesítsen, amikor a(z) {{ product_name }} elérhetővé válik - {{ product_url }}"
+    },
+    "cart_discount": {
+      "label": "Akciós kód",
+      "placeholder": "Ide írd be a kedvezménykódot",
+      "button_label": "Alkalmazza a kedvezménykódot"
+    },
+    "cart_reminder": {
+      "text": "Ne maradj le!",
+      "button_label": "Fejezd be a vásárlást"
+    },
+    "cart_savings": {
+      "label": "teljes megtakarítás"
+    },
+    "collection_filters": {
+      "label": "Szűrő"
+    },
+    "cookie_box": {
+      "text_html": "<strong>Szereted a sütiket?<\/strong> 🍪 Cookie-kat használunk, hogy a lehető legjobb élményt nyújthassuk weboldalunkon.",
+      "button_label": "Cookie-k elfogadása"
+    },
+    "delivery_date": {
+      "label": "Válassza ki a kívánt szállítási dátumot",
+      "placeholder": "Dátum és idő kiválasztása*",
+      "error_message": "A folytatáshoz válasszon"
+    },
+    "gift_wrap": {
+      "checkbox_label": "Adjon hozzá egy díszdobozt\/csomagolást",
+      "text_field_label": "Ajándék üzenet",
+      "text_field_placeholder": "Írd ide az ajándéküzenetedet..."
+    },
+    "inactive_tab_message": {
+      "first_message": "🔥 Ezt ne felejtsd el...",
+      "second_message": "🔥 Gyere vissza!"
+    },
+    "infinite_scroll": {
+      "load_more": "Töltsön be többet"
+    },
+    "inventory_quantity": {
+      "prefix_text": "Csak",
+      "suffix_text": "raktáron maradt",
+      "in_stock_text": "Raktáron"
+    },
+    "minimum_order": {
+      "amount_reached_text": "Elérte a minimális rendelési mennyiséget. Továbbléphet a pénztárhoz.",
+      "amount_unreached_text": "Még mindig nem érte el a minimális rendelési összeget. A folytatáshoz adja hozzá a következőt: {left_amount}."
+    },
+    "newsletter_popup": {
+      "floating_bar_text": "20% kedvezménnyel!",
+      "popup_title": "Iratkozzon fel hírlevelünkre!",
+      "popup_text": "Ha feliratkozik hírlevelünkre, 10% kedvezményt kap első vásárlásából.",
+      "popup_close_text": "Nem, köszönöm, nem szeretem a kedvezményeket.",
+      "popup_title_success": "Köszönöm!",
+      "popup_text_success": "Másolja ki az alábbi kedvezménykódot, és illessze be a pénztárnál, hogy megkapja a kedvezményt!",
+      "popup_reward_button": "Alkalmazza a kedvezménykódot"
+    },
+    "order_feedback": {
+      "select_title": "Honnan hallottál rólunk?",
+      "default_options_text": "Ez a beállítás értéke üres",
+      "select_options": "Facebook, Twitter, Google, Instagram, Youtube",
+      "error_message": "Kérjük, válasszon egy lehetőséget lent",
+      "other_option_text": "Egyéb",
+      "other_option_placeholder": "Például. Leo barátom",
+      "other_error_message": "Kérjük, töltse ki az alábbi szövegmezőt",
+      "title": "Honnan hallottál rólunk?",
+      "other_title": "Honnan hallott rólunk másoktól?"
+    },
+    "order_tracking": {
+      "input_placeholder": "Adja meg nyomkövetési számát...",
+      "button_text": "Kövesse nyomon a rendelésemet"
+    },
+    "quick_compare": {
+      "remove_from_compare_text": "Eltávolítás a Gyors összehasonlításból",
+      "add_to_compare_text": "Hozzáadás a Gyors összehasonlításhoz",
+      "title_modal": "Gyors összehasonlítás",
+      "empty_table": "Jelenleg nincsenek tételek a gyors összehasonlító listán",
+      "images_cell": "Termék kép",
+      "title_cell": "Termék címe",
+      "price_cell": "Ár",
+      "type_cell": "típus",
+      "vendor_cell": "Eladó",
+      "collections_cell": "Gyűjtemények",
+      "tags_cell": "Címkék",
+      "short_description_cell": "Rövid leírások"
+    },
+    "recently_viewed": {
+      "heading": "Nemrég nézett"
+    },
+    "smart_search": {
+      "products_text": "Termékek",
+      "collections_text": "Gyűjtemények",
+      "articles_text": "Cikkek",
+      "pages_text": "Oldalak",
+      "all_results_text": "Az összes eredmény megjelenítése a következőre:"
+    },
+    "social_discount": {
+      "button_label": "Oszd meg és kapsz 15% kedvezményt!",
+      "popup_title": "Oszd meg és kapsz 15% kedvezményt!",
+      "popup_text": "Egyszerűen ossza meg ezt a terméket az alábbi közösségi hálózatok egyikén, és 15% kedvezményt kap!",
+      "popup_success_title": "Köszönöm a megosztást!",
+      "popup_success_text": "Másolja ki az alábbi kedvezménykódot, és illessze be a pénztárnál, hogy megkapja a kedvezményt!",
+      "popup_button_label": "Alkalmazzon kedvezmény kódot"
+    },
+    "trust_badge": {
+      "text": "Garantált biztonságos és biztonságos pénztár"
+    },
+    "wishlist": {
+      "add_to_wishlist_text": "Hozzáadni a Kívánságlistához",
+      "remove_from_wishlist_text": "Távolítsa el a kívánságlistáról",
+      "empty_wishlist_text": "Kívánságlistája jelenleg üres.",
+      "share_wishlist_text": "Ossza meg a kívánságlistát"
+    }
+  },
+  "blogs": {
+    "article": {
+      "tags": "Címkék",
+      "read_more": "olvasson tovább",
+      "view_all": "Összes megtekintése",
+      "back_to_blog": "Vissza ide: {{ title }}"
+    },
+    "comments": {
+      "title": "Szólj hozzá",
+      "name": "Név",
+      "email": "Email",
+      "message": "Üzenet",
+      "post": "Üzenet elküldése",
+      "moderated": "Felhívjuk figyelmét, hogy a megjegyzéseket jóvá kell hagyni a közzétételük előtt",
+      "success_moderated": "Hozzászólását sikeresen elküldtük. Rövid időn belül közzétesszük, mivel blogunk moderált.",
+      "success": "Hozzászólását sikeresen elküldtük! Köszönöm!",
+      "with_count": {
+        "one": "{{ count }} megjegyzés",
+        "other": "{{ count }} megjegyzés"
+      }
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "A kosarad",
+      "remove": "Távolítsa el",
+      "note": "Különleges utasítások az eladónak",
+      "subtotal": "Részösszeg",
+      "taxes_and_shipping_at_checkout": "Az adókat és a szállítási költséget a fizetéskor számítják ki",
+      "taxes_and_shipping_policy_at_checkout_html": "Az adókat és <a href=\"{{ link }}\">a szállítási költséget<\/a> a fizetéskor számítják ki",
+      "taxes_included_but_shipping_at_checkout": "Tartalmazza az áfát és a szállítási költséget a fizetéskor számítjuk ki",
+      "taxes_included_and_shipping_policy_html": "Tartalmazza az adót. <a href=\"{{ link }}\">A kiszállítás<\/a> a pénztárnál számítva.",
+      "update": "Kosár frissítése",
+      "checkout": "Kijelentkezés",
+      "empty": "A kosarad jelenleg üres.",
+      "continue_browsing_html": "Folytassa a böngészést",
+      "close_cart": "Kosár bezárása",
+      "savings_html": "Ön {{ savings }} összeget takarít meg",
+      "reduce_quantity": "Csökkentse a cikk mennyiségét eggyel",
+      "increase_quantity": "Növelje a cikk mennyiségét eggyel",
+      "cookies_required": "A bevásárlókosár használatához engedélyezze a cookie-kat",
+      "custom_currency_html": "Minden rendelés feldolgozása itt: {{ shopCurrency }}. Amíg a kosara tartalma jelenleg látható<span class='selected-currency'><\/span> , akkor a(z) {{ shopCurrency }} használatával fizet a legfrissebb árfolyamon."
+    },
+    "label": {
+      "quantity": "Mennyiség",
+      "total": "Teljes"
+    },
+    "cart_message": {
+      "text": "Az elem hozzáadva",
+      "button_label": "Kosár megtekintése"
+    }
+  },
+  "collections": {
+    "general": {
+      "catalog_title": "Katalógus",
+      "all_of_collection": "Minden",
+      "no_matches": "Sajnáljuk, ebben a kollekcióban nincsenek termékek."
+    },
+    "sorting": {
+      "title": "Rendezés",
+      "title_tags": "Szűrés vlami alapján",
+      "all_of_collection": "Összes {{ collection }}"
+    },
+    "grid": {
+      "button_label": "Vásárolj most"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Név",
+      "email": "Email",
+      "phone": "Telefonszám",
+      "message": "Üzenet",
+      "send": "Küld",
+      "post_success": "Köszönjük hogy kapcsolatba léptél velünk. A lehető leghamarabb visszatérünk Önhöz."
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "A fiókom",
+      "details": "Számla részletei",
+      "view_addresses": "Címek megtekintése",
+      "return": "Vissza a Számla részleteihez"
+    },
+    "activate_account": {
+      "title": "Aktiválja a fiókot",
+      "subtext": "Fiókja aktiválásához hozza létre jelszavát.",
+      "password": "Jelszó",
+      "password_confirm": "Jelszó megerősítése",
+      "submit": "Aktiválja a fiókot",
+      "cancel": "Meghívás elutasítása"
+    },
+    "addresses": {
+      "title": "Az Ön címei",
+      "default": "Alapértelmezett",
+      "add_new": "Új cím hozzáadása",
+      "edit_address": "Cím szerkesztése",
+      "first_name": "Keresztnév",
+      "last_name": "Vezetéknév",
+      "company": "Vállalat",
+      "address1": "Cím 1",
+      "address2": "Cím 2",
+      "city": "Város",
+      "country": "Ország\/régió",
+      "province": "Tartomány",
+      "zip": "Postai \/ irányítószám",
+      "phone": "Telefon",
+      "set_default": "Beállítás alapértelmezett címként",
+      "add": "Adja meg a címet",
+      "update": "Frissítse a címet",
+      "cancel": "Megszünteti",
+      "edit": "Szerkesztés",
+      "delete": "Töröl"
+    },
+    "login": {
+      "title": "Belépés",
+      "email": "Email",
+      "password": "Jelszó",
+      "forgot_password": "Elfelejtette a jelszavát?",
+      "sign_in": "Bejelentkezés",
+      "cancel": "Vissza az Áruházba",
+      "guest_title": "Továbbra is vendégként",
+      "guest_continue": "Folytatni"
+    },
+    "orders": {
+      "title": "Rendelési előzmények",
+      "order_number": "Rendelés",
+      "date": "Dátum",
+      "payment_status": "Fizetési állapot",
+      "fulfillment_status": "Teljesítés állapota",
+      "total": "Teljes",
+      "none": "Még nem adott le rendelést."
+    },
+    "order": {
+      "title": "Rendelés: {{ name }}",
+      "date": "Elhelyezve: {{ date }}",
+      "cancelled": "Megrendelés törölve ekkor: {{ date }}",
+      "cancelled_reason": "Ok: {{ reason }}",
+      "billing_address": "számlázási cím",
+      "payment_status": "Fizetési állapot",
+      "shipping_address": "szállítási cím",
+      "fulfillment_status": "Teljesítés állapota",
+      "discount": "Kedvezmény",
+      "shipping": "Szállítás",
+      "tax": "Adó",
+      "product": "Termék",
+      "sku": "SKU",
+      "price": "Ár",
+      "quantity": "Mennyiség",
+      "total": "Teljes",
+      "fulfilled_at": "Teljesült: {{ date }}",
+      "subtotal": "Részösszeg",
+      "track_shipment": "Szállítás nyomon követése"
+    },
+    "recover_password": {
+      "title": "Állítsd vissza a jelszavad",
+      "email": "Email",
+      "submit": "Beküldés",
+      "cancel": "Megszünteti",
+      "subtext": "E-mailt küldünk a jelszava visszaállításához.",
+      "success": "Küldtünk Önnek egy e-mailt a jelszó frissítéséhez szükséges linkkel."
+    },
+    "reset_password": {
+      "title": "Állítsa vissza a fiók jelszavát",
+      "subtext": "Adjon meg új jelszót a következőhöz: {{ email }}",
+      "password": "Jelszó",
+      "password_confirm": "Jelszó megerősítése",
+      "submit": "Jelszó visszaállítása"
+    },
+    "register": {
+      "title": "Fiók létrehozása",
+      "first_name": "Keresztnév",
+      "last_name": "Vezetéknév",
+      "email": "Email",
+      "password": "Jelszó",
+      "submit": "Teremt",
+      "cancel": "Vissza az Áruházba"
+    }
+  },
+  "home_page": {
+    "slideshow": {
+      "navigation_instructions": "A bal\/jobb nyilak segítségével navigálhat a diavetítésben, vagy csúsztassa az ujját balra\/jobbra, ha mobileszközt használ",
+      "next_slide": "Következő dia",
+      "previous_slide": "Előző dia",
+      "play": "Diavetítés lejátszása",
+      "pause": "Diavetítés szüneteltetése",
+      "load_slide": "Dia betöltése: {{ slide_number }}",
+      "active_slide": "{{ slide_number }}. dia, aktuális"
+    },
+    "onboarding": {
+      "product_vendor": "Termék szállítója",
+      "product_title": "Példa termékcímre",
+      "collection_title": "Példa a gyűjtemény címére",
+      "blog_title": "A bejegyzésed címe",
+      "blog_excerpt": "Az üzleted még nem tett közzé blogbejegyzéseket. A blogon új termékbevezetésekről, tippekről vagy egyéb hírekről beszélhet, amelyeket meg szeretne osztani ügyfeleivel. A Shopify e-kereskedelmi blogjában inspirációt és tanácsokat találhat saját üzletéhez és blogjához.",
+      "no_content": "Ez a szakasz jelenleg nem tartalmaz tartalmat. Adjon hozzá tartalmat ehhez a szakaszhoz az oldalsáv segítségével."
+    },
+    "map": {
+      "address_error": "Hiba történt a cím keresése során",
+      "address_no_results": "Nincs találat erre a címre",
+      "address_query_limit_html": "Túllépte a Google API használati korlátját. Fontolja meg a <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">prémium csomagra<\/a> való frissítést.",
+      "auth_error_html": "Hiba történt a Google Térkép-fiók hitelesítésekor."
+    }
+  },
+  "layout": {
+    "cart": {
+      "title": "Kosár"
+    },
+    "customer": {
+      "account": "fiók",
+      "log_out": "Kijelentkezés",
+      "log_in": "Belépés",
+      "create_account": "Fiók létrehozása"
+    },
+    "footer": {
+      "social_platform": "{{ name }}, {{ platform }}"
+    }
+  },
+  "products": {
+    "general": {
+      "save_html": "Mentés {{ saved_amount }}",
+      "collection_return": "Vissza ide: {{ collection }}",
+      "sale_price": "Eladási ár",
+      "regular_price": "Normál ár",
+      "include_taxes": "Tartalmazza az adót.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">A kiszállítás<\/a> a pénztárnál számítva.",
+      "unit_price": "Egységár"
+    },
+    "product": {
+      "sold_out": "Eladva",
+      "sold_out_html": "Eladva",
+      "unavailable": "Nem érhető el",
+      "quantity": "Mennyiség",
+      "add_to_cart": "Kosárba",
+      "replace": "Cserélje ki",
+      "full_details": "Összes részlet",
+      "view_more": "Mutass többet",
+      "view_in_space": "Nézd meg a te téreden",
+      "view_in_space_label": "Megtekintés a terében, betölti az elemet a kiterjesztett valóság ablakában",
+      "slide_label": "{{ slide_max }}\/{{ slide_number }}. dia.",
+      "gallery_thumbnail_alt": "Kép betöltése a Galérianézegetőbe, {{ imageAlt }}",
+      "video_thumbnail_alt": "Videó betöltése és lejátszása a Galérianézegetőben, {{ imageAlt }}",
+      "model_thumbnail_alt": "3D modell betöltése a Galérianézegetőbe, {{ imageAlt }}"
+    },
+    "zoom": {
+      "next": "Következő (jobbra nyíl gomb)",
+      "prev": "Előző (balra nyíl gomb)",
+      "close": "Bezárás (Esc)"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Íme a(z) {{ value }} ajándékutalványa a következőre: {{ shop }}!",
+      "subtext": "Íme az ajándékutalványod!",
+      "disabled": "Tiltva",
+      "expired": "Lejárt: {{ expiry }}",
+      "active": "Lejár: {{ expiry }}",
+      "redeem": "Használja ezt a kódot a pénztárnál az ajándékutalvány beváltásához",
+      "shop_link": "Kezdje el a vásárlást",
+      "print": "Nyomtatás",
+      "add_to_apple_wallet": "Hozzáadás az Apple Wallethez"
+    }
+  },
+  "date_formats": {
+    "month_day_year": "%a %b %d"
+  }
+}

@@ -1,0 +1,35 @@
+{%- if settings.dbtfy_cart_discount -%}
+  {%- liquid
+    assign icon = settings.dbtfy_cart_discount_icon
+    assign button_icon = settings.dbtfy_cart_discount_apply_button_icons
+    assign label = 'add-ons.cart_discount.label' | t
+    assign placeholder = 'add-ons.cart_discount.placeholder' | t
+    assign button_label = 'add-ons.cart_discount.button_label' | t
+  -%}
+
+  <div class="dbtfy dbtfy-cart_discount{% if position == 'cart_drawer' %} drawer__inner-section ajaxcart__discount{% endif %}{% if position == 'cart_page' %} card card-mobile spacer-top{% endif %}">
+    <div class="CartDiscount{% if position == 'cart_page' %} card-body{% endif %}">
+      {% unless label == blank %}
+        <label for="cd-input">
+          <span class="{{ settings.icon }} icon-width" aria-hidden="true">
+            {{ icon }}
+          </span>
+
+          {{ label }}
+        </label>
+      {% endunless %}
+
+      <div class="input-group">
+        <input id="cd-input" class="input-cart_discount input--small input-group-field" autocomplete="off" type="text" name="discount" placeholder="{{ placeholder }}"/>
+
+        <button type="button" class="btn btn--primary btn-square-small input-group-btn cd-apply" name="apply-discount" aria-label="{{ button_label }}" title="{{ button_label }}">
+          <span class="btn__text">
+            <span class="{{ settings.icon }} icon-width">
+              {{ button_icon }}
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

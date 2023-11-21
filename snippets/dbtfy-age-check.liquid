@@ -1,0 +1,116 @@
+{%- if settings.dbtfy_age_check -%}
+  {%- liquid
+    assign logo_svg = settings.dbtfy_age_check_logo_svg
+    assign logo_image = settings.dbtfy_age_check_logo_image
+    assign logo_image_width = settings.dbtfy_age_check_logo_image_width
+    assign valid_age = settings.dbtfy_age_check_valid_age
+    assign verification_type = settings.dbtfy_age_check_option
+    assign background_image = settings.dbtfy_age_check_background_image
+    assign title = 'add-ons.age_check.title' | t
+    assign description = 'add-ons.age_check.description' | t
+    assign error_message = 'add-ons.age_check.error_message' | t
+    assign yes_label = 'add-ons.age_check.yes_label' | t
+    assign no_label = 'add-ons.age_check.no_label' | t
+    assign button_label = 'add-ons.age_check.button_label' | t
+  -%}
+
+  <div class="dbtfy dbtfy-age_check" data-valid-age="{{ valid_age }}">
+    <div class="modal stacked-on-top-of-content text-center ac-modal" data-modal-no-close>
+      <div class="modal-dialog">
+        <div class="modal-content overlay-content">
+
+          <div class="modal-body">
+            {%- liquid
+              if logo_svg != blank
+                assign ac_image = logo_svg
+                assign ac_image_type = 'svg'
+              elsif logo_image != blank
+                assign ac_image = logo_image
+                assign ac_image_type = 'retina'
+              endif
+            -%}
+
+            {%- if ac_image != blank -%}
+              <div class="spacer-bottom">
+                <img class="ac-image imgset lazyload radius-none"
+                  {%- render 'lazysizes', img: ac_image, img_type: ac_image_type, img_width: logo_image_width -%}
+                  alt="{{ shop.name }}">
+              </div>
+            {%- endif -%}
+
+            {%- if title != blank -%}
+              <h1>
+                {{ title }}
+              </h1>
+            {%- endif -%}
+
+            {%- if description != blank -%}
+              <p class="ac-adult-text">
+                {{ description }}
+              </p>
+            {%- endif -%}
+
+            {%- if error_message != blank -%}
+              <p class="ac-error-text errors text-center" style="display: none;">
+                {{ error_message }}
+              </p>
+            {%- endif -%}
+
+            {%- if verification_type == 'birth-date' -%}
+              <div>
+                <select value="0" class="ac-month-picker select--small spacer-bottom-sm full">
+                  <option value="0">{{ 'general.dates.month' | t }}</option>
+                  <option value="1">{{ 'general.months.full.january' | t }}</option>
+                  <option value="2">{{ 'general.months.full.february' | t }}</option>
+                  <option value="3">{{ 'general.months.full.march' | t }}</option>
+                  <option value="4">{{ 'general.months.full.april' | t }}</option>
+                  <option value="5">{{ 'general.months.full.may' | t }}</option>
+                  <option value="6">{{ 'general.months.full.june' | t }}</option>
+                  <option value="7">{{ 'general.months.full.july' | t }}</option>
+                  <option value="8">{{ 'general.months.full.august' | t }}</option>
+                  <option value="9">{{ 'general.months.full.september' | t }}</option>
+                  <option value="10">{{ 'general.months.full.october' | t }}</option>
+                  <option value="11">{{ 'general.months.full.november' | t }}</option>
+                  <option value="12">{{ 'general.months.full.december' | t }}</option>
+                </select>
+
+                <select value="0" class="ac-day-picker select--small spacer-bottom-sm full">
+                  <option value="0">{{ 'general.dates.day' | t }}</option>
+
+                  {%- for i in (1..31) -%}
+                    <option value="{{ forloop.index }}">{{ i }}</option>
+                  {%- endfor -%}
+                </select>
+
+                <select value="0" class="ac-year-picker select--small spacer-bottom-sm full">
+                  <option value="0">{{ 'general.dates.year' | t }}</option>
+
+                  {% assign current_year = "now" | date: "%Y" %}
+
+                  {%- for i in (1910..current_year) reversed -%}
+                    <option value="{{ i }}">{{ i }}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+
+              <button class="btn btn--primary full spacer-top-sm ac-submit-birthdate">{{ button_label }}</button>
+            {%- else -%}
+              <div class="ac-yes-no-option inline-list">
+                <button type="button" class="btn btn--primary ac-yes-option">{{ yes_label }}</button>
+                <button type="button" class="btn btn--primary ac-no-option">{{ no_label }}</button>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- if background_image != blank -%}
+      <div class="ac-popup-image-overlay lazyload bgset overlay-backdrop overlay-modal"
+      {%- render 'lazysizes', img: background_image, img_type: 'background' -%}>
+      </div>
+    {%- else -%}
+      <div class="overlay-modal overlay-backdrop"></div>
+    {%- endif -%}
+  </div>
+{% endif %}

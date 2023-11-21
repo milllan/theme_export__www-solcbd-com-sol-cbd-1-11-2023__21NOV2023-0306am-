@@ -1,0 +1,230 @@
+<div id="section-{{ section.id }}" class="{% unless section.settings.show_on_desktop %} medium--hide large--hide{% endunless %} {{ section.settings.section_style }}{% unless section.settings.show_on_mobile %} small--hide{% endunless %}" data-section-id="{{ section.id }}" data-section-type="custom-html-section">
+  <div class="{%- if section.settings.padding_section -%}box{%- endif -%}">
+    <div class="wrapper{{ section.settings.wrapper_size }}">
+      {%- if section.blocks.size > 0 -%}
+        <div class="grid grid-spacer">
+
+          <!-- Blocks -->
+          {%- for block in section.blocks -%}
+
+            {%- liquid
+              case block.settings.column_width
+                when 1
+                  assign block_width = 'large--one-twelfth medium--one-twelfth'
+                when 2
+                  assign block_width = 'large--two-twelfths medium--two-twelfths'
+                when 3
+                  assign block_width = 'large--three-twelfths medium--three-twelfths'
+                when 4
+                  assign block_width = 'large--four-twelfths medium--four-twelfths'
+                when 5
+                  assign block_width = 'large--five-twelfths medium--five-twelfths'
+                when 6
+                  assign block_width = 'large--six-twelfths medium--six-twelfths'
+                when 7
+                  assign block_width = 'large--seven-twelfths medium--seven-twelfths'
+                when 8
+                  assign block_width = 'large--eight-twelfths medium--eight-twelfths'
+                when 9
+                  assign block_width = 'large--nine-twelfths medium--nine-twelfths'
+                when 10
+                  assign block_width = 'large--ten-twelfths medium--ten-twelfths'
+                when 11
+                  assign block_width = 'large--eleven-twelfths medium--eleven-twelfths'
+                when 12
+                  assign block_width = 'large--twelfth-twelfths medium--twelfth-twelfths'
+                endcase
+            -%}
+
+            {%- liquid
+              case block.settings.column_width_mobile
+                when 1
+                  assign block_width_mobile = 'small--one-twelfth'
+                when 2
+                  assign block_width_mobile = 'small--two-twelfths'
+                when 3
+                  assign block_width_mobile = 'small--three-twelfths'
+                when 4
+                  assign block_width_mobile = 'small--four-twelfths'
+                when 5
+                  assign block_width_mobile = 'small--five-twelfths'
+                when 6
+                  assign block_width_mobile = 'small--six-twelfths'
+                when 7
+                  assign block_width_mobile = 'small--seven-twelfths'
+                when 8
+                  assign block_width_mobile = 'small--eight-twelfths'
+                when 9
+                  assign block_width_mobile = 'small--nine-twelfths'
+                when 10
+                  assign block_width_mobile = 'small--ten-twelfths'
+                when 11
+                  assign block_width_mobile = 'small--eleven-twelfths'
+                when 12
+                  assign block_width_mobile = 'small--twelfth-twelfths'
+              endcase
+            -%}
+
+            <div class="grid__item {{ block_width }} {{ block_width_mobile }}" 
+            {{ block.shopify_attributes }}>
+              {%- if block.settings.code != blank -%}
+                <div class="{{ block.settings.text_alignment }}">
+                  {{ block.settings.code }}
+                </div>
+              {%- else -%}
+                <div class="text-center">
+                  {{ 'home_page.onboarding.no_content' | t }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.blocks.size == 0 -%}
+        {%- render 'no-blocks' -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.custom_html.name",
+	  "class": "custom-html-section",
+    "max_blocks": 9,
+	  "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_on_desktop",
+        "label": "t:sections.custom_html.settings.show_on_desktop.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_on_mobile",
+        "label": "t:sections.custom_html.settings.show_on_mobile.label",
+        "default": true
+      },
+	    {
+        "type": "checkbox",
+        "id": "padding_section",
+        "label": "t:sections.custom_html.settings.add_padding.label",
+		    "default": true
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "t:sections.custom_html.settings.section_style.label",
+        "default": "section-blank",
+        "options": [
+          {
+            "value": "section-blank",
+            "label": "t:sections.custom_html.settings.section_style.options__1.label"
+          },
+		      {
+            "value": "section-default",
+            "label": "t:sections.custom_html.settings.section_style.options__2.label"
+          },
+          {
+            "value": "section-border",
+            "label": "t:sections.custom_html.settings.section_style.options__3.label"
+          }
+        ]
+      },
+	    {
+        "type": "select",
+        "id": "wrapper_size",
+        "label": "t:sections.custom_html.settings.wrapper_size.label",
+		    "default": "",
+        "options": [
+		      {
+            "value": "",
+            "label": "t:sections.custom_html.settings.wrapper_size.options__1.label"
+          },
+	        {
+            "value": "-fluid",
+            "label": "t:sections.custom_html.settings.wrapper_size.options__2.label"
+          },
+		      {
+            "value": "-full",
+            "label": "t:sections.custom_html.settings.wrapper_size.options__3.label"
+          }
+        ]
+      }
+	  ],
+    "blocks": [
+      {
+        "type": "html",
+        "name": "t:sections.custom_html.blocks.html.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.custom_html.blocks.html.settings.block_name.label",
+            "info": "t:sections.custom_html.blocks.html.settings.block_name.info"
+          },
+          {
+            "type": "html",
+            "id": "code",
+            "label": "t:sections.custom_html.blocks.html.settings.html_code.label",
+			      "default": "<h2>Custom HTML!</h2><p>This section can be used to code your own custom layout.</p>"
+          },
+          {
+            "type": "range",
+            "id": "column_width",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "label": "t:sections.custom_html.blocks.html.settings.column_width_desktop.label",
+            "default": 4
+          },
+          {
+            "type": "range",
+            "id": "column_width_mobile",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "label": "t:sections.custom_html.blocks.html.settings.column_width_mobile.label",
+            "default": 12
+          },
+		      {
+            "type": "select",
+            "id": "text_alignment",
+            "label": "t:sections.custom_html.blocks.html.settings.text_alignment.label",
+            "default": "text-center",
+            "options": [
+              {
+                "value": "text-left",
+                "label": "t:sections.custom_html.blocks.html.settings.text_alignment.options__1.label"
+              },
+              {
+                "value": "text-center",
+                "label": "t:sections.custom_html.blocks.html.settings.text_alignment.options__2.label"
+              },
+              {
+                "value": "text-right",
+                "label": "t:sections.custom_html.blocks.html.settings.text_alignment.options__3.label"
+              },
+               {
+                "value": "text-justify",
+                "label": "t:sections.custom_html.blocks.html.settings.text_alignment.options__4.label"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.custom_html.presets.name",
+        "category": "t:sections.custom_html.presets.category",
+        "blocks": [
+          {
+            "type": "html"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

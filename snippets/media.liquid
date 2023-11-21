@@ -1,0 +1,183 @@
+{% comment %}
+  Renders a media element for the product gallery.
+  Media types include: image, video, external_video and model.
+  Accepts:
+  - media: {Object} Media Liquid object (required)
+  - enable_image_zoom: {Boolean} Image zoom setting (required for media type image)
+  - stacked: {Boolean} Layout type set as stacked (required)
+  - featured: {Boolean} Media is set as featured (required)
+
+  Usage:
+  {%- for media in product.media -%}
+    {% include 'media', media: media, enable_image_zoom: true, featured: true, stacked: true %}
+  {%- endfor -%}
+{% endcomment %}
+
+{% capture media_id %}{{ id }}-{{ media.id }}{% endcapture %}
+{% capture img_id_class %}product-single__media-{{ media_id }}{% endcapture %}
+{% capture wrapper_id %}ProductMediaWrapper-{{ media_id }}{% endcapture %}
+{% capture image_size %}{{ height }}x{{ height }}{% endcapture %}
+
+{%- assign display_zoom_icon = false -%}
+
+{%- if enable_image_zoom_on_icon_click -%}
+  {%- assign display_zoom_icon = true -%}
+  
+  {%- if full_screen_image -%}
+      {%- if media.media_type == "external_video" -%}
+        {%- assign display_zoom_icon = false -%}
+      {%- endif -%}
+  {%- else -%}
+      {%- if media.media_type == "model" or media.media_type == "video" or media.media_type == "external_video" -%}
+        {%- assign display_zoom_icon = false -%}
+      {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+
+
+<div id="{{ wrapper_id }}" class="product-single__media-wrapper{% if featured %} featured-media{% endif %}"
+{% if media.media_type == 'video' or media.media_type == 'external_video' %} data-product-media-type-video data-enable-video-looping="{{ video_looping }}"{% endif %}
+{% if media.media_type == 'model' %} data-product-media-type-model{% endif %}
+{% if media.media_type == 'external_video' %} data-video-id="{{ media.external_id }}"{% endif %}
+data-product-single-media-wrapper
+data-media-id="{{ media_id }}"
+tabindex="-1">
+  {% case media.media_type %}
+  {% when 'image' %}
+    <div class="product--wrapper product-single__media media-wrapper thumbnail-{{ section.settings.thumbnails_position }}"
+    style="padding-top:{{ 1 | divided_by: media.aspect_ratio | times: 100}}%;"
+    {% if full_screen_image == false %}data-zoom="{{ media | img_url: 'master', scale: 2 }}"{% endif %}> 
+      {% if enable_image_zoom_on_icon_click and full_screen_image %}
+        <a 
+          href="{{ media | img_url: 'original' }}" 
+          data-media-href="{{ media | img_url: 'original' }}" 
+          data-fancybox="gallery-{{ product.id }}"
+          class="productGallery"
+        >
+      {% endif %}
+      
+      <img class="product--image media lazyload {{ img_id_class }}" 
+      {%- render 'lazysizes', img: media, img_type: 'responsive' -%}
+      alt="{{ media.alt }}"
+      data-media-id="{{ media.id }}">
+      
+      {% if enable_image_zoom_on_icon_click and full_screen_image %}
+        </a>
+      {% endif %}
+    </div>
+    {%- if display_zoom_icon -%}
+    <button data-image-index="{{ image_index }}" type="button" class="btn-zoom-{{ id }} btn-zoom">
+      <span class="zoom-icon icon-md"></span>
+    </button>
+    {%- endif -%}
+  {% when 'external_video' %}
+    <div class="product-single__media media-wrapper product-single__media--video product-single__media--video-external" style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%;">
+      {% if enable_image_zoom_on_icon_click and full_screen_image %}
+        <a
+          href="{{ media | external_video_url }}" 
+          data-media-href="{{ media | img_url: 'original' }}"
+          data-media-type="{{ media.media_type }}" 
+          data-fancybox="gallery-{{ product.id }}" 
+          class="productGallery"
+        >
+      {% endif %}
+          
+      {{ media | external_video_tag }}
+          
+      {% if enable_image_zoom_on_icon_click and full_screen_image %}
+        </a>
+      {% endif %}
+    </div>
+    {%- if display_zoom_icon -%}
+      <button data-image-index="{{ image_index }}" type="button" class="btn-zoom-{{ id }} btn-zoom">
+        <span class="zoom-icon icon-md"></span>
+      </button>
+      {%- endif -%}
+  {% when 'video' %}
+    <div class="product-single__media media-wrapper product-single__media--video" style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%;">
+      {% if enable_image_zoom_on_icon_click and full_screen_image %}
+        {%- assign media_url = media -%}
+
+        {%- unless media_url contains "youtube" or media_url contains "vimeo" -%}
+          {%- if media.sources.first.format == "mp4" -%}
+            {%- assign media_url = media.sources.first.url -%}
+          {%- else if media.sources.[1].format == "mp4" -%}
+            {%- assign media_url = media.sources[1].url -%}
+          {%- else if media.sources[2].format == "mp4" -%}
+            {%- assign media_url = media.sources[2].url -%}
+          {%- endif -%}
+        {%- endunless -%}
+
+        <a
+        href="{{ media_url }}"
+        data-media-href="{{ media | img_url: '850x850' }}" 
+        data-media-type="{{ media.media_type }}" 
+        data-fancybox="gallery-{{ product.id }}" 
+        class="productGallery"
+        >
+      {% endif %}
+
+      {{ media | video_tag: controls: false, class: 'media-video', image_size: image_size }}
+          
+      {% if enable_image_zoom_on_icon_click and full_screen_image %}
+        </a>
+      {% endif %}
+    </div>
+    {%- if display_zoom_icon -%}
+      <button data-image-index="{{ image_index }}" type="button" class="btn-zoom-{{ id }} btn-zoom">
+        <span class="zoom-icon icon-md"></span>
+      </button>
+      {%- endif -%}
+  {% when 'model' %}
+    <div class="product-single__media {% if enable_image_zoom_on_icon_click and full_screen_image %}has-full-screen-image-zoom-enabled{% endif %}" style="padding-top:100%;position: relative;">
+      {%- assign model_id = '3dmodel' | append: media.id -%}
+      
+      {%- if enable_image_zoom_on_icon_click and full_screen_image -%}
+        <a 
+          href="{{ media | img_url: 'original' }}"
+          data-media-href="{{ media | img_url: 'original' }}" 
+          data-fancybox="gallery-{{ product.id }}"
+          data-fancybox="gallery-{{ product.id }}"
+          data-options='{"src": "#{{ model_id }}", "touch": false, "clickSlide" : false, "slideClass": "product-model", "keyboard": 0, "thumb": "{{ media | img_url: 'original' }}"}' 
+          href="javascript:;" 
+          class="productGallery"
+          data-media-type="{{ media.media_type }}"
+        >
+      {%- endif -%}
+
+      {%- assign model_size = image_size | times: 4 -%}
+      {{ media | model_viewer_tag: image_size: image_size, class:'model-media-item', reveal: 'auto', toggleable: false, data-model-id: media.id, id:model_id  }}
+
+      {%- if enable_image_zoom_on_icon_click and full_screen_image -%}
+        </a>
+      {%- endif -%}
+    </div>
+     {%- if display_zoom_icon -%}
+      <button data-image-index="{{ image_index }}" type="button" class="btn-zoom-{{ id }} btn-zoom">
+        <span class="zoom-icon icon-md"></span>
+      </button>
+      {%- endif -%}
+  {% else %}
+    <div class="product-single__media media-wrapper" style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%;">
+      {% if enable_image_zoom_on_icon_click and full_screen_image %}
+        <a href="{{ media }}" data-fancybox="gallery-{{ product.id }}" class="productGallery">
+      {% endif %}
+          
+      {{ media | media_tag: class: 'media-item', image_size: image_size }}
+
+      {% if enable_image_zoom_on_icon_click and full_screen_image %}
+        </a>
+      {% endif %}
+    </div>
+    {%- if display_zoom_icon -%}
+      <button data-image-index="{{ image_index }}" type="button" class="btn-zoom-{{ id }} btn-zoom">
+        <span class="zoom-icon icon-md"></span>
+      </button>
+      {%- endif -%}
+  {% endcase %}
+  <noscript>
+    <img class="product-single__media media-wrapper" src="{{ media | img_url: 'master' }}"
+      alt="{{ media.alt | escape }}">
+  </noscript>
+</div>

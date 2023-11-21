@@ -1,0 +1,91 @@
+<!-- /templates/customers/register.liquid -->
+<div class="box">
+  <div class="wrapper">
+
+    <div class="grid">
+      <div class="grid__item large--four-twelfths push--large--four-twelfths">
+
+        <div class="section-header">
+          <div class="page-title-wrapper">
+            <h1 class="page-title">{{ 'customer.register.title' | t }}</h1>
+          </div>
+        </div>
+
+        {%- form 'create_customer', class: 'form-vertical' -%}
+          {%- if form.errors -%}
+          {{ form.errors | default_errors }}
+          {%- endif -%}
+
+          <label for="FirstName">{{ 'customer.register.first_name' | t }}</label>
+          <input type="text"
+                name="customer[first_name]"
+                id="FirstName"
+                placeholder="{{ 'customer.register.first_name' | t }}"
+                {%- if form.first_name -%}
+                value="{{ form.first_name }}"
+                {%- endif -%}
+                autocapitalize="words"
+                autofocus="autofocus">
+
+          <label for="LastName">{{ 'customer.register.last_name' | t }}</label>
+          <input type="text"
+                name="customer[last_name]"
+                id="LastName"
+                placeholder="{{ 'customer.register.last_name' | t }}"
+                {%- if form.last_name -%}
+                value="{{ form.last_name }}"
+                {%- endif -%}
+                autocapitalize="words">
+
+          <label for="Email">{{ 'customer.register.email' | t }} *</label>
+          <input type="email"
+                name="customer[email]"
+                id="Email"
+                class="{%- if form.errors contains 'email' -%} input-error{%- endif -%}"
+                placeholder="{{ 'customer.register.email' | t }}" {%- if form.email -%}
+                value="{{ form.email }}"{%- endif -%}
+                autocorrect="off"
+                autocapitalize="off"
+                pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
+                required="required"
+                {%- if form.errors contains 'email' -%}
+                aria-invalid="true"
+                {%- endif -%}>
+
+          <label for="CreatePassword">{{ 'customer.register.password' | t }}</label>
+          <input type="password"
+                name="customer[password]"
+                id="CreatePassword"
+                class="{%- if form.errors contains 'password' -%} input-error{%- endif -%}"
+                placeholder="{{ 'customer.register.password' | t }}"
+                {%- if form.errors contains 'password' -%}
+                aria-invalid="true"
+                {%- endif -%}>
+
+          <input type="hidden" name="customer[accepts_marketing]" value="" />
+
+          <div class="checkbox">
+            <input id="registerOptin"
+                  type="checkbox"
+                  name="customer[accepts_marketing]"
+                  checked="checked" />
+            <label for="registerOptin" class="text-small label-checkbox">{{ 'shopify.checkout.marketing.accept_marketing_checkbox_label' | t }}</label>
+          </div>
+
+          <button type="submit" class="btn btn--primary full">
+            <span class="btn__text">
+              {{ 'customer.register.submit' | t }}
+            </span>
+          </button>
+        {%- endform -%}
+
+        <div class="text-center spacer-top">
+          <p><a href="{{ routes.account_login_url }}"><span class="{{ settings.icon }}" aria-hidden="true">exit_to_app</span> {{ 'layout.customer.log_in' | t }}</a></p>
+          <p><a href="{{ routes.root_url }}"><span class="{{ settings.icon }}" aria-hidden="true">storefront</span> {{ 'customer.login.cancel' | t }}</a></p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

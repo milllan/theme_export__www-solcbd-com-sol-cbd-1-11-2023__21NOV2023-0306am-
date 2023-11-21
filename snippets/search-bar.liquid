@@ -1,0 +1,47 @@
+<!-- /snippets/search-bar.liquid -->
+{%- capture form_content -%}
+  {%- liquid
+    assign search_type = ""
+
+    if settings.search_show_products
+      assign search_type = search_type | append: ',' | append: 'product'
+    endif
+
+    if settings.search_show_articles
+      assign search_type = search_type | append: ',' | append: 'article'
+    endif
+
+    if settings.search_show_pages
+      assign search_type = search_type | append: ',' | append: 'page'
+    endif
+  -%}
+
+  <div class="input-group">
+    <input type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.placeholder' | t }}"
+          class="search-input input-group-field"
+          aria-label="{{ 'general.search.placeholder' | t }}"
+          required="required"
+          {%- if search_location == "drawer" -%}data-focus{%- endif -%}>
+
+    <input type="hidden" name="type" value="{{ search_type | remove_first: ',' }}" />
+    <input type="hidden" name="options[prefix]" value="last" aria-hidden="true" />
+
+    <button type="submit" class="btn btn--primary btn--square input-group-btn" aria-label="{{ 'general.search.submit' | t }}" title="{{ 'general.search.submit' | t }}">
+      <span class="btn__text">
+        <span class="{{ settings.icon }}" aria-hidden="true">search</span>
+      </span>
+    </button>
+  </div>
+{%- endcapture -%}
+
+{%- if form_tag -%}
+  <form action="{{ routes.search_url }}" method="get" class="search-bar {{ input_type }}" role="search">
+    {{ form_content }}
+  </form>
+{%- else -%}
+  {{ form_content }}
+{%- endif -%}
+

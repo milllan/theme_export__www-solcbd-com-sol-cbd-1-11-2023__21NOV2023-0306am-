@@ -1,0 +1,796 @@
+
+  
+  
+      <style>
+        @font-face {
+  font-family: 'Russo One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/russoone/v16/Z9XUDmZRWg6M1LvRYsHOz8mP.woff) format('woff');
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Russo One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/russoone/v16/Z9XUDmZRWg6M1LvRYsHOy8mJvLuL9BLT.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Russo One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/russoone/v16/Z9XUDmZRWg6M1LvRYsHOwcmJvLuL9BLT.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Russo One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/russoone/v16/Z9XUDmZRWg6M1LvRYsHOz8mJvLuL9A.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+      </style>
+    
+  <style>
+    .gps-486263458162017201 .btn-disabled{cursor:default}.gps-486263458162017201 .pointer-events-none{pointer-events:none}.gps-486263458162017201 .pointer-events-auto{pointer-events:auto}.gps-486263458162017201 .invisible{visibility:hidden}.gps-486263458162017201 .static{position:static}.gps-486263458162017201 .absolute{position:absolute}.gps-486263458162017201 .relative{position:relative}.gps-486263458162017201 .z-9{z-index:9}.gps-486263458162017201 .mx-auto{margin-left:auto;margin-right:auto}.gps-486263458162017201 .mb-0{margin-bottom:0}.gps-486263458162017201 .block{display:block}.gps-486263458162017201 .inline-block{display:inline-block}.gps-486263458162017201 .flex{display:flex}.gps-486263458162017201 .inline-flex{display:inline-flex}.gps-486263458162017201 .grid{display:grid}.gps-486263458162017201 .contents{display:contents}.gps-486263458162017201 .\!hidden{display:none!important}.gps-486263458162017201 .hidden{display:none}.gps-486263458162017201 .h-5{height:20px}.gps-486263458162017201 .h-full{height:100%}.gps-486263458162017201 .w-5{width:20px}.gps-486263458162017201 .w-full{width:100%}.gps-486263458162017201 .w-max{width:-moz-max-content;width:max-content}.gps-486263458162017201 .min-w-max{min-width:-moz-max-content;min-width:max-content}.gps-486263458162017201 .\!max-w-max{max-width:-moz-max-content!important;max-width:max-content!important}.gps-486263458162017201 .max-w-full{max-width:100%}.gps-486263458162017201 .flex-1{flex:1 1 0%}@keyframes spin{to{transform:rotate(1turn)}}.gps-486263458162017201 .animate-spin{animation:spin 1s linear infinite}.gps-486263458162017201 .flex-col{flex-direction:column}.gps-486263458162017201 .flex-wrap{flex-wrap:wrap}.gps-486263458162017201 .items-end{align-items:flex-end}.gps-486263458162017201 .items-center{align-items:center}.gps-486263458162017201 .justify-center{justify-content:center}.gps-486263458162017201 .gap-3{gap:12px}.gps-486263458162017201 .gap-y-0{row-gap:0}.gps-486263458162017201 .overflow-hidden{overflow:hidden}.gps-486263458162017201 .overflow-clip{overflow:clip}.gps-486263458162017201 .truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gps-486263458162017201 .rounded-none{border-radius:0}.gps-486263458162017201 .text-center{text-align:center}.gps-486263458162017201 .align-middle{vertical-align:middle}.gps-486263458162017201 .text-g-bg-3{color:var(--g-c-bg-3)}.gps-486263458162017201 .text-g-text-3{color:var(--g-c-text-3)}.gps-486263458162017201 .line-through{text-decoration-line:line-through}.gps-486263458162017201 .no-underline{text-decoration-line:none}.gps-486263458162017201 .decoration-g-text-1{text-decoration-color:var(--g-c-text-1)}.gps-486263458162017201 .opacity-25{opacity:.25}.gps-486263458162017201 .opacity-30{opacity:.3}.gps-486263458162017201 .opacity-75{opacity:.75}.gps-486263458162017201 .transition-colors{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-486263458162017201 .duration-200{transition-duration:.2s}.gps-486263458162017201 .duration-300{transition-duration:.3s}.gps-486263458162017201 .ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-486263458162017201 .disabled\:btn-disabled:disabled{cursor:default}.gps-486263458162017201 .disabled\:pointer-events-none:disabled{pointer-events:none}.gps-486263458162017201 .disabled\:opacity-30:disabled{opacity:.3}.gps-486263458162017201 .data-\[disabled\=true\]\:hidden[data-disabled=true],.gps-486263458162017201 .data-\[hidden\=true\]\:hidden[data-hidden=true]{display:none}.gps-486263458162017201 .group[data-state=loading] .group-data-\[state\=loading\]\:visible{visibility:visible}.gps-486263458162017201 .group[data-state=loading] .group-data-\[state\=loading\]\:invisible{visibility:hidden}.gps-486263458162017201 .\[\&_\*\]\:max-w-full *{max-width:100%}.gps-486263458162017201 .\[\&_p\]\:inline p{display:inline}.gps-486263458162017201 .\[\&_p\]\:truncate p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gps-486263458162017201 .\[\&_p\]\:after\:whitespace-pre-wrap p:after{content:var(--tw-content);white-space:pre-wrap}.gps-486263458162017201 .\[\&_p\]\:after\:content-\[\'\\A\'\] p:after{--tw-content:"\A";content:var(--tw-content)}
+  </style>
+  
+      
+      
+            <section
+              class="mx-auto max-w-full"
+              style="--w:100%;--w-tablet:100%;--w-mobile:100%;--pl:0px;--pl-tablet:0px;--pl-mobile:0px;--pr:0px;--pr-tablet:0px;--pr-mobile:0px"
+            >
+              
+    <div
+      id="gxqmy0wX9v"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--pl:15px;--pb:72px;--pr:15px;--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:#FFFFFF;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gxqmy0wX9v mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gDJ7Ycaht0 relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="gv1sXUkLjw"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-2xl);--cg:32px;--pc:start;--gtc:minmax(0, 12fr);--w:var(--g-ct-w, 1200px);--w-tablet:var(--g-ct-w, 100%);--w-mobile:var(--g-ct-w, 100%);--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gv1sXUkLjw mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gi3VzoTsJB relative flex flex-col"
+    >
+      <div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-s)" class="gBBoz05xAy ">
+      
+    <div
+      parentTag="Col"
+        class="gBBoz05xAy  overflow-clip"
+        style="--tt:default;--ta:center"
+      >
+      <div class="flex" style="--jc:center">
+        <h2
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#242424;--fs:normal;--ff:var(--g-font-Russo-One, Russo One);--weight:400;--ls:normal;--lh:130%;--size:48px;--size-tablet:48px;--size-mobile:42px;word-break:break-word"
+        >
+        <p>LIMITED TIME DEAL IS ON</p>
+        </h2>
+      </div>
+    </div>
+      </div>
+    <div
+      parentTag="Col"
+        class="gaWFLmj5Wn  overflow-clip"
+        style="--tt:default;--ta:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xl)"
+      >
+      <div class="flex" style="--jc:center">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#242424;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:600;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px;word-break:break-word"
+        >
+        <p>Get a bonus Black Wireless Headphone when you purchase our GemTech Gaming Laptop Computer with the Best Price</p>
+        </div>
+      </div>
+    </div>
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product.v2.js" defer="defer"></script>
+    {%- assign gpBkProduct = product -%}
+    
+        {%- liquid
+          if request.page_type == 'product'
+            if 'static' == 'static'
+              if 'latest' == 'latest'
+                paginate collections.all.products by 100000
+                  assign product = collections.all.products | sort: 'created_at' | reverse | first
+                endpaginate
+              else
+                assign product = all_products['']
+                if product == empty or product == null
+                  paginate collections.all.products by 100000
+                    for item in collections.all.products 
+                      if item.id == 'latest'
+                        assign product = item
+                      endif
+                    endfor
+                  endpaginate
+                endif
+              endif
+            endif
+          else
+            if 'latest' == 'latest'
+              paginate collections.all.products by 100000
+                assign product = collections.all.products | sort: 'created_at'| reverse | first
+              endpaginate
+            else
+              assign product = all_products['']
+              if product == empty or product == null
+                paginate collections.all.products by 100000
+                  for item in collections.all.products 
+                    if item.id == 'latest'
+                      assign product = item
+                    endif
+                  endfor
+                endpaginate
+              endif
+            endif
+          endif
+        -%}
+      
+
+    {%-if product != empty and product != null -%}
+      {%- assign initVariantId =  -%}
+      {%- assign product_form_id = 'product-form-' | append: "gax0ke9DRx" -%}
+      {%- assign variant = product.selected_or_first_available_variant -%}
+      {%- assign productSelectedVariant = product.selected_or_first_available_variant -%}
+      {%-if productSelectedVariant == empty or productSelectedVariant == null -%}
+        {%- assign productSelectedVariant = product.selected_or_first_available_variant -%}
+      {%- endif -%}
+      {%-if variant == empty or variant == null -%}
+        {%- assign variant = product.selected_or_first_available_variant -%}
+      {%- endif -%}
+      <gp-product class="" gp-context='{"productId": {{ product.id }}, "isSyncProduct": "", "variantSelected": {{ variant | json | escape }}, "quantity": 1, "formId": "{{ product_form_id }}" }'
+        gp-data='{"variantSelected": {{ variant | json | escape }}, "quantity": 1}'>
+        {%- form 'product', product, id: product_form_id, class: 'form contents', data-type: 'add-to-cart-form', autocomplete: 'off'  -%}
+          <input type="hidden" name="id" value="{{ variant.id }}" />
+          <input type="hidden" name="quantity" value="{{ quantity }}" />
+          <button type="submit" onclick="return false;" style="display:none;"></button>
+          
+      
+      
+    <div
+      id
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--cg:30px;--pc:start;--gtc:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%"
+        class="mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="goxlmBg5Sp relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="gOECbXgR8o"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xl);--cg:var(--g-s-m);--pc:center;--gtc:minmax(0, auto) minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gOECbXgR8o mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="gVSy5slWiS relative flex flex-col"
+    >
+      <div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)" class="gLPh-MImcY ">
+      
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-tag.js" defer="defer"></script>
+  {% liquid 
+    assign price = variant.price | times: 1.0
+    assign salePrice = variant.compare_at_price | times: 1.0
+    assign priceSave = salePrice | minus: price
+    if salePrice == null or price == null
+      assign pricePercentage = '- ' | append: '0%' | append: ' '
+    else 
+         assign salePercent = priceSave | divided_by: salePrice | times: 100  | round
+                assign pricePercentage = '- ' | append: salePercent | append: '%' | append: ' '
+              
+    endif
+  %}
+
+   <gp-product-tag
+    data-disabled="{%- if priceSave > 0 -%} false {%- else -%} true {%- endif -%}"
+    gp-data='{"setting":{"customContent":{"prefix":"-","suffix":"","unit":"percentage"}}, "id": "gLPh-MImcY", "locale": "{{shop.locale}}", "currency": "{{shop.currency}}", "moneyFormat": "{{ shop.money_format | replace: '"', '\"' | escape }}"}'
+    class="block data-[disabled=true]:hidden "
+    style="--ta:left"
+  >
+ 
+     <div class="inline-flex flex-wrap items-end gap-3">
+       <div
+         class="inline-block text-g-text-3"
+         style="--bs:none;--bw:0px;--bc:transparent;--bg:#EA3335;--radius:var(--g-radius-none);--pl:16px;--pr:16px;--pt:6px;--pb:6px"
+       >
+         
+    <div
+      id="p-tag-gLPh-MImcY"
+        class="  overflow-clip"
+        style=""
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-text-3"
+          style="--w:100%;--ta:left;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:600;--ls:normal;--lh:130%;--size:19px;--size-tablet:19px;--size-mobile:17px;word-break:break-word"
+        >
+        {{pricePercentage}}
+        </div>
+      </div>
+    </div>
+       </div>
+     </div>
+
+ </gp-product-tag>
+   
+      </div>
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="ga5-BrgeAY relative flex flex-col"
+    >
+      
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-price.js" defer="defer"></script>
+      <gp-product-price
+        gp-data='{"priceType":"regular","uid":"gdJoNVXCiS","locale":"{{shop.locale}}","currency":"{{shop.currency}}","moneyFormat":"{{ shop.money_format | replace: '"', '\\"' | escape }}"}'
+        
+        class=" data-[hidden=true]:hidden"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+        data-hidden="false"
+      >
+        
+    <div
+      id="p-price-gdJoNVXCiS"
+        class="  overflow-clip"
+        style=""
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-price decoration-g-text-1"
+          style="--w:100%;--tdc:text-1;--tdt:1;--ta:left;--c:#242424;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:130%;--size:33px;--size-tablet:33px;--size-mobile:29px;word-break:break-word"
+        >
+        
+                  {% if variant.price %} 
+                    {{ variant.price | money}}
+                  {% endif %}
+                
+        </div>
+      </div>
+    </div>
+      </gp-product-price>
+  
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:center"
+      class="g_CTVVJ0p1 relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="g-K6qps5F8"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--cg:var(--g-s-xs);--pc:start;--gtc:minmax(0, auto) minmax(0, auto);--gtc-mobile:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="g-K6qps5F8 mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gS0bEScSN5 relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gzyoGcto19  overflow-clip"
+        style="--tt:default;--ta:left;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:0px"
+      >
+      <div class="flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#575757;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:16px;word-break:break-word"
+        >
+        <p>was</p>
+        </div>
+      </div>
+    </div>
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gkyiHJfsjS relative flex flex-col"
+    >
+      
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-price.js" defer="defer"></script>
+      <gp-product-price
+        gp-data='{"priceType":"compare","uid":"gKDMwVHQ69","locale":"{{shop.locale}}","currency":"{{shop.currency}}","moneyFormat":"{{ shop.money_format | replace: '"', '\\"' | escape }}"}'
+        
+        class=" data-[hidden=true]:hidden"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+        data-hidden="{% if variant.compare_at_price > variant.price and variant.compare_at_price >= 0 %}false{% else %}true{% endif %}"
+      >
+        
+    <div
+      id="p-price-gKDMwVHQ69"
+        class="  overflow-clip"
+        style=""
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-price line-through"
+          style="--w:100%;--tdc:#575757;--tdt:1;--ta:left;--c:#575757;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:400;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:16px;word-break:break-word"
+        >
+        
+                  {% if variant.compare_at_price  %} 
+                    {{ variant.compare_at_price | money}}
+                  {% endif %}
+                
+        </div>
+      </div>
+    </div>
+      </gp-product-price>
+  
+    </div>
+    </div>
+  
+    
+    </div>
+    </div>
+  
+    
+  <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-product-button.js" defer="defer"></script>
+  
+  
+  
+   {%- liquid 
+      assign inventory_quantity = variant.inventory_quantity | default: 0
+    -%}
+    <gp-product-button
+      gp-data='{"setting":{"actionEffect":"open-cart-drawer","customURL":{"link":"/cart","target":"_self"},"errorMessage":"Cannot add product to cart","successMessage":"Add product to cart successfully","label":"GET IT NOW","outOfStockLabel":"Out of stocks","errorType":"built-in"},"styles":{"errorTypo":{"type":"paragraph-2"},"successTypo":{"type":"paragraph-2"}},"disabled":"{{variant.available}}","variantID":"{{variant.id}}"}'
+    >
+        <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xl);--ta:center"
+    class="{% unless variant.available %} !hidden {% endunless %} undefined"
+  >
+    <style>
+    .gqNhC7YxwX.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: none;
+  border-width: 0px 0px 0px 0px;
+  border-color: transparent;
+  
+      
+      
+      
+      
+      
+      
+    }
+
+    .gqNhC7YxwX:hover::before {
+      border-style: none;
+  border-width: 0px 0px 0px 0px;
+  border-color: transparent;
+  
+      
+    }
+  </style>
+    <button
+      type="submit" data-id="gqNhC7YxwX" aria-label="GET IT NOW"
+      data-state="idle"
+      class="gqNhC7YxwX gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none text-g-text-3 gp-button-atc"
+      style="--hvr-bg:#2352E7;--bg:#126BFF;--c:var(--g-c-text-3, text-3);--pl:68px;--pr:68px;--pt:12px;--pb:12px;--pl-tablet:68px;--pr-tablet:68px;--pt-tablet:12px;--pb-tablet:12px;--pl-mobile:68px;--pr-mobile:68px;--pt-mobile:12px;--pb-mobile:12px;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--tt:default;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="truncate group-data-[state=loading]:invisible [&_p]:truncate z-9 "
+        style="--tt:default"
+      >
+        GET IT NOW
+      </span>
+    </button>
+  </div>
+        <div
+    
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-xl);--ta:center"
+    class="{% if variant.available %} !hidden {% endif %}"
+  >
+    <style>
+    .gqNhC7YxwX.gp-button-base::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      pointer-events: none;
+      border-style: none;
+  border-width: 0px 0px 0px 0px;
+  border-color: transparent;
+  
+      
+      
+      
+      
+      
+      
+    }
+
+    .gqNhC7YxwX:hover::before {
+      border-style: none;
+  border-width: 0px 0px 0px 0px;
+  border-color: transparent;
+  
+      
+    }
+  </style>
+    <button
+      type="button" data-id="gqNhC7YxwX" aria-label="Out of stocks"
+      data-state="idle"
+      class="gqNhC7YxwX gp-button-base rounded-none max-w-full relative group inline-flex items-center justify-center no-underline transition-colors duration-300 disabled:btn-disabled disabled:opacity-30 disabled:pointer-events-none text-g-text-3 gp-button-sold-out btn-disabled opacity-30 pointer-events-none"
+      style="--hvr-bg:#2352E7;--bg:#126BFF;--c:var(--g-c-text-3, text-3);--pl:68px;--pr:68px;--pt:12px;--pb:12px;--pl-tablet:68px;--pr-tablet:68px;--pt-tablet:12px;--pb-tablet:12px;--pl-mobile:68px;--pr-mobile:68px;--pt-mobile:12px;--pb-mobile:12px;--w:Auto;--w-tablet:Auto;--w-mobile:Auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--tt:default;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:150%;--size:16px;--size-tablet:16px;--size-mobile:14px"
+    >
+        <svg
+          class="invisible absolute h-5 w-5 animate-spin group-data-[state=loading]:visible"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+
+    
+      <span
+        class="truncate group-data-[state=loading]:invisible [&_p]:truncate z-9 "
+        style="--tt:default"
+      >
+        Out of stocks
+      </span>
+    </button>
+  </div>
+    </gp-product-button>
+  <div style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-l)" class="gGowcL1oD2 ">
+      
+    <gp-countdown-timer
+     class="flex "
+     gp-data='{"behaviour":"daily","dateStandard":1685754866537,"dayLabel":"DAY","enableDay":true,"enableHour":true,"enableMinute":true,"enableSecond":true,"enableWeek":false,"hourLabel":"HRS","minuteLabel":"MINS","redirectUrl":{"link":"#","target":"_self"},"secondLabel":"SECS","timeZone":"UTC+7","timerDaily":{"format":"am","hours":10,"mins":30},"timerEverygreen":{"days":0,"endTime":1685160866537,"hours":3,"mins":0,"startTime":1685150066537},"weekLabel":"Weeks"}'
+     style="--jc:center"
+     >
+      <div id="section-countdown" class="flex flex-wrap w-max !hidden" style="gap:var(--g-s-m);--jc:center">
+           
+          
+    <div
+        style="--pl:10px;--pr:10px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+    class="flex-1 text-center min-w-max !max-w-max">
+    
+    <div
+      id="day"
+        class="  overflow-clip"
+        style="--mb:var(--g-s-xs);--c:#242424"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-countdown-number"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:130%;--size:23px;--size-tablet:23px;--size-mobile:20px;--c:#242424;word-break:break-word"
+        >
+        00
+        </div>
+      </div>
+    </div>
+    
+    <div
+      
+        class="  overflow-clip"
+        style="--c:#B4B4B4"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A']"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:400;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;--c:#B4B4B4;word-break:break-word"
+        >
+        DAY
+        </div>
+      </div>
+    </div>
+    </div>
+    
+          
+    <div
+        style="--pl:10px;--pr:10px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+    class="flex-1 text-center min-w-max !max-w-max">
+    
+    <div
+      id="hour"
+        class="  overflow-clip"
+        style="--mb:var(--g-s-xs);--c:#242424"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-countdown-number"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:130%;--size:23px;--size-tablet:23px;--size-mobile:20px;--c:#242424;word-break:break-word"
+        >
+        00
+        </div>
+      </div>
+    </div>
+    
+    <div
+      
+        class="  overflow-clip"
+        style="--c:#B4B4B4"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A']"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:400;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;--c:#B4B4B4;word-break:break-word"
+        >
+        HRS
+        </div>
+      </div>
+    </div>
+    </div>
+    
+          
+    <div
+        style="--pl:10px;--pr:10px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+    class="flex-1 text-center min-w-max !max-w-max">
+    
+    <div
+      id="minute"
+        class="  overflow-clip"
+        style="--mb:var(--g-s-xs);--c:#242424"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-countdown-number"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:130%;--size:23px;--size-tablet:23px;--size-mobile:20px;--c:#242424;word-break:break-word"
+        >
+        00
+        </div>
+      </div>
+    </div>
+    
+    <div
+      
+        class="  overflow-clip"
+        style="--c:#B4B4B4"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A']"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:400;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;--c:#B4B4B4;word-break:break-word"
+        >
+        MINS
+        </div>
+      </div>
+    </div>
+    </div>
+    
+          
+    <div
+        style="--pl:10px;--pr:10px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bg:transparent"
+    class="flex-1 text-center min-w-max !max-w-max">
+    
+    <div
+      id="second"
+        class="  overflow-clip"
+        style="--mb:var(--g-s-xs);--c:#242424"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] gp-countdown-number"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:130%;--size:23px;--size-tablet:23px;--size-mobile:20px;--c:#242424;word-break:break-word"
+        >
+        00
+        </div>
+      </div>
+    </div>
+    
+    <div
+      
+        class="  overflow-clip"
+        style="--c:#B4B4B4"
+      >
+      <div class="" style="">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A']"
+          style="--w:100%;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:400;--ls:normal;--lh:150%;--size:13px;--size-tablet:13px;--size-mobile:12px;--c:#B4B4B4;word-break:break-word"
+        >
+        SECS
+        </div>
+      </div>
+    </div>
+    </div>
+    
+      </div>
+     </gp-countdown-timer>
+     <script src="https://d2ls1pfffhvy22.cloudfront.net/assets/gp-countdown.js" defer="defer"></script>
+  
+      </div>
+    </div>
+    </div>
+  
+    
+        {%- endform -%}
+      </gp-product>
+      {%- assign product = gpBkProduct -%}
+    {% else %}
+      <div class="text-center">Product not found</div>
+    {%- endif -%}
+  
+    </div>
+    </div>
+  
+    
+      
+      
+    <div
+      parentTag="Col" id="g2UloKzQKr"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:1000px;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="g2UloKzQKr mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gW8LzPUN_l relative flex flex-col"
+    >
+      
+      
+      
+    <div
+      parentTag="Col" id="gwaugI6GpN"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--pos:absolute;--right:13%;--radius:var(--g-radius-none);--pt:43px;--pl:32px;--pb:42px;--pr:32px;--pt-mobile:19px;--pl-mobile:13px;--pb-mobile:18px;--pr-mobile:13px;--top:2%;--z:1;--cg:var(--g-s-2xl);--pc:start;--gtc:minmax(0, 12fr);--w:140px;--w-tablet:140px;--w-mobile:60px;--bgc:transparent;--bgi:url({{ "432750572815254551-1f6c9b24-9f75-42ee-80e5-180180513161.png" | asset_url }});--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gwaugI6GpN mx-auto mb-0 grid max-w-full gap-y-0 transition-colors duration-200 ease-in-out [&_*]:max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gpWdMgw0xu relative flex flex-col"
+    >
+      
+    <div
+      parentTag="Col"
+        class="gUZBd6dV1F  overflow-clip"
+        style="--tt:default;--ta:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:center">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:100%;--size:30px;--size-tablet:30px;--size-mobile:13px;word-break:break-word"
+        >
+        <p>BEST</p>
+        </div>
+      </div>
+    </div>
+    <div
+      parentTag="Col"
+        class="gl0_0DWc1O  overflow-clip"
+        style="--tt:default;--ta:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none)"
+      >
+      <div class="flex" style="--jc:center">
+        <div
+          data-gp-text
+          class="[&_p]:inline [&_p]:after:whitespace-pre-wrap [&_p]:after:content-['\A'] text-g-bg-3 gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#FFFFFF;--fs:normal;--ff:var(--g-font-Open-Sans, Open Sans);--weight:700;--ls:normal;--lh:100%;--size:25px;--size-tablet:25px;--size-mobile:10px;word-break:break-word"
+        >
+        <p>PRICE</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  
+    <div
+    
+    role="presentation"
+    class="group/image gldXzV5o6J"
+    style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--ta:left"
+    >
+    <figure
+      class="relative inline-block overflow-hidden align-middle pointer-events-none"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--h:auto;--h-tablet:auto;--h-mobile:auto;border-radius:inherit"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+      >
+        <img
+    quality="70" title="Image Title"
+    draggable="false"
+    class="inline-block w-full h-full max-w-full flex gp_lazyload"
+    data-src="{{ "432750572815254551-f675bd12-0873-454e-98a1-f6fdb234916d.png" | asset_url }}" data-srcset="{{ '432750572815254551-f675bd12-0873-454e-98a1-f6fdb234916d.png' | asset_img_url: '768x768' }} 768w, {{ '432750572815254551-f675bd12-0873-454e-98a1-f6fdb234916d.png' | asset_img_url: '1024x1024' }} 1024w, {{ '432750572815254551-f675bd12-0873-454e-98a1-f6fdb234916d.png' | asset_img_url: 'master' }} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+Pr1638ACaED3/nOThIAAAAASUVORK5CYII=" width="1264" height="720" alt="Alt Image" priority
+    sizes="100vw"
+    style="--aspect:auto;--objf:cover;--bs:none;--bw:0px;--bc:transparent;--radius:var(--g-radius-none);--w:100%"
+  />
+      </div>
+    </figure>
+  </div>
+    </div>
+    </div>
+  
+    
+    </div>
+    </div>
+  
+            </section>
+          
+    
+{% schema %}
+  {
+    
+    "name": "Section 15",
+    "tag": "section",
+    "class": "gps-486263458162017201 gps gpsi",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Section design by GemPages. [Click here to start design](https://builder.gempages.net/instant/hyperlink/edit?type=section&section_id=486263458162017201&template_id=482463146242475100)"
+      }
+    ],
+    "blocks": [{"type": "@app"}]
+  }
+{% endschema %}

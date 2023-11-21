@@ -1,0 +1,208 @@
+{%- if settings.dbtfy_newsletter_popup -%}
+  {%- liquid
+    assign enable_floating_bar = settings.dbtfy_newsletter_floating_bar
+    assign mobile_floating_bar = settings.dbtfy_floating_bar_mobile
+    assign floating_bar_position = settings.dbtfy_floating_bar_position
+    assign floating_bar_text = 'add-ons.newsletter_popup.floating_bar_text' | t
+    assign floating_bar_icon = settings.dbtfy_floating_bar_icons
+    assign popup_bg_image = settings.dbtfy_newsletter_background_image
+    assign popup_width = settings.dbtfy_newsletter_popup_width
+    assign popup_image_as_bg = settings.dbtfy_newsletter_popup_image_whole
+    assign popup_image = settings.dbtfy_newsletter_popup_image
+    assign popup_image_position = settings.dbtfy_newsletter_popup_image_position
+    assign popup_title = 'add-ons.newsletter_popup.popup_title' | t
+    assign popup_text = 'add-ons.newsletter_popup.popup_text' | t
+    assign popup_close_text = 'add-ons.newsletter_popup.popup_close_text' | t
+    assign popup_icon = settings.dbtfy_newsletter_popup_icons
+    assign popup_time_trigger = settings.dbtfy_newsletter_popup_time_trigger
+    assign popup_timeout = settings.dbtfy_newsletter_popup_timeout
+    assign popup_exit_intent = settings.dbtfy_newsletter_popup_exit_intent
+    assign popup_scroll_depth = settings.dbtfy_newsletter_popup_scroll_depth
+    assign popup_scroll_percentage = settings.dbtfy_newsletter_popup_scroll_percentage
+    assign popup_title_success = 'add-ons.newsletter_popup.popup_title_success' | t
+    assign popup_text_success = 'add-ons.newsletter_popup.popup_text_success' | t
+    assign popup_reward_button = 'add-ons.newsletter_popup.popup_reward_button' | t
+    assign popup_customer_tag = settings.dbtfy_newsletter_popup_customer_tag
+    assign popup_discount_name = settings.dbtfy_newsletter_popup_discount_name
+    assign popup_discount_amount = settings.dbtfy_newsletter_popup_discount_amount
+    assign popup_discount_type = settings.dbtfy_newsletter_popup_discount_type
+
+    assign form_classes = ""
+
+    if settings.newsletter_app == "omnisend"
+      assign form_classes = form_classes | append: " omnisend-subscribe-form no-loading-state"
+    endif
+
+    if settings.newsletter_app == "klaviyo"
+      assign customer_tag_list = popup_customer_tag | split: ','
+      assign isTagPresent = false
+
+      for tag in customer_tag_list
+        assign current_tag = tag | lstrip | rstrip | downcase
+
+        if current_tag == "newsletter"
+          assign isTagPresent = true
+          break
+        endif
+      else
+        assign popup_customer_tag = popup_customer_tag | prepend: 'newsletter'
+        assign isTagPresent = true
+      endfor
+
+      unless isTagPresent
+        assign popup_customer_tag = popup_customer_tag | prepend: 'newsletter, '
+      endunless
+    endif
+  -%}
+
+  <div class="dbtfy dbtfy-newsletter_popup"
+    data-timeout="{{ popup_timeout }}000"
+    data-time-trigger="{{ popup_time_trigger }}"
+    data-exit-intent="{{ popup_exit_intent }}"
+    data-scroll-depth="{{ popup_scroll_depth }}"
+    data-page-scroll-percentage="{{ popup_scroll_percentage }}"
+    data-discount="{{ popup_discount_amount }}"
+    data-discount-code="{{ popup_discount_name }}"
+    data-discount-type="{{ popup_discount_type }}">
+
+    <div id="NewsletterPopup" class="modal stacked-on-top-of-content" role="dialog">
+      <div class="modal-dialog modal-{{ popup_width }}">
+        <div class="modal-content overlay-content" aria-hidden="true" tabindex="-1">
+          <div class="grid grid-full">
+            {%- liquid
+              if popup_image == blank or popup_width == "small" or popup_image_as_bg
+                assign image_width_newsletter_popup = "one-whole"
+                assign content_width_newsletter_popup = "one-whole"
+              else
+                assign image_width_newsletter_popup = "large--four-twelfths medium--four-twelfths"
+                assign content_width_newsletter_popup = "large--eight-twelfths medium--eight-twelfths"
+              endif
+
+              assign bg_whole = popup_image_as_bg
+            -%}
+
+            {%- unless bg_whole -%}
+              {%- if popup_image != blank -%}
+                <div class="grid__item {{ image_width_newsletter_popup }}">
+                  <div class="media-wrapper image-newsletter_popup">
+                    <div class="media bgset lazyload"
+                      {%- render 'lazysizes', img: popup_image, img_type: 'background' -%}
+                      style="background-position: {{ popup_image_position }};">
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endunless -%}
+
+            <div class="grid__item {{ content_width_newsletter_popup }}">
+              {%- if bg_whole -%}
+                <div class="media-wrapper overlay image-newsletter_popup">
+                  <div class="media bgset lazyload"
+                    {%- render 'lazysizes', img: popup_image, img_type: 'background' -%}
+                    style="background-position: {{ popup_image_position }};">
+                  </div>
+              {%- endif -%}
+
+              <div class="content-newsletter_popup flex align-center justify-center text-center{% if bg_whole %} media-content{% endif %}">
+                {%- form "customer", class: form_classes, id: "formNewsletterPopup" -%}
+                  {%- if form.posted_successfully? -%}
+                    <div class="np-success"
+                        data-discount-name="{{ popup_discount_name }}"
+                        data-discount-type="{{ popup_discount_type }}"
+                        data-discount-amount="{{ popup_discount_amount }}">
+
+                      <div class="text-container-newsletter_popup rte">
+                        {%- if popup_title_success != blank -%}
+                          <h3>{{ popup_title_success }}</h3>
+                        {%- endif -%}
+
+                        {%- if popup_text_success != blank -%}
+                          <p>{{ popup_text_success }}</p>
+                        {%- endif -%}
+                      </div>
+
+                      {%- if popup_discount_name != blank -%}
+                        <div class="select-box spacer-bottom" tabindex="0">
+                          {{ popup_discount_name }}
+                        </div>
+                      {%- endif -%}
+
+                      {%- if popup_reward_button != blank -%}
+                        <button type="button" class="btn btn--primary small--full np-reward-apply" data-modal-close="#NewsletterPopup">
+                          <span class="btn__text">
+                            {{ popup_reward_button }}
+                          </span>
+                        </button>
+                      {%- endif -%}
+                    </div>
+                  {%- else -%}
+                    <div class="text-container-newsletter_popup rte">
+                      {%- if popup_title != blank -%}
+                        <h3>{{ popup_title }}</h3>
+                      {%- endif -%}
+
+                      {%- if popup_text != blank -%}
+                        <p>{{ popup_text }}</p>
+                      {%- endif -%}
+                    </div>
+
+                    {{ form.errors | default_errors }}
+
+                    <input type="hidden" name="contact[tags]" value="{{ popup_customer_tag }}">
+
+                    <div class="newsletter--form">
+                      <div class="input-group">
+                        <input id="input-newsletter_popup"
+                        type="email"
+                        placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}"
+                        name="contact[email]"
+                        pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
+                        class="input-group-field newsletter__input{% if settings.newsletter_app == "omnisend" %} omnisend-subscribe-input-email{% endif %}"
+                        value="{%- if form.email -%}{{ form.email }}{%- elsif customer -%}{{ customer.email }}{%- endif -%}"
+                        required="required" autocorrect="off"
+                        autocapitalize="off">
+
+                        <button type="submit" class="btn btn--square btn--primary input-group-btn newsletter__submit" name="commit" id="Subscribe">
+                          <span class="btn__text">
+                            <span class="{{ settings.icon }}">{{ popup_icon }}</span>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {%- if popup_close_text != blank -%}
+                      <button type="button" class="spacer-top text-link" data-modal-close="#NewsletterPopup">
+                        <small>{{ popup_close_text }}</small>
+                      </button>
+                    {%- endif -%}
+                  {%- endif -%}
+                {% endform %}
+              </div>
+
+              {%- if bg_whole -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- if popup_bg_image != blank -%}
+      <div class="lazyload bgset overlay-backdrop overlay-modal"
+        {%- render 'lazysizes', img: popup_bg_image, img_type: 'background' -%}>
+      </div>
+    {%- else -%}
+      <div class="overlay-modal overlay-backdrop"></div>
+    {%- endif -%}
+
+    {%- if enable_floating_bar -%}
+      <div class="np-floating-bar-wrapper np-position-{{ floating_bar_position }} stacked-on-top-of-content {% if floating_bar_position == "right" %} prevent-scrollbar-shift{% endif %}{% if mobile_floating_bar %} small--hide{% endif %}">
+        <div class="np-floating-bar btn">
+          <span>{{ floating_bar_text }}</span>
+          <span class="{{ settings.icon }}">{{ floating_bar_icon }}</span>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
